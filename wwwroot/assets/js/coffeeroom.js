@@ -1,4 +1,37 @@
 
+function livesearch() {
+
+    const searchStat = document.getElementById('search_stat');
+    const searchResults = document.getElementById('search_results');
+    searchStat.innerHTML = 'Searching <i class="ai-clock mb-1"></i>';
+    var ddr = document.getElementById("global_search").value;
+    if (ddr.length >= 2) {
+        axios.get('/api/livesearch/all/' + ddr)
+            .then(response => {
+                console.log(response.data);
+                var sb = new StringBuilder();
+                for (var i = 0; i < response.data.length; i++) {
+                    sb.append('<div class="d-flex align-items-center border-bottom pb-4 mb-4 fade-in">');
+                    sb.append('<a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="' + response.data[i].url + '">');
+                    sb.append('<img src="/assets/images/search_thumbs/' + response.data[i].image + '.svg" width="70" alt="Product" /></a><div class="ps-3">');
+                    sb.append('<h4 class="h6 mb-2"><a href="/">' + response.data[i].title + '</a></h4>');
+                    sb.append(' <span class="fs-sm text-muted ms-auto">' + response.data[i].description + '</span>');
+                    sb.append('</div></div>');
+                }
+                searchResults.innerHTML = sb.toString();
+                   searchStat.innerHTML = 'Search';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                 searchStat.innerHTML = '';
+                searchResults.innerHTML = '';
+            });
+    }
+    else {
+        searchResults.innerHTML = '';
+        searchStat.innerHTML = 'Search';
+    }
+}
 
 const lnkDisableElements = document.querySelectorAll('.lnk_disable');
 

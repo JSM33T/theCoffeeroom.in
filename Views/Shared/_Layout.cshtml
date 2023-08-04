@@ -141,14 +141,14 @@
     <link rel="stylesheet" media="screen" href="/assets/css/theme.min.css">
     @await RenderSectionAsync("cssLib", required: false) 
 
-    <environment include="development">
-        <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
+    <environment include="development">       
         <link rel="stylesheet" href="~/assets/css/theme.css" />
+        <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
     </environment>
     <environment include="production">
+        <link rel="stylesheet" href="~/assets/css/theme.min.css" />
         <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
         @*<link rel="stylesheet" href="~/assets/css/coffeeroom.min.css" asp-append-version="true" />*@
-        <link rel="stylesheet" href="~/assets/css/theme.min.css" />
     </environment>
   
     <style id="custom_theme">
@@ -279,44 +279,44 @@
 
 
     <script src="~/libraries/axios/axios.min.js"></script>
-@*    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>*@
     <script>
-        
-        function livesearch() {
-            const searchStat = document.getElementById('#search_stat');
-            const searchResults = document.getElementById('#search_results');
 
-            searchStat.innerHTML = 'Search <i class="ai-clock mb-1"></i>';
-            let ddr = document.getElementById("global_search").value;
-            if (ddr.length >= 2) {
-                axios.get('/api/livesearch/all/' + ddr)
-                    .then(response => {
-                        console.log(response.data);
-                        const sb = new StringBuilder();
-                        for (var i = 0; i < response.data.length; i++) {
-                            sb.append('<div class="d-flex align-items-center border-bottom pb-4 mb-4">');
-                            sb.append('<a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="' + response.data[i].url + '">');
-                            sb.append('<img src="/assets/images/search_thumbs/' + response.data[i].image + '.svg" width="70" alt="Product" /></a><div class="ps-3">');
-                            sb.append('<h4 class="h6 mb-2"><a href="/">' + response.data[i].title + '</a></h4>');
-                            sb.append(' <span class="fs-sm text-muted ms-auto">' + response.data[i].description + '</span>');
-                            sb.append('</div></div>');
-                        }
-                        searchResults.innerHTML = sb.toString();
-                        searchStat.innerHTML = 'Search';
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        searchStat.innerHTML = '';
-                        searchResults.innerHTML = '';
-                    });
-            }
-            else {
-                searchResults.innerHTML = '';
-                searchStat.innerHTML = 'Search';
-            }
-        }
+        //function livesearch() {
+
+        //    const searchStat = document.getElementById('search_stat');
+        //    const searchResults = document.getElementById('search_results');
+
+        //    searchStat.innerHTML = 'Searching <i class="ai-clock mb-1"></i>';
+        //    var ddr = document.getElementById("global_search").value;
+        //    if (ddr.length >= 2) {
+        //        axios.get('/api/livesearch/all/' + ddr)
+        //            .then(response => {
+        //                console.log(response.data);
+        //                var sb = new StringBuilder();
+        //                for (var i = 0; i < response.data.length; i++) {
+        //                    sb.append('<div class="d-flex align-items-center border-bottom pb-4 mb-4">');
+        //                    sb.append('<a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="' + response.data[i].url + '">');
+        //                    sb.append('<img src="/assets/images/search_thumbs/' + response.data[i].image + '.svg" width="70" alt="Product" /></a><div class="ps-3">');
+        //                    sb.append('<h4 class="h6 mb-2"><a href="/">' + response.data[i].title + '</a></h4>');
+        //                    sb.append(' <span class="fs-sm text-muted ms-auto">' + response.data[i].description + '</span>');
+        //                    sb.append('</div></div>');
+        //                }
+        //                searchResults.innerHTML = sb.toString();
+        //                //   searchStat.innerHTML = 'Search';
+        //            })
+        //            .catch(error => {
+        //                console.error('Error:', error);
+        //                // searchStat.innerHTML = '';
+        //                searchResults.innerHTML = '';
+        //            });
+        //    }
+        //    else {
+        //        //   searchResults.innerHTML = '';
+        //        searchStat.innerHTML = 'Search';
+        //    }
+        //}
     </script>
+ 
 
     @await RenderSectionAsync("jsScripts", required: false)
     <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -326,12 +326,13 @@
     
     
     <environment include="production">
-        <script src="~/assets/js/coffeeroom.min.js" asp-append-version="true"></script>
+        
         <script src="~/assets/js/theme.min.js"></script>
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
     </environment>
     <environment include="development">
-        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
         <script src="~/assets/js/theme.js"></script>
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
     </environment>
 </body>
 </html>

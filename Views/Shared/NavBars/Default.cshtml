@@ -38,7 +38,7 @@
                     <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">@ViewData["role"]</h6>
                     @if (ViewData["role"].ToString() == "guest")
                     {
-                        <a class="dropdown-item" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
+                        <a class="dropdown-item" href="/account"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
                     }
                     @if (ViewData["role"].ToString() == "admin")
                     {

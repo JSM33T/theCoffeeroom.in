@@ -1,5 +1,119 @@
-﻿@    using theCoffeeroom.Models.Frame
-@model BlogRoute
+﻿@using theCoffeeroom.Models.Frame;
+@model BlogLoad
+
+<section class="container py-5 mb-lg-4 mt-1" id="blog_intro">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class=" pb-lg-4 pb-2 pt-4 breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/blogs">Blogs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Slug</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-lg-9 col-xl-8 pe-lg-4 pe-xl-0">
+            <h1 class="pb-2 pb-lg-3">@Model.Title</h1>
+            @foreach (var tag in Model.Tags.Split(','))
+            {
+                <span>@tag.Trim()</span>
+            }
+            <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
+                <div class="d-flex align-items-center mb-4 me-4"><span class="fs-sm me-2">By:</span><span class=" position-relative fw-semibold p-0">{{authors}}</span></div>
+                <div class="d-flex align-items-center mb-4">
+                    <button type="button" id="shareButton" class="fs-sm me-2 btn btn-sm btn-outline-secondary rounded-pill"><i class="ai-share"></i></button>
+                </div>
+            </div>
+            @await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/Body.cshtml")
+        </div>
+        @await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/SideBar.cshtml")
+    </div>
+
+    <div class="pt-4 pt-xl-5 mt-4" id="blog_comments">
+
+        <div class="border-top border-bottom">
+            <!-- Comments collapse-->
+            <hr />
+            <div class="collapse" id="commentsCollapse">
+                <div id="comments"></div>
+            </div>
+            <div class="nav">
+                <button class="btn-more nav-link collapsed w-100 justify-content-center p-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="false"
+                        aria-controls="commentsCollapse" data-show-label="Show all comments"
+                        data-hide-label="Hide all comments">
+                    <span class="fw-normal opacity-70 ms-1">
+                        (<span id="blogcount">{{blogCommentsCount}}</span>)
+                    </span>
+                </button>
+            </div>
+
+            <!-- Comment form-->
+
+        </div>
+    </div>
+
+</section>
+<section class="container pt-5 mt-5">
+    <div class="card border-0 bg-secondary pt-2 pb-2 mt-2 p-md-2 p-xl-3 p-xxl-4 mt-n3 mt-md-0">
+        <div class="card-body">
+            @{
+                string role;
+                try
+                {
+
+                    role = Context.Session.GetString("role");
+                }
+                catch
+                {
+                    role = "guest";
+                }
+
+            }
+            @if (role != null)
+            {
+                if (role != null && (role == "user" || role == "admin"))
+                {
+                    <h2 class="pb-2 pb-lg-3 pb-xl-4">Leave a comment</h2>
+                    <div class="row needs-validation g-4" novalidate>
+                        <div class="col-12">
+                            <label class="form-label" for="c-comment">Comment</label>
+                            <textarea class="form-control" rows="4" id="blog_comment" placeholder="Type your comment here..."
+                                      required></textarea>
+                            <div class="invalid-feedback">Please enter a comment message!</div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" id="commentbutton" type="button" onclick="addcomment()">
+                                Post
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                    <span id="commentstat" hidden></span>
+                }
+                else
+                {
+                    <span><a style="text-decoration:none" href="/account/login">login</a> to comment</span>
+                }
+            }
+            else
+            {
+                <span><a style="text-decoration:none" href="/account/login">login</a> to comment</span>
+            }
+        </div>
+    </div>
+</section>
+
+<button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas"
+        data-bs-target="#sidebar">
+    <i class="ai-layout-column me-2"></i>Sidebar
+</button>
+
+@section jsScripts{
+    <environment include="development">
+        <script src="~/reactors/blogpostreactor.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="production">
+        <script src="~/reactors/blogpostreactor.min.js" asp-append-version="true"></script>
+    </environment>
 
 
-@await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/blog_content.cshtml")
+}
