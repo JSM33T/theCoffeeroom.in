@@ -88,24 +88,24 @@ const SignupComponent = {
     
     <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
         <div class="w-100 mt-auto" style="max-width: 526px;">
-            <h1>Log In</h1>
+            <h1>Sign Up</h1>
             <p class="pb-3 mb-3 mb-lg-4">Don't have an account yet?&nbsp;&nbsp;<router-link to='/account/signup'>Register here!</router-link></p>
           <form id="signUpForm">
                 <div class="row row-cols-1 row-cols-sm-2">
                     <div class="col mb-4">
-                        <input class="form-control form-control-lg" name="firstname" id="firstname" type="text" placeholder="First Name" required maxlength="20">
+                        <input class="form-control form-control-lg" name="firstname" v-model="firstname" type="text" placeholder="First Name" required maxlength="20">
                     </div>
                     <div class="col mb-4">
-                        <input class="form-control form-control-lg" name="lastname" id="lastname" type="text" placeholder="Last Name" required maxlength="20">
+                        <input class="form-control form-control-lg" name="lastname" v-model="lastname" type="text" placeholder="Last Name" required maxlength="20">
                     </div>
                     <div class="col mb-4">
-                        <input class="form-control form-control-lg" type="text" name="username" id="username" placeholder="Preferred UserName" required maxlength="20">
+                        <input class="form-control form-control-lg" type="text" name="username" v-model="username" placeholder="Preferred UserName" required maxlength="20">
                     </div>
                 </div>
                 <div class="pb-3 mb-3">
                     <div class="position-relative">
                         <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                        <input name="email" type="email" id="email" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
+                        <input name="email" type="email" v-model="email" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@ const SignupComponent = {
 
                         <div class="password-toggle">
                             <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input name="password" type="password" id="password" class="bindentersignup form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
+                            <input name="password" type="password" v-model="password" class="bindentersignup form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
                             <label class="password-toggle-btn" aria-label="Show/hide password">
                                 <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                             </label>
@@ -160,6 +160,26 @@ const SignupComponent = {
             console.error('Error fetching data from API:', error);
         } finally { }
     },
+    methods: {
+        submitSignUp() {
+            console.log("something");
+            const details = {
+                UserName: this.username,
+                PassWord: this.password,
+            };
+            axios.post('/api/account/login', details)
+                .then((response) => {
+                    window.location.href = localStorage.getItem("curr_link");
+                    console.log("done");
+                })
+                .catch((error) => {
+                    console.error('Error while sending POST request:', error);
+                    console.log('done with error');
+                });
+
+
+        }
+    }
 };
 
 
