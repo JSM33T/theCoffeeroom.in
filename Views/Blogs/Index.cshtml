@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["ActiveCategory"] = "";
+    ViewData["ActiveYear"] = "";
+    ViewData["ActiveTag"] = "";
+    ViewData["ActivePage"] = "Blogs";
+}
+
+@section cssStyles{
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+}
+
+<div class="container py-5 mb-lg-4" id="app">
+    <!-- Breadcrumb-->
+    <nav aria-label="breadcrumb" class="pt-1">
+        <ol class="pb-lg-2 pb-2 pt-4 breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+        </ol>
+    </nav>
+
+    <div class="row mb-md-2 pt-3 mb-xl-4">
+        <!-- Blog posts-->
+        <div class="col-lg-9 pe-lg-4 pe-xl-5">
+            <h1 class="pb-3 pb-lg-4" id="titleBlog">{{titleItem}}</h1>
+            <div v-if="placeHolder">
+                <article class="row g-0 border-0 mb-4">
+                    <a class="col-sm-5 rounded-5 placeholder placeholder-wave" style="min-height: 14rem"></a>
+                    <div class="col-sm-7">
+                        <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder placeholder-sm col-7 me-2"></span>
+                                <span class="placeholder placeholder-sm col-4"></span>
+                                <span class="placeholder placeholder-sm col-4 me-2"></span>
+                                <span class="placeholder placeholder-sm col-6"></span>
+                                <span class="placeholder placeholder-sm col-8"></span>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <router-view></router-view>
+
+
+            <!-- Pagination-->
+            <div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-4 pt-lg-0">
+
+                <div class="col col-md-12 col-12 order-md-2 order-3 text-center">
+                    <button class="btn btn-primary ripple w-md-auto w-100" id="load_more" onclick="loaddefault()" data-id="0" type="button">Load more posts</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- Sidebar (offcanvas on sreens < 992px)-->
+        <aside class="col-lg-3">
+            <div class="offcanvas-lg offcanvas-end" id="sidebarBlog">
+                <div class="offcanvas-header">
+                    <h4 class="offcanvas-title">Sidebar</h4>
+                    <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebarBlog"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <!-- Search box-->
+                    <div class="position-relative mb-4 mb-lg-5">
+                        <i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                        <input v-model="inputValue" @@keyup="updateRouteParam" class="form-control ps-5" type="search" placeholder="Enter keyword">
+                    </div>
+                    <!-- Category links-->
+                    <h4 class="pt-1 pt-lg-0 mt-lg-n2">Categories:</h4>
+                    <ul class="nav flex-column mb-lg-5 mb-4">
+
+
+                        <li class="mb-2"><router-link id="cat_all" class="nav-link d-flex p-0" to="/blogs">All categories</router-link></li>
+                       
+                                <li class="mb-2"><router-link to="/blogs/category/binge" id="binge" class="nav-link d-flex p-0 "> Binge<span class="fs-sm text-muted ms-2">(1)</span></router-link></li>
+
+                        @* <li class="mb-2"><router-link to="/blogs" class="nav-link d-flex p-0 ">Home<span class="fs-sm text-muted ms-2">(0)</span></router-link></li>
+                        <li class="mb-2"><router-link to="/blogs/category/binge" class="nav-link d-flex p-0 ">About<span class="fs-sm text-muted ms-2">(0)</span></router-link></li>*@
+                    </ul>
+
+                    <h4 class="pt-1 pt-lg-0 mt-lg-n2">Year:</h4>
+                    <ul class="nav flex-column mb-lg-5 mb-4">
+                        <li class="mb-2"><router-link to="/blogs/year/2023" class="nav-link d-flex p-0 ">2023</router-link></li>
+                        <li class="mb-2"><router-link to="/blogs/year/2022" class="nav-link d-flex p-0 ">2022</router-link></li>
+                    </ul>
+
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<button class="d-lg-none btn btn-sm fs-sm btn-primary w-100 rounded-0 fixed-bottom" data-bs-toggle="offcanvas" data-bs-target="#sidebarBlog"><i class="ai-layout-column me-2"></i>Sidebar</button>
+
+
+@section jsScripts{
+    <environment include="development">
+        <script src="~/blogreactor.js"></script>
+    </environment>
+    <environment include="production">
+        <script src="~/blogreactor.min.js"></script>
+    </environment>
+        
+    
+}
+
+@section jsLib{
+    <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+}

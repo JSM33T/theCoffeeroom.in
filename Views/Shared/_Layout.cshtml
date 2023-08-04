@@ -1,0 +1,337 @@
+﻿@{
+    //SEO Stuff
+    ViewData["Title"] ??= "The Coffee Room";
+    ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography,magazines, creative";
+    ViewData["Description"] ??= "The Coffee Room";
+    ViewData["Authors"] ??= "Jass and others";
+    ViewData["OgUrl"] ??= "https://thecoffeeroom.in";
+    ViewData["OgType"] ??= "website";
+    ViewData["OgImage"] ??= "website";
+
+    //visuals
+    ViewData["BodyBg"] ??= "";
+    ViewData["ActivePage"] ??= "";
+    ViewData["NavBarProps"] ??= "navbar navbar-expand-lg fixed-top bg-light";
+
+    //navbar active stat
+    ViewData["ActivePage"] ??= "";
+
+}
+@{
+    var mySessionVariable = Context.Session.GetString("username");
+    if (mySessionVariable != null)
+    {
+        ViewData["user_name"] = Context.Session.GetString("username").ToString();
+        ViewData["first_name"] = Context.Session.GetString("first_name").ToString();
+        ViewData["role"] = Context.Session.GetString("role").ToString();
+        ViewData["avatar"] = Context.Session.GetString("avatar").ToString();
+        ViewData["user_id"] = Context.Session.GetString("user_id").ToString();
+        ViewData["fullname"] = Context.Session.GetString("fullname").ToString();
+    }
+    else
+    {
+        ViewData["first_name"] = "guest";
+        ViewData["role"] = "guest";
+        ViewData["avatar"] = "default";
+        ViewData["user_id"] = "0";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Coffeeroom</title>
+    <!-- SEO Meta Tags-->
+    <meta name="keywords" content="@ViewData["Tags"]">
+    <meta name="description" content="@ViewData["Description"]">
+    <meta name="author" content="@ViewData["Authors"]">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="white">    
+     <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+
+      
+
+    </script>
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          },400);
+
+                let elem_theme = window.localStorage.getItem("cust_theme");
+                if (elem_theme !== undefined && elem_theme !== "" && elem_theme !== null) {
+                    document.getElementById("custom_theme").innerHTML = elem_theme;
+                }
+                let elem_font = window.localStorage.getItem("cust_font");
+                if (elem_font !== undefined && elem_font !== "" && elem_font !== null) {
+                    var a = document.getElementById('custom_font');
+                    a.href = elem_font;
+                }
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.ctrlKey && event.key === 'f') {
+                        event.preventDefault();
+                        document.getElementById('search_trigger_a').click();
+                    }
+                });
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.ctrlKey && event.key === 'd') {
+                        event.preventDefault();
+                        var themeMode = document.getElementById("theme-mode");
+                        var persMode = document.getElementById("dmode-trigger");
+
+                        if (themeMode.checked) {
+                            themeMode.checked = false;
+                            if (persMode) { persMode.checked = false; }
+                            root.classList.remove('dark-mode');
+                            localStorage.removeItem("mode");
+                        }
+                        else {
+                            themeMode.checked = true;
+                            if (persMode) { persMode.checked = true; }
+                            root.classList.add('dark-mode');
+                            localStorage.setItem("mode", "dark")
+                        }
+                    }
+                });
+                if (localStorage.getItem("curr_link") == null) {
+                    localStorage.setItem("curr_link", window.location.pathname);
+                }
+                else {
+                    localStorage.setItem("prev_link", localStorage.getItem("curr_link"));
+                    localStorage.setItem("curr_link", window.location.pathname);
+                }
+
+
+        };
+      })();
+      
+    </script>
+      <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue-router@4.0.13/dist/vue-router.global.prod.js"></script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link id="custom_font" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap" rel="stylesheet">
+
+    <!-- Vendor styles-->
+    <link href="~/libraries/aos/aos.css" rel="stylesheet" />
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="/assets/css/theme.min.css">
+    @await RenderSectionAsync("cssLib", required: false) 
+
+    <environment include="development">
+        <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/assets/css/theme.css" />
+    </environment>
+    <environment include="production">
+        <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
+        @*<link rel="stylesheet" href="~/assets/css/coffeeroom.min.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/assets/css/theme.min.css" />
+    </environment>
+  
+    <style id="custom_theme">
+        :root {
+            --ar-primary: #66818f;
+            --ar-primary-rgb: 102,129,143;
+            --ar-link-color: #66818f;
+            --ar-link-hover-color: #4d6876;
+            --ar-warning: #8f7466;
+            --ar-warning-rgb: 143,116,102;
+            --ar-success: #68aca2;
+            --ar-success-rgb: 104,172,162;
+            --ar-danger: #b85656;
+            --ar-danger-rgb: 184,86,86;
+            --ar-border-radius: 0rem;
+            --ar-body-font-family: 'Poppins', sans-serif;
+            --ar-body-font-size: 1rem;
+        }
+
+        .btn-primary {
+            --ar-btn-bg: #66818f;
+            --ar-btn-border-color: #66818f;
+            --ar-btn-hover-bg: #4d6876;
+            --ar-btn-hover-border-color: #4d6876;
+            --ar-btn-active-bg: #4d6876;
+            --ar-btn-active-border-color: #4d6876;
+            --ar-btn-disabled-bg: #66818f;
+            --ar-btn-disabled-border-color: #66818f;
+        }
+
+        .btn-warning {
+            --ar-btn-bg: #8f7466;
+            --ar-btn-border-color: #8f7466;
+            --ar-btn-hover-bg: #765b4d;
+            --ar-btn-hover-border-color: #765b4d;
+            --ar-btn-active-bg: #765b4d;
+            --ar-btn-active-border-color: #765b4d;
+            --ar-btn-disabled-bg: #8f7466;
+            --ar-btn-disabled-border-color: #8f7466;
+        }
+
+        .btn-success {
+            --ar-btn-bg: #68aca2;
+            --ar-btn-border-color: #68aca2;
+            --ar-btn-hover-bg: #4f9389;
+            --ar-btn-hover-border-color: #4f9389;
+            --ar-btn-active-bg: #4f9389;
+            --ar-btn-active-border-color: #4f9389;
+            --ar-btn-disabled-bg: #68aca2;
+            --ar-btn-disabled-border-color: #68aca2;
+        }
+
+        .btn-danger {
+            --ar-btn-bg: #b85656;
+            --ar-btn-border-color: #b85656;
+            --ar-btn-hover-bg: #9f3d3d;
+            --ar-btn-hover-border-color: #9f3d3d;
+            --ar-btn-active-bg: #9f3d3d;
+            --ar-btn-active-border-color: #9f3d3d;
+            --ar-btn-disabled-bg: #b85656;
+            --ar-btn-disabled-border-color: #b85656;
+        }
+
+        .btn-outline-primary {
+            --ar-btn-color: #66818f;
+            --ar-btn-border-color: #66818f;
+            --ar-btn-hover-bg: #66818f;
+            --ar-btn-hover-border-color: #66818f;
+            --ar-btn-active-bg: #66818f;
+            --ar-btn-active-border-color: #66818f;
+            --ar-btn-disabled-color: #66818f;
+            --ar-btn-disabled-border-color: #66818f;
+        }
+
+        .btn-outline-warning {
+            --ar-btn-color: #8f7466;
+            --ar-btn-border-color: #8f7466;
+            --ar-btn-hover-bg: #8f7466;
+            --ar-btn-hover-border-color: #8f7466;
+            --ar-btn-active-bg: #8f7466;
+            --ar-btn-active-border-color: #8f7466;
+            --ar-btn-disabled-color: #8f7466;
+            --ar-btn-disabled-border-color: #8f7466;
+        }
+
+        .btn-outline-success {
+            --ar-btn-color: #68aca2;
+            --ar-btn-border-color: #68aca2;
+            --ar-btn-hover-bg: #68aca2;
+            --ar-btn-hover-border-color: #68aca2;
+            --ar-btn-active-bg: #68aca2;
+            --ar-btn-active-border-color: #68aca2;
+            --ar-btn-disabled-color: #68aca2;
+            --ar-btn-disabled-border-color: #68aca2;
+        }
+
+        .btn-outline-danger {
+            --ar-btn-color: #b85656;
+            --ar-btn-border-color: #b85656;
+            --ar-btn-hover-bg: #b85656;
+            --ar-btn-hover-border-color: #b85656;
+            --ar-btn-active-bg: #b85656;
+            --ar-btn-active-border-color: #b85656;
+            --ar-btn-disabled-color: #b85656;
+            --ar-btn-disabled-border-color: #b85656;
+        }
+    </style>
+    @await RenderSectionAsync("cssStyles", required: false)
+</head>
+<body class="@ViewData["BodyBg"]">
+    <div class="page-loading active">
+        <div class="page-loading-inner">
+            <div class="page-spinner"></div><span>Loading...</span>
+        </div>
+    </div>
+    <main class="page-wrapper">
+       @await Html.PartialAsync("NavBars/Default")
+        @RenderBody()
+        @await Html.PartialAsync("Modals/_Modals")
+    </main>
+    @await Html.PartialAsync("Footers/Default")
+
+    <a class="btn-scroll-top" href="#top" data-scroll>
+        <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+        </svg><i class="ai-arrow-up"></i>
+    </a>
+
+
+    <script src="~/libraries/axios/axios.min.js"></script>
+@*    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>*@
+    <script>
+        
+        function livesearch() {
+            const searchStat = document.getElementById('#search_stat');
+            const searchResults = document.getElementById('#search_results');
+
+            searchStat.innerHTML = 'Search <i class="ai-clock mb-1"></i>';
+            let ddr = document.getElementById("global_search").value;
+            if (ddr.length >= 2) {
+                axios.get('/api/livesearch/all/' + ddr)
+                    .then(response => {
+                        console.log(response.data);
+                        const sb = new StringBuilder();
+                        for (var i = 0; i < response.data.length; i++) {
+                            sb.append('<div class="d-flex align-items-center border-bottom pb-4 mb-4">');
+                            sb.append('<a class="position-relative d-inline-block flex-shrink-0 bg-secondary rounded-1" href="' + response.data[i].url + '">');
+                            sb.append('<img src="/assets/images/search_thumbs/' + response.data[i].image + '.svg" width="70" alt="Product" /></a><div class="ps-3">');
+                            sb.append('<h4 class="h6 mb-2"><a href="/">' + response.data[i].title + '</a></h4>');
+                            sb.append(' <span class="fs-sm text-muted ms-auto">' + response.data[i].description + '</span>');
+                            sb.append('</div></div>');
+                        }
+                        searchResults.innerHTML = sb.toString();
+                        searchStat.innerHTML = 'Search';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        searchStat.innerHTML = '';
+                        searchResults.innerHTML = '';
+                    });
+            }
+            else {
+                searchResults.innerHTML = '';
+                searchStat.innerHTML = 'Search';
+            }
+        }
+    </script>
+
+    @await RenderSectionAsync("jsScripts", required: false)
+    <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="~/libraries/aos/aos.js"></script>
+    @await RenderSectionAsync("jsLib", required: false)
+    
+    
+    <environment include="production">
+        <script src="~/assets/js/coffeeroom.min.js" asp-append-version="true"></script>
+        <script src="~/assets/js/theme.min.js"></script>
+    </environment>
+    <environment include="development">
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
+        <script src="~/assets/js/theme.js"></script>
+    </environment>
+</body>
+</html>

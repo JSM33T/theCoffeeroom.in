@@ -1,0 +1,64 @@
+﻿<div class="modal fade" id="modalLogout" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Logout!</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Wanna log out?</p>
+            </div>
+            <div class="modal-footer flex-column flex-sm-row">
+                <button type="button" class="ripple btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">Close</button>
+                <a type="button" href="/account/logout" class="ripple btn btn-primary w-100 w-sm-auto ms-sm-3">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" data-focus-input="#search">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-block position-relative border-0 pb-3 flex">
+                <div class="row row-cols-sm-auto g-3 align-items-end">
+                    <div class="col-4">
+                        <input class="form-check-input" value="a" type="radio" id="ex-radio-1" name="radioSearch" checked>
+                        <label class="form-check-label" for="ex-radio-1">All</label>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-check-input" value="b" type="radio" id="ex-radio-2" name="radioSearch">
+                        <label class="form-check-label" for="ex-radio-1">Apps</label>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-check-input" value="c" type="radio" id="ex-radio-3" name="radioSearch">
+                        <label class="form-check-label" for="ex-radio-1">Blogs</label>
+                    </div>
+                </div>
+                <div class="position-relative w-100 mt-2 mb-2">
+                    <button class="btn-close position-absolute top-50 end-0 translate-middle-y m-0 me-n1" type="button" data-bs-dismiss="modal">
+                    </button>
+                    <i class="ai-search fs-xl position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                    <input id="global_search" onkeyup="livesearch(1)" class="form-control form-control-lg px-5" type="search" placeholder="Type to search" autocomplete="off" data-focus-on-open="[&quot;modal&quot;, &quot;#searchModal&quot;]" />
+                </div>
+                <div id="search_stat" class="fs-xs fw-medium text-muted text-uppercase">Search</div>
+            </div>
+            <div class="modal-body pt-3">
+                <div id="search_results">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="position: absolute; top: 0; right: 0;">
+    <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" id="toastBox" data-bs-delay="4000" data-bs-autohide="true">
+        <div class="toast-header">
+            <i class="ai-bell fs-lg me-2"></i>
+            <h6 class="mb-0 me-auto" id="toastTitle">title</h6>
+            @*<small class="fw-medium text-muted" id="toastTime">11 mins ago</small>*@
+            <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toastBody">Hello, world! This is a toast message.</div>
+    </div>
+</div>
+

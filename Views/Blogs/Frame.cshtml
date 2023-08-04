@@ -1,0 +1,5 @@
+﻿@    using theCoffeeroom.Models.Frame
+@model BlogRoute
+
+
+@await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/blog_content.cshtml")
