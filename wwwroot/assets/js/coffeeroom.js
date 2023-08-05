@@ -99,8 +99,9 @@ function load_images_temp() {
 function toaster(title, message) {
     //removed trim from message and title
     document.getElementById("toastBody").innerText = message;
-    document.getElementById("toastTitle").innerText = title
+    document.getElementById("toastTitle").innerText = title;
     var toastElement = document.getElementById("toastBox");
     var toast = new bootstrap.Toast(toastElement);
     toast.show();
 }
+

@@ -83,13 +83,11 @@
 
 @section jsScripts{
     <environment include="development">
-        <script src="~/reactors/blogreactor.js" asp-append-version="true"></script>
+        @await Html.PartialAsync("Reactor/_Script")
     </environment>
     <environment include="production">
-        <script src="~/reactors/blogreactor.min.js" asp-append-version="true"></script>
+        @await Html.PartialAsync("Reactor/_ScriptProd")
     </environment>
-        
-    
 }
 
 @section jsLib{

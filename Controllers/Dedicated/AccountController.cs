@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Data;
 using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
+using Validators = theCoffeeroom.Core.Helpers.Validators;
 
 namespace theCoffeeroom.Controllers.Dedicated
 {
@@ -67,6 +70,132 @@ namespace theCoffeeroom.Controllers.Dedicated
                 return StatusCode(500, "soomething went wrong");
                
             }
+        }
+
+        [HttpPost("/api/account/signup")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> UserSignUp([FromBody] UserProfile userProfile)
+        {
+            string body, subject;
+            string connectionString = ConfigHelper.NewConnectionString;
+            string message = "something working", type = "error";
+            if (userProfile.UserName != null && userProfile.Password!= null)
+            {
+                if (userProfile.FirstName == "")
+                {
+                    message = "first name is mandatory";
+                }
+                else if (userProfile.LastName == "")
+                {
+                    message = "username is mandatory";
+                }
+                else if (!Validators.IsAlphaNumeric(userProfile.UserName))
+                {
+                    message = "only alphanumeric characters are allowed";
+                }
+                else if (userProfile.EMail == "")
+                {
+                    message = "email is mandatory";
+                }
+                else if (Validators.IsValidEmail(userProfile.EMail) == false)
+                {
+                    message = "invalid email format";
+                }
+                else if (userProfile.Password.Trim() == "")
+                {
+                    message = "password is mandatory";
+                }
+                else if (userProfile.Password.Trim().Length <= 6)
+                {
+                    message = "password should be atlease 6 chars long";
+                }
+                else
+                {
+                    try
+                    {
+                        string FilteredUsername = userProfile.UserName.Trim().ToLower().ToString();
+                        using SqlConnection connection = new(connectionString);
+                        await connection.OpenAsync();
+                        SqlCommand cmd = new("select count(*) from TblUserProfile where UserName = @inputusername or EMail = @inputemail", connection);
+                        cmd.Parameters.AddWithValue("@inputusername", FilteredUsername);
+                        cmd.Parameters.AddWithValue("@inputemail", userProfile.EMail);
+                        var counter = cmd.ExecuteScalar().ToString();
+                        if (counter == "0")
+                        {
+                            string secret = StringProcessors.GenerateRandomString(10);
+                            var otp = OTPGenerator.GenerateOTP(secret);
+                            subject = "Verify Your Account | TheCoffeeroom";
+                            try
+                            {
+
+                                body = "<h1>Hey there,</h1>" +
+                                        "<p> This is for the verification of your account @TheCoffeeRoom." +
+                                        "" + otp + " is your OTP which is valid for 30 minutes </p>." +
+                                        "Or alternatively you can click here to verify directly:" +
+                                        "<a type=\"button\" href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"><b> VERIFY </b></a>";
+
+                                int stat = Mailer.MailSignup(subject, body, userProfile.EMail.ToString());
+                                if (stat == 1)
+                                {
+                                    try
+                                    {
+                                        SqlCommand maxIdCommand = new("SELECT ISNULL(MAX(Id), 0) + 1 FROM TblUserProfile", connection);
+                                        int newId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
+                                        cmd = new("insert into TblUserProfile (Id,FirstName,LastName,EMail,UserName,PassWord,IsActive,IsVerified,OTP,OTPTime,Role,Bio,Gender,Phone,AvatarId,DateJoined) VALUES(@Id,@firstname,@lastname,@email,@username,@password,1,0,@otp,@otptime,'user','','','',1,@datejoined)", connection);
+                                        cmd.Parameters.AddWithValue("@Id", newId);
+                                        cmd.Parameters.AddWithValue("@firstname", userProfile.FirstName);
+                                        cmd.Parameters.AddWithValue("@lastname", userProfile.LastName);
+                                        cmd.Parameters.AddWithValue("@email", userProfile.EMail);
+                                        cmd.Parameters.AddWithValue("@username", FilteredUsername);
+                                        cmd.Parameters.AddWithValue("@password", userProfile.Password);
+                                        cmd.Parameters.AddWithValue("@otp", otp);
+                                        cmd.Parameters.Add("@otptime", SqlDbType.DateTime).Value = DateTime.Now;
+                                        cmd.Parameters.Add("@datejoined", SqlDbType.DateTime).Value = DateTime.Now;
+
+                                        await cmd.ExecuteNonQueryAsync();
+                                        message = "verification email send please verify your account";
+                                        type = "success";
+                                        Log.Information(userProfile.FirstName + " registered, Email: " + userProfile.EMail);
+                                    }
+                                    catch (Exception exm)
+                                    {
+                                        Log.Error("Error while user registration: " + exm.Message.ToString());
+                                    }
+
+                                }
+                                else
+                                {
+                                    message = "unable to send the mail";
+                                    type = "error";
+                                }
+                            }
+                            catch (Exception ex2)
+                            {
+                                message = "something went wrong";
+                                Log.Error(ex2.Message.ToString());
+                            }
+                        }
+                        else
+                        {
+                            message = "username/email taken!!";
+                            type = "error";
+                        }
+                        await connection.CloseAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        message = "something went wrong";
+                        Log.Error("error while signup" + ex.Message.ToString());
+                    }
+                }
+            }
+            else
+            {
+                message = "something went wrong:";
+                type = "error";
+            }
+            var keys = new { message, type };
+            return new JsonResult(keys);
         }
     }
 }

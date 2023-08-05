@@ -259,6 +259,7 @@
     </div>
     <main class="page-wrapper">
         @RenderBody()
+        @await Html.PartialAsync("Modals/_Modals")
     </main>
 
     <script src="~/libraries/axios/axios.min.js"></script>

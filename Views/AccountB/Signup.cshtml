@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "_LayoutEmpty";
+}
+<div class="d-lg-flex position-relative h-100">
+    <!-- Home button--><a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+    <!-- Sign in form-->
+    <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
+        <div class="w-100 mt-auto" style="max-width: 526px;">
+            <h1>Log In</h1>
+            <p class="pb-3 mb-3 mb-lg-4">Don't have an account yet?&nbsp;&nbsp;<a href='/account/signup'>Register here!</a></p>
+            <form class="needs-validation" id="loginForm" novalidate>
+                <div class="pb-3 mb-3">
+                    <div class="position-relative">
+                        <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                        <input class="form-control form-control-lg ps-5" id="userName" type="text" placeholder="Usename" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="position-relative">
+                        <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                        <div class="password-toggle">
+                            <input class="form-control form-control-lg ps-5" id="passCode" type="password" placeholder="Password" required>
+                            <label class="password-toggle-btn" aria-label="Show/hide password">
+                                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
+                    <form-check class="my-1">
+                        <input class="form-check-input" type="checkbox" id="keep-signedin" disabled>
+                        <label class="form-check-label ms-1" for="keep-signedin">Keep me signed in (id)</label>
+                    </form-check><a class="fs-sm fw-semibold text-decoration-none my-1" href="/account/password-recovery">Forgot password?</a>
+                </div>
+                <button class="btn btn-lg btn-primary w-100 mb-4" id="logIn" type="submit">Log In</button>
+                <h2 class="h6 text-center pt-3 pt-lg-4 mb-4">Or sign in with your social account(id)</h2>
+                <div class="row row-cols-1 row-cols-sm-2 gy-3">
+                    <div class="col"><a class="btn btn-icon btn-outline-secondary btn-google btn-lg w-100 disabled" href="#"><i class="ai-google fs-xl me-2"></i>Google</a></div>
+                    <div class="col"><a class="btn btn-icon btn-outline-secondary btn-facebook btn-lg w-100 disabled" href="#"><i class="ai-facebook fs-xl me-2"></i>Facebook</a></div>
+                </div>
+            </form>
+        </div>
+        <!-- Copyright-->
+        <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
+    </div>
+    <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
+
+
+
+</div>
+@Html.AntiForgeryToken()
+@section jsScripts{
+
+    <script>
+
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            toaster("some", "thing");
+            var msg = "error";
+            var title = "error";
+            var username = document.getElementById("userName").value;
+            var passcode = document.getElementById("passCode").value;
+            if (username.trim() === '' && username.trim() === '') {
+                msg = "enter valid userame and password";
+                toaster("some", "thing");
+            }
+            else if (username.trim() === '') {
+                msg = "Enter a valid username";
+                toaster(title, msg);
+            }
+            else if (passcode.trim() === '') {
+                msg = "Enter a valid password";
+                toaster(title, msg);
+            }
+            else {
+                loginSubmit();
+            }
+        });
+
+
+
+
+
+
+        function loginSubmit() {
+
+            const checkbox = document.getElementById('keep-signedin');
+            if (checkbox.checked) {
+                localStorage.setItem('keep-signed', 'y');
+            }
+            else {
+                localStorage.removeItem('keep-signed')
+            }
+
+            var loginBtn = document.getElementById('logIn');
+            loginBtn.innerHTML = "logging in..";
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            var data = {
+                userName: document.getElementById("userName").value,
+                passWord: document.getElementById("passCode").value,
+            };
+            axios.defaults.headers.common['RequestVerificationToken'] = token;
+            axios.post("/api/account/login", data)
+                .then(function (response) {
+                    console.log(response);
+                    var typeResp = response.data;
+                        toaster("Success", typeResp.message);
+                        let fwrdLink = localStorage.getItem('curr_link');
+                       // window.location.replace(fwrdLink);
+                })
+                .catch(function (error) {
+                    loginBtn.innerHTML = "Log In";
+                    toaster("Error", "something went wrong");
+                })
+        }
+
+
+    </script>
+
+}
