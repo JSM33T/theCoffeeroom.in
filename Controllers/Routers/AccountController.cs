@@ -28,7 +28,15 @@ namespace theCoffeeroom.Controllers.Routers
         [Route("/account")]
         public IActionResult Login()
         {
-            return View("Views/Account/Index.cshtml");
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Views/Account/Index.cshtml");
+            }
+            else
+            {
+                return View("Views/Home/AccessDenied.cshtml");
+            }
+            
         }
 
         [Route("/account/signup")]

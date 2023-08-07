@@ -9,6 +9,7 @@
 #coffeeroom custom entries
 /.vscode
 /logs
+/Controllers/Dedicated/AccountController.cs
 /Notes
 /wwwroot/content/
 /wwwroot/libraries/

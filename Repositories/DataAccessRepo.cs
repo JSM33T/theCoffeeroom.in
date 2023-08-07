@@ -21,7 +21,7 @@ namespace theCoffeeroom.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Mail> AddMailAsync(Mail mail)
+        public async Task<string> AddMailAsync(Mail mail)
         {
             using SqlConnection connection = new(connectionString);
             await connection.OpenAsync();
@@ -47,15 +47,16 @@ namespace theCoffeeroom.Repositories
                     addEmailCmd.Parameters.AddWithValue("@dateadded", DateTime.Now);
                     await addEmailCmd.ExecuteNonQueryAsync();
                     Log.Information("mail added to newsletter:" + mail.EMailId);
-                    return mail;
+                    return "Email submitted";
                 }
                 else
                 {
-                    throw new Exception("email already present");
+                    return "Email already submitted";
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error("email da repo error" + ex.Message.ToString());
                 throw new Exception("something went wrong");
             }
         }

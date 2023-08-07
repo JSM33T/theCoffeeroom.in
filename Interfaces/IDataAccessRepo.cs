@@ -6,7 +6,7 @@ namespace theCoffeeroom.Interfaces
     {
         Task<IEnumerable<Mail>> GetAllMailsAsync();
         Task<Mail> GetMailAsync(int Id);
-        Task<Mail> AddMailAsync(Mail mail);
+        Task<string> AddMailAsync(Mail mail);
         Task<Mail> UpdateMailAsync(Mail mail);
         Task<Mail> DeleteMailAsync(int Id);
         

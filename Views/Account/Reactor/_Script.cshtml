@@ -6,7 +6,7 @@
 
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
 
-    <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
         <div class="w-100 mt-auto" style="max-width: 526px;">
             <h1>Log In</h1>
             <p class="pb-3 mb-3 mb-lg-4">Don't have an account yet?&nbsp;&nbsp;<router-link to='/account/signup'>Register here!</router-link></p>
@@ -64,7 +64,7 @@
         },
         methods: {
             submitLogin() {
-                this.buttonText = ' <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading...';
+                this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Logging In...';
                 const details = {
                     UserName: this.username,
                     PassWord: this.password,
@@ -90,7 +90,7 @@
         template: `
             <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
 
-        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
                 <h1>Sign Up</h1>
                 <p class="pb-3 mb-3 mb-lg-4">Already have an account?&nbsp;&nbsp;<router-link to='/account'>Log In!</router-link></p>
@@ -141,7 +141,6 @@
             </div>
             <!-- Copyright-->
             <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
-
                     `,
 
         data() {
@@ -163,7 +162,7 @@
         },
         methods: {
             submitLogin() {
-                this.buttonText = ' <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading...';
+                this.buttonText = ' <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Signing Up...';
                 const details = {
                     FirstName: this.firstname,
                     LastName: this.lastname,
@@ -188,14 +187,21 @@
         },
     };
 
-
     const routes = [{
         path: '/account/',
         component: LoginComponent
     }, {
         path: '/account/signup',
         component: SignupComponent
-    }];
+    }, {
+        path: '/account/resentverification',
+        component: SignupComponent
+    },
+    {
+        path: '/account/resentverification',
+        component: SignupComponent
+    }
+    ];
     const router = VueRouter.createRouter({
         history: VueRouter.createWebHistory(),
         routes

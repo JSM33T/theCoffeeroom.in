@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Dedicated\Apps\" />
     <Folder Include="Notes\" />
     <Folder Include="Views\Archive\Content\" />
     <Folder Include="Views\Apps\Content\" />

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import axios from 'axios'; // Import axios if not already imported
+    import axios from 'axios';
 
     export default {
         data() {

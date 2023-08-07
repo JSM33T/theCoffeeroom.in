@@ -1,37 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using System.Diagnostics;
 using theCoffeeroom.Core.Helpers;
-using theCoffeeroom.Models;
 using theCoffeeroom.Models.Domain;
 
-namespace theCoffeeroom.Controllers.Routers
+namespace theCoffeeroom.Controllers.Dedicated
 {
-    public class HomeController : Controller
+    public class ThemeController : Controller
     {
-        [Route("/")]
-        public IActionResult Index(string level)
+        readonly string connectionString = ConfigHelper.NewConnectionString;
+        [HttpGet("api/theme/{id}")]
+        public async Task<IActionResult> GetThemeById(int id)
         {
-            return View(level);
+            List<Theme> themes = new();
+            
+            using (SqlConnection connection = new(connectionString))
+            {
+                connection.Open();
+                string sql;
+                sql = "SELECT * FROM TblThemeMaster WHERE Id=@Id";
+                using SqlCommand command = new(sql, connection);
+                command.Parameters.AddWithValue("@Id", id);
+                using SqlDataReader dataReader = await command.ExecuteReaderAsync();
+
+                while (await dataReader.ReadAsync())
+                {
+                    Theme entry = new()
+                    {
+                        Title = (string)dataReader["Title"],
+                        Description = (string)dataReader["Description"],
+                        String = (string)dataReader["String"],
+                        FontLink = (string)dataReader["FontLink"],
+                    };
+                    themes.Add(entry);
+                }
+            }
+            return new JsonResult(themes);
         }
 
-        [Route("/changelog")]
-        public IActionResult Changelog()
+        [HttpGet("api/themes/list")]
+        public async Task<IActionResult> GetThemes()
         {
-            return View();
-        }
-
-        [Route("/faq")]
-        public IActionResult Faq()
-        {
-            return View();
-        }
-
-        [Route("/personalize")]
-        public async Task<IActionResult> Personalize()
-        {
-            string connectionString = ConfigHelper.NewConnectionString;
-            List<Theme> ThemeDD;
+             List<Theme> ThemeDD;
             ThemeDD = new List<Theme>();
             using var connection = new SqlConnection(connectionString);
             connection.Open();
@@ -53,14 +62,7 @@ namespace theCoffeeroom.Controllers.Routers
                 });
             }
             await reader.CloseAsync();
-            return View(ThemeDD);
-        }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return new JsonResult(ThemeDD);
         }
     }
 }

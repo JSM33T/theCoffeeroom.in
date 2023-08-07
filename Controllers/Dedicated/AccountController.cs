@@ -42,7 +42,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         var username = reader.GetString(reader.GetOrdinal("UserName"));
                         var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
                         var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
-                        var fullname = firstname + " " + reader.GetString(reader.GetOrdinal("LastName"));
+                        var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
                         var role = reader.GetString(reader.GetOrdinal("Role"));
                         var avatar = reader.GetString(reader.GetOrdinal("Image"));
                         //set session
@@ -159,6 +159,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                                     }
                                     catch (Exception exm)
                                     {
+                                        message = "something went wrong";
                                         Log.Error("Error while user registration: " + exm.Message.ToString());
                                     }
 
@@ -197,5 +198,44 @@ namespace theCoffeeroom.Controllers.Dedicated
             var keys = new { message, type };
             return new JsonResult(keys);
         }
+
+        [HttpGet]
+        [Route("/api/getavatars")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> GetAvatars()
+        {
+            try
+            {
+                List<Avatar> entries = new();
+                string sql;
+                string connectionString = ConfigHelper.NewConnectionString;
+                using (SqlConnection connection = new(connectionString))
+                {
+                    await connection.OpenAsync();
+                    sql = "select * from TblAvatarMaster";
+                    using SqlCommand command = new(sql, connection);
+                    using SqlDataReader dataReader = await command.ExecuteReaderAsync();
+
+                    while (await dataReader.ReadAsync())
+                    {
+                        Avatar entry = new()
+                        {
+                            Id = Int32.Parse(dataReader["Id"].ToString()),
+                            Title = (string)dataReader["Title"],
+                            Image = (string)dataReader["Image"]
+                        };
+                        entries.Add(entry);
+                    }
+                    await connection.CloseAsync();
+                }
+                return new JsonResult(entries);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("error in live search: " + ex.Message.ToString());
+                return BadRequest("something went wrong");
+            }
+        }
+
     }
 }
