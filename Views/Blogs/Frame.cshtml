@@ -452,41 +452,44 @@
                 });
         }
 
-        function replyEditSave() {
-            axios.post('/api/blog/comment/edit', {
-                replyId: localStorage.getItem('replyid'),
-                reply: $("#blog_replyEdit").val()
-            })
-                .then(function (response) {
-                    loadComments();
-                    toaster("success", "changes saved");
-                })
-                .catch(function (error) {
-                    toaster("error", "something went wrong");
-                });
-        }
+        //function replyEditSave() {
+        //    axios.post('/api/blog/comment/edit', {
+        //        replyId: localStorage.getItem('replyid'),
+        //        reply: $("#blog_replyEdit").val()
+        //    })
+        //        .then(function (response) {
+        //            loadComments();
+        //            toaster("success", "changes saved");
+        //        })
+        //        .catch(function (error) {
+        //            toaster("error", "something went wrong");
+        //        });
+        //}
 
-       
-        function replyEditSave2() {
+
+        function replyEditSave() {
+            var replyId = localStorage.getItem('replyid');
+            var editedReply = $("#blog_replyEdit").val();
+
             $.ajax({
                 url: '/api/blog/reply/edit',
                 type: 'POST',
                 data: JSON.stringify({
-                    replyId: localStorage.getItem('replyid'),
-                    reply: $("#blog_replyEdit").val()
+                    replyId: replyId,
+                    reply: editedReply
                 }),
+                contentType: 'application/json',
                 success: function (data) {
                     loadComments();
                     $('#mdlReply').modal('hide');
-                    $("#blog_replyEdit").val() == "";
-                    toaster("Success","Reply added");
+                    $("#blog_replyEdit").val(""); // Changed '==' to '=' to assign the value instead of comparing
+                    toaster("Success", "Reply edited successfully"); // Changed the success message for clarity
                     localStorage.removeItem("replyid");
                 },
                 error: function () {
-                    toaster(data.type, "Something went wrong");
+                    toaster("error", "Something went wrong"); // Fixed the error message to a general one
                 }
             });
-
         }
 
 

@@ -26,12 +26,41 @@
 
 @section jsScripts{
     <script>
-        const ProfileComponent = {
+        const Security =
+        {
+            template: '<h1>hey there  {{ username }}how you doing?</h1>',
+            data()
+            {
+                return{
+                    username: "Jasmeet Singh",
+                };
+                
+            },
+            async mounted()
+            {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+                this.onInit();
+            },
+            methods:{
+                onInit() {
+                   toaster("success","security tab reached");
+                }
+
+            }
+            
+        }
+
+
+
+        const EditProfile = {
             template: `
             <div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
                                         <i class="ai-edit text-primary lead pe-1 me-2"></i>
-                                                 <h2 class="h4 mb-0">Edit Info</h2><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link>
+                                                                 <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
                                     </div>
                                     <div id="profilepanel">
                                         <div class="d-md-flex align-items-center">
@@ -53,7 +82,7 @@
                                             </div>
                                             <div class="w-100 pt-3 pt-md-0 ms-md-auto col-sm-12" style="max-width: 212px;">
                                                 <div class="d-flex justify-content-between fs-sm pb-1 mb-2">Select your avatar</div>
-                                                        <select name="avatar" id="avatars" class="form-select" @@change="handleChange">
+                                                <select name="avatar" id="avatars" class="form-select" @@change="handleChange">
                                                          <option v-for="option in options" :value="option.image" :key="option.title">{{ option.title }}</option>
                                                 </select>
                                             </div>
@@ -84,15 +113,15 @@
                                                 <div class="col-sm-12 col-md-6  d-sm-flex align-items-center pt-sm-2 pt-md-3">
                                                     <div class="form-label text-muted mb-2 mb-sm-0 me-sm-4">Gender:</div>
                                                     <div class="form-check form-check-inline mb-0">
-                                                        <input value="m" name="gender" type="radio" id="male" class="form-check-input" @(@Model.Gender == "m" ? "checked" : "false") />
+                                                        <input value="m" v-model="gender" type="radio" id="male" class="form-check-input" @(@Model.Gender == "m" ? "checked" : "false") />
                                                         <label class="form-check-label" for="male">Male</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mb-0">
-                                                        <input value="f" name="gender" type="radio" id="female" class="form-check-input" @(@Model.Gender == "f" ? "checked" : "false") />
+                                                        <input value="f" v-model="gender" type="radio" id="female" class="form-check-input" @(@Model.Gender == "f" ? "checked" : "false") />
                                                         <label class="form-check-label" for="female">Female</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mb-0">
-                                                        <input value="o" name="gender" type="radio" id="other" class="form-check-input" @(@Model.Gender == "o" ? "checked" : "false") />
+                                                        <input value="o" v-model="gender" type="radio" id="other" class="form-check-input" @(@Model.Gender == "o" ? "checked" : "false") />
                                                         <label class="form-check-label" for="other">Other</label>
                                                     </div>
                                                 </div>
@@ -139,13 +168,17 @@
                 handleChange(event) {
                     var dropdown = document.getElementById("avatars");
                     var selectedOption = dropdown.options[dropdown.selectedIndex];
-                    alert(selectedOption.value);
                     var selectedOptionDataId = selectedOption.getAttribute("image-link");
                     //document.getElementById('avatar_placeholder').style.background-image = 'url(/assets/images/avatars/default/default.png)';
+                },
+                saveDetails(){
+                    toaster("success","save changes event triggered");
                 }
             }
         };
-        const HomeComponent = {
+
+
+        const Dashboard = {
             template: `
             <div class="fade-in">
                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
@@ -215,18 +248,22 @@
                 };
             },
             async mounted() {
-                //   document.getElementById("titleBlog").innerHTML = "Our Blogs";
                 window.scrollTo({
                     top: 0,
-                    behavior: 'smooth', // Use 'smooth' for smooth scrolling effect, 'auto' for instant scrolling
+                    behavior: 'smooth', 
                 });
 
             },
         };
 
+
+
+
+
         const routes = [
-            { path: '/profile', component: HomeComponent },
-            { path: '/profile/edit', component: ProfileComponent, props: true }
+            { path: '/profile', component: Dashboard },
+            { path: '/profile/edit', component: EditProfile},   
+            { path: '/profile/security', component: Security }
         ];
 
         const router = VueRouter.createRouter({
@@ -244,69 +281,5 @@
         });
         app.use(router);
         app.mount('#app');
-    </script>
-    <script>
-        function save_prof() {
-            //var selectedOption = document.querySelector('input[name="gender"]:checked');
-            // var gndrval = selectedOption ? selectedOption.value : "n";
-
-            var saveProfButton = document.getElementById("saveprof");
-            saveProfButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Saving';
-            saveProfButton.className = "btn btn-primary pe-none";
-
-            var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-
-            var config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    "RequestVerificationToken": token
-                }
-            };
-
-            var postData = {
-                FirstName: document.getElementById("firstname").value,
-                LastName: document.getElementById("lastname").value,
-                Phone: document.getElementById("phone").value,
-                EMail: document.getElementById("email").value,
-                // Gender: gndrval,
-                AvatarId: document.getElementById("avatars").value,
-                Bio: document.getElementById("bio").value
-            };
-
-            alert(FirstName);
-            axios.post("/acc?handler=SubmitDeetsNow", postData, config)
-                .then(function (response) {
-                    var data = response.data;
-                    saveProfButton.innerHTML = "Save Profile";
-                    saveProfButton.className = "btn btn-primary";
-
-
-                    var dropdown = document.getElementById("avatars");
-                    var selectedOption = dropdown.options[dropdown.selectedIndex];
-                    var selectedOptionDataId = selectedOption.getAttribute("image-link");
-
-                    if (data.type == "success") {
-
-                        document.getElementById("profilename").innerHTML = document.getElementById("firstname").value + " " + document.getElementById("lastname").value;
-                        document.getElementById("title_master").innerHTML = document.getElementById("firstname").value + " ";
-                        document.getElementById("title_master_mobile").innerHTML = document.getElementById("firstname").value;
-                        document.getElementById("layout_pfp").setAttribute("src", "/assets/images/avatars/default/" + selectedOptionDataId + ".png");
-                        document.getElementById("layout_pfp_mobile").setAttribute("src", "/assets/images/avatars/default/" + selectedOptionDataId + ".png");
-                        document.getElementById("avatar_container").src = "/assets/images/avatars/default/" + selectedOptionDataId + ".png";
-                        document.getElementById("name_container").innerHTML = document.getElementById("firstname").value + " " + document.getElementById("lastname").value;
-
-                    }
-
-                    toaster(data.type, data.message);
-                })
-                .catch(function (error) {
-                    console.error("Error:", error);
-                    saveProfButton.innerHTML = "Save Profile";
-                    saveProfButton.className = "btn btn-primary";
-                    var profStat = document.getElementById("profstat");
-                    toaster("error", "something went wrong");
-                });
-
-        }
     </script>
 }

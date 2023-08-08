@@ -3,9 +3,7 @@
 
     const LoginComponent = {
         template: `
-
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
         <div class="w-100 mt-auto" style="max-width: 526px;">
             <h1>Log In</h1>
@@ -14,14 +12,14 @@
                 <div class="pb-3 mb-3">
                     <div class="position-relative">
                         <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                        <input class="form-control form-control-lg ps-5" v-model="username" type="text" placeholder="Username or email" required>
+                                <input class="form-control form-control-lg ps-5" v-model="username" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
                     </div>
                 </div>
                 <div class="mb-4">
                     <div class="position-relative">
                         <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                         <div class="password-toggle">
-                            <input class="form-control form-control-lg ps-5" v-model="password" type="password" placeholder="Password" required>
+                                    <input class="form-control form-control-lg ps-5" v-model="password" @@keyup.enter="submitLogin" type="password" placeholder="Password" required>
                             <label class="password-toggle-btn" aria-label="Show/hide password">
                                 <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                             </label>
@@ -116,7 +114,6 @@
 
                     <div class="row row-cols-1 row-cols-sm-2 pb-2 mb-2">
                         <div class="position-relative">
-
                             <div class="password-toggle">
                                 <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                                 <input name="password" type="password" v-model="password" class="bindentersignup form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
@@ -151,7 +148,8 @@
                 passcofirm: '',
                 firstname: '',
                 lastname:'',
-                email:''
+                email:'',
+                
             };
         },
         async mounted() {
@@ -162,7 +160,7 @@
         },
         methods: {
             submitLogin() {
-                this.buttonText = ' <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Signing Up...';
+                this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Signing Up...';
                 const details = {
                     FirstName: this.firstname,
                     LastName: this.lastname,
@@ -182,6 +180,7 @@
                     })
                     .finally(() => {
                         this.buttonText = 'Sign Up';
+                        this.lala = 'Sign Up';
                     });
             },
         },
@@ -194,7 +193,7 @@
         path: '/account/signup',
         component: SignupComponent
     }, {
-        path: '/account/resentverification',
+        path: '/account/resendverification',
         component: SignupComponent
     },
     {

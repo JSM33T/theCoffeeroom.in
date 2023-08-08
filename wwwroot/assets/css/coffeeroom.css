@@ -1,4 +1,7 @@
 ﻿/*default styles override init*/
+a {
+    text-decoration: none !important
+}
 .fade-in {
     opacity: 0;
     transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */

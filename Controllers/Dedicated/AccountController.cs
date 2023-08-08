@@ -12,6 +12,9 @@ namespace theCoffeeroom.Controllers.Dedicated
 {
     public class AccountController : Controller
     {
+
+        readonly string connectionString = ConfigHelper.NewConnectionString;
+
         [HttpPost("/api/account/login")]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> UserLogin([FromBody] LoginCreds loginCreds)
@@ -20,8 +23,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 return BadRequest("Invalid Data");
             }
-
-            string connectionString = ConfigHelper.NewConnectionString;
             try
             {
                 using SqlConnection connection = new(connectionString);
@@ -56,6 +57,9 @@ namespace theCoffeeroom.Controllers.Dedicated
                     }
                     else
                     {
+
+                    }
+                    {
                         Log.Information("invalid creds by username:" + loginCreds.UserName);
                       
                     }
@@ -77,7 +81,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         public async Task<IActionResult> UserSignUp([FromBody] UserProfile userProfile)
         {
             string body, subject;
-            string connectionString = ConfigHelper.NewConnectionString;
+           
             string message = "something working", type = "error";
             if (userProfile.UserName != null && userProfile.Password!= null)
             {
@@ -208,7 +212,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 List<Avatar> entries = new();
                 string sql;
-                string connectionString = ConfigHelper.NewConnectionString;
+               
                 using (SqlConnection connection = new(connectionString))
                 {
                     await connection.OpenAsync();
@@ -228,6 +232,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     }
                     await connection.CloseAsync();
                 }
+                Thread.Sleep(2000);
                 return new JsonResult(entries);
             }
             catch (Exception ex)
@@ -236,6 +241,60 @@ namespace theCoffeeroom.Controllers.Dedicated
                 return BadRequest("something went wrong");
             }
         }
+
+
+        [HttpPost]
+        [Route("api/profile/update")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> SaveProfile([FromBody] UserProfile userProfile)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using SqlConnection connection = new(connectionString);
+
+                    await connection.OpenAsync();
+                    SqlCommand insertCommand = new("UPDATE TblUserProfile SET FirstName = @FirstName,LastName = @LastName,EMail = @EMail,Phone = @Phone,AvatarId= AvatarId,Gender = @Gender,Bio = @Bio where UserName = @UserName", connection);
+                    insertCommand.Parameters.AddWithValue("@FirstName", userProfile.FirstName.Trim());
+                    insertCommand.Parameters.AddWithValue("@LastName", userProfile.LastName.Trim());
+                    insertCommand.Parameters.AddWithValue("@EMail", userProfile.EMail.Trim());
+                    insertCommand.Parameters.AddWithValue("@Phone", userProfile.Phone.Trim());
+                    insertCommand.Parameters.AddWithValue("@Gender", userProfile.Gender.Trim());
+                    insertCommand.Parameters.AddWithValue("@AvatarId", userProfile.AvatarId);
+                    insertCommand.Parameters.Add("@datejoined", SqlDbType.DateTime).Value = DateTime.Now;
+                    insertCommand.Parameters.AddWithValue("@UserName", HttpContext.Session.GetString("username"));
+                    insertCommand.Parameters.AddWithValue("@Bio", userProfile.Bio.Trim());
+                    await insertCommand.ExecuteNonQueryAsync();
+
+                    SqlCommand AvatarCommand = new("SELECT Image FROM TblAvatarMaster WHERE Id = @avtrid", connection);
+                    AvatarCommand.Parameters.AddWithValue("@avtrid", userProfile.AvatarId);
+                    var reader = await AvatarCommand.ExecuteReaderAsync();
+                    if (await reader.ReadAsync())
+                    {
+                        string session_avtr = reader.GetString(0).ToString();
+                        HttpContext.Session.SetString("avatar", session_avtr);
+                    }
+                    HttpContext.Session.SetString("first_name", userProfile.FirstName.Trim());
+                    HttpContext.Session.SetString("fullname", userProfile.FirstName.Trim() + " " + userProfile.LastName.Trim());
+                    await connection.CloseAsync();
+                    return Ok("Changes Saved");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("error updating profile:" + ex.Message.ToString());
+                    return BadRequest("Something went wrong");
+                }
+            }
+            else
+            {
+                return BadRequest("Invalid Data");
+            }
+          
+          
+        }
+
 
     }
 }

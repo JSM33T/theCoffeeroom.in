@@ -498,6 +498,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/reply/edit")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> EditrReply([FromBody] BlogReply blogReply)
         {
             if (HttpContext.Session.GetString("username") != null)

@@ -1,0 +1,28 @@
+﻿
+
+
+
+<section class="container mt-5 pt-5">
+    <h1> this is a test content</h1>
+    <button class=" btn-sm btn-primary" id="bbbb" onclick="ffff()">load view</button>
+
+    <span id="viewContent">load here</span>
+
+</section>
+
+
+@section jsScripts{
+    <script>
+        function ffff()
+        {
+            axios.get('/api/falana')
+                .then(function (response) {
+                    document.getElementById('viewContent').innerHTML = response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error fetching view content:', error);
+                });
+        }
+       
+    </script>
+}
