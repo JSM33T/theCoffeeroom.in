@@ -11,89 +11,78 @@
     <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css" />
 }
 
-<section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5">
-    <div class="container d-flex justify-content-center pb-sm-3 py-md-4 py-xl-5">
-        <div class="row align-items-center pt-5 mt-4 mt-xxl-0">
-            <!-- Video + Parallax-->
-            <div class="col-lg-6 mb-4 mb-lg-0 pb-3 pb-lg-0">
-                <div class="parallax mx-auto mx-lg-0" style="max-width: 582px;">
-                    <div class="parallax-layer zindex-3" data-depth="0.1">
-                        <div class="position-relative mx-auto" style="max-width: 61%; padding: .3125rem; margin-bottom: 9.9%; background-color: #121519; border-radius: calc(var(--ar-border-radius) * 2.125);">
-                            <div class="position-absolute start-50 translate-middle-x" style="top: 4.4%; width: 85%;">
-                                <div class="row row-cols-4 gx-2 mb-3">
-                                    <div class="col">
-                                        <div class="border-white border opacity-80"></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="border-white border opacity-80"></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="border-white border opacity-80"></div>
-                                    </div>
-                                    <div class="col position-relative">
-                                        <div class="position-absolute top-0 start-0 w-100 border-white border opacity-30"></div>
-                                        <div class="position-absolute top-0 start-0 w-50 border-white border opacity-80"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="assets/img/landing/marketing-agency/hero/avatar.jpg" width="35" alt="Avatar">
-                                    <div class="dark-mode fs-xs ps-2"><span class="text-nav fw-bold me-1">thecoffeeroom.in</span><span class="text-muted">12 min</span></div>
-                                </div>
-                            </div>
-                            <video class="d-block w-100" autoplay loop muted style="border-radius: calc(var(--ar-border-radius) * 1.875);">
-                                <source src="~/assets/clips/covercr.mp4" type="video/mp4">
-                            </video>
+<section class="bg-secondary py-5">
+    <div class="container py-md-2 py-lg-3 py-xl-5 my-2 my-sm-3 my-md-4 my-xxl-5">
+        <div class="row">
+            <div class="col-md-4 text-center text-md-start">
+                <h2 class="h1">Any questions? Check out the FAQ</h2>
+                <p class="pb-3 pb-sm-4">Et felis vitae ac venenatis lacus cras etiam risus scelerisque auctor adipiscing in a porta</p>
+                <div class="d-none d-md-flex justify-content-center">
+                    <svg class="text-warning ms-n4" width="200" height="211" viewBox="0 0 200 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M198.804 194.488C189.279 189.596 179.529 185.52 169.407 182.07L169.384 182.049C169.227 181.994 169.07 181.939 168.912 181.884C166.669 181.139 165.906 184.546 167.669 185.615C174.053 189.473 182.761 191.837 189.146 195.695C156.603 195.912 119.781 196.591 91.266 179.049C62.5221 161.368 48.1094 130.695 56.934 98.891C84.5539 98.7247 112.556 84.0176 129.508 62.667C136.396 53.9724 146.193 35.1448 129.773 30.2717C114.292 25.6624 93.7109 41.8875 83.1971 51.3147C70.1109 63.039 59.63 78.433 54.2039 95.0087C52.1221 94.9842 50.0776 94.8683 48.0703 94.6608C30.1803 92.8027 11.2197 83.6338 5.44902 65.1074C-1.88449 41.5699 14.4994 19.0183 27.9202 1.56641C28.6411 0.625793 27.2862 -0.561638 26.5419 0.358501C13.4588 16.4098 -0.221091 34.5242 0.896608 56.5659C1.8218 74.6941 14.221 87.9401 30.4121 94.2058C37.7076 97.0203 45.3454 98.5003 53.0334 98.8449C47.8679 117.532 49.2961 137.487 60.7729 155.283C87.7615 197.081 139.616 201.147 184.786 201.155L174.332 206.827C172.119 208.033 174.345 211.287 176.537 210.105C182.06 207.125 187.582 204.122 193.084 201.144C193.346 201.147 195.161 199.887 195.423 199.868C197.08 198.548 193.084 201.144 195.528 199.81C196.688 199.192 197.846 198.552 199.006 197.935C200.397 197.167 200.007 195.087 198.804 194.488ZM60.8213 88.0427C67.6894 72.648 78.8538 59.1566 92.1207 49.0388C98.8475 43.9065 106.334 39.2953 114.188 36.1439C117.295 34.8947 120.798 33.6609 124.168 33.635C134.365 33.5511 136.354 42.9911 132.638 51.031C120.47 77.4222 86.8639 93.9837 58.0983 94.9666C58.8971 92.6666 59.783 90.3603 60.8213 88.0427Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-7 offset-lg-1">
+                <div class="accordion" id="faq">
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#questionOne" aria-expanded="true" aria-controls="questionOne">Is there a free trial?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse show" id="questionOne" aria-labelledby="headingOne" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Adipiscing sagittis neque egestas id platea accumsan. Morbi inpa platea urna curabitur habitant pulvinar lacinia neque. Netus gravida amet, aliquam quam turpis aliquet cras. Find aute irure dolor in reprehenderit voluptate velit esse cillum dolore eu nulla pariatur. Sit amet, adipiscing elit.</div>
                         </div>
                     </div>
-                    <div class="parallax-layer" data-depth="0.3"><img src="assets/img/landing/marketing-agency/hero/shape01.svg" alt="Background shape"></div>
-                    <div class="parallax-layer zindex-2" data-depth="-0.1"><img src="assets/img/landing/marketing-agency/hero/shape02.svg" alt="Background shape"></div>
-                    <div class="parallax-layer" data-depth="-0.15"><img src="assets/img/landing/marketing-agency/hero/shape03.svg" alt="Background shape"></div>
-                    <div class="parallax-layer zindex-2" data-depth="-0.25"><img src="assets/img/landing/marketing-agency/hero/shape04.svg" alt="Background shape"></div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionTwo" aria-expanded="false" aria-controls="questionTwo">How do refunds work?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionTwo" aria-labelledby="headingTwo" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Quisque rutrum sit amet magna sit amet tristique. Vivamus rhoncus ac purus vitae convallis. Aliquam erat volutpat. Proin egestas, mauris ut semper semper, ipsum felis mattis ligula, et porttitor ante arcu nec ante. Aliquam congue est eu turpis sollicitudin, et ullamcorper tortor aliquam.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionThree" aria-expanded="false" aria-controls="questionThree">Do you offer student discounts?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionThree" aria-labelledby="headingThree" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Proin ac quam eget velit luctus tincidunt vel in nunc. Maecenas cursus erat lacus, id interdum elit accumsan in. Mauris placerat dapibus sem, condimentum interdum nulla varius ac. Mauris quam mauris, rhoncus et tortor vel, tempus dignissim libero. Curabitur sed odio in odio elementum cursus.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionFour" aria-expanded="false" aria-controls="questionFour">What happens if I run out of credit?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionFour" aria-labelledby="headingFour" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac pretium dui. Aliquam rutrum justo lorem, in efficitur odio efficitur vel. Integer mattis, neque malesuada sagittis porttitor, enim tortor ullamcorper diam, id eleifend sem mauris at turpis. Curabitur sed nisi nec ligula dictum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionFive" aria-expanded="false" aria-controls="questionFive">Do you have monthly and yearly billing options?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionFive" aria-labelledby="headingFive" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Vestibulum faucibus lectus eget augue pharetra, quis semper lectus gravida. Vestibulum pretium in elit sed iaculis. Curabitur elementum turpis at ipsum molestie, id maximus odio tincidunt. Praesent id lacinia orci. Phasellus at varius arcu. Ut nec lobortis velit.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionSix" aria-expanded="false" aria-controls="questionSix">What happens when I change plans?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionSix" aria-labelledby="headingSix" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Nunc non placerat mi, sit amet hendrerit lacus. Quisque cursus lorem vitae placerat ultrices. Morbi ut orci sit amet quam vulputate lobortis. Donec vulputate mi nec nisi tincidunt commodo. Nullam efficitur tincidunt tellus accumsan pellentesque. Suspendisse elementum blandit orci.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-light">
+                        <h3 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionSeven" aria-expanded="false" aria-controls="questionSeven">How do I cancel my paid plan?</button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="questionSeven" aria-labelledby="headingSeven" data-bs-parent="#faq">
+                            <div class="accordion-body fs-sm">Morbi a consequat diam. Fusce sit amet faucibus erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque id est dictum, suscipit neque id, ornare nibh. Cras lacinia, est non ultrices porttitor, arcu orci rhoncus leo, egestas condimentum lorem.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6 text-center text-lg-start">
-                <h1 class="display-2 pb-3 mb-4"><span class='fw-normal'>The Coffeeroom</span></h1>
-                <div class="row row-cols-3">
-                    <div class="col-4">
-                        <i class="ai-bulb-alt d-block fs-1 text-dark mb-2 pb-1"></i>
-                        <p class="mb-0">Blogs to keep you involved</p>
-                    </div>
-                    <div class="col-8">
-                        <i class="ai-circle-check-filled d-block fs-3 text-dark mb-3"></i>
-                        <p class="mb-0">Shops,Apps,Presets,Gallery and more in checklist. Stay tuned</p>
-                    </div>
-                </div>
-                <div class="d-sm-flex justify-content-center justify-content-lg-start pt-5 mt-lg-2"><a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="#">Explore themes..</a><a class="btn btn-lg btn-link" href="#">Explore blogs<i class="ai-arrow-right ms-2"></i></a></div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="container dark-mode pt-5 mt-5">
-    <div class="card border-0 bg-primary position-relative py-lg-4 py-xl-5">
-        <!-- Decorative shapes-->
-        <svg class="position-absolute end-0 mt-n2" width="242" height="331" viewBox="0 0 242 331" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M172.014 250.127C137.236 227.74 112.349 192.144 144.586 153.591C157.686 137.932 176.759 127.973 196.524 122.046C234.647 110.639 277.027 113.361 313.349 129.576C338.19 140.666 361.129 159.183 369.934 184.502C383.476 223.496 359.75 260.161 321.569 273.118C288.832 284.223 247.685 279.513 214.885 269.837C201.003 265.743 185.745 258.966 172.014 250.127Z" fill="#121519" fill-opacity=".07"></path>
-            <path d="M20.3265 69.264C19.7064 43.0736 29.8071 17.1878 62.3851 19.8622C75.6229 20.9505 87.9525 27.2066 98.3563 35.3132C118.426 50.9253 132.424 73.896 136.952 98.6413C140.044 115.562 138.424 134.218 127.978 148C111.901 169.236 83.4531 170.283 62.5246 155.209C44.5807 142.281 32.0983 119.217 25.3391 98.6799C22.4836 89.9885 20.5616 79.6021 20.3265 69.264Z" fill="#121519" fill-opacity=".07"></path>
-        </svg>
-        <svg class="position-absolute start-0 bottom-0 ms-3" width="169" height="217" viewBox="0 0 169 217" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34.2574 90.0177C29.666 97.6253 26.6254 106.591 24.9502 114.96C19.9522 140.043 26.4112 168.792 49.6162 181.885C66.0705 191.17 91.0017 189.904 108.062 183.692C125.725 177.266 135.045 168.04 142.29 150.389C151.409 128.174 150.912 99.6904 125.93 91.6429C115.423 88.254 104.723 86.5065 94.2249 82.5889C84.6622 79.0248 74.8545 72.1766 64.4411 71.6149C50.8011 70.8777 40.9122 79.0146 34.2574 90.0177Z" fill="#121519" fill-opacity="0.07"></path>
-            <path d="M147.005 75.6331C152.135 70.7783 156.106 64.2374 159.153 57.9073C166.014 43.6372 174.127 22.1368 160.207 9.68505C152.924 3.17188 139.243 3.86644 130.324 5.29774C118.428 7.20428 107.295 8.85077 96.5031 14.783C85.8056 20.6599 79.0155 33.6997 77.0014 45.6686C75.4978 54.5776 79.63 63.6672 84.7391 70.7453C91.8208 80.5571 103.503 84.2003 114.817 84.3975C121.101 84.5081 127.716 84.0527 133.89 82.8121C138.932 81.7962 143.273 79.1597 147.005 75.6331Z" fill="#121519" fill-opacity="0.07"></path>
-        </svg>
-        <div class="card-body position-relative zindex-2 py-5">
-            <form class="mx-auto" style="max-width: 800px;">
-                @Html.AntiForgeryToken()
-                <h2 class="h1 card-title text-center pb-4">Join out mailing list!!</h2>
-                <div class="row g-4">
-                    <div class="col-sm-10 offset-sm-1">
-                        <label class="form-label fs-base" for="name">Your email</label>
-                        <input class="form-control form-control-lg" type="email" name="user_email" placeholder="Your email" required="" id="user_email" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-12 text-center pt-4">
-                        <button class="btn btn-lg btn-primary btn-dark ripple" id="submitMail" type="submit">Subscribe</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 </section>

@@ -15,7 +15,6 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromSeconds(3600);
 });
 
-
 //DA service
 builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 //builder.Services.AddScoped<ViewRenderService>();
@@ -28,7 +27,7 @@ builder.Services.AddWebMarkupMin(options =>
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = false;
+    options.MinificationSettings.PreserveNewLines = true;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;

@@ -15,16 +15,30 @@ namespace theCoffeeroom.Controllers.Routers
             return View(level);
         }
 
-        [Route("/changelog")]
+
+        [Route("/docs")]
+        public IActionResult DocsBase()
+        {
+            return View("Views/Docs/Index.cshtml");
+        }
+
+
+        [Route("/docs/changelog")]
         public IActionResult Changelog()
         {
             return View();
         }
 
-        [Route("/faq")]
+        [Route("/docs/faq")]
         public IActionResult Faq()
         {
-            return View();
+            return View("Views/Docs/Faq.cshtml");
+        }
+
+        [Route("/docs/attributions")]
+        public IActionResult Attribs()
+        {
+            return View("Views/Docs/Faq.cshtml");
         }
 
         [Route("/personalize")]
