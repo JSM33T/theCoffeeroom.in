@@ -10,7 +10,6 @@
     <Folder Include="Controllers\Dedicated\Apps\" />
     <Folder Include="Notes\" />
     <Folder Include="Views\Archive\Content\" />
-    <Folder Include="Views\Apps\Content\" />
     <Folder Include="Views\Magazines\Content\" />
     <Folder Include="Views\Studio\Content\" />
     <Folder Include="Views\Music\Content\" />

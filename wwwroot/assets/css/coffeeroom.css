@@ -1,7 +1,52 @@
-﻿/*default styles override init*/
+﻿/*animations*/
+
+@keyframes fade-in-smooth-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fade-in-pop-delay {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) translateX(-10px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.02) translateX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
+}
+
+.fade-in-delay {
+    opacity: 0;
+    animation: fade-in-pop-delay 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    animation-delay: 0.1s;
+}
+
+.fade-in-smooth-pop {
+    animation: fade-in-smooth-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+
+
+/*default styles override init*/
 a {
     text-decoration: none !important
 }
+
 .fade-in {
     opacity: 0;
     transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */
@@ -16,7 +61,7 @@ a {
 }
 
 .toast {
-    border:1px solid var(--ar-primary) !important;
+    border: 1px solid var(--ar-primary) !important;
 }
 
 option {
@@ -166,7 +211,7 @@ html {
     background-position: center;
     transition: background 0.8s;
 }
-/*.btn-primary {
+    /*.btn-primary {
     --ar-btn-bg: #8d7aa8;
     --ar-btn-border-color: #8d7aa8;
     --ar-btn-hover-bg: #74618f;
@@ -177,20 +222,20 @@ html {
     --ar-btn-disabled-border-color: #8d7aa8;
 }*/
 
-.ripple:hover,
-.ripple:active,
-.ripple:focus {
-    background: var(--ar-btn-bg) radial-gradient(circle, transparent 1%, var(--ar-btn-bg) 1%) center/15000%;
-    transition: background 1s;
-}
+    .ripple:hover,
+    .ripple:active,
+    .ripple:focus {
+        background: var(--ar-btn-bg) radial-gradient(circle, transparent 1%, var(--ar-btn-bg) 1%) center/15000%;
+        transition: background 1s;
+    }
 
 
-.ripple:active {
-    /* background-color: rgba(255,255,255,0.5);*/
-    background-color: var(--ar-btn-hover-bg);
-    background-size: 100%;
-    transition: background 0s;
-}
+    .ripple:active {
+        /* background-color: rgba(255,255,255,0.5);*/
+        background-color: var(--ar-btn-hover-bg);
+        background-size: 100%;
+        transition: background 0s;
+    }
 
 
 

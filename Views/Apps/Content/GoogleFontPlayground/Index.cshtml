@@ -1,0 +1,51 @@
+﻿
+
+@section cssStyles{
+    <style>
+        .applyfont {
+            font-family: 'ABeeZee', monospace;
+        }
+    </style>
+}
+
+
+<section class="container mt-5 pt-5">
+    <div id="app">
+        {{ message }}
+        <p :class="fontClass">This paragraph uses the Google Font.</p>
+        <button @@click="addGoogleFont">press here</button>
+    </div>
+
+    
+</section>
+           
+
+@section jsScripts{
+    <script>
+        // Vue app logic
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello, Vue!',
+                    fontClass: 'default-class'
+                };
+            },
+            mounted() {
+              //  this.addGoogleFont();
+            },
+            methods: {
+                addGoogleFont() {
+                    var link = document.createElement("link");
+                    link.href = "https://fonts.googleapis.com/css2?family=ABeeZee&display=swap";
+                    link.rel = "stylesheet";
+                    document.head.appendChild(link);
+                    this.fontClass = 'applyfont';
+                }
+            }
+        });
+
+        const vm = app.mount('#app');
+    </script>
+}
+
+ 
