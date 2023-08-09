@@ -10,23 +10,8 @@ namespace theCoffeeroom.Controllers.Routers
     public class AccountController : Controller
     {
 
-        ////account vue app
-        //// login/signup/signin/forgetpass/otp
-        //[Route("/account/login")]
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        //[Route("/account/signup")]
-        //public IActionResult SignUp()
-        //{
-        //    return View("Views/Account/Index.cshtml");
-        //}
-
-
         [Route("/account")]
-        public IActionResult Login()
+        public IActionResult Account()
         {
             if (HttpContext.Session.GetString("username") == null)
             {
@@ -41,6 +26,12 @@ namespace theCoffeeroom.Controllers.Routers
 
         [Route("/account/signup")]
         public IActionResult SignUp()
+        {
+            return View("Views/Account/Index.cshtml");
+        }
+
+        [Route("/account/login")]
+        public IActionResult Login()
         {
             return View("Views/Account/Index.cshtml");
         }

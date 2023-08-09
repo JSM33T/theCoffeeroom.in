@@ -29,7 +29,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                 await connection.OpenAsync();
                 SqlCommand checkcommand = new("select p.*,a.Image " +
                     "from TblUserProfile p,TblAvatarMaster a " +
-                    "where UserName = @username " +
+                    "where (p.UserName = @username OR p.email = @username)" +
                     "and PassWord =@password " +
                     "and p.IsActive= 1 " +
                     "and p.IsVerified = 1 " +
@@ -232,7 +232,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     }
                     await connection.CloseAsync();
                 }
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 return new JsonResult(entries);
             }
             catch (Exception ex)
@@ -256,15 +256,15 @@ namespace theCoffeeroom.Controllers.Dedicated
                     using SqlConnection connection = new(connectionString);
 
                     await connection.OpenAsync();
-                    SqlCommand insertCommand = new("UPDATE TblUserProfile SET FirstName = @FirstName,LastName = @LastName,EMail = @EMail,Phone = @Phone,AvatarId= AvatarId,Gender = @Gender,Bio = @Bio where UserName = @UserName", connection);
+                    SqlCommand insertCommand = new("UPDATE TblUserProfile SET FirstName = @FirstName,LastName = @LastName,Phone = @Phone,AvatarId= @AvatarId,Gender = @Gender,Bio = @Bio where UserName = @UserName", connection);
                     insertCommand.Parameters.AddWithValue("@FirstName", userProfile.FirstName.Trim());
                     insertCommand.Parameters.AddWithValue("@LastName", userProfile.LastName.Trim());
-                    insertCommand.Parameters.AddWithValue("@EMail", userProfile.EMail.Trim());
+                   // insertCommand.Parameters.AddWithValue("@EMail", userProfile.EMail.Trim());
                     insertCommand.Parameters.AddWithValue("@Phone", userProfile.Phone.Trim());
                     insertCommand.Parameters.AddWithValue("@Gender", userProfile.Gender.Trim());
                     insertCommand.Parameters.AddWithValue("@AvatarId", userProfile.AvatarId);
                     insertCommand.Parameters.Add("@datejoined", SqlDbType.DateTime).Value = DateTime.Now;
-                    insertCommand.Parameters.AddWithValue("@UserName", HttpContext.Session.GetString("username"));
+                   insertCommand.Parameters.AddWithValue("@UserName", HttpContext.Session.GetString("username"));
                     insertCommand.Parameters.AddWithValue("@Bio", userProfile.Bio.Trim());
                     await insertCommand.ExecuteNonQueryAsync();
 
