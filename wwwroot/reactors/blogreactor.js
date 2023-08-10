@@ -89,14 +89,14 @@
             </div>
     </div>
 </article>
-        </div >
-    </div >
+        </div>
+    </div>
 
     `,
     };
     const HomeComponent = {
         template: `
-    <h1 class="pb-3 pb-lg-4" id = "titleBlog" > {{ titleItem }}</h1 >
+    <h1 class="pb-3 pb-lg-4" id = "titleBlog"> {{ titleItem }}</h1>
     <div v-if="isLoading">
         <article class="row g-0 border-0 mb-4">
             <a class="col-sm-5 rounded-5 placeholder placeholder-wave" style="min-height: 14rem"></a>
@@ -137,9 +137,9 @@
                         </div>
                     </div>
                 </div>
-            </article >
-        </div >
-    </div >
+            </article>
+        </div>
+    </div>
 
 
 

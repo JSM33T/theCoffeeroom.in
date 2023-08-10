@@ -1,3 +1,4 @@
-# loading....
-The Coffeeroom Project Prototype(razor pages + api)
+# TheCoffeeroom.in
 
+Stack/Frameworks used:
+<br>

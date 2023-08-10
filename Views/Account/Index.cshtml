@@ -12,8 +12,6 @@
         [v-cloak] {
             display: none;
         }
-
-
     </style>
 }
 
@@ -23,15 +21,12 @@
     <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
 </div>
 
-
-
 @section jsScripts{
-    
     <environment include="development">
-        @await Html.PartialAsync("Reactor/_Script")
+        <script src="/reactors/accountreactor.js" asp-append-version="true"></script>
     </environment>
     <environment include="production">
-        @await Html.PartialAsync("Reactor/_ScriptProd")
+        <script src="/reactors/accountreactor.min.js" asp-append-version="true"></script>
     </environment>
 }
 
