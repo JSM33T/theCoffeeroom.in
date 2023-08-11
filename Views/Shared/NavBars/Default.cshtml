@@ -66,7 +66,7 @@
                                     <ul class="list-unstyled mb-0">
                                         <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Home" ? "active" : "") " href="/">Home</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
                                         <li><a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Music" ? "active" : "")" href="/music">Music</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
                                         <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "") " href="/blogs">Blogs</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
                                     </ul>
                                 </div>
@@ -90,7 +90,7 @@
 
 
                             <li class="dropdown">
-                                <a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
+                                <a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Apps" ? "active" : "")" href="/apps">Apps</a>

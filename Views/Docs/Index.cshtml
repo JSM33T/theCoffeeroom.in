@@ -1,10 +1,8 @@
 ﻿@{
-
     ViewData["ActiveCategory"] = "";
     ViewData["ActiveYear"] = "";
     ViewData["ActiveTag"] = "";
     ViewData["ActivePage"] = "";
-
 
     ViewData["FaqPage"] = "";
 }
@@ -22,6 +20,11 @@
     <router-view></router-view>
 </section>
 @section jsScripts{
-   <script src="~/reactors/docsreactor.js"></script>
+    <environment include="development">
+        <script src="/reactors/docsreactor.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="production">
+        <script src="/reactors/docsreactor.min.js" asp-append-version="true"></script>
+    </environment>
  
 }

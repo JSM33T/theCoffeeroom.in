@@ -6,44 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace theCoffeeroom.Services
 {
-    public class ViewRenderService
+    public static class ViewRenderService
     {
-        private readonly IViewEngine _viewEngine;
-        private readonly ITempDataProvider _tempDataProvider;
-
-        public ViewRenderService(IViewEngine viewEngine, ITempDataProvider tempDataProvider)
+        public static async Task<string> RenderViewAsync(this Controller controller, string viewName, bool partial = false)
         {
-            _viewEngine = viewEngine;
-            _tempDataProvider = tempDataProvider;
-        }
-
-        public async Task<string> RenderToStringAsync(string viewName, object model)
-        {
-            var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+            if (string.IsNullOrEmpty(viewName))
             {
-                Model = model
-            };
+                viewName = controller.ControllerContext.ActionDescriptor.ActionName;
+            }
 
-            using (var sw = new StringWriter())
+       
+
+            using (var writer = new StringWriter())
             {
-                var viewResult = _viewEngine.FindView(new ActionContext(), viewName, false);
+                IViewEngine viewEngine = controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                ViewEngineResult viewResult = viewEngine.FindView(controller.ControllerContext, viewName, !partial);
 
-                if (viewResult.View == null)
+                if (viewResult.Success == false)
                 {
-                    throw new ArgumentNullException($"{viewName} does not match any available view.");
+                    return $"A view with the name {viewName} could not be found";
                 }
 
-                var viewContext = new ViewContext(
-                    new ActionContext(),
+                ViewContext viewContext = new(
+                    controller.ControllerContext,
                     viewResult.View,
-                    viewData,
-                    new TempDataDictionary(new DefaultHttpContext(), _tempDataProvider),
-                    sw,
+                    controller.ViewData,
+                    controller.TempData,
+                    writer,
                     new HtmlHelperOptions()
                 );
 
                 await viewResult.View.RenderAsync(viewContext);
-                return sw.ToString();
+
+                return writer.GetStringBuilder().ToString();
             }
         }
     }
