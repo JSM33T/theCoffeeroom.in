@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\logs\**" />
+    <Content Remove="wwwroot\logs\**" />
+    <EmbeddedResource Remove="wwwroot\logs\**" />
+    <None Remove="wwwroot\logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\Dedicated\Apps\" />
     <Folder Include="Controllers\Routers\Apps\" />
     <Folder Include="Notes\" />
@@ -28,7 +35,6 @@
     <Folder Include="wwwroot\content\musiccontent\global\" />
     <Folder Include="wwwroot\content\musiccontent\radio-cuts\" />
     <Folder Include="wwwroot\content\musiccontent\singles\" />
-    <Folder Include="wwwroot\logs\" />
   </ItemGroup>
 
   <ItemGroup>
