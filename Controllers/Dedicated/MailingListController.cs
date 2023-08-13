@@ -28,9 +28,9 @@ namespace theCoffeeroom.Controllers.Dedicated
                 {
                     try
                     {
-                            await _dataAccessRepo.AddMailAsync(mail);
-                            Log.Information("mail added to newsletter:" + mail.EMailId);
-                            return Ok("email submitted!!");
+                        await _dataAccessRepo.AddMailAsync(mail);
+                        Log.Information("mail added to newsletter:" + mail.EMailId);
+                        return Ok("email submitted!!");
                     }
                     catch (Exception ex)
                     {

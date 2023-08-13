@@ -140,13 +140,12 @@
     @await RenderSectionAsync("cssLib", required: false) 
 
     <environment include="development">       
-        <link rel="stylesheet" href="~/assets/css/theme.css" />
+        <link rel="stylesheet" href="~/assets/css/theme.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
     </environment>
     <environment include="production">
-        <link rel="stylesheet" href="~/assets/css/theme.min.css" />
-        <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
-        @*<link rel="stylesheet" href="~/assets/css/coffeeroom.min.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/assets/css/theme.min.css"  asp-append-version="true"/>
+        <link rel="stylesheet" href="~/assets/css/coffeeroom.min.css" asp-append-version="true" />
     </environment>
   
     <style id="custom_theme">

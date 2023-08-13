@@ -66,7 +66,7 @@ const CategorisedBlogComponent = {
         </div>
         <div v-else>
            <div v-for="blog in blogs" :key="blog.title">
-              <article class="row g-0 border-0 mb-4 fade-in">
+              <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
                  <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
                  <div class="col-sm-7">
                     <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
@@ -97,8 +97,9 @@ const HomeComponent = {
            </article>
         </div>
         <div v-else>
-           <div v-for="blog in blogs" :key="blog.title">
-              <article class="row g-0 border-0 mb-4 fade-in">
+         <div v-if="blogs.length > 0">
+            <div v-for="blog in blogs" :key="blog.title">
+              <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
                  <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
                  <div class="col-sm-7">
                     <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
@@ -111,6 +112,11 @@ const HomeComponent = {
                  </div>
               </article>
            </div>
+         </div>
+         <div v-else>
+          <h1 class="fade-in-smooth-pop">no blogs found!!</h1>
+         </div>
+        
         </div>
 
             `,
@@ -126,7 +132,6 @@ const HomeComponent = {
             top: 0,
             behavior: 'smooth',
         });
-
         try {
             const response = await axios.get('/api/blogs/0/na/na');
             const data = response.data;
@@ -135,16 +140,56 @@ const HomeComponent = {
         } catch (error) {
             console.error('Error fetching data from API:', error);
         } finally {
-            setTimeout(() => {
                 this.isLoading = false;
-            }, 200);
         }
     },
+    watch: {
+        '$route.query.search': {
+            handler(newSearchValue, oldSearchValue) {
+                this.$nextTick(async () => {
+                    if (typeof newSearchValue === 'string' && newSearchValue.length >= 1) {
+                        this.loadSearches(newSearchValue);
+                    } else {
+                        this.loadDefaults();
+                    }
+                });
+            },
+            immediate: true
+        }
+    },
+
+    methods: {
+        async loadDefaults() {
+            try {
+                const response = await axios.get('/api/blogs/0/na/na');
+                const data = response.data;
+                this.blogs = data;
+                console.log("default triggered");
+            } catch (error) {
+                console.error('Error fetching data from API:', error);
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        async loadSearches(newSearchValue) {
+            try {
+                const response =await axios.get('/api/blogs/0/search/' + newSearchValue);
+                const data = response.data;
+                this.blogs = data;
+            } catch (error) {
+                console.error('Error fetching data from API:', error);
+            } finally {
+                this.isLoading = false;
+            }
+        }
+
+
+    }
 };
 const routes = [{
     path: '/blogs',
     component: HomeComponent
-}, {
+},{
     path: '/blogs/:param1/:param2',
     component: CategorisedBlogComponent,
     props: true
@@ -160,18 +205,17 @@ const app = Vue.createApp({
             titleItem: 'Blogs'
         };
     },
-    methods: {
-        navigateToBlog() {
-            // Navigate to the route with the parameter
-            if (this.inputValue.length <= 1) {
-                this.$router.push({ path: `/blogs` });
+    methods:{
+    navigateToBlog() {
+        this.$nextTick(() => {
+            if (this.inputValue.length >= 1) {
+                this.$router.push({ path: '/blogs', query: { search: this.inputValue } });
+            } else {
+                this.$router.push({ path: '/blogs' });
             }
-            else {
-                this.$router.push({ path: `/blogs/search/${this.inputValue}` });
-            }
-
-        },
+        });
     }
+}
 
 });
 app.use(router);

@@ -12,7 +12,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         public async Task<IActionResult> GetThemeById(int id)
         {
             List<Theme> themes = new();
-            
+
             using (SqlConnection connection = new(connectionString))
             {
                 connection.Open();
@@ -40,7 +40,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         [HttpGet("api/themes/list")]
         public async Task<IActionResult> GetThemes()
         {
-             List<Theme> ThemeDD;
+            List<Theme> ThemeDD;
             ThemeDD = new List<Theme>();
             using var connection = new SqlConnection(connectionString);
             connection.Open();

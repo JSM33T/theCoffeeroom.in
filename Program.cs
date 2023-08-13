@@ -22,12 +22,12 @@ builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 
 builder.Services.AddWebMarkupMin(options =>
 {
-    options.AllowMinificationInDevelopmentEnvironment = false;
-    options.AllowCompressionInDevelopmentEnvironment = false;
+    options.AllowMinificationInDevelopmentEnvironment = true;
+    options.AllowCompressionInDevelopmentEnvironment = true;
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = true;
+    options.MinificationSettings.PreserveNewLines = false;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
