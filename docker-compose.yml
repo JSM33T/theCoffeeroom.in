@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  thecoffeeroom:
+    image: ${DOCKER_REGISTRY-}thecoffeeroom
+    build:
+      context: .
+      dockerfile: Dockerfile
