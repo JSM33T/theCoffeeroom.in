@@ -239,7 +239,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         public async Task<IActionResult> LoadComments([FromBody] BlogComment blogComment)
         {
 
-            Dictionary<int, dynamic> comments = new Dictionary<int, dynamic>();
+            Dictionary<int, dynamic> comments = new();
             using var connection = new SqlConnection(connectionString);
             await connection.OpenAsync();
             var command = new SqlCommand(@"SELECT
@@ -318,7 +318,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         {
                             id = commentId,
                             edit = editable,
-                            user = user,
+                            user,
                             fullname = reader.GetString(3) + " " + reader.GetString(4),
                             userid = reader.GetInt32(2),
                             username = reader.GetString(5),
@@ -336,7 +336,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         var reply = new
                         {
                             replyEdit = replyeditable,
-                            user = user,
+                            user,
                             replyId = reader.GetInt32(9),
                             replyComment = HttpUtility.HtmlDecode(reader.GetString(10)),
                             replyUserId = reader.GetInt32(12),

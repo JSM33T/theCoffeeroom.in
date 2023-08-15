@@ -25,7 +25,9 @@ namespace theCoffeeroom.Controllers.Tests
         [HttpGet]
         [Route("api/gallery/{Year}/{Slug}")]
         [IgnoreAntiforgeryToken]
+        #pragma warning disable IDE0060 // Remove unused parameter
         public IActionResult GetHTMLContent(string Year, string Slug)
+        #pragma warning restore IDE0060 // Remove unused parameter
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "content", "gallerycontent", "garden-state", "gallery.min.glr");
 
@@ -55,7 +57,7 @@ namespace theCoffeeroom.Controllers.Tests
         [Route("api/encrypt")]
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public async Task<string> Encryptor([FromBody] GrabACookie grabACookie)
+        public  string Encryptor([FromBody] GrabACookie grabACookie)
         {
             string res = EnDcryptor.Encrypt(grabACookie.Ckies);
             return res;
@@ -64,7 +66,7 @@ namespace theCoffeeroom.Controllers.Tests
         [Route("api/decrypts")]
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public async Task<string> Decryptor([FromBody] GrabACookie grabACookie)
+        public string Decryptor([FromBody] GrabACookie grabACookie)
         {
             string res2 = EnDcryptor.Decrypt(grabACookie.Ckies);
             return res2;
