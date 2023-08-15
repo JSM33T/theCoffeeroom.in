@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 using theCoffeeroom.Interfaces;
 using theCoffeeroom.Repositories;
@@ -18,7 +19,12 @@ builder.Services.AddSession(options =>
 //DA service
 builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 //builder.Services.AddScoped<ViewRenderService>();
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+       .AddCookie(options =>
+       {
+           options.ExpireTimeSpan = TimeSpan.FromDays(30); // Set the expiration time for the persistent cookie
+           options.SlidingExpiration = true; // Extend the expiration time with each request
+       });
 
 builder.Services.AddWebMarkupMin(options =>
 {

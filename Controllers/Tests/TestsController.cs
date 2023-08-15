@@ -3,10 +3,15 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using theCoffeeroom.Core;
 using theCoffeeroom.Services;
 
 namespace theCoffeeroom.Controllers.Tests
 {
+    public class GrabACookie
+    {
+        public string Ckies{ get; set; }
+    }
     public class TestsController : Controller
     {
 
@@ -38,13 +43,31 @@ namespace theCoffeeroom.Controllers.Tests
         [HttpGet]
         [Route("api/tester")]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> Something()
+        public IActionResult Something()
         {
            // string renderedView = await this.RenderViewAsync("Views/Tests/Haha.cshtml");
 
             // Now you can use the renderedView for your purpose (e.g., sending emails)
 
             return View("Views/Tests/Haha.cshtml");
+        }
+
+        [Route("api/encrypt")]
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<string> Encryptor([FromBody] GrabACookie grabACookie)
+        {
+            string res = EnDcryptor.Encrypt(grabACookie.Ckies);
+            return res;
+        }
+
+        [Route("api/decrypts")]
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<string> Decryptor([FromBody] GrabACookie grabACookie)
+        {
+            string res2 = EnDcryptor.Decrypt(grabACookie.Ckies);
+            return res2;
         }
 
     }

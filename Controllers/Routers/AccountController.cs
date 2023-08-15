@@ -30,6 +30,12 @@ namespace theCoffeeroom.Controllers.Routers
             return View("Views/Account/Index.cshtml");
         }
 
+        [Route("/account/accountrecovery")]
+        public IActionResult RecoverAccount()
+        {
+            return View("Views/Account/Index.cshtml");
+        }
+
         [Route("/account/login")]
         public IActionResult Login()
         {
@@ -39,16 +45,16 @@ namespace theCoffeeroom.Controllers.Routers
         [Route("/account/verification/{Uzrnm}/{OTP}")]
         public async Task<IActionResult> Verification(string Uzrnm,string OTP)
         {
-
-            VerificationModel UserDetailsDisplay = null;
             string connectionString = ConfigHelper.NewConnectionString;
             using SqlConnection connection = new(connectionString);
 
-            try{
+            VerificationModel UserDetailsDisplay;
+            try
+            {
                 connection.Open();
                 SqlCommand checkcmd = new("select * from TblUserProfile where Username ='" + Uzrnm + "' and OTP ='" + OTP + "' and IsVerified = 0 ", connection);
                 SqlDataReader dataReader = await checkcmd.ExecuteReaderAsync();
-                if (dataReader.Read())
+                if(dataReader.Read())
                 {
                     UserDetailsDisplay = new()
                     {
@@ -71,7 +77,8 @@ namespace theCoffeeroom.Controllers.Routers
                     return View("Views/Account/Verification.cshtml", UserDetailsDisplay);
                 }
             }
-            catch{
+            catch
+            {
                 UserDetailsDisplay = new()
                 {
                     FirstName = "na",
@@ -79,9 +86,6 @@ namespace theCoffeeroom.Controllers.Routers
                 };
                 return View("Views/Account/Verification.cshtml", UserDetailsDisplay);
             }
-           
-            
-            
         }
 
         [Route("/account/logout")]

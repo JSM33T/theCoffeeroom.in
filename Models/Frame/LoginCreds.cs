@@ -10,5 +10,7 @@ namespace theCoffeeroom.Models.Frame
         [Required]
         [MaxLength(50)]
         public string Password { get; set; }
+
+        public string Otp { get; set; }
     }
 }

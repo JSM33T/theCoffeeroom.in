@@ -18,6 +18,12 @@
 
 }
 @{
+
+   
+    
+
+    Context.Response.Cookies.Append("falana", "dhimkana");
+
     var mySessionVariable = Context.Session.GetString("username");
     if (mySessionVariable != null)
     {
@@ -30,10 +36,19 @@
     }
     else
     {
-        ViewData["first_name"] = "guest";
-        ViewData["role"] = "guest";
-        ViewData["avatar"] = "default";
-        ViewData["user_id"] = "0";
+        //if (Context.Request.Cookies.TryGetValue("falana", out string cookieValue))
+        //{
+        //    ViewData["CookieValue"] = cookieValue;
+
+        //}
+        //else
+        //{
+            ViewData["first_name"] = "guest";
+            ViewData["role"] = "guest";
+            ViewData["avatar"] = "default";
+            ViewData["user_id"] = "0";
+       // }
+       
     }
 }
 <!DOCTYPE html>
