@@ -257,25 +257,20 @@ const PasswordReset = {
                             <input class="form-control form-control-lg ps-5" v-model="email" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
                         </div>
                     </div>
-
-                    
-                        
-                    
-                        <div v-if="showOtpPanel">
-                            <input class="form-control form-control-lg ps-5" v-model="otp" @@keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
-                            <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
-                        </div>
-                        <div v-else>
-                            <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="passReset"><span v-html="buttonText"></span></button>
-                        </div>
+                    <div v-if="showOtpPanel">
+                        <input class="form-control form-control-lg ps-5" v-model="otp" @@keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
+                        <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
+                    </div>
+                    <div v-else>
+                        <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="passReset"><span v-html="buttonText"></span></button>
+                    </div>
                 </form>
             </div>
-            <!-- Copyright-->
             <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
 
                 <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
             </div>
-                        `,
+          `,
     data() {
         return {
             buttonText: 'Send Recovery Key',
@@ -335,7 +330,7 @@ const PasswordReset = {
     }
 };
 
-const NewPassword = {
+const Loginviaotp = {
     template: `
               <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
                 <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in-pop">
@@ -432,8 +427,8 @@ const routes = [
         path: '/account/accountrecovery',
         component: PasswordReset
     }, {
-        path: '/account/new-password',
-        component: NewPassword
+        path: '/account/loginviaotp',
+        component: Loginviaotp
     }
 ];
 const router = VueRouter.createRouter({

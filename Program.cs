@@ -56,18 +56,12 @@ Log.Logger = new LoggerConfiguration()
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-
     app.UseHsts();
 }
-else
-{
-    app.UseExceptionHandler("/Home/PublicError");
-}
-
 app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-//app.UseWebMarkupMin();
+app.UseWebMarkupMin();
 app.UseRouting();
 
 app.UseAuthorization();
