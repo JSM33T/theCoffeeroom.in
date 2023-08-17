@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "vue@3.2.47",
+      "destination": "wwwroot/libraries/vue/"
+    },
+    {
+      "library": "vue-router@4.2.4",
+      "destination": "wwwroot/libraries/vue-router/"
+    }
+  ]
+}

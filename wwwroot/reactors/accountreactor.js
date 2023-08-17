@@ -3,7 +3,7 @@ const routerViewElement = document.querySelector('router-view');
 const BaseComponent = {
     template: `
           <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-            <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3 fade-in-smooth-pop bg-secondary">
+            <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3 fade-in bg-secondary">
             <div class="w-100 mt-auto" style="max-width: 526px;">
               <div class="row  g-4 pb-xl-2 pb-xxl-3">
                 <!-- Item-->
@@ -64,7 +64,7 @@ const BaseComponent = {
 const LoginComponent = {
     template: `
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in-smooth-pop">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
         <div class="w-100 mt-auto" style="max-width: 526px;">
             <h1>Log In</h1>
             <router-link to='/account'>back to menu</router-link>
@@ -72,14 +72,14 @@ const LoginComponent = {
                 <div class="pb-3 mb-3">
                     <div class="position-relative">
                         <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                                <input class="form-control form-control-lg ps-5" v-model="username" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
+                                <input class="form-control form-control-lg ps-5" v-model="username" @keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
                     </div>
                 </div>
                 <div class="mb-4">
                     <div class="position-relative">
                         <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                         <div class="password-toggle">
-                                    <input class="form-control form-control-lg ps-5" v-model="password" @@keyup.enter="submitLogin" type="password" placeholder="Password" required>
+                                    <input class="form-control form-control-lg ps-5" v-model="password" @keyup.enter="submitLogin" type="password" placeholder="Password" required>
                             <label class="password-toggle-btn" aria-label="Show/hide password">
                                 <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                             </label>
@@ -148,7 +148,7 @@ const SignupComponent = {
     template: `
             <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
 
-        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in-smooth-pop">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
                 <h1>Sign Up</h1>
                     <router-link to='/account'>back to menu</router-link>
@@ -167,30 +167,30 @@ const SignupComponent = {
                     <div class="pb-3 mb-3">
                         <div class="position-relative">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input name="email" type="email" v-model="email" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
+                            <input name="email" type="email" v-model="email" @keyup.enter="submitLogin" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
                         </div>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 pb-2 mb-2">
                         <div class="position-relative pb-4">
                             <div class="password-toggle">
                                 <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                                <input name="password" type="password" v-model="password" class="bindentersignup form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
+                                <input name="password" type="password" @keyup.enter="submitLogin" v-model="password" class=" form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
                                 <label class="password-toggle-btn" aria-label="Show/hide password">
                                     <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="position-relative">
+                          
                             <div class="password-toggle">
-                                <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                                <input name="password" type="password" v-model="passconfirm" class="bindentersignup form-control form-control-lg ps-5 bindenter" placeholder="Confirm Pass" maxlength="20" />
+                                <input name="passconfirm" v-model="passconfirm" class="form-control form-control-lg ps-5" type="password" placeholder="Password" required="">
                                 <label class="password-toggle-btn" aria-label="Show/hide password">
-                                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                  <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                 </label>
-                            </div>
+                              </div>
                         </div>
                     </div>
-                                <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button"  v-on:click="submitLogin"><span v-html="buttonText"></span></button>
+                                <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" @keyup.enter="submitLogin" v-on:click="submitLogin"><span v-html="buttonText"></span></button>
                 </form>
             </div>
             <!-- Copyright-->
@@ -202,7 +202,7 @@ const SignupComponent = {
             buttonText: 'Sign Up',
             username: '',
             password: '',
-            passcofirm: '',
+            passconfirm: '',
             firstname: '',
             lastname: '',
             email: '',
@@ -254,12 +254,15 @@ const PasswordReset = {
                     <div class="pb-3 mb-3">
                         <div class="position-relative">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input class="form-control form-control-lg ps-5" v-model="email" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
+                            <input class="form-control form-control-lg ps-5" v-model="email" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required :readonly="isReadOnly">
                         </div>
                     </div>
                     <div v-if="showOtpPanel">
-                        <input class="form-control form-control-lg ps-5" v-model="otp" @@keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
-                        <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
+                        <div class="position-relative fade-in">
+                            <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                            <input class="form-control form-control-lg ps-5 " v-model="otp" @@keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
+                        </div>
+                        <button class="btn btn-lg btn-primary w-100 pt-3 mt-4 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
                     </div>
                     <div v-else>
                         <button class="btn btn-lg btn-primary w-100 mb-4" type="button" v-on:click="passReset"><span v-html="buttonText"></span></button>
@@ -291,12 +294,14 @@ const PasswordReset = {
             const details = {
                 StringRec: this.email
             };
+
             const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             axios.defaults.headers.common['RequestVerificationToken'] = token;
             axios.post('/api/account/recover', details)
                 .then((response) => {
                     toaster("success", response.data);
                     this.showOtpPanel = true;
+                    this.isReadOnly = true;
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);
@@ -315,16 +320,16 @@ const PasswordReset = {
             };
              const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
               axios.defaults.headers.common['RequestVerificationToken'] = token;
-            axios.post('/api/account/recover', loginDeets)
+            axios.post('/api/account/loginviaotp', loginDeets)
                 .then((response) => {
                     toaster("success", response.data);
-                    this.showOtpPanel = true;
+                    window.location.href = '/profile/security';
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);
                 })
                 .finally(() => {
-                    this.buttonText = 'Send Recovery Key';
+                    this.buttonText = 'Login';
                 });
         },
     }

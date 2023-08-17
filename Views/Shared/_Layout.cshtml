@@ -141,8 +141,8 @@
       })();
       
     </script>
-      <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.prod.js"></script>
-    <script src="https://unpkg.com/vue-router@4.0.13/dist/vue-router.global.prod.js"></script>
+    <script src="~/libraries/vue/vue.global.prod.min.js"></script>
+    <script src="~/libraries/vue-router/vue-router.global.prod.min.js"></script>
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,9 +151,7 @@
     <!-- Vendor styles-->
     <link href="~/libraries/aos/aos.css" rel="stylesheet" />
     <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="/assets/css/theme.min.css">
     @await RenderSectionAsync("cssLib", required: false) 
-
     <environment include="development">       
         <link rel="stylesheet" href="~/assets/css/theme.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
