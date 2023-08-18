@@ -14,10 +14,11 @@
         }
     </style>
 }
-
+@Html.AntiForgeryToken()
 <div class="d-lg-flex position-relative h-100" id="app">
+    
     <router-view></router-view>
-    @Html.AntiForgeryToken()
+    
     <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
 </div>
 

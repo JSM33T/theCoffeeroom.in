@@ -156,6 +156,8 @@ const EditProfile = {
                 gender: this.gender,
                 avatarId: avtId,
             };
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            axios.defaults.headers.common['RequestVerificationToken'] = token;
             axios.post("/api/profile/update", data)
                 .then(response => {
                     console.log(response.data);
