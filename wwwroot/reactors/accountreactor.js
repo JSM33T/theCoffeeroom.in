@@ -5,7 +5,7 @@ const BaseComponent = {
           <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
             <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3 fade-in bg-secondary">
             <div class="w-100 mt-auto" style="max-width: 526px;">
-              <div class="row  g-4 pb-xl-2 pb-xxl-3">
+              <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
                 <!-- Item-->
                 <div class="col-md-12">
                   <div class="card h-100 border-0 rounded-5">

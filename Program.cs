@@ -61,7 +61,7 @@ if (!app.Environment.IsDevelopment())
 app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseWebMarkupMin();
+//app.UseWebMarkupMin();
 app.UseRouting();
 
 app.UseAuthorization();
