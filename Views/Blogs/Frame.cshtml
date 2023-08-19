@@ -1,6 +1,21 @@
 ﻿@using theCoffeeroom.Models.Frame;
 @model BlogLoad
 
+@{
+    if (Context.Session.GetString("role") != null && Context.Session.GetString("role") != "" && Context.Session.GetString("role") != "guest")
+    {
+        ViewData["BlogRole"] = Context.Session.GetString("role").ToString();
+    }
+    else
+    {
+        ViewData["BlogRole"] = "guest";
+    }
+}
+
+
+
+<div id="blogview">
+    
 <section class="container py-5 mb-lg-4 mt-1" id="blog_intro">
     <nav aria-label="breadcrumb" class="pt-4">
         <ol class=" pb-lg-4 pb-2 pt-4 breadcrumb">
@@ -107,18 +122,18 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="mdlDelete" tabindex="-1" role="dialog">
+<div class="modal fade fade-in-smooth-pop" id="mdlDelete" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Delete</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close mdl-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Do you want to delete your comment?</p>
             </div>
             <div class="modal-footer flex-column flex-sm-row">
-                <button type="button" class="btn ripple btn-secondary w-100 w-sm-auto mb-sm-0"
+                <button type="button" class="mdl-close btn ripple btn-secondary w-100 w-sm-auto mb-sm-0"
                         data-bs-dismiss="modal">
                     Cancel
                 </button>
@@ -130,18 +145,18 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="mdlreplyDelete" tabindex="-1" role="dialog">
+<div class="modal fade fade-in-smooth-pop" id="mdlreplyDelete" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Delete</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close mdl-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Do you want to delete your reply?</p>
             </div>
             <div class="modal-footer flex-column flex-sm-row">
-                <button type="button" class="btn ripple btn-secondary w-100 w-sm-auto mb-sm-0"
+                    <button type="button" class="mdl-close btn ripple btn-secondary w-100 w-sm-auto mb-sm-0"
                         data-bs-dismiss="modal">
                     Cancel
                 </button>
@@ -154,12 +169,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="mdlEdit" tabindex="-1" role="dialog">
+    <div class="modal fade fade-in-smooth-pop" id="mdlEdit" tabindex="-1" role="dialog">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit</h4>
-                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#mdlEdit" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close mdl-close" data-bs-toggle="modal" data-bs-target="#mdlEdit" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>
@@ -169,7 +184,7 @@
                 </p>
             </div>
             <div class="modal-footer flex-column flex-sm-row">
-                <button type="button" class="btn ripple btn-secondary w-100 w-sm-auto mb-sm-0"
+                    <button type="button" class="btn mdl-close ripple btn-secondary w-100 w-sm-auto mb-sm-0"
                         data-bs-dismiss="modal">
                     Cancel
                 </button>
@@ -182,12 +197,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="mdlReply" tabindex="-1" role="dialog">
+    <div class="modal fade fade-in-smooth-pop" id="mdlReply" tabindex="-1" role="dialog">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close mdl-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>
@@ -196,7 +211,7 @@
                 </p>
             </div>
             <div class="modal-footer flex-column flex-sm-row">
-                <button type="button" class="btn btn-secondary ripple w-100 w-sm-auto mb-sm-0"
+                <button type="button" class="mdl-close btn btn-secondary ripple w-100 w-sm-auto mb-sm-0"
                         data-bs-dismiss="modal">
                     Cancel
                 </button>
@@ -208,12 +223,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="mdladdReply" tabindex="-1" role="dialog">
+    <div class="modal-backdrop fade show " id="backdrop" style="display: none;"></div>
+    <div id="mdladdReply" class="modal fade fade-in-smooth-pop" tabindex="-1" role="dialog">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Reply</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close mdl-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>
@@ -237,43 +253,232 @@
         data-bs-target="#sidebar">
     <i class="ai-layout-column me-2"></i>Sidebar
 </button>
+</div>
 @Html.AntiForgeryToken()
 
 @section jsScripts
     {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            loadImages();
-            loadComments();
-            loadAuthors();
-           loadTags();
+        document.addEventListener('DOMContentLoaded', () => {
+            const closeBtns = document.querySelectorAll('.mdl-close');
+            closeBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    mdlCloseAll();
+                });
+            });
         });
+      
+
         var token = $('input[name="__RequestVerificationToken"]').val();
         const config = {
             headers: {
-                "Content-Type": "application/json", // Modify the content type if you are sending a different data format
-                            "RequestVerificationToken": token // Add the anti-forgery token to the headers
+                "Content-Type": "application/json", 
+                            "RequestVerificationToken": token
             }
         };
+      
 
-        async function loadComments() {
-        @{
-            if (Context.Session.GetString("role") != null && Context.Session.GetString("role") != "" && Context.Session.GetString("role") != "guest")
-            {
-                ViewData["BlogRole"] = Context.Session.GetString("role").ToString();
-            }
-            else
-            {
-                ViewData["BlogRole"] = "guest";
+        function addcomment() {
+            const cmntBtn = document.getElementById('commentbutton');
+            cmntBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>posting.. ';
+            cmntBtn.className = 'btn btn-primary pe-none';
+            
+            $.ajax({
+                type: "POST",
+                url: "/api/blog/comment/add", contentType: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    Slug: "@Model.Slug",
+                    Comment: document.getElementById('blog_comment').value
+                }),
+                success: function (data) {
+                    cmntBtn.innerHTML = 'Post Comment';
+                    loadComments();
+                    cmntBtn.className = 'btn btn-primary';
+                   toaster("success","comment added");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", errorThrown.e);
+                    cmntBtn.innerHTML = 'Post Comment';
+                    cmntBtn.className = 'btn btn-primary';
+                    toaster("error", "something went wrong");
+                }
+            });
+        }
+
+        function cmntEdit(id) {
+            localStorage.removeItem("editid");
+            localStorage.setItem('editid', id);
+            const v = localStorage.getItem('editid');
+            //$('#mdlEdit').modal('show');
+            mdlOpen('mdlEdit');
+            var cmntid = "cm_" + id;
+            var p = document.getElementById(cmntid).innerHTML;
+            document.getElementById("blog_commentEdit").value = p;
+            if (p == "" || p == null) {
+                document.getElementById("blog_commentEdit").value = p;
+                alert("entity");
             }
         }
-                     var roleData = "@ViewData["BlogRole"]";
+        function replyEdit(id) {
+            localStorage.removeItem("replyid");
+            localStorage.setItem('replyid', id);
+            const v = localStorage.getItem('replyid');
+            //$('#mdlReply').modal('show');
+            mdlOpen('mdlReply');
+            var replid = "reply_" + id;
+            var p = document.getElementById(replid).innerHTML;
+            document.getElementById("blog_replyEdit").value = p;
+            if (p == "" || p == null) {
+                document.getElementById("blog_replyEdit").value = p;
+                alert("entity");
+            }
+        }
+        function cmntEditSave() {
+            var editId = localStorage.getItem('editid');
+            var comment = document.querySelector("#blog_commentEdit").value;
+            axios.post('/api/blog/comment/edit', {
+                id: editId,
+                comment: comment
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                    loadComments();
+                    document.querySelector("#blog_commentEdit").value = "";
+                    //$('#mdlEdit').modal('hide');
+                    mdlClose('mdlEdit');
+                    localStorage.removeItem("editid");
+                    toaster("success", "changes saved");
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    toaster("error", "something went wrong");
+                });
+        }
+        function replyEditSave() {
+            var replyId = localStorage.getItem('replyid');
+            var editedReply = $("#blog_replyEdit").val();
+
+            $.ajax({
+                url: '/api/blog/reply/edit',
+                type: 'POST',
+                data: JSON.stringify({
+                    replyId: replyId,
+                    reply: editedReply
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    loadComments();
+                    //$('#mdlReply').modal('hide');
+                    mdlClose('mdlReply');
+                    $("#blog_replyEdit").val(""); // Changed '==' to '=' to assign the value instead of comparing
+                    toaster("Success", "Reply edited successfully"); // Changed the success message for clarity
+                    localStorage.removeItem("replyid");
+                },
+                error: function () {
+                    toaster("error", "Something went wrong"); // Fixed the error message to a general one
+                }
+            });
+        }
+        function cmntDelete(id) {
+            localStorage.setItem('delid', id);
+            const v = localStorage.getItem('delid');
+            //$('#mdlDelete').modal('show');
+            mdlOpen('mdlDelete');
+        }
+
+        function cmntDeleteConfirm() {
+            axios.post('/api/blog/comment/delete', {
+                id: localStorage.getItem('delid')
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                    loadComments();
+                    //$('#mdlEdit').modal('hide');
+                    //$('#mdlDelete').modal('hide');
+                    mdlClose('mdlEdit');
+                    mdlClose('mdlDelete');
+                    
+                    localStorage.removeItem('delid');
+                    toaster("success", "comment deleted");
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    //$('#mdlDelete').modal('hide');
+                    mdlClose('mdlDelete');
+                    localStorage.removeItem('delid');
+                    toaster("error", "something went wrong");
+                })
+        }
+
+
+        function cmntReply(id) {
+            localStorage.setItem('replyto', id);
+            const v = localStorage.getItem('replyto');
+            document.getElementById("addReplybox").value = "";
+            //$('#mdladdReply').modal('show');
+            mdlOpen('mdlReply');
+        }
+
+        function replAdd() {
+            $.ajax({
+                type: "POST",
+                url: "/api/blog/reply/add", contentType: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    Slug: "@ViewData["blogurl"]",
+                    ReplyText: $("#addReplybox").val(),
+                    CommentId: localStorage.getItem('replyto')
+                }),
+                success: function (data) {    
+                        $('#mdladdReply').modal('hide');
+                        loadComments();
+                        toaster("Success","Reply added");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", errorThrown.e);
+                    toaster("Error", error.response.data);
+                }
+            });
+
+        }
+
+        function replyDelete(id) {
+            localStorage.setItem('delid', id);
+            const v = localStorage.getItem('delid');
+            //$('#mdlreplyDelete').modal('show');
+            mdlOpen("mdlreplyDelete");
+        }
+
+        function replyDeleteConfirm() {
+           
+            axios.post('/api/blog/reply/delete', {
+                replyId: localStorage.getItem('delid')
+            })
+                .then(function (response) {
+                  //  $('#mdlreplyDelete').modal('hide');
+                    mdlClose("mdlreplyDelete");
+                    loadComments();
+                    localStorage.removeItem('delid');
+                    toaster("success", "reply deleted");
+                })
+                .catch(function (error) {
+                    //$('#mdlreplyDelete').modal('hide');
+                    mdlClose("mdlreplyDelete");
+                    localStorage.removeItem('delid');
+                    toaster("error", "something went wrong");
+                })
+            
+        }
+
+        function loadComments(){
+            const roleData = "@ViewData["BlogRole"]";
             const data = {
                 Slug: '@Model.Slug'
             };
 
-           axios.post("/api/blog/comments/load", data, config)
+            axios.post("/api/blog/comments/load", data, config)
                 .then((response) => {
                     // data.sort((a, b) => a.id - b.id);
                     let commentsHTML = "";
@@ -343,289 +548,150 @@
                 });
         }
 
-        async function loadImages() {
-            const elements = document.querySelectorAll('.img_placeholder');
-            elements.forEach(element => {
-                const originalString = element.getAttribute("src");
-                const modifiedString = originalString.replace(new RegExp("_placeholder", 'g'), '');
-                element.setAttribute("src", modifiedString);
-            });
-        }
 
-        function addcomment() {
-            const cmntBtn = document.getElementById('commentbutton');
-            cmntBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>posting.. ';
-            cmntBtn.className = 'btn btn-primary pe-none';
-            
-            $.ajax({
-                type: "POST",
-                url: "/api/blog/comment/add", contentType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    Slug: "@Model.Slug",
-                    Comment: document.getElementById('blog_comment').value
-                }),
-                success: function (data) {
-                    cmntBtn.innerHTML = 'Post Comment';
-                    loadComments();
-                    cmntBtn.className = 'btn btn-primary';
-                   toaster("success","comment added");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", errorThrown.e);
-                    cmntBtn.innerHTML = 'Post Comment';
-                    cmntBtn.className = 'btn btn-primary';
-                    toaster("error", "something went wrong");
-                }
-            });
-        }
-
-
-
-        async function loadAuthors() {
-            axios.get('/api/blog/@Model.Slug/authors')
-                .then(response => {
-                    const data = response.data;
-                    var authorsdat = "";
-                    var authorsdat2 = "";
-                    if (data.length != 0) {
-                        for (var i = 0; i < data.length; i++) {
-
-                            authorsdat2 = authorsdat2 + data[i].firstName + ' ' + data[i].lastName + ' , ';
-                        }
-                        document.getElementById('authorsPlaceholder2').innerHTML = authorsdat2.slice(0, authorsdat2.lastIndexOf(',')) + authorsdat2.slice(authorsdat2.lastIndexOf(',') + 1);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('authorsPlaceholder2').innerHTML = "unable to fetch authors' data";
-                });
-
-        }
-
-        function cmntEdit(id) {
-            localStorage.removeItem("editid");
-            localStorage.setItem('editid', id);
-            const v = localStorage.getItem('editid');
-            $('#mdlEdit').modal('show');
-            var cmntid = "cm_" + id;
-            var p = document.getElementById(cmntid).innerHTML;
-            document.getElementById("blog_commentEdit").value = p;
-            if (p == "" || p == null) {
-                document.getElementById("blog_commentEdit").value = p;
-                alert("entity");
-            }
-        }
-
-        function replyEdit(id) {
-            localStorage.removeItem("replyid");
-            localStorage.setItem('replyid', id);
-            const v = localStorage.getItem('replyid');
-            $('#mdlReply').modal('show');
-            var replid = "reply_" + id;
-            var p = document.getElementById(replid).innerHTML;
-            document.getElementById("blog_replyEdit").value = p;
-            if (p == "" || p == null) {
-                document.getElementById("blog_replyEdit").value = p;
-                alert("entity");
-            }
-        }
-
-        function cmntEditSave() {
-            var editId = localStorage.getItem('editid');
-            var comment = document.querySelector("#blog_commentEdit").value;
-            axios.post('/api/blog/comment/edit', {
-                id: editId,
-                comment: comment
-            })
-                .then(function (response) {
-                    console.log(response.data);
-                    loadComments();
-                    document.querySelector("#blog_commentEdit").value = "";
-                    $('#mdlEdit').modal('hide');
-                    localStorage.removeItem("editid");
-                    toaster("success", "changes saved");
-                })
-                .catch(function (error) {
-                    console.error(error);
-                    toaster("error", "something went wrong");
-                });
-        }
-
-        //function replyEditSave() {
-        //    axios.post('/api/blog/comment/edit', {
-        //        replyId: localStorage.getItem('replyid'),
-        //        reply: $("#blog_replyEdit").val()
-        //    })
-        //        .then(function (response) {
-        //            loadComments();
-        //            toaster("success", "changes saved");
-        //        })
-        //        .catch(function (error) {
-        //            toaster("error", "something went wrong");
-        //        });
-        //}
-
-
-        function replyEditSave() {
-            var replyId = localStorage.getItem('replyid');
-            var editedReply = $("#blog_replyEdit").val();
-
-            $.ajax({
-                url: '/api/blog/reply/edit',
-                type: 'POST',
-                data: JSON.stringify({
-                    replyId: replyId,
-                    reply: editedReply
-                }),
-                contentType: 'application/json',
-                success: function (data) {
-                    loadComments();
-                    $('#mdlReply').modal('hide');
-                    $("#blog_replyEdit").val(""); // Changed '==' to '=' to assign the value instead of comparing
-                    toaster("Success", "Reply edited successfully"); // Changed the success message for clarity
-                    localStorage.removeItem("replyid");
-                },
-                error: function () {
-                    toaster("error", "Something went wrong"); // Fixed the error message to a general one
-                }
-            });
-        }
-
-
-        function cmntDelete(id) {
-            localStorage.setItem('delid', id);
-            const v = localStorage.getItem('delid');
-            $('#mdlDelete').modal('show');
-        }
-
-        function cmntDeleteConfirm() {
-            axios.post('/api/blog/comment/delete', {
-                id: localStorage.getItem('delid')
-            })
-                .then(function (response) {
-                    console.log(response.data);
-                    loadComments();
-                    $('#mdlEdit').modal('hide');
-                    $('#mdlDelete').modal('hide');
-                    localStorage.removeItem('delid');
-                    toaster("success", "comment deleted");
-                })
-                .catch(function (error) {
-                    console.error(error);
-                    $('#mdlDelete').modal('hide');
-                    localStorage.removeItem('delid');
-                    toaster("error", "something went wrong");
-                })
-        }
-
-
-        function cmntReply(id) {
-            localStorage.setItem('replyto', id);
-            const v = localStorage.getItem('replyto');
-            document.getElementById("addReplybox").value = "";
-            $('#mdladdReply').modal('show');
-        }
-
-        function replAdd() {
-            $.ajax({
-                type: "POST",
-                url: "/api/blog/reply/add", contentType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    Slug: "@ViewData["blogurl"]",
-                    ReplyText: $("#addReplybox").val(),
-                    CommentId: localStorage.getItem('replyto')
-                }),
-                success: function (data) {    
-                        $('#mdladdReply').modal('hide');
-                        loadComments();
-                        toaster("Success","Reply added");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", errorThrown.e);
-                    toaster("Error", error.response.data);
-                }
-            });
-
-        }
-
-        function replyDelete(id) {
-            localStorage.setItem('delid', id);
-            const v = localStorage.getItem('delid');
-            $('#mdlreplyDelete').modal('show');
-        }
-
-        function replyDeleteConfirm() {
-           
-            axios.post('/api/blog/reply/delete', {
-                replyId: localStorage.getItem('delid')
-            })
-                .then(function (response) {
-                    $('#mdlreplyDelete').modal('hide');
-                    loadComments();
-                    localStorage.removeItem('delid');
-                    toaster("success", "reply deleted");
-                })
-                .catch(function (error) {
-                    $('#mdlreplyDelete').modal('hide');
-                    localStorage.removeItem('delid');
-                    toaster("error", "something went wrong");
-                })
-            
-        }
-
-        function loadTags() {
-            var input = '@Model.Tags';
-            var parts = input.split(',');
-            var tags = "";
-            parts.forEach(function (part) {
-                var words = part.split(' ');
-                for (var i = 0; i < words.length; i++) {
-                    tags = tags + `<a class="btn btn-outline-secondary rounded-pill mt-3 ms-3" href="/blogs/tag/${words[i]}">${words[i]}</a>`;
-                }
-            });
-            document.getElementById('tagsPlaceholder').innerHTML = tags;
-
-        }
 
 
     </script>
     <script>
-        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+      
         const { createApp, ref } = Vue;
         const app = createApp({
             setup() {
-                const emailValue = ref('');
-                const btnTxt = ref('Submit');
+                const modalVisible = ref(true);
+                const loadTags = async () => {
+                    var input = '@Model.Tags';
+                    var parts = input.split(',');
+                    var tags = "";
+                    parts.forEach(function (part) {
+                        var words = part.split(' ');
+                        for (var i = 0; i < words.length; i++) {
+                            tags = tags + `<a class="btn btn-outline-secondary rounded-pill mt-3 ms-3" href="/blogs/tag/${words[i]}">${words[i]}</a>`;
+                        }
+                    });
+                    document.getElementById('tagsPlaceholder').innerHTML = tags;
+                };
+                const loadAuthors = async() =>{
+                    axios.get('/api/blog/@Model.Slug/authors')
+                        .then(response => {
+                            const data = response.data;
+                            var authorsdat = "";
+                            var authorsdat2 = "";
+                            if (data.length != 0) {
+                                for (var i = 0; i < data.length; i++) {
 
-                const submitMail = async () => {
-                    btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
-
-                    try {
-                        axios.defaults.headers.common['RequestVerificationToken'] = token;
-                        const response = await axios.post('/api/newsletter', {
-                            EMailId: emailValue.value,
-                            Origin: "/"
+                                    authorsdat2 = authorsdat2 + data[i].firstName + ' ' + data[i].lastName + ' , ';
+                                }
+                                document.getElementById('authorsPlaceholder2').innerHTML = authorsdat2.slice(0, authorsdat2.lastIndexOf(',')) + authorsdat2.slice(authorsdat2.lastIndexOf(',') + 1);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            document.getElementById('authorsPlaceholder2').innerHTML = "unable to fetch authors' data";
                         });
-                        toaster("success", response.data);
-                        emailValue.value = '';
-                    } catch (error) {
-                        toaster("error", error.response.data);
-                    } finally {
-                        btnTxt.value = 'Submit';
-                    }
-                };
+                }
+                const lazyloadImages = async () =>{
+                    const elements = document.querySelectorAll('.img_placeholder');
+                    elements.forEach(element => {
+                        const originalString = element.getAttribute("src");
+                        const modifiedString = originalString.replace(new RegExp("_placeholder", 'g'), '');
+                        element.setAttribute("src", modifiedString);
+                    });
+                }
+                const loadComments = async () =>{
+                    const roleData = "@ViewData["BlogRole"]";
+                    const data = {
+                        Slug: '@Model.Slug'
+                    };
 
+                    axios.post("/api/blog/comments/load", data, config)
+                        .then((response) => {
+                            // data.sort((a, b) => a.id - b.id);
+                            let commentsHTML = "";
+                            if (response.data.length == 0) {
+                                commentsHTML = "";
+                            }
+                            else {
+                                for (let i = 0; i < response.data.length; i++) {
+                                    const comment = response.data[i];
+                                    var c = i + 1;
+                                    commentsHTML += '<div class="border-bottom py-4 mt-2 mb-4">' +
+                                        '<div class="d-flex align-items-center pb-1 mb-3"> <img class="rounded-circle" src="/assets/images/avatars/default/' + comment.avatar + '.png" width="48" alt="Comment author">' +
+                                        '<div class="ps-3">' +
+                                        '<h6 class="mb-0">' + comment.fullname + ' </h6><span class="fs-sm text-muted">' + comment.date + '</span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="btn-group-sm me-2 ml-2 mx-2" style="float:right;" role="group" aria-label="Settings group">' +
+                                        (roleData !== 'guest' ? '<button type="button" id="repl_' + comment.id + '" onclick="cmntReply(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-redo"></i></button>&nbsp;' : '') +
+                                        (comment.edit ? '<button type="button" id="edt_' + comment.id + '" onclick="cmntEdit(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
+                                        (comment.edit ? '<button type="button" id="dlt_' + comment.id + '" onclick="cmntDelete(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
+                                        '</div>' +
+                                        '<span class="pb-2 mb-0" id="cm_' + comment.id + '">' + comment.comment + '</span>';
+
+                                    if (comment.replies && comment.replies.length > 0) {
+                                        // comment.replies.sort((a, b) => a.replyId - b.replyId);
+                                        for (let j = 0; j < comment.replies.length; j++) {
+                                            const reply = comment.replies[j];
+                                            commentsHTML +=
+                                                '<div class="card card-body border-0 bg-secondary mt-4">' +
+                                                '    <div class="d-flex align-items-center pb-1 mb-3">' +
+                                                '        <img class="rounded-circle" src="/assets/images/avatars/default/' + reply.replyAvatar + '.png" width="48" alt="Comment author">' +
+                                                '        <div class="ps-3">' +
+                                                '            <h6 class="mb-0">' + reply.replyFullName + '</h6><span class="fs-sm text-muted">' + reply.replyDate + '</span>' +
+                                                '        </div>' +
+                                                '    </div>' +
+                                                '    <div class="d-flex align-items-center justify-content-between mb-3" role="group" aria-label="Settings group">' +
+                                                '        <p class="mb-0"><a class="fw-bold text-decoration-none" href="#">@@' + comment.fullname + '</a>&nbsp;&nbsp;<span id="reply_' + reply.replyId + '">' + reply.replyComment + '</span></p>' +
+                                                '        <div>' +
+                                                (reply.replyEdit ? '<button type="button" id="edt' + reply.replyId + '" onclick="replyEdit(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
+                                                (reply.replyEdit ? '<button type="button" id="repldlt_' + reply.replyId + '" onclick="replyDelete(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
+                                                '        </div>' +
+                                                '    </div>' +
+                                                '</div>';
+
+                                        }
+                                    }
+                                    commentsHTML += `</div>`;
+                                }
+                            }
+
+                            document.getElementById("comments").innerHTML = commentsHTML;
+                            document.getElementById("blogcount").innerHTML = c;
+                        })
+                        .catch((error) => {
+                            if (error.response) {
+                                const errorMessage = error.response.data.error;
+                                console.error(errorMessage);
+                            } else if (error.request) {
+                                console.error('Network error:', error.request);
+                            } else {
+                                console.error('Error:', error.message);
+
+                            }
+                            document.getElementById("comments").innerHTML = "";
+                            document.getElementById("blogcount").innerHTML = "0";
+
+                        });
+                }
                 return {
-                    emailValue,
-                    btnTxt,
-                    submitMail
+                    loadTags,
+                    loadAuthors,
+                    lazyloadImages,
+                    loadComments
+
                 };
+            },
+            async mounted() {
+                await this.lazyloadImages();
+                await this.loadTags();
+                await this.loadAuthors();
+                await this.loadComments();
+                //await this.replyMdl();
             }
         });
 
-        app.mount('#mailSubmit');
-    </script>
+    app.mount('#blogview');
+</script>
+    
+   
 
 }

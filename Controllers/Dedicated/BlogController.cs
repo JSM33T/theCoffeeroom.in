@@ -138,6 +138,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpGet]
         [Route("api/blog/{Slug}/authors")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LoadAuthors(string Slug)
         {
             List<object> data = new();
@@ -172,6 +173,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/comment/add")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> AddComment([FromBody] BlogComment blogComment)
         {
 
@@ -236,6 +238,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/comments/load")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LoadComments([FromBody] BlogComment blogComment)
         {
 
@@ -367,6 +370,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/comment/edit")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> EditComment([FromBody] BlogComment blogComment)
         {
             if (HttpContext.Session.GetString("username") != null)
@@ -403,6 +407,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/comment/delete")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> DeleteComment([FromBody] BlogComment blogComment)
         {
             if (HttpContext.Session.GetString("username") != null)
@@ -448,6 +453,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/reply/add")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> AddReply([FromBody] BlogReply blogReply)
         {
             string userid = "";
@@ -534,6 +540,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/blog/reply/delete")]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> DeleteReply([FromBody] BlogReply blogReply)
         {
             if (HttpContext.Session.GetString("username") != null)

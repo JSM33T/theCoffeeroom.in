@@ -3,8 +3,8 @@ const routerViewElement = document.querySelector('router-view');
 const BaseComponent = {
     template: `
           <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-            <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3 fade-in bg-secondary">
-            <div class="w-100 mt-auto" style="max-width: 526px;">
+            <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3  bg-secondary">
+            <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
               <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
                 <!-- Item-->
                 <div class="col-md-12">
@@ -64,8 +64,8 @@ const BaseComponent = {
 const LoginComponent = {
     template: `
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
-        <div class="w-100 mt-auto" style="max-width: 526px;">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 ">
+        <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
             <h1>Log In</h1>
             <router-link to='/account'>back to menu</router-link>
             <form class="needs-validation" id="loginForm" novalidate>

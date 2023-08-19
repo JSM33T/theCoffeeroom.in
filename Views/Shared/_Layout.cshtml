@@ -287,7 +287,12 @@
         </svg><i class="ai-arrow-up"></i>
     </a>
 
-
+    <environment include="production">
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="development">
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
+    </environment>
     <script src="~/libraries/axios/axios.min.js"></script>
     @await RenderSectionAsync("jsScripts", required: false)
     <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -298,11 +303,9 @@
     
     <environment include="production">
         <script src="~/assets/js/theme.min.js"></script>
-        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
     </environment>
     <environment include="development">
         <script src="~/assets/js/theme.js"></script>
-        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
     </environment>
 </body>
 </html>

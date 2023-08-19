@@ -1,3 +1,29 @@
+function mdlOpen(mdlId) {
+    document.getElementById("backdrop").style.display = "block"
+    document.getElementById(mdlId).style.display = "block"
+    document.getElementById(mdlId).classList.add("show")
+    var modal = document.getElementById(mdlId);
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            mdlClose(mdlId)
+        }
+    }
+}
+
+function mdlClose(mdlId) {
+    document.getElementById("backdrop").style.display = "none"
+    document.getElementById(mdlId).style.display = "none"
+    document.getElementById(mdlId).classList.remove("show")
+}
+function mdlCloseAll() {
+    const openModal = document.querySelector('.modal.show');
+    if (openModal) {
+        const modalId = openModal.getAttribute('id'); 
+        const modal = new bootstrap.Modal(openModal); 
+        modal.hide();
+        mdlClose(modalId);
+    }
+}
 
 function livesearch() {
 

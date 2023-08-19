@@ -5,7 +5,7 @@
 @section jsLib{
     <script src="~/assets/vendor/parallax-js/dist/parallax.min.js"></script>
 }
-
+<div id="appHome">
 <section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5">
     <div class="container d-flex justify-content-center pb-sm-3 py-md-4 py-xl-5">
         <div class="row align-items-center pt-5 mt-4 mt-xxl-0">
@@ -35,9 +35,16 @@
                                     <div class="dark-mode fs-xs ps-2"><span class="text-nav fw-bold me-1">thecoffeeroom.in</span><span class="text-muted">12 min</span></div>
                                 </div>
                             </div>
-                            <video class="d-block w-100" autoplay loop muted style="border-radius: calc(var(--ar-border-radius) * 1.875);">
-                                <source src="~/assets/clips/covercr.mp4" type="video/mp4">
-                            </video>
+
+                            <div v-if="loadVid"> 
+                                <video class="d-block w-100" autoplay loop muted style="border-radius: calc(var(--ar-border-radius) * 1.875);">
+                                    <source src="~/assets/clips/covercr.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div v-else>
+                                <img src="~/assets/clips/covercr_placeholder.png" height="1920px">
+                            </div>
+                       
                         </div>
                     </div>
                     <div class="parallax-layer" data-depth="0.3"><img src="assets/img/landing/marketing-agency/hero/shape01.svg" alt="Background shape"></div>
@@ -63,7 +70,7 @@
         </div>
     </div>
 </section>
-<section class="container dark-mode pt-5 mt-5" id="mailSubmit">
+<section class="container dark-mode pt-5 mt-5">
     <div class="card border-0 bg-primary position-relative py-lg-4 py-xl-5">
         <!-- Decorative shapes-->
         <svg class="position-absolute end-0 mt-n2" width="242" height="331" viewBox="0 0 242 331" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +99,7 @@
         </div>
     </div>
 </section>
-
+</div>
 
 
 @section jsScripts{
@@ -103,6 +110,7 @@
             setup() {
                 const emailValue = ref('');
                 const btnTxt = ref('Submit');
+                const loadVid = ref(true);
                
                 const submitMail = async () => {
                     btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
@@ -125,12 +133,13 @@
                 return {
                     emailValue,
                     btnTxt,
-                    submitMail
+                    submitMail,
+                    loadVid
                 };
             }
         });
 
-        app.mount('#mailSubmit');
+        app.mount('#appHome');
     </script>
 
 }
