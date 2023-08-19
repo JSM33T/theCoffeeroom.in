@@ -19,7 +19,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         [HttpPost]
         [Route("api/newsletter")]
-        [IgnoreAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMailToLetter([FromBody] Mail mail)
         {
             try

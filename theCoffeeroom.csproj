@@ -12,12 +12,16 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\Dedicated\Apps\**" />
+    <Compile Remove="Views\Magazines\Content\**" />
     <Compile Remove="wwwroot\logs\**" />
     <Content Remove="Controllers\Dedicated\Apps\**" />
+    <Content Remove="Views\Magazines\Content\**" />
     <Content Remove="wwwroot\logs\**" />
     <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
+    <EmbeddedResource Remove="Views\Magazines\Content\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
     <None Remove="Controllers\Dedicated\Apps\**" />
+    <None Remove="Views\Magazines\Content\**" />
     <None Remove="wwwroot\logs\**" />
   </ItemGroup>
 
@@ -25,7 +29,6 @@
     <Folder Include="Controllers\Routers\Apps\" />
     <Folder Include="Notes\" />
     <Folder Include="Views\Archive\Content\" />
-    <Folder Include="Views\Magazines\Content\" />
     <Folder Include="Views\Studio\Content\" />
     <Folder Include="Views\Music\Content\" />
     <Folder Include="Views\Shop\Content\" />

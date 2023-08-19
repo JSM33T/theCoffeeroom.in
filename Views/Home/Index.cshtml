@@ -63,7 +63,7 @@
         </div>
     </div>
 </section>
-<section class="container dark-mode pt-5 mt-5">
+<section class="container dark-mode pt-5 mt-5" id="mailSubmit">
     <div class="card border-0 bg-primary position-relative py-lg-4 py-xl-5">
         <!-- Decorative shapes-->
         <svg class="position-absolute end-0 mt-n2" width="242" height="331" viewBox="0 0 242 331" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,15 +77,15 @@
         <div class="card-body position-relative zindex-2 py-5">
             <form class="mx-auto" style="max-width: 800px;">
                 @Html.AntiForgeryToken()
-                <h2 class="h1 card-title text-center pb-4">Join our mailing list!!</h2>
+                <h2 class="h1 card-title text-center pb-4">Join our mailing list!! {{username}}</h2>
                 <div class="row g-4">
                     <div class="col-sm-10 offset-sm-1">
-                        <label class="form-label fs-base" for="name">Your email</label>
-                        <input class="form-control form-control-lg" type="email" name="user_email" placeholder="Your email" required="" id="user_email" autocomplete="off">
+                        <label class="form-label fs-base" for="email">Your email</label>
+                        <input class="form-control form-control-lg" type="email" v-model="emailValue" placeholder="Your email" autocomplete="off">
                     </div>
 
                     <div class="col-sm-12 text-center pt-4">
-                        <button class="btn btn-lg btn-primary btn-dark ripple" id="submitMail" type="submit">Subscribe</button>
+                        <button class="btn btn-lg btn-primary btn-dark ripple" v-on:click="submitMail" type="button" v-html="btnTxt"></button>
                     </div>
                 </div>
             </form>
@@ -96,43 +96,41 @@
 
 
 @section jsScripts{
-<script>
-        const SubButton = document.getElementById('submitMail');
-        let UserMail = document.getElementById('user_email');
+    <script>
         const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-        let innerArticle;
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const emailValue = ref('');
+                const btnTxt = ref('Submit');
+               
+                const submitMail = async () => {
+                    btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
 
-        SubButton.addEventListener('click',
-            function (e) { 
-                e.preventDefault(); 
-                submitMail();
+                    try {
+                        axios.defaults.headers.common['RequestVerificationToken'] = token;
+                        const response = await axios.post('/api/newsletter', {
+                            EMailId: emailValue.value,
+                            Origin: "/"
+                        });
+                        toaster("success", response.data);
+                        emailValue.value = ''; 
+                    } catch (error) {
+                        toaster("error", error.response.data);
+                    } finally{
+                        btnTxt.value = 'Submit';
+                    }
+                };
+
+                return {
+                    emailValue,
+                    btnTxt,
+                    submitMail
+                };
             }
-        );
-    function submitMail()
-    {
+        });
 
-            SubButton.innerHTML = ` <span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..`;
-            let data = {
-                EMailId: UserMail.value,
-                Origin: "/"
-            };
-            axios.defaults.headers.common['RequestVerificationToken'] = token;
-            axios.post('/api/newsletter', data)
-                .then(function (response) {
-                    console.log(response)
-                        toaster("success",response.data);
-                    SubButton.innerHTML = "Subscribe";
-                    UserMail.value = "";
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    toaster("error", error.response.data);
-                    SubButton.innerHTML = "Subscribe";
-                    UserMail.focus();
+        app.mount('#mailSubmit');
+    </script>
 
-                })
-
-    }
-
-</script>
 }
