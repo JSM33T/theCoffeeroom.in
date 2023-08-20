@@ -12,7 +12,7 @@
     }
 }
 
-
+@Html.AntiForgeryToken()
 
 <div id="blogview">
     
@@ -201,7 +201,7 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit</h4>
+                <h4 class="modal-title">Reply</h4>
                 <button type="button" class="btn-close mdl-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -254,11 +254,10 @@
     <i class="ai-layout-column me-2"></i>Sidebar
 </button>
 </div>
-@Html.AntiForgeryToken()
+
 
 @section jsScripts
     {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const closeBtns = document.querySelectorAll('.mdl-close');
@@ -269,8 +268,7 @@
             });
         });
       
-
-        var token = $('input[name="__RequestVerificationToken"]').val();
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         const config = {
             headers: {
                 "Content-Type": "application/json", 
@@ -282,29 +280,32 @@
         function addcomment() {
             const cmntBtn = document.getElementById('commentbutton');
             cmntBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>posting.. ';
-            cmntBtn.className = 'btn btn-primary pe-none';
-            
-            $.ajax({
-                type: "POST",
-                url: "/api/blog/comment/add", contentType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify({
+            cmntBtn.classList.add('pe-none');
+
+            axios({
+                method: 'POST',
+                url: '/api/blog/comment/add',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
                     Slug: "@Model.Slug",
-                    Comment: document.getElementById('blog_comment').value
-                }),
-                success: function (data) {
+                    Comment: document.getElementById('blog_comment').value,
+                },
+            })
+                .then(function (response) {
                     cmntBtn.innerHTML = 'Post Comment';
                     loadComments();
-                    cmntBtn.className = 'btn btn-primary';
-                   toaster("success","comment added");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", errorThrown.e);
+                    cmntBtn.classList.remove('pe-none');
+                    toaster('success', 'Comment added');
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
                     cmntBtn.innerHTML = 'Post Comment';
-                    cmntBtn.className = 'btn btn-primary';
-                    toaster("error", "something went wrong");
-                }
-            });
+                    cmntBtn.classList.remove('pe-none');
+                    toaster('error', 'Something went wrong');
+                });
+
         }
 
         function cmntEdit(id) {
@@ -356,31 +357,37 @@
                     toaster("error", "something went wrong");
                 });
         }
-        function replyEditSave() {
-            var replyId = localStorage.getItem('replyid');
-            var editedReply = $("#blog_replyEdit").val();
+ 
 
-            $.ajax({
+        function replyEditSave() {
+            let replyId = localStorage.getItem('replyid');
+            let editedReply = document.getElementById('blog_replyEdit').value;
+
+            axios({
+                method: 'POST',
                 url: '/api/blog/reply/edit',
-                type: 'POST',
-                data: JSON.stringify({
-                    replyId: replyId,
-                    reply: editedReply
-                }),
-                contentType: 'application/json',
-                success: function (data) {
-                    loadComments();
-                    //$('#mdlReply').modal('hide');
-                    mdlClose('mdlReply');
-                    $("#blog_replyEdit").val(""); // Changed '==' to '=' to assign the value instead of comparing
-                    toaster("Success", "Reply edited successfully"); // Changed the success message for clarity
-                    localStorage.removeItem("replyid");
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-                error: function () {
-                    toaster("error", "Something went wrong"); // Fixed the error message to a general one
-                }
-            });
+                data: {
+                    replyId: replyId,
+                    reply: editedReply,
+                },
+            })
+                .then(function (response) {
+                    loadComments();
+                    mdlClose('mdlReply');
+                    document.getElementById('blog_replyEdit').value = '';
+                    toaster('Success', 'Reply edited successfully');
+                    localStorage.removeItem('replyid');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    toaster('error', 'Something went wrong');
+                });
+
         }
+
         function cmntDelete(id) {
             localStorage.setItem('delid', id);
             const v = localStorage.getItem('delid');
@@ -418,30 +425,34 @@
             const v = localStorage.getItem('replyto');
             document.getElementById("addReplybox").value = "";
             //$('#mdladdReply').modal('show');
-            mdlOpen('mdlReply');
+            mdlOpen('mdladdReply');
         }
 
-        function replAdd() {
-            $.ajax({
-                type: "POST",
-                url: "/api/blog/reply/add", contentType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    Slug: "@ViewData["blogurl"]",
-                    ReplyText: $("#addReplybox").val(),
-                    CommentId: localStorage.getItem('replyto')
-                }),
-                success: function (data) {    
-                        $('#mdladdReply').modal('hide');
-                        loadComments();
-                        toaster("Success","Reply added");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", errorThrown.e);
-                    toaster("Error", error.response.data);
-                }
-            });
+       
 
+
+        function replAdd() { 
+            axios({
+                  method: "POST",
+                  url: "/api/blog/reply/add",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: {
+                    Slug: "@ViewData["blogurl"]",
+                    ReplyText: document.getElementById("addReplybox").value,
+                    CommentId: localStorage.getItem("replyto"),
+                  },
+            })
+                  .then(function (response) {
+                    loadComments();
+                    mdlClose("mdladdReply");
+                    toaster("Success", "Reply added");
+                  })
+                  .catch(function (error) {
+                    console.error("Error:", error);
+                    toaster("Error", error.response.data);
+                  });
         }
 
         function replyDelete(id) {
