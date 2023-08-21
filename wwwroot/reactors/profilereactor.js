@@ -189,7 +189,7 @@ const Dashboard = {
             <div class="fade-in">
                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
             <i class="ai-user text-primary lead pe-1 me-2"></i>
-            <h2 class="h4 mb-0">Dashboard</h2><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile/edit"><i class="ai-edit ms-n1 me-2"></i>Edit info</router-link>
+            <h2 class="h4 mb-0">Dashboard</h2><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile/edit"><i class="ai-edit ms-n1 me-2"></i>Edit info</router-link><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile/security"><i class="ai-edit ms-n1 me-2"></i>Security</router-link>
         </div>
         <div class="d-md-flex align-items-center">
             <div class="d-sm-flex align-items-center">
