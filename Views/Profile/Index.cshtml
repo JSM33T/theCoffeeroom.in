@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["BodyBg"] = "bg-secondary";
     var avtrid = Context.Session.GetString("avatar") + ".png";
+    var avtValue = Context.Session.GetString("avatar");
     var fname = Context.Session.GetString("first_name");
     var userrole = Context.Session.GetString("role");
 }
@@ -31,9 +32,9 @@
         var glLastName = "@Model.LastName";
         var glPhone = "@Model.Phone";
         var glEmail = "@Model.EMail";
-        //var glAvatar = "@avtrid";
         var glAvatar = "@avtrid";
         var glGender = "@Model.Gender";
+        var avtSelect = "@avtValue";
         var glRole = "@userrole";
         var glBio = "@Model.Bio";
         //var glAvtImage = "@Context.Session.GetString("avatar")" + ".png";

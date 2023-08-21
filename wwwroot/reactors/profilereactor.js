@@ -1,9 +1,29 @@
 const Security =
 {
-    template: '<h1>under construction</h1>',
+    template: `  <div class="fade-in">
+                              <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                                        <i class="ai-edit text-primary lead pe-1 me-2"></i>
+                                               <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+                                    </div>
+                           
+                                            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="fn">Enter Password</label>
+                                                    <input type="password" v-model="newPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" required/>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="ln">Last name</label>
+                                                    <input type="password" v-model="confirmPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" />
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end pt-3">
+                                                    <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveCredentials">Save Profile</button>
+                                                </div>
+                                            </div>
+                </div>`,
     data() {
         return {
-            username: "Jasmeet Singh",
+            username: glUsername,
+            passWord: '',
         };
 
     },
@@ -12,11 +32,30 @@ const Security =
             top: 0,
             behavior: 'smooth',
         });
-        this.onInit();
     },
     methods: {
-        onInit() {
-            toaster("success", "security tab reached");
+        saveCredentials() {
+
+            if (this.newPassword != this.confirmPassword) {
+                alert("nope");
+            }
+            else {
+                const data = {
+                    password: this.newPassword,
+                    confirmPassword: this.confirmPassword
+                };
+               // const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+               // axios.defaults.headers.common['RequestVerificationToken'] = token;
+                axios.post("/api/profile/password/update", data)
+                    .then(response => {
+                        toaster("success", response.data);
+                    })
+                    .catch(error => {
+                        toaster("Error", "Something went wrong");
+                    });
+            }
+          
+            //toaster("success", "button clickworking");
         }
 
     }
@@ -109,6 +148,7 @@ const EditProfile = {
             phone: glPhone,
             bio: glBio,
             avatar: glAvatar,
+            avtMenu: avtSelect,
             gender: glGender,
             role: glRole,
             someThing: "2"
@@ -127,19 +167,18 @@ const EditProfile = {
     methods: {
         selectValue() {
             this.$nextTick(() => {
-                document.getElementById("avatars").value = glAvtImage;
+                document.getElementById("avatars").value = this.avtMenu;
             });
 
         },
-        fetchAvatars() {
-            axios.get("/api/getavatars")
+        async fetchAvatars() {
+            await axios.get("/api/getavatars")
                 .then(response => {
                     this.options = response.data;
-                    console.log(response.data);
                     this.selectValue();
                 })
                 .catch(error => {
-                    console.error('Error fetching data:', error);
+                    toaster("error", "something went wrong");
                 });
         },
         saveDetails() {
@@ -160,12 +199,10 @@ const EditProfile = {
             axios.defaults.headers.common['RequestVerificationToken'] = token;
             axios.post("/api/profile/update", data)
                 .then(response => {
-                    console.log(response.data);
                     document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + avtVal + '.png';
                     toaster("success", response.data);
                 })
                 .catch(error => {
-                    console.error('Error fetching data:', error);
                     toaster("Error", "Something went wrong");
                 });
         },
@@ -189,7 +226,7 @@ const Dashboard = {
             <div class="fade-in">
                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
             <i class="ai-user text-primary lead pe-1 me-2"></i>
-            <h2 class="h4 mb-0">Dashboard</h2><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile/edit"><i class="ai-edit ms-n1 me-2"></i>Edit info</router-link><router-link class="btn btn-sm btn-secondary ripple ms-auto" to="/profile/security"><i class="ai-edit ms-n1 me-2"></i>Security</router-link>
+            <h2 class="h4 mb-0">Dashboard</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
         </div>
         <div class="d-md-flex align-items-center">
             <div class="d-sm-flex align-items-center">

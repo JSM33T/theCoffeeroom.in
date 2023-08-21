@@ -33,9 +33,7 @@ const CategorisedBlogComponent = {
             } catch (error) {
                 console.error('Error fetching data from API:', error);
             } finally {
-                setTimeout(() => {
                     this.isLoading = false;
-                }, 200);
             }
         },
     },
@@ -114,7 +112,7 @@ const HomeComponent = {
            </div>
          </div>
          <div v-else>
-          <h1 class="fade-in-smooth-pop">no blogs found!!</h1>
+            <h1 class="fade-in-smooth-pop">no blogs found!!</h1>
          </div>
         
         </div>
@@ -149,8 +147,10 @@ const HomeComponent = {
                 this.$nextTick(async () => {
                     if (typeof newSearchValue === 'string' && newSearchValue.length >= 1) {
                         this.loadSearches(newSearchValue);
+                        this.titleItem = "Blogs \'" + newSearchValue + "\'" ;
                     } else {
                         this.loadDefaults();
+                        this.titleItem = "Blogs";
                     }
                 });
             },
@@ -173,6 +173,7 @@ const HomeComponent = {
         },
         async loadSearches(newSearchValue) {
             try {
+                this.titleItem = "Searching";
                 const response =await axios.get('/api/blogs/0/search/' + newSearchValue);
                 const data = response.data;
                 this.blogs = data;
@@ -206,16 +207,18 @@ const app = Vue.createApp({
         };
     },
     methods:{
-    navigateToBlog() {
-        this.$nextTick(() => {
-            if (this.inputValue.length >= 1) {
-                this.$router.push({ path: '/blogs', query: { search: this.inputValue } });
-            } else {
-                this.$router.push({ path: '/blogs' });
-            }
-        });
+        async navigateToBlog() {
+                    this.$nextTick(() => {
+                        if (this.inputValue.length >= 1) {
+                            this.$router.push({ path: '/blogs', query: { search: this.inputValue } });
+                            this.titleItem = "searching";
+                        } else {
+                            this.$router.push({ path: '/blogs' });
+                    
+                        }
+                    });
+              }
     }
-}
 
 });
 app.use(router);
