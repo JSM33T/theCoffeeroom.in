@@ -1,5 +1,415 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["ActiveCategory"] = "";
+    ViewData["ActiveYear"] = "";
+    ViewData["ActiveTag"] = "";
+    ViewData["ActivePage"] = "Music";
+}
+
+
+<section class="container py-5 mt-5 mb-xl-3 mb-xxl-5">
+    <div class="row pt-2">
+        <!-- Text + CTA button-->
+        <div class="col-lg-6 d-flex flex-column mb-4 mb-lg-0 pb-sm-3 pb-lg-0">
+            <h1 class="display-1 text-uppercase fw-bold mt-auto mb-2">the <span class="fw-normal">coffeeroom</span> studio<span class="d-none d-md-inline-block align-middle ms-4" style="width: 120px; height: 2px; background-color: currentColor;"></span></h1>
+            <div class="d-flex align-items-center py-4 py-lg-5">
+                
+                <div class="flex-shrink-sm-0" style="color: currentColor;">
+                    @*<img class="d-dark-mode-none" src="~/assets/images/logos/jsm33t.svg" width="120" alt="by jsm33t"><img class="d-none d-dark-mode-block" src="~/assets/images/logos/jsm33t.svg" width="120" alt="Clutch">*@
+                    <svg style="margin-left:0px" version="1.0" xmlns="http://www.w3.org/2000/svg" width="75.000000pt" height="24.000000pt" viewBox="0 0 1000.000000 300.000000" preserveAspectRatio="xMidYMid meet">
+                        <g transform="translate(0.000000,275.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
+                            <path d="M520 2725 c0 -3 0 -104 0 -225 0 -121 0 -224 0 -230 0 -6 84 -10 230 -10 l231 0 -3 -787 c-4 -900 0 -858 -87 -944 -71 -71 -168 -85 -263 -38 -43 22 -73 62 -104 138 l-23 56 -250 3 c-138 1 -251 -1 -251 -5 0 -5 11 -48 24 -98 47 -173 117 -297 228 -401 188 -175 476 -231 735 -142 132 45 199 87 281 173 103 108 159 228 187 400 12 75 15 262 15 1103 l0 1012 -475 0 c-261 0 -475 -2 -475 -5z"></path>
+                            <path d="M2305 2734 c-326 -53 -572 -272 -639 -571 -21 -92 -21 -270 0 -371 33 -164 134 -314 272 -405 79 -53 217 -116 397 -182 201 -74 271 -111 341 -180 74 -73 96 -129 96 -242 -1 -96 -31 -162 -107 -231 -73 -67 -154 -97 -260 -96 -102 1 -167 28 -229 94 -61 66 -88 121 -111 232 l-5 28 -256 0 -257 0 7 -60 c21 -187 95 -345 226 -484 176 -186 400 -275 664 -263 198 9 362 65 508 176 127 96 233 262 280 436 31 118 31 338 -1 450 -82 290 -258 442 -689 594 -95 34 -198 74 -230 90 -70 35 -146 115 -161 167 -14 52 -14 147 1 198 18 60 99 138 163 157 100 29 212 9 275 -48 54 -48 76 -86 97 -168 l19 -70 244 0 244 0 -3 49 c-8 132 -80 311 -171 423 -96 119 -250 219 -395 258 -60 16 -263 28 -320 19z"></path>
+                            <path d="M3447 2481 l-187 -269 2 -417 3 -417 160 233 160 234 3 -907 c1 -533 6 -908 11 -908 5 0 168 233 362 518 775 1134 880 1287 889 1290 7 2 10 -320 10 -912 l0 -916 250 0 250 0 0 1370 0 1370 -232 0 -233 0 -390 -560 c-214 -307 -393 -559 -397 -559 -5 -1 -8 251 -8 559 l0 560 -232 0 -233 -1 -188 -268z"></path>
+                            <path d="M5445 2727 c-3 -7 -4 -114 -3 -237 l3 -225 483 -3 482 -2 0 -330 0 -330 -272 -2 -273 -3 0 -235 0 -235 273 -3 272 -2 0 -320 c0 -249 -3 -320 -12 -320 -7 0 -220 0 -473 0 -253 0 -466 -4 -473 -8 -9 -7 -12 -61 -10 -238 l3 -229 738 -3 737 -2 -2 1367 -3 1368 -733 3 c-588 2 -734 0 -737 -11z"></path>
+                            <path d="M7002 2503 l3 -238 478 -3 477 -2 0 -330 0 -330 -267 -2 -268 -3 -3 -237 -2 -238 270 0 270 0 -2 -320 -3 -321 -475 -2 -475 -2 -3 -237 -2 -238 735 0 735 0 0 1370 0 1370 -735 0 -735 0 2 -237z"></path>
+                            <path d="M8557 2723 c-4 -3 -7 -618 -7 -1365 l0 -1358 255 0 255 0 0 1130 0 1130 253 2 252 3 3 233 2 232 -503 0 c-277 0 -507 -3 -510 -7z"></path>
+                        </g>
+                    </svg>
+                    </div>
+            </div>
+            <ul class="nav mt-auto mx-n2 pt-sm-3 pt-lg-0">
+                <li class="nav-item me-3"><a class="nav-link p-2" href="#">youtube</a></li>
+                <li class="nav-item me-3"><a class="nav-link p-2" href="#">soundcloud</a></li>
+                <li class="nav-item"><a class="nav-link p-2" href="#">instagram</a></li>
+            </ul>
+        </div>
+        <!-- Services (grid of cards)-->
+        <div class="col-lg-6">
+            <div class="row row-cols-1 row-cols-sm-2 g-1">
+                <div class="col">
+                    <a class="card-flip" href="#">
+                        <div class="card-flip-inner">
+                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/01.jpg);">
+                                <div class="d-flex flex-column h-100 ignore-dark-mode">
+                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Singles</h2>
+                                </div>
+                            </div>
+                            <div class="card-flip-back bg-secondary">
+                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
+                                    <h3 class="h4">Strategy</h3>
+                                    <p class="text-body mb-3">Leo vitae sem eget eget at in vivamus placerat in sodales tristique a risusiis senectusic vitae sem eget eget at in vivamus placerat in sodales.</p>
+                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
+                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a class="card-flip" href="#">
+                        <div class="card-flip-inner">
+                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/02.jpg);">
+                                <div class="d-flex flex-column h-100 ignore-dark-mode">
+                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Albums</h2>
+                                </div>
+                            </div>
+                            <div class="card-flip-back bg-secondary">
+                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
+                                    <h3 class="h4">Social</h3>
+                                    <ul class="text-body ps-4 mb-3">
+                                        <li class="mb-2">Social media posts</li>
+                                        <li class="mb-2">Content plan</li>
+                                        <li class="mb-2">Advertising launch</li>
+                                        <li class="mb-2">Photo and video content</li>
+                                        <li class="mb-1">Cases and portfolio</li>
+                                    </ul>
+                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
+                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col order-sm-2">
+                    <a class="card-flip" href="#">
+                        <div class="card-flip-inner">
+                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/04.jpg);">
+                                <div class="d-flex flex-column h-100 ignore-dark-mode">
+                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Podcasts</h2>
+                                </div>
+                            </div>
+                            <div class="card-flip-back bg-secondary">
+                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
+                                    <h3 class="h4">original design</h3>
+                                    <p class="text-body mb-3">Pharetra in morbi quis is massa maecenas arcu vulputate in pulvinar elit non nullage a, duis tortor mi massa ipsum in eu eu eget libero.</p>
+                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
+                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col order-sm-1">
+                    <a class="card-flip" href="#">
+                        <div class="card-flip-inner">
+                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/03.jpg);">
+                                <div class="d-flex flex-column h-100 ignore-dark-mode">
+                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Bootlegs</h2>
+                                </div>
+                            </div>
+                            <div class="card-flip-back bg-secondary">
+                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
+                                    <h3 class="h4">album</h3>
+                                    <ul class="text-body ps-4 mb-3">
+                                        <li class="mb-2">Identity design</li>
+                                        <li class="mb-2">Brand book creation</li>
+                                        <li class="mb-2">Colors and fonts</li>
+                                        <li class="mb-2">Banners and covers</li>
+                                        <li class="mb-1">Visual style</li>
+                                    </ul>
+                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
+                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container py-md-4 py-lg-5 mb-xl-3 mb-xxl-5">
+    <div class="row pt-sm-2">
+        <div class="col-xl-10">
+            <p class="fs-2 text-dark pb-md-2 mb-lg-5">From the first stages of developing a project plan idea, we pay special attention <span class="fw-semibold">to design solutions to existing problems,</span> create brands that become part of history, and create a digital skill that harnesses the power of <span class="fw-semibold">creativity and humanity.</span></p>
+        </div>
+    </div>
+    <div class="row pb-5">
+        <div class="col-sm-4 col-lg-3 mb-3">
+            <h3 class="display-1 mb-0 mb-sm-1">16+</h3><span class="fs-sm">Radio Features</span>
+        </div>
+        <div class="col-sm-4 col-lg-3 mb-3">
+            <h3 class="display-1 mb-0 mb-sm-1">90k+</h3><span class="fs-sm">SoundCoud Plays</span>
+        </div>
+        <div class="col-sm-4 col-lg-3 mb-2 mb-sm-3">
+            <h3 class="display-1 mb-0 mb-sm-1">350K+</h3><span class="fs-sm">Total Youtube Plays</span>
+        </div>
+    </div>
+</section>
+<!-- Our projects (Filterable masonry grid)-->
+<section class="container overflow-hidden pb-5 mb-2 mb-lg-3 mb-xl-4 mb-xxl-5">
+    <div class="masonry-filterable">
+        <div class="row pb-lg-4 mb-2 mb-sm-3">
+            <!-- Page title-->
+         @*   <div class="col-xxl-3 col-lg-4 text-center text-lg-start">
+                <h1>Our Projects</h1>
+                <p class="mb-4 mb-lg-0">We will put our industry expertise for creativity to work for your project</p>
+            </div>*@
+            <!-- Filters-->
+            <div class="col-xxl-12 col-lg-12 d-flex">
+                <ul class="masonry-filters nav nav-pills fs-sm flex-nowrap overflow-auto text-nowrap w-100 mx-auto me-lg-0 pb-3">
+                    <li class="nav-item mb-0"><a class="nav-link border active" href="#" data-group="all">All</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="single">Singles</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="album">Albums</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="podcast">Podcasts</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="collection">Collection</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- Grid of portfolio items-->
+        <div class="masonry-grid" data-columns="4">
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 512px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/07.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/single/title">Titli</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>Drum and Bass Bootleg</span><span>2019</span></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/08.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Coffeeroom Bootlegs</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>various artists</span><span>2023</span></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 467px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/09.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Bulleya</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>single, Packaging</span><span>2019</span></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom ms-auto pb-3" style="max-width: 605px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/10.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Kabhi Jo Badal Barse</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>Orchestral Rendition</span><span>2019</span></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Recuerdos 2</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2019</span></div>
+                    </div>
+                </div>
+            </article>
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Recuerdos 1</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2016-17</span></div>
+                    </div>
+                </div>
+            </article>
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;collection&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Teasers</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2021</span></div>
+                    </div>
+                </div>
+            </article>
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;collection&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Radio Cuts</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2021</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;podcast&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Random Podcast</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>Someone</span><span>2021</span></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Item-->
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom mx-auto pb-3" style="max-width: 470px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/12.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/melancholy">Melancholy</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>orchestral,original</span><span>2020</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- Button-->
+        <div class="text-center pb-sm-2 pb-md-4 mt-n1 mt-lg-n2"><a class="btn btn-lg btn-outline-dark rounded-0" href="#">Let's work together</a></div>
+    </div>
+</section>
+<section class="container pt-2 pt-xxl-3 pb-5 mb-sm-2 mb-lg-3 mb-xl-4 mb-xxl-5">
+    <div class="row pb-md-3">
+        <div class="col-md-4 mb-2 mb-sm-3 mb-md-4 pb-2" style="margin-top: -120px;">
+            <div class="position-sticky top-0" style="padding-top: 120px;">
+                <h2 class="display-3 mb-0 mb-md-3 pb-lg-3">Featured Artists</h2><a class="btn btn-lg btn-link px-0" href="#">View all 16 members<i class="ai-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/01.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-stack-overflow rounded-circle mx-2" href="#"><i class="ai-stack-overflow"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Nick Black</h3><span class="fs-lg text-muted">Web Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/02.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-instagram rounded-circle mx-2" href="#"><i class="ai-instagram"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Emilia Denver</h3><span class="fs-lg text-muted">Identity Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/03.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-twitter rounded-circle mx-2" href="#"><i class="ai-twitter"></i></a><a class="btn btn-light btn-icon btn-sm btn-google rounded-circle mx-2" href="#"><i class="ai-google"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Jane Cooper</h3><span class="fs-lg text-muted">Marketing Coordinator</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/04.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Jenny Wilson</h3><span class="fs-lg text-muted">Web Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/05.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-instagram rounded-circle mx-2" href="#"><i class="ai-instagram"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Robert Fox</h3><span class="fs-lg text-muted">Graphic Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item-->
+                <div class="col">
+                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
+                        <div class="position-relative">
+                            <img src="assets/img/landing/creative-agency/team/06.jpg" alt="Image">
+                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-twitter rounded-circle mx-2" href="#"><i class="ai-twitter"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
+                        </div>
+                        <div class="border-bottom pt-4 pb-3">
+                            <h3 class="h4 mb-2">Jacob Jones</h3><span class="fs-lg text-muted">Branding Designer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section cssLib{
+    <link rel="stylesheet" media="screen" href="~/assets/vendor/swiper/swiper-bundle.min.css" />
+}
+
+@section jsLib
+    {
+    <script src="~/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="~/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+}
+
+@section jsScripts
+    {
+    <script>
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const loadThumbs = async () => {
+
+                };
+
+                return {
+                    loadThumbs
+                };
+            },
+            async mounted() {
+                await this.loadThumbs();
+            }
+        });
+
+        app.mount('#gallery');
+    </script>
 }

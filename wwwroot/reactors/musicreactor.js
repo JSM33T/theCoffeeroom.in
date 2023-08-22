@@ -83,7 +83,7 @@ const CategorisedBlogComponent = {
 };
 const HomeComponent = {
     template: `
-                        <h1 class="pb-3 pb-lg-4" id="titleBlog">{{titleItem}}</h1>
+        <h1 class="pb-3 pb-lg-4" id="titleBlog">{{titleItem}}</h1>
         <div v-if="isLoading">
            <article class="row g-0 border-0 mb-4">
               <a class="col-sm-5 rounded-5 placeholder placeholder-wave" style="min-height:14rem"></a>
@@ -95,21 +95,21 @@ const HomeComponent = {
            </article>
         </div>
         <div v-else>
-         <div v-if="blogs.length > 0">
-            <div v-for="blog in blogs" :key="blog.title">
-              <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
-                 <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
-                 <div class="col-sm-7">
-                    <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
-                       <h3>
-                          <a v-bind:href="'/blog/' + blog.datePosted.substring(0, 4)+'/' + blog.urlHandle">
-                             {{blog.title}}
-                       </h3>
-                       <p class="d-sm-none d-md-block">{{blog.description}}</p><div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">{{blog.comments}}<i class="ai-message fs-lg ms-1"></i></a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">{{blog.datePosted.substring(0, 7)}}</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><router-link class="badge text-nav fs-xs border mt-2" :to="'/blogs/category/'+  blog.locator ">{{blog.category}}</router-link></div>
-                    </div>
-                 </div>
-              </article>
-           </div>
+            <div v-if="blogs.length > 0">
+                <div v-for="blog in blogs" :key="blog.title">
+                  <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
+                     <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
+                     <div class="col-sm-7">
+                        <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+                           <h3>
+                              <a v-bind:href="'/blog/' + blog.datePosted.substring(0, 4)+'/' + blog.urlHandle">
+                                 {{blog.title}}
+                           </h3>
+                           <p class="d-sm-none d-md-block">{{blog.description}}</p><div class="d-flex flex-wrap align-items-center mt-n2"><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">{{blog.comments}}<i class="ai-message fs-lg ms-1"></i></a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">{{blog.datePosted.substring(0, 7)}}</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><router-link class="badge text-nav fs-xs border mt-2" :to="'/blogs/category/'+  blog.locator ">{{blog.category}}</router-link></div>
+                        </div>
+                     </div>
+                  </article>
+                </div>
          </div>
          <div v-else>
             <h1 class="fade-in-smooth-pop">no blogs found!!</h1>

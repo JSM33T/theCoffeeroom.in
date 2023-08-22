@@ -1,9 +1,5 @@
 ﻿@{
     ViewData["BodyBg"] = "bg-secondary";
-    var avtrid = Context.Session.GetString("avatar") + ".png";
-    var avtValue = Context.Session.GetString("avatar");
-    var fname = Context.Session.GetString("first_name");
-    var userrole = Context.Session.GetString("role");
 }
 <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
     <div class="row pt-sm-2 pt-lg-0" id="app">
@@ -24,22 +20,5 @@
 
 
 @section jsScripts{
-   
-    <script>
-
-        var glUsername = "@Model.UserName";
-        var glFirstName = "@Model.FirstName";
-        var glLastName = "@Model.LastName";
-        var glPhone = "@Model.Phone";
-        var glEmail = "@Model.EMail";
-        var glAvatar = "@avtrid";
-        var glGender = "@Model.Gender";
-        var avtSelect = "@avtValue";
-        var glRole = "@userrole";
-        var glBio = "@Model.Bio";
-        //var glAvtImage = "@Context.Session.GetString("avatar")" + ".png";
-        var glAvtImage = "default.png"
-       
-    </script>
     <script src="~/reactors/profilereactor.js"></script>
 }

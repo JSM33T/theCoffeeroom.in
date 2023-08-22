@@ -17,5 +17,6 @@ namespace theCoffeeroom.Models.Domain
         public string Role { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public string AvatarImg { get; set; }
     }
 }

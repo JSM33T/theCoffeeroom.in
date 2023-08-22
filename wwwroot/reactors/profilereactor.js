@@ -1,11 +1,10 @@
 const Security =
 {
-    template: `  <div class="fade-in">
+    template: `<div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
                                         <i class="ai-edit text-primary lead pe-1 me-2"></i>
                                                <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
                                     </div>
-                           
                                             <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
                                                 <div class="col-sm-6">
                                                     <label class="form-label" for="fn">Enter Password</label>
@@ -22,7 +21,7 @@ const Security =
                 </div>`,
     data() {
         return {
-            username: glUsername,
+            username: '',
             passWord: '',
         };
 
@@ -69,12 +68,12 @@ const EditProfile = {
             <div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
                                         <i class="ai-edit text-primary lead pe-1 me-2"></i>
-                                               <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
-                                    </div>
+                                    <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+                              </div>
                                     <div id="profilepanel">
                                         <div class="d-md-flex align-items-center">
                                             <div class="d-sm-flex align-items-center">
-                                                <div id="avatar_placeholder" class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style='"width:80px; height: 80px; background-image: url(/assets/images/avatars/default/${glAvatar});"'></div>
+                                                <div id="avatar_placeholder" class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style='"width:80px; height: 80px; background-image: url(/assets/images/avatars/default/default.png);"'></div>
                                                 <div class="pt-3 pt-sm-0 ps-sm-3">
                                                     <h3 class="h5 mb-2">
                                                         <span id="profilename">
@@ -91,7 +90,7 @@ const EditProfile = {
                                             </div>
                                             <div class="w-100 pt-3 pt-md-0 ms-md-auto col-sm-12" style="max-width: 212px;">
                                                 <div class="d-flex justify-content-between fs-sm pb-1 mb-2">Select your avatar</div>
-                                                <select name="avatar" id="avatars" class="form-select" @change="handleChange">
+                                                <select v-model="avatars" id="avatars" class="form-select" @change="handleChange">
                                                          <option v-for="option in options" :data-id="option.id" :value="option.image" :key="option.title">{{ option.title }}</option>
                                                 </select>
                                             </div>
@@ -140,17 +139,15 @@ const EditProfile = {
         return {
             options: [],
             title: "Edit Info",
-            username: glUsername,
-            firstname: glFirstName,
-            lastname: glLastName,
-            email: glEmail,
-            phone: glPhone,
-            bio: glBio,
-            avatar: glAvatar,
-            avtMenu: avtSelect,
-            gender: glGender,
-            role: glRole,
-            someThing: "2"
+            username: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            phone: '',
+            avatars: '',
+            bio: '',
+            gender: '',
+            role: ''
         };
     },
     async mounted() {
@@ -158,29 +155,50 @@ const EditProfile = {
             top: 0,
             behavior: 'smooth',
         });
+       
         this.fetchAvatars();
-        this.selectValue();
+        this.getDetails();
 
 
     },
     methods: {
+        async getDetails() {
+            await axios.get("/api/profile/getdetails")
+                .then(response => {
+                    console.log(response.data);
+                    this.username = response.data.userName;
+                    this.firstname = response.data.firstName;
+                    this.lastname = response.data.lastName;
+                    this.phone = response.data.phone;
+                    this.bio = response.data.bio;
+                    this.avatars = response.data.avatarImg;
+                    this.gender = response.data.gender;
+                    this.role = response.data.role;
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    toaster("error", "something went wrong");
+                });
+        },
         selectValue() {
-            this.$nextTick(() => {
-                document.getElementById("avatars").value = this.avtMenu;
-            });
+            //this.$nextTick(() => {
+            //    document.getElementById("avatars").value = this.avatars.value;
+            //});
 
         },
         async fetchAvatars() {
             await axios.get("/api/getavatars")
                 .then(response => {
                     this.options = response.data;
-                    this.selectValue();
+                   // this.selectValue();
                 })
                 .catch(error => {
                     toaster("error", "something went wrong");
                 });
         },
         saveDetails() {
+
             let dropdown = document.getElementById("avatars");
             let selectedOption = dropdown.options[dropdown.selectedIndex];
             let avtId = selectedOption.getAttribute("data-id");
@@ -198,7 +216,7 @@ const EditProfile = {
             axios.defaults.headers.common['RequestVerificationToken'] = token;
             axios.post("/api/profile/update", data)
                 .then(response => {
-                    document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + avtVal + '.png';
+                    document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + this.avatars + '.png';
                     toaster("success", response.data);
                 })
                 .catch(error => {
@@ -211,8 +229,6 @@ const EditProfile = {
             var selectedOptionDataId = selectedOption.getAttribute("data-id");
             var selectedOptionValue = selectedOption.getAttribute("value");
             document.getElementById('avatar_placeholder').style.backgroundImage = 'url(/assets/images/avatars/default/' + selectedOptionValue + '.png)';
-
-
 
         },
     },
@@ -229,7 +245,7 @@ const Dashboard = {
         </div>
         <div class="d-md-flex align-items-center">
             <div class="d-sm-flex align-items-center">
-                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/' + avatar + ')' }"></div>
+                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
                 <div class="pt-3 pt-sm-0 ps-sm-3">
                     <h3 class="h5 mb-2">{{firstname}} {{lastname}}<i class="ai-circle-check-filled fs-base text-success ms-2"></i></h3>
                     <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
@@ -255,7 +271,6 @@ const Dashboard = {
                     </tr>
                     <tr>
                         <td class="border-0 text-muted py-1 px-0">Gender</td>
-
                         <td class="border-0 text-dark fw-medium py-1 ps-3">{{gender}}</td>
                     </tr>
                     <tr>
@@ -277,15 +292,15 @@ const Dashboard = {
     data() {
         return {
             title: "Dashboard",
-            username: glUsername,
-            firstname: glFirstName,
-            lastname: glLastName,
-            email: glEmail,
-            phone: glPhone,
-            bio: glBio,
-            avatar: glAvatar,
-            gender: glGender,
-            role: glRole,
+            username: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            phone: '',
+            avatar: '',
+            bio: '',
+            gender: '',
+            role: ''
         };
     },
     async mounted() {
@@ -293,8 +308,29 @@ const Dashboard = {
             top: 0,
             behavior: 'smooth',
         });
-
+        this.getDetails();
     },
+    methods: {
+        async getDetails() {
+            await axios.get("/api/profile/getdetails")
+                .then(response => {
+                    console.log(response.data);
+                    this.username = response.data.userName;
+                    this.firstname = response.data.firstName;
+                    this.lastname = response.data.lastName;
+                    this.phone = response.data.phone;
+                    this.bio = response.data.bio;
+                    this.avatar = response.data.avatarImg + ".png";
+                    this.gender = response.data.gender;
+                    this.email = response.data.eMail;
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    toaster("error", "something went wrong");
+                });
+        },
+    }
 };
 
 
@@ -306,7 +342,6 @@ const routes = [
     { path: '/profile/edit', component: EditProfile },
     { path: '/profile/security', component: Security }
 ];
-
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes

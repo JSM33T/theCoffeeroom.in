@@ -26,7 +26,7 @@ namespace theCoffeeroom.Controllers.Routers
         [Route("/docs/changelog")]
         public IActionResult Changelog()
         {
-            return View();
+            return View("Views/Docs/Changelog.cshtml");
         }
 
         [Route("/docs/faq")]
@@ -38,7 +38,13 @@ namespace theCoffeeroom.Controllers.Routers
         [Route("/docs/attributions")]
         public IActionResult Attribs()
         {
-            return View("Views/Docs/Faq.cshtml");
+            return View("Views/Docs/Attributions.cshtml");
+        }
+
+        [Route("/us")]
+        public IActionResult Us()
+        {
+            return View("Views/Home/Us.cshtml");
         }
 
         [Route("/personalize")]

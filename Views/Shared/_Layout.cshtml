@@ -10,8 +10,14 @@
 
     //visuals
     ViewData["BodyBg"] ??= "";
+  
     ViewData["ActivePage"] ??= "";
     ViewData["NavBarProps"] ??= "navbar navbar-expand-lg fixed-top bg-light";
+
+
+    //component render
+      ViewData["ShowNav"] ??= "y";
+    ViewData["ShowFooter"] ??= "y";
 
     //navbar active stat
     ViewData["ActivePage"] ??= "";
@@ -151,7 +157,8 @@
     <!-- Vendor styles-->
     <link href="~/libraries/aos/aos.css" rel="stylesheet" />
     <!-- Main Theme Styles + Bootstrap-->
-    @await RenderSectionAsync("cssLib", required: false) 
+    @await RenderSectionAsync("cssLib", required: false)
+  
     <environment include="development">       
         <link rel="stylesheet" href="~/assets/css/theme.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/assets/css/coffeeroom.css" asp-append-version="true" />
@@ -275,18 +282,32 @@
         </div>
     </div>
     <main class="page-wrapper">
-        @await Html.PartialAsync("NavBars/Default")
+        @if(ViewData["ShowNav"].ToString() == "y")
+        {
+            @await Html.PartialAsync("NavBars/Default");
+        }
+        
         @RenderBody()
         @await Html.PartialAsync("Modals/_Modals")
     </main>
-    @await Html.PartialAsync("Footers/Default")
-
+     @if(ViewData["ShowFooter"].ToString() == "y")
+        {
+            @await Html.PartialAsync("Footers/Default")
+        }
     <a class="btn-scroll-top" href="#top" data-scroll>
         <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
         </svg><i class="ai-arrow-up"></i>
     </a>
-
+    <script>
+        //document.addEventListener('DOMContentLoaded', function () {
+        //    const preloader = document.querySelector('.page-loading');
+        //    preloader.classList.remove('active');
+        //    setTimeout(function () {
+        //      preloader.remove();
+        //    },1000);
+        //});
+        </script>
     <environment include="production">
         <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
     </environment>

@@ -4,7 +4,7 @@ const BaseComponent = {
     template: 
     `
     <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-    <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3  bg-secondary">
+    <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1  bg-secondary">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
             <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
                 <!-- Item-->
@@ -44,7 +44,7 @@ const BaseComponent = {
                 </div>
             </div>
             <!-- Copyright-->
-            <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
+            <p class="w-100 fs-sm pt-5 mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
             <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);">
             </div>
         </div>
@@ -95,7 +95,7 @@ const LoginComponent = {
                     <form-check class="my-1">
                         <input class="form-check-input" type="checkbox" id="keep-signedin" disabled>
                         <label class="form-check-label ms-1" for="keep-signedin">Keep me signed in (id)</label>
-                    </form-check><a class="fs-sm fw-semibold text-decoration-none my-1" href="/account/password-recovery">Forgot password?</a>
+                    </form-check><router-link class="fs-sm fw-semibold text-decoration-none my-1" to="/account/accountrecovery">Forgot password?</router-link>
                 </div>
                     <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" v-on:click="submitLogin"><span v-html="buttonText"></span></button>
 
@@ -137,7 +137,7 @@ const LoginComponent = {
             axios.post('/api/account/login', details)
                 .then((response) => {
                     toaster("success", "Logging in..");
-                    window.location.href = localStorage.getItem("curr_link");
+                    window.location.href = localStorage.getItem("prev_link");
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);
@@ -259,13 +259,13 @@ const PasswordReset = {
                     <div class="pb-3 mb-3">
                         <div class="position-relative">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input class="form-control form-control-lg ps-5" v-model="email" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required :readonly="isReadOnly">
+                            <input class="form-control form-control-lg ps-5" v-model="email" @keyup.enter="submitLogin" type="text" placeholder="Username or email" required :readonly="isReadOnly">
                         </div>
                     </div>
                     <div v-if="showOtpPanel">
                         <div class="position-relative fade-in">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input class="form-control form-control-lg ps-5 " v-model="otp" @@keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
+                            <input class="form-control form-control-lg ps-5 " v-model="otp" @keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
                         </div>
                         <button class="btn btn-lg btn-primary w-100 pt-3 mt-4 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
                     </div>
@@ -350,14 +350,14 @@ const Loginviaotp = {
                         <div class="pb-3 mb-3">
                             <div class="position-relative">
                                 <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                                        <input class="form-control form-control-lg ps-5" v-model="newpass" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
+                                        <input class="form-control form-control-lg ps-5" v-model="newpass" @keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
                             </div>
                         </div>
                         <div class="mb-4">
                             <div class="position-relative">
                                 <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                                 <div class="password-toggle">
-                                            <input class="form-control form-control-lg ps-5" v-model="password" @@keyup.enter="submitLogin" type="password" placeholder="Password" required>
+                                            <input class="form-control form-control-lg ps-5" v-model="password" @keyup.enter="submitLogin" type="password" placeholder="Password" required>
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                         <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                     </label>
