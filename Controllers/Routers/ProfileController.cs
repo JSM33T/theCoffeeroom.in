@@ -34,8 +34,8 @@ namespace theCoffeeroom.Controllers.Routers
                             EMail = reader.GetString(4),
                             Phone = reader.GetString(5),
                             Gender = reader.GetString(6),
-                            Bio = reader.GetString(12),
-                            AvatarId = reader.GetInt32(13)
+                            Bio = reader.GetString(11),
+                            AvatarId = reader.GetInt32(12)
                         };
                         await reader.CloseAsync();
                     }

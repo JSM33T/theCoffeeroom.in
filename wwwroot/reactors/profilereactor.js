@@ -12,7 +12,7 @@ const Security =
                                                     <input type="password" v-model="newPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" required/>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label class="form-label" for="ln">Last name</label>
+                                                    <label class="form-label" for="ln">Confirm Password</label>
                                                     <input type="password" v-model="confirmPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" />
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end pt-3">
@@ -36,22 +36,25 @@ const Security =
     methods: {
         saveCredentials() {
 
-            if (this.newPassword != this.confirmPassword) {
-                alert("nope");
+            if (this.newPassword.length < 6) {
+                toaster('error', 'Password cannot be less than 6 characters');
+            }
+            else if (this.newPassword != this.confirmPassword) {
+                toaster('error', 'Passwords don\'t match');
             }
             else {
                 const data = {
                     password: this.newPassword,
                     confirmPassword: this.confirmPassword
                 };
-               // const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-               // axios.defaults.headers.common['RequestVerificationToken'] = token;
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                axios.defaults.headers.common['RequestVerificationToken'] = token;
                 axios.post("/api/profile/password/update", data)
                     .then(response => {
                         toaster("success", response.data);
                     })
                     .catch(error => {
-                        toaster("Error", "Something went wrong");
+                        toaster("Error", error.response.data);
                     });
             }
           
@@ -102,10 +105,6 @@ const EditProfile = {
                                                 <div class="col-sm-6">
                                                     <label class="form-label" for="ln">Last name</label>
                                                             <input type="text" v-model="lastname" class="form-control " aria-autocomplete="none" value="" maxlength="20" />
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="email">Email address</label>
-                                                            <input type="text" v-model="email" class="form-control" placeholder="Enter your email" value="" aria-autocomplete="none" maxlength="40" />
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label class="form-label" for="phone">Phone <span class='text-muted'>(optional)</span></label>

@@ -1,50 +1,55 @@
 const routerViewElement = document.querySelector('router-view');
 
 const BaseComponent = {
-    template: `
-          <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-            <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3  bg-secondary">
-            <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
-              <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
+    template: 
+    `
+    <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+    <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1 pt-3  bg-secondary">
+        <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
+            <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
                 <!-- Item-->
                 <div class="col-md-12">
-                  <div class="card h-100 border-0 rounded-5">
-                    <div class="card-body pb-3">
-                      <h3 class="h4">Login</h3>
-                      <p class="mb-0">Alrready have an account? Do log in</p>
+                    <div class="card h-100 border-0 rounded-5">
+                        <div class="card-body pb-3">
+                            <h3 class="h4">Login</h3>
+                            <p class="mb-0">Alrready have an account? Do log in</p>
+                        </div>
+                        <div class="card-footer border-0 pt-3 mb-3">
+                            <router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/login"><i class="ai-arrow-right"></i></router-link>
+                        </div>
                     </div>
-                    <div class="card-footer border-0 pt-3 mb-3"><router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/login"><i class="ai-arrow-right"></i></router-link></div>
-                  </div>
                 </div>
                 <!-- Item-->
                 <div class="col-md-6">
-                  <div class="card h-100 border-0 rounded-5">
-                    <div class="card-body pb-3">
-                      <h3 class="h4">Sign Up</h3>
-                      <p class="mb-0">Don't have an account? do sign up'.</p>
+                    <div class="card h-100 border-0 rounded-5">
+                        <div class="card-body pb-3">
+                            <h3 class="h4">Sign Up</h3>
+                            <p class="mb-0">Don't have an account? do sign up'.</p>
+                        </div>
+                        <div class="card-footer border-0 pt-3 mb-3">
+                            <router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/signup"><i class="ai-arrow-right"></i></router-link>
+                        </div>
                     </div>
-                    <div class="card-footer border-0 pt-3 mb-3"><router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/signup"><i class="ai-arrow-right"></i></router-link></div>
-                  </div>
                 </div>
-
-                 <div class="col-md-6">
-                  <div class="card h-100 border-0 rounded-5">
-                    <div class="card-body pb-3">
-                      <h3 class="h4">Recover Account</h3>
-                      <p class="mb-0">Don't have an account? do sign up'.</p>
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 rounded-5">
+                        <div class="card-body pb-3">
+                            <h3 class="h4">Recover Account</h3>
+                            <p class="mb-0">Don't have an account? do sign up'.</p>
+                        </div>
+                        <div class="card-footer border-0 pt-3 mb-3">
+                            <router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/accountrecovery"><i class="ai-arrow-right"></i></router-link>
+                        </div>
                     </div>
-                    <div class="card-footer border-0 pt-3 mb-3"><router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/accountrecovery"><i class="ai-arrow-right"></i></router-link></div>
-                  </div>
                 </div>
-               
-            
             </div>
             <!-- Copyright-->
             <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
-
-                <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
+            <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);">
             </div>
-                        `,
+        </div>
+    </div>
+    `,
     data() {
         return {
 
