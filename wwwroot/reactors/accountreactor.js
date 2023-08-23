@@ -84,7 +84,7 @@ const LoginComponent = {
               <div class="mb-4">
                 <div class="position-relative"><i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                   <div class="password-toggle">
-                    <input class="form-control form-control-lg ps-5" type="password" placeholder="Password" required="">
+                    <input class="form-control form-control-lg ps-5" v-model="password" type="password" placeholder="Password" required="">
                     <label class="password-toggle-btn" aria-label="Show/hide password">
                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                     </label>
@@ -423,7 +423,6 @@ const Loginviaotp = {
         },
     }
 };
-
 
 const routes = [
     {
