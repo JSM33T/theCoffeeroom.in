@@ -4,8 +4,6 @@ const BaseCompo = {
     template: `
                 <section class="bg-secondary py-5">
                     <div class="container py-md-2 py-lg-3 py-xl-5 my-2 my-sm-3 my-md-4 my-xxl-5">
-                        
-                        
                        Hey there this ia base
                        <router-link to="/docs">home page</router-link>
                        <router-link to="/docs/faq">faq things</router-link>

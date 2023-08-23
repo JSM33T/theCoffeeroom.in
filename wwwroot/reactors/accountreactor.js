@@ -56,12 +56,14 @@ const BaseComponent = {
         };
     },
     async mounted() {
+        this.$initToggle();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
     },
     methods: {
+     
 
     }
 };
@@ -122,6 +124,7 @@ const LoginComponent = {
         };
     },
     async mounted() {
+        this.$initToggle();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -217,6 +220,7 @@ const SignupComponent = {
         };
     },
     async mounted() {
+        this.$initToggle();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -290,6 +294,7 @@ const PasswordReset = {
         };
     },
     async mounted() {
+        this.$initToggle();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -395,6 +400,7 @@ const Loginviaotp = {
         };
     },
     async mounted() {
+        this.$initToggle();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -446,6 +452,7 @@ const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes
 });
+
 const app = Vue.createApp({
     data() {
         return {
@@ -453,5 +460,25 @@ const app = Vue.createApp({
         };
     },
 });
+app.config.globalProperties.$initToggle = function () {
+    var passwordVisibilityToggle = function () {
+        var elements = document.querySelectorAll('.password-toggle');
+        var _loop2 = function _loop2(i) {
+            var passInput = elements[i].querySelector('.form-control'),
+                passToggle = elements[i].querySelector('.password-toggle-btn');
+            passToggle.addEventListener('click', function (e) {
+                if (e.target.type !== 'checkbox') return;
+                if (e.target.checked) {
+                    passInput.type = 'text';
+                } else {
+                    passInput.type = 'password';
+                }
+            }, false);
+        };
+        for (var i = 0; i < elements.length; i++) {
+            _loop2(i);
+        }
+    }();
+};
 app.use(router);
 app.mount('#app');
