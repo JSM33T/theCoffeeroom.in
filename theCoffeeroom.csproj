@@ -34,12 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="deploy.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Notes\" />
     <Folder Include="Views\Archive\Content\" />
     <Folder Include="Views\Shop\Content\" />
@@ -71,6 +65,12 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="WebMarkupMin.AspNetCore7" Version="2.14.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="deploy.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
