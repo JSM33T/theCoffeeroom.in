@@ -6,14 +6,23 @@ const Security =
                                                <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
                                     </div>
                                             <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="fn">Enter Password</label>
-                                                    <input type="password" v-model="newPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" required/>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="ln">Confirm Password</label>
-                                                    <input type="password" v-model="confirmPassword" class="form-control " aria-autocomplete="none" value="" mixlength="6" />
-                                                </div>
+                                            <div class="col-md-6">
+                                                   <div class="password-toggle">
+                                                    <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" placeholder="Password" autocomplete="off" required="">
+                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                                    </label>
+                                                  </div>
+                                                  </div>
+                                        <div class="col-md-6">
+                                                <div class="password-toggle">
+                                                    <input class="form-control form-control-lg ps-5" v-model="confirmPassword" type="password" placeholder="Password" autocomplete="off" required="">
+                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                                    </label>
+                                                  </div>
+                                                  </div>
+
                                                 <div class="col-12 d-flex justify-content-end pt-3">
                                                     <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveCredentials">Save Profile</button>
                                                 </div>
