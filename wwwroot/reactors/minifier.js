@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const configPath = 'replacements.json';
+const configPath = 'minifier.json';
 const inputFile = process.argv[2];
 const outputFile = process.argv[3];
 
@@ -28,9 +28,8 @@ try {
         modifiedContent = modifiedContent.replace(/ {2}/g, ' ');
     }
 
-    // Write the modified content to the output file
     fs.writeFileSync(outputFile, modifiedContent);
-    console.log(`Commented sections removed, replacements applied, and double spaces replaced in ${inputFile} saved to ${outputFile}`);
+    console.log(`processed ${inputFile} production file to ${outputFile}`);
 } catch (error) {
     console.error('An error occurred:', error);
 }
