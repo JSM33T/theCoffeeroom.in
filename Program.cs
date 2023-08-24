@@ -28,12 +28,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddWebMarkupMin(options =>
 {
-    options.AllowMinificationInDevelopmentEnvironment = false;
-    options.AllowCompressionInDevelopmentEnvironment = false;
+    options.AllowMinificationInDevelopmentEnvironment = true;
+    options.AllowCompressionInDevelopmentEnvironment = true;
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = false;
+    options.MinificationSettings.PreserveNewLines = true;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
@@ -61,7 +61,7 @@ if (!app.Environment.IsDevelopment())
 app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-//app.UseWebMarkupMin();
+app.UseWebMarkupMin();
 app.UseRouting();
 
 app.UseAuthorization();

@@ -1,0 +1,14 @@
+[
+  {
+    "inputFile": "../reactors/blogreactor.js",
+    "outputFile": "../reactors/blogreactor.prod.js"
+  },
+  {
+    "inputFile": "../reactors/accountreactor.js",
+    "outputFile": "../reactors/accountreactor.prod.js"
+  },
+  {
+    "inputFile": "../reactors/profilereactor.js",
+    "outputFile": "../reactors/profilereactor.prod.js"
+  }
+]

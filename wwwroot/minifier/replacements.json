@@ -1,0 +1,74 @@
+{
+    "replacements": [
+        {
+            "find": "  ",
+            "replace": " "
+        },
+        {
+            "find": "\\n",
+            "replace": "\\n"
+        },
+		{
+            "find": "\\n",
+            "replace": " "
+        },
+		{
+            "find": "< ",
+            "replace": "<"
+        },
+		{
+            "find": " <",
+            "replace": "<"
+        },
+		{
+            "find": " >",
+            "replace": ">"
+        },
+		{
+            "find": "> ",
+            "replace": ">"
+        },
+		{
+            "find": "{ ",
+            "replace": "{"
+        },
+		{
+            "find": " {",
+            "replace": "{"
+        },
+		{
+			"find": "} ",
+            "replace": "}"
+        },
+		{
+			"find": " }",
+            "replace": "}"
+        },
+		{
+            "find": "= ",
+            "replace": "="
+        },
+		{
+            "find": "= ",
+            "replace": "="
+        },
+		{
+            "find": " : ",
+            "replace": ": "
+        },
+		{
+            "find": ":  ",
+            "replace": ": "
+        },
+		{
+            "find": "\" ",
+            "replace": "\""
+        },
+		{
+            "find": " \"",
+            "replace": "\""
+        }
+		
+
+    ]
+}

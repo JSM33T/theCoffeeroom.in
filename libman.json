@@ -3,12 +3,22 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "vue@3.2.47",
-      "destination": "wwwroot/libraries/vue/"
+      "library": "vue@3.3.4",
+      "destination": "wwwroot/assets/vendor/vue/"
     },
     {
       "library": "vue-router@4.2.4",
-      "destination": "wwwroot/libraries/vue-router/"
+      "destination": "wwwroot/assets/vendor/vue-router/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "axios@1.4.0",
+      "destination": "wwwroot/assets/vendor/axios/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "aos@2.3.4",
+      "destination": "wwwroot/assets/vendor/aos/"
     }
   ]
 }

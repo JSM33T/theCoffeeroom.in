@@ -73,20 +73,20 @@ const LoginComponent = {
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 ">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
-            <h1>Log In</h1>
-            <router-link to='/account'>back to menu</router-link>
+              <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/signup"><i class="ai-user ms-n1 me-2"></i>Signup</router-link></div>
+           
             <form class="needs-validation" id="loginForm" novalidate>
                 <div class="pb-3 mb-3">
                     <div class="position-relative">
                         <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                        <input class="form-control form-control-lg ps-5" v-model="username" @keyup.enter="submitLogin" type="text" placeholder="Username or email" required>
+                        <input class="form-control form-control-lg ps-5" v-model="username" @keyup.enter="submitLogin" type="text" placeholder="Username or email" value="" autocomplete="off" required>
                     </div>
                 </div>
             
               <div class="mb-4">
                 <div class="position-relative"><i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                   <div class="password-toggle">
-                    <input class="form-control form-control-lg ps-5" v-model="password" type="password" placeholder="Password" required="">
+                    <input class="form-control form-control-lg ps-5" v-model="password" type="password" placeholder="Password" autocomplete="password" value="" required="">
                     <label class="password-toggle-btn" aria-label="Show/hide password">
                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                     </label>
@@ -103,11 +103,6 @@ const LoginComponent = {
                 </div>
                     <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" v-on:click="submitLogin"><span v-html="buttonText"></span></button>
 
-                <h2 class="h6 text-center pt-3 pt-lg-4 mb-4">Or sign in with your social account(id)</h2>
-                <div class="row row-cols-1 row-cols-sm-2 gy-3">
-                    <div class="col"><a class="btn btn-icon btn-outline-secondary btn-google btn-lg w-100 disabled" href="#"><i class="ai-google fs-xl me-2"></i>Google</a></div>
-                    <div class="col"><a class="btn btn-icon btn-outline-secondary btn-facebook btn-lg w-100 disabled" href="#"><i class="ai-facebook fs-xl me-2"></i>Facebook</a></div>
-                </div>
             </form>
         </div>
         <!-- Copyright-->
@@ -125,6 +120,8 @@ const LoginComponent = {
     },
     async mounted() {
         this.$initToggle();
+        this.username = '';
+        this.password = '';
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -142,7 +139,16 @@ const LoginComponent = {
             axios.post('/api/account/login', details)
                 .then((response) => {
                     toaster("success", "Logging in..");
-                    window.location.href = localStorage.getItem("prev_link");
+                    let prevlink = localStorage.getItem("prev_link");
+                    if(prevlink !== '' && prevlink !== undefined && prevlink !== '/account/login')
+                    {
+                        window.location.href = prevlink;
+                    }
+                    else
+                    {
+                        window.location.href = "/";
+                    }
+                    
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);
@@ -160,8 +166,7 @@ const SignupComponent = {
 
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
-                <h1>Sign Up</h1>
-                    <router-link to='/account'>back to menu</router-link>
+                <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/login"><i class="ai-user ms-n1 me-2"></i>Login</router-link></div>
               <form id="signUpForm">
                     <div class="row row-cols-1 row-cols-sm-2">
                         <div class="col mb-4">
@@ -259,8 +264,7 @@ const PasswordReset = {
           <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
             <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
-                <h1>Recover Account</h1>
-                <p class="pb-3 mb-3 mb-lg-4">Back to &nbsp;&nbsp;<router-link to='/account'>Account Menu!</router-link></p>
+                <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link></div>
                 <form class="needs-validation" id="passReset" novalidate>
                     <div class="pb-3 mb-3">
                         <div class="position-relative">

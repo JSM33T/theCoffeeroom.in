@@ -38,8 +38,6 @@
     <Folder Include="Views\Archive\Content\" />
     <Folder Include="Views\Shop\Content\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
-    <Folder Include="wwwroot\assets\vendor\flatpickr\dist\types\" />
-    <Folder Include="wwwroot\assets\vendor\flatpickr\dist\utils\" />
     <Folder Include="wwwroot\assets\vendor\jarallax\typings\" />
     <Folder Include="wwwroot\content\appcontent\" />
     <Folder Include="wwwroot\content\archivecontent\" />

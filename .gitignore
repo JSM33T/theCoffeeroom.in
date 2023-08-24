@@ -12,16 +12,16 @@
 /Controllers/Dedicated/AccountController.cs
 /Notes
 /wwwroot/content/
-/wwwroot/libraries/
 /wwwroot/assets/img/
 /wwwroot/assets/favicon
 /wwwroot/assets/images/
 /wwwroot/assets/fonts/
 /wwwroot/assets/vendor/
-/wwwroot/assets/css/theme.css
 /wwwroot/assets/css/theme.min.css
-/wwwroot/assets/js/theme.js
 /wwwroot/assets/js/theme.min.js
+/wwwroot/reactors/accountreactor.min.js
+/wwwroot/reactors/blogreactor.min.js
+/wwwroot/reactors/profilereactor.min.js
 /appsettings.json
 /appsettings.Development.json
 
