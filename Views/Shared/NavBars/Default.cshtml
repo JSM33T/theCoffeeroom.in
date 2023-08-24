@@ -38,7 +38,7 @@
                     <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">@ViewData["role"]</h6>
                     @if (ViewData["role"].ToString() == "guest")
                     {
-                        <a class="dropdown-item" href="/account"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
+                        <a class="dropdown-item" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
                     }
                     @if (ViewData["role"].ToString() == "admin")
                     {
@@ -118,7 +118,7 @@
                             <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">@ViewData["role"]</h6>
                             @if (ViewData["role"].ToString() == "guest")
                             {
-                                <a class="dropdown-item" href="/account"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
+                                <a class="dropdown-item" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
                             }
                             @if (ViewData["role"].ToString() == "admin")
                             {
@@ -131,8 +131,7 @@
                             {
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">Account</h6>
-                                <a class="dropdown-item" href="/account"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Account</a>
-                                <a class="dropdown-item" id="mobile_nav_favourites" href="#"><i class="ai-heart fs-lg opacity-70 me-2"></i>Favourites</a>
+                                <a class="dropdown-item" href="/profile"><i class="ai-settings fs-lg opacity-70 me-2"></i>Profile</a>
                                 <a class="dropdown-item" href="javascriptVoid(0)" data-bs-toggle="modal" data-bs-target="#modalLogout"><i class="ai-logout fs-lg opacity-70 me-2"></i>Log Out</a>
                             }
                         </div>

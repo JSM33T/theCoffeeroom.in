@@ -2,8 +2,7 @@ const Security =
 {
     template: `<div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                        <i class="ai-edit text-primary lead pe-1 me-2"></i>
-                                               <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+                                       <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
                                     </div>
                                             <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
                                             <div class="col-md-6">
@@ -76,8 +75,7 @@ const EditProfile = {
     template: `
             <div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                        <i class="ai-edit text-primary lead pe-1 me-2"></i>
-                                    <h2 class="h4 mb-0">Edit Info</h2><div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+                                      <div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
                               </div>
                                     <div id="profilepanel">
                                         <div class="d-md-flex align-items-center">
@@ -249,8 +247,7 @@ const Dashboard = {
     template: `
             <div class="fade-in">
                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
-            <i class="ai-user text-primary lead pe-1 me-2"></i>
-            <h2 class="h4 mb-0">Dashboard</h2><div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+            <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
         </div>
         <div class="d-md-flex align-items-center">
             <div class="d-sm-flex align-items-center">
