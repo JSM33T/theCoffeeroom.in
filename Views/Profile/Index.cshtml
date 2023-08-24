@@ -21,4 +21,11 @@
 
 @section jsScripts{
     <script src="~/reactors/profilereactor.js"></script>
+
+    <environment include="development">
+        <script src="/reactors/profilereactor.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="production">
+        <script src="/reactors/profilereactor.prod.js" asp-append-version="true"></script>
+    </environment>
 }
