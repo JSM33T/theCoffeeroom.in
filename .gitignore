@@ -13,17 +13,9 @@
 /Notes
 /wwwroot/content/
 /wwwroot/assets/img/
-/wwwroot/assets/favicon
 /wwwroot/assets/images/
-/wwwroot/assets/fonts/
 /wwwroot/assets/vendor/
-/wwwroot/assets/css/theme.min.css
-/wwwroot/assets/css/coffeeroom.min.css
-/wwwroot/assets/js/theme.min.js
-/wwwroot/reactors/accountreactor.prod.js
-/wwwroot/reactors/blogreactor.prod.js
-/wwwroot/reactors/docsreactor.prod.js
-/wwwroot/reactors/profilereactor.prod.js
+
 /appsettings.json
 /appsettings.Development.json
 
