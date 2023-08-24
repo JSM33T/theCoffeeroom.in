@@ -155,7 +155,7 @@
     <link id="custom_font" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap" rel="stylesheet">
 
     <!-- Vendor styles-->
-    <link href="~/libraries/aos/aos.css" rel="stylesheet" />
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet" />
     <!-- Main Theme Styles + Bootstrap-->
     @await RenderSectionAsync("cssLib", required: false)
   
@@ -308,20 +308,20 @@
         //    },1000);
         //});
         </script>
-    <environment include="production">
-        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
-    </environment>
-    <environment include="development">
-        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
-    </environment>
-    <script src="~/asstes/vendor/axios/axios.min.js"></script>
+    
+    <script src="~/assets/vendor/axios/axios.min.js"></script>
     @await RenderSectionAsync("jsScripts", required: false)
     <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     @await RenderSectionAsync("jsLib", required: false)
     
-    
+    <environment include="production">
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="development">
+        <script src="~/assets/js/coffeeroom.js" asp-append-version="true"></script>
+    </environment>
     <environment include="production">
         <script src="~/assets/js/theme.min.js"></script>
     </environment>

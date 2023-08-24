@@ -62,7 +62,7 @@ a {
 .fade-in {
     opacity: 0;
     transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */
-    animation: fadeInAnimation 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: fadeInAnimation .5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes fadeInAnimation {

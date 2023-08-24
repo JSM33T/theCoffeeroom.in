@@ -2,11 +2,28 @@
     ViewData["Title"] = "Home Page";
 }
 
+@section cssStyles{
+    <style>
+        .fade-inhome {
+    opacity: 0;
+    transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */
+    animation: fadeInAnimation 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+    @@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Move to the original position */
+    }
+}
+    </style>
+}
+
 @section jsLib{
     <script src="~/assets/vendor/parallax-js/dist/parallax.min.js"></script>
 }
 <div id="appHome">
-<section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5">
+<section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5 fade-inhome">
     <div class="container d-flex justify-content-center pb-sm-3 py-md-4 py-xl-5">
         <div class="row align-items-center pt-5 mt-4 mt-xxl-0">
             <!-- Video + Parallax-->
