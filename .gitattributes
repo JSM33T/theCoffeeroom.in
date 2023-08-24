@@ -1,3 +1,4 @@
 * text=auto
 *.cshtml linguist-detectable=false
+*.css linguist-detectable=false
 *.sql linguist-language=TSQL
