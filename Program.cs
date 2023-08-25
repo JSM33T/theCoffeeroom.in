@@ -63,7 +63,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseWebMarkupMin();
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
