@@ -13,7 +13,7 @@
     @@keyframes fadeInAnimation {
     to {
         opacity: 1;
-        transform: translateY(0); /* Move to the original position */
+        transform: translateY(0);
     }
 }
     </style>
@@ -53,14 +53,11 @@
                                 </div>
                             </div>
 
-                            <div v-if="loadVid">
-                                    <img src="~/assets/clips/covercr_placeholder.png" height="1920px">
-                            </div>
-                            <div v-else>
+                           
                                     <video class="d-block w-100" autoplay loop muted style="border-radius: calc(var(--ar-border-radius) * 1.875);">
                                         <source src="~/assets/clips/covercr.mp4" type="video/mp4">
                                     </video>
-                            </div>
+                           
                        
                         </div>
                     </div>
@@ -127,11 +124,8 @@
             setup() {
                 const emailValue = ref('');
                 const btnTxt = ref('Submit');
-                const loadVid = ref(true);
-               
                 const submitMail = async () => {
                     btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
-
                     try {
                         axios.defaults.headers.common['RequestVerificationToken'] = token;
                         const response = await axios.post('/api/newsletter', {
@@ -151,11 +145,11 @@
                     emailValue,
                     btnTxt,
                     submitMail,
-                    loadVid
+                  
                 };
             },
             async mounted() {
-                this.loadVid = !this.loadVid;
+              
             }
         });
 

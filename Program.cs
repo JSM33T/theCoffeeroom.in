@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 using theCoffeeroom.Interfaces;
 using theCoffeeroom.Repositories;
-using theCoffeeroom.Services;
 using WebMarkupMin.AspNetCore7;
 using WebMarkupMin.Core;
 
@@ -64,7 +63,6 @@ app.UseStaticFiles();
 app.UseWebMarkupMin();
 app.UseRouting();
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
