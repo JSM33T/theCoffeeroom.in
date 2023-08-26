@@ -10,13 +10,12 @@
 
     //visuals
     ViewData["BodyBg"] ??= "";
-  
     ViewData["ActivePage"] ??= "";
     ViewData["NavBarProps"] ??= "navbar navbar-expand-lg fixed-top bg-light";
 
 
     //component render
-      ViewData["ShowNav"] ??= "y";
+    ViewData["ShowNav"] ??= "y";
     ViewData["ShowFooter"] ??= "y";
 
     //navbar active stat
@@ -67,6 +66,11 @@
     <meta name="keywords" content="@ViewData["Tags"]">
     <meta name="description" content="@ViewData["Description"]">
     <meta name="author" content="@ViewData["Authors"]">
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="@ViewData["OgType"]" />
+    <meta property="og:site_name" content="The Coffeeroom" />
+    <meta property="og:url" content="https://@Context.Request.Host@Context.Request.Path@Context.Request.QueryString" />
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
@@ -95,7 +99,7 @@
           preloader.classList.remove('active');
           setTimeout(function () {
             preloader.remove();
-          },500);
+          },700);
 
                 let elem_theme = window.localStorage.getItem("cust_theme");
                 if (elem_theme !== undefined && elem_theme !== "" && elem_theme !== null) {
@@ -300,13 +304,13 @@
         </svg><i class="ai-arrow-up"></i>
     </a>
     <script>
-        //document.addEventListener('DOMContentLoaded', function () {
+        // document.addEventListener('DOMContentLoaded', function () {
         //    const preloader = document.querySelector('.page-loading');
         //    preloader.classList.remove('active');
         //    setTimeout(function () {
         //      preloader.remove();
-        //    },1000);
-        //});
+        //    },500);
+        // });
         </script>
     
     <script src="~/assets/vendor/axios/axios.min.js"></script>

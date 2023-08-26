@@ -2,6 +2,10 @@
 @model BlogLoad
 
 @{
+
+    ViewData["OgType"] ??= "article";
+
+
     if (Context.Session.GetString("role") != null && Context.Session.GetString("role") != "" && Context.Session.GetString("role") != "guest")
     {
         ViewData["BlogRole"] = Context.Session.GetString("role").ToString();
