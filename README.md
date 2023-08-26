@@ -5,46 +5,51 @@
 </p>
 
 
-:coffee: **The Coffeeroom** is a project  driven by a small community
+:coffee: **The Coffeeroom** is a a community hobby driven project.
+
 What we have here?:
 
-- :coffee: Blogs ...
-- 🌱 Bootlegs and Music Albums
-- :rocket: Gallery
-- 🤔 Applications
-- 💬 Tutorials
+- 📫 Blogs 
+- 🌱 Ideas
+- 📫 Bootlegs and Music Albums
+- 📫 Gallery
+- 📫 Applications
+- 📫 Tutorials
 - 📫 Sample Packs
-- 😄 Shop
+- 📫 Shop
 
-
-### 🛠 &nbsp;Tech Stack
+### 🛠 &nbsp;Tech & Tools
 
 ![HTML](https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5)&nbsp;
 ![CSS](https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3&logoColor=1572B6)&nbsp;
 ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
-![VUE JS](https://img.shields.io/badge/-Vue-05122A?style=flat&logo=vue.js)&nbsp;
+
+![VUE JS](https://img.shields.io/badge/-Vue-indigo?style=flat&logo=vue.js)&nbsp;
+![Bootstrap](https://img.shields.io/badge/-Bootstrap-05122A?style=flat&logo=bootstrap)&nbsp;
+### 🛠 &nbsp;Tech & Tools
+
+
 
 ![Csharp](https://img.shields.io/badge/-Csharp-05122A?style=flat&logo=csharp)&nbsp;
-![DotNETCore](https://img.shields.io/badge/dotnet-%23013243.svg?style=flat&logo=dotnet&logoColor=white)
-![DotNETCore](https://img.shields.io/badge/python-%23013243.svg?style=flat&logo=python&logoColor=white)
-
-![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)&nbsp;
+![DotNETCore](https://img.shields.io/badge/dotnet-black.svg?style=flat&logo=dotnet)
+![Nodejs](https://img.shields.io/badge/node.js-black.svg?style=flat&logo=node.js)
+![Git](https://img.shields.io/badge/-Git-indigo?style=flat&logo=git)&nbsp;
 ![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)&nbsp;
-![VUE JS](https://img.shields.io/badge/-Batch%20Files-05122A?style=flat&logo=windowsterminal)&nbsp;
+![BATCH](https://img.shields.io/badge/-Batch%20Files-05122A?style=flat&logo=windowsterminal)&nbsp;
 ![Visual Studio Code](https://img.shields.io/badge/-Visual%20Studio-05122A?style=flat&logo=visual-studio&logoColor=007ACC)&nbsp;
+
+![SQL Server](https://img.shields.io/badge/-MS%20SQL%20Server-white?style=flat&logo=microsoftsqlserver&logoColor=007ACC)&nbsp;
+
+
+![SQL Server](https://img.shields.io/badge/-Swiper-white?style=flat&logo=swiper&logoColor=007ACC)&nbsp;
+![SQL Server](https://img.shields.io/badge/-MS%20SQL%20Server-white?style=flat&logo=microsoftsqlserver&logoColor=007ACC)&nbsp;
 
 
 
 
 
   
-  ### 🤝🏻 &nbsp;Connect with Us
-
-<p align="center">
-<!-- <a href="https://www.linkedin.com/in/jsm33t/"><img src="https://img.shields.io/badge/-Jasmeet Singh-0077B5?style=flat&logo=Linkedin&logoColor=white"/></a>
-<a href="mailto:jskainthofficial@gmail.com"><img src="https://img.shields.io/badge/-jskainthofficial@gmail.com-D14836?style=flat&logo=Gmail&logoColor=white"/></a>
-<a href="https://www.instagram.com/jsm33t/"><img src="https://img.shields.io/badge/-jsm33t-E4405F?style=flat&logo=Instagram&logoColor=white"/></a>
-<a href="https://jsm33t.com/"><img src="https://img.shields.io/badge/-🌐%20jsm333t.com-1877F2?style=flat&logo=website&logoColor=white"/></a>
--->
-<a href="https://jsm33t.com/"><img src="https://img.shields.io/badge/-🌐%20coffeeroom.in-1877F2?style=flat&logo=website&logoColor=white"/></a>
+ ### 🤝🏻 &nbsp;Connect with Us
+ <p align="center">
+<a href="https://thecoffeeroom.in/"><img src="https://img.shields.io/badge/-🌐%20coffeeroom.in-1877F2?style=flat&logo=website&logoColor=white"/></a>
 </p>
