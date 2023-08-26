@@ -1,27 +1,57 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://coffeeroom.in/</loc>
-      <lastmod>2023-07-10</lastmod>
-   </url>
-	<url>
-		<loc>https://coffeeroom.in/studio</loc>
-		<lastmod>2023-07-10</lastmod>
-	</url>
-	<url>
-		<loc>https://coffeeroom.in/gallery</loc>
-		<lastmod>2023-07-10</lastmod>
-	</url>
-	<url>
-		<loc>https://coffeeroom.in/blogs</loc>
-		<lastmod>2023-07-10</lastmod>
-	</url>
-	<url>
-		<loc>https://coffeeroom.in/account</loc>
-		<lastmod>2023-07-10</lastmod>
-	</url>
-	<url>
-		<loc>https://coffeeroom.in/us</loc>
-		<lastmod>2023-07-10</lastmod>
-	</url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://thecoffeeroom.in/</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/account/login</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/personalize</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/studio</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/gallery</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/blogs</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/us</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/docs/faq</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/gallery/garden-state</loc>
+  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
 </urlset>

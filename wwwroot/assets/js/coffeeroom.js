@@ -24,12 +24,28 @@ function mdlCloseAll() {
         mdlClose(modalId);
     }
 }
+function debounce(func, delay) {
+    let debounceTimeout;
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(func, delay);
+}
+
+
+
+
+
+function livesearchTrigger() {
+    const searchStat = document.getElementById('search_stat');
+    const searchResults = document.getElementById('search_results');
+    searchStat.innerHTML = 'Searching <i class="ai-clock mb-1"></i>';
+    debounce(livesearch, 1000);
+}
 
 function livesearch() {
 
     const searchStat = document.getElementById('search_stat');
     const searchResults = document.getElementById('search_results');
-    searchStat.innerHTML = 'Searching <i class="ai-clock mb-1"></i>';
+    //searchStat.innerHTML = 'Searching <i class="ai-clock mb-1"></i>';
     var ddr = document.getElementById("global_search").value;
     if (ddr.length >= 2) {
         axios.get('/api/livesearch/all/' + ddr)

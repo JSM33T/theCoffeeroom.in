@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using theCoffeeroom.Core;
-using theCoffeeroom.Services;
 
 namespace theCoffeeroom.Controllers.Tests
 {
@@ -25,9 +20,7 @@ namespace theCoffeeroom.Controllers.Tests
         [HttpGet]
         [Route("api/gallery/{Year}/{Slug}")]
         [IgnoreAntiforgeryToken]
-        #pragma warning disable IDE0060 // Remove unused parameter
         public IActionResult GetHTMLContent(string Year, string Slug)
-        #pragma warning restore IDE0060 // Remove unused parameter
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "content", "gallerycontent", "garden-state", "gallery.min.glr");
 

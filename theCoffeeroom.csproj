@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Notes\" />
     <Folder Include="Views\Archive\Content\" />
     <Folder Include="Views\Shop\Content\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
@@ -50,6 +49,8 @@
   <ItemGroup>
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="wwwroot\scripts\adminperm.bat" />
+    <None Include="wwwroot\scripts\deploy.bat" />
   </ItemGroup>
 
   <ItemGroup>

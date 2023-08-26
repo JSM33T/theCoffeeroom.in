@@ -86,7 +86,7 @@ const LoginComponent = {
               <div class="mb-4">
                 <div class="position-relative"><i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                   <div class="password-toggle">
-                    <input class="form-control form-control-lg ps-5" v-model="password" type="password" placeholder="Password" autocomplete="password" value="" required="">
+                    <input class="form-control form-control-lg ps-5" v-model="password" @keyup.enter="submitLogin" type="password" placeholder="Password" autocomplete="password" value="" required="">
                     <label class="password-toggle-btn" aria-label="Show/hide password">
                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                     </label>
@@ -265,17 +265,17 @@ const PasswordReset = {
             <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
                 <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link></div>
-                <form class="needs-validation" id="passReset" novalidate>
+                <form class="needs-validation">
                     <div class="pb-3 mb-3">
                         <div class="position-relative">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input class="form-control form-control-lg ps-5" v-model="email" @keyup.enter="submitLogin" type="text" placeholder="Username or email" required :readonly="isReadOnly">
+                            <input class="form-control form-control-lg ps-5" v-model="email" @keyup.enter="passReset" type="text" placeholder="Username or email" :readonly="isReadOnly">
                         </div>
                     </div>
                     <div v-if="showOtpPanel">
                         <div class="position-relative fade-in">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input class="form-control form-control-lg ps-5 " v-model="otp" @keyup.enter="loginViaOtp" type="text" placeholder="OTP" required maxlength="6">
+                            <input class="form-control form-control-lg ps-5" ref="otpBox" v-model="otp" @keyup.enter="loginViaOtp" type="text" placeholder="OTP" maxlength="6">
                         </div>
                         <button class="btn btn-lg btn-primary w-100 pt-3 mt-4 mb-4" type="button" v-on:click="loginViaOtp">Log In</span></button>
                     </div>
@@ -318,6 +318,7 @@ const PasswordReset = {
                     toaster("success", response.data);
                     this.showOtpPanel = true;
                     this.isReadOnly = true;
+                    this.$refs.otpBox.focus();
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);

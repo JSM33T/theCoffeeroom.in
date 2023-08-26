@@ -1,13 +1,12 @@
-const Security =
-{
+const Security = {
     template: `<div class="fade-in">
                               <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                       <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+                                       <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit Profile</router-link></div>
                                     </div>
                                             <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
                                             <div class="col-md-6">
                                                    <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" placeholder="Password" autocomplete="off" required="">
+                                                    <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" @keyup.enter="saveCredentials" placeholder="Password" autocomplete="off" required="">
                                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                                     </label>
@@ -15,7 +14,7 @@ const Security =
                                                   </div>
                                         <div class="col-md-6">
                                                 <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="confirmPassword" type="password" placeholder="Password" autocomplete="off" required="">
+                                                    <input class="form-control form-control-lg ps-5" v-model="confirmPassword" @keyup.enter="saveCredentials" type="password" placeholder="Password" autocomplete="off" required="">
                                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                                       <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                                     </label>
@@ -42,11 +41,16 @@ const Security =
     },
     methods: {
         saveCredentials() {
-
-            if (this.newPassword.length < 6) {
+            if (this.newPassword === "" || this.newPassword == null)
+            {
+                toaster('error', 'please enter the password');
+            }
+            else if (this.newPassword.length < 6)
+            {
                 toaster('error', 'Password cannot be less than 6 characters');
             }
-            else if (this.newPassword != this.confirmPassword) {
+            else if (this.newPassword != this.confirmPassword)
+            {
                 toaster('error', 'Passwords don\'t match');
             }
             else {
@@ -80,7 +84,7 @@ const EditProfile = {
                                     <div id="profilepanel">
                                         <div class="d-md-flex align-items-center">
                                             <div class="d-sm-flex align-items-center">
-                                                <div id="avatar_placeholder" class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style='"width:80px; height: 80px; background-image: url(/assets/images/avatars/default/default.png);"'></div>
+                                                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
                                                 <div class="pt-3 pt-sm-0 ps-sm-3">
                                                     <h3 class="h5 mb-2">
                                                         <span id="profilename">
@@ -152,6 +156,7 @@ const EditProfile = {
             email: '',
             phone: '',
             avatars: '',
+            avatar: 'default.png',
             bio: '',
             gender: '',
             role: ''
@@ -165,8 +170,10 @@ const EditProfile = {
        
         this.fetchAvatars();
         this.getDetails();
-
-
+    },
+    watch: {
+        avatar(){},
+        avatars(){ }
     },
     methods: {
         async getDetails() {
@@ -179,6 +186,7 @@ const EditProfile = {
                     this.phone = response.data.phone;
                     this.bio = response.data.bio;
                     this.avatars = response.data.avatarImg;
+                    this.avatar = response.data.avatarImg + ".png";
                     this.gender = response.data.gender;
                     this.role = response.data.role;
 
@@ -188,23 +196,16 @@ const EditProfile = {
                     toaster("error", "something went wrong");
                 });
         },
-        selectValue() {
-            //this.$nextTick(() => {
-            //    document.getElementById("avatars").value = this.avatars.value;
-            //});
-
-        },
         async fetchAvatars() {
             await axios.get("/api/getavatars")
                 .then(response => {
                     this.options = response.data;
-                   // this.selectValue();
                 })
                 .catch(error => {
                     toaster("error", "something went wrong");
                 });
         },
-        saveDetails() {
+        async saveDetails() {
 
             let dropdown = document.getElementById("avatars");
             let selectedOption = dropdown.options[dropdown.selectedIndex];
@@ -230,15 +231,16 @@ const EditProfile = {
                     toaster("Error", "Something went wrong");
                 });
         },
-        handleChange(event) {
+        async handleChange(event) {
             var dropdown = document.getElementById("avatars");
             var selectedOption = dropdown.options[dropdown.selectedIndex];
             var selectedOptionDataId = selectedOption.getAttribute("data-id");
             var selectedOptionValue = selectedOption.getAttribute("value");
-            document.getElementById('avatar_placeholder').style.backgroundImage = 'url(/assets/images/avatars/default/' + selectedOptionValue + '.png)';
-
-        },
+            this.avatar = selectedOptionValue + ".png";
+        }
     },
+   
+    
 
 };
 
@@ -303,7 +305,7 @@ const Dashboard = {
             lastname: '',
             email: '',
             phone: '',
-            avatar: '',
+            avatar: 'default.png',
             bio: '',
             gender: '',
             role: ''

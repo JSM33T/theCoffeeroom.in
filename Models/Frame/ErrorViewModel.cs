@@ -1,4 +1,4 @@
-namespace theCoffeeroom.Models
+namespace theCoffeeroom.Models.Frame
 {
     public class ErrorViewModel
     {

@@ -19,7 +19,7 @@ namespace theCoffeeroom.Controllers.Routers
             }
             else
             {
-                return View("Views/Home/AccessDenied.cshtml");
+                return View("Views/Home/Index.cshtml");
             }
             
         }
