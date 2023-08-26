@@ -130,11 +130,15 @@ namespace theCoffeeroom.Controllers.Dedicated
                             try
                             {
 
-                                body = "<h1>Hey there,</h1>" +
-                                        "<p> This is for the verification of your account @TheCoffeeRoom." +
-                                        "" + otp + " is your OTP which is valid for 30 minutes </p>." +
-                                        "Or alternatively you can click here to verify directly:" +
-                                        "<a type=\"button\" href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"><b> VERIFY </b></a>";
+                                body = "<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Verification Confirmation</title></head><body style=\"margin:0;padding:0;font-family:Arial,sans-serif;line-height:1.4;color:#111;background-color:#fff\"><div style=\"max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:5px\"><h1 style=\"color:#111;margin-bottom:20px;font-size:24px\">Complete Signup</h1><p>Hey there,</p><div style=\"text-align:center;margin-bottom:20px\"><img src=\"https://thecoffeeroom.in/assets/favicon/apple-touch-icon.png\" width=\"100\" alt=\"Image\" style=\"max-width:100%;height:auto;border-radius:5px\"></div><p>Thank you for signing up for the coffeeroom. Please click the button below to verify your email address:</p><p>" +
+                                    "<a href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"" +
+                                    " style=\"display:inline-block;padding:10px 20px;background-color:#111;color:#fff;text-decoration:none;border-radius:4px\">Verify Email</a></p><p>If you did not sign up for this account, please ignore this email.</p><div style=\"margin-top:20px;text-align:center;font-size:12px;color:#999\"><p>This is an automated email, please do not reply.</p></div></div></body></html>";
+
+                                //body = "<h1>Hey there,</h1>" +
+                                //        "<p> This is for the verification of your account @TheCoffeeRoom." +
+                                //        "" + otp + " is your OTP which is valid for 30 minutes </p>." +
+                                //        "Or alternatively you can click here to verify directly:" +
+                                //        "<button type=\"button\" href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"><b> VERIFY </b></button>";
 
                                 int stat = Mailer.MailSignup(subject, body, userProfile.EMail.ToString());
                                 if (stat == 1)

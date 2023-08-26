@@ -24,7 +24,7 @@ const BaseComponent = {
                     <div class="card h-100 border-0 rounded-5">
                         <div class="card-body pb-3">
                             <h3 class="h4">Sign Up</h3>
-                            <p class="mb-0">Don't have an account? do sign up'.</p>
+                            <p class="mb-0">Don't have an account? do sign up.</p>
                         </div>
                         <div class="card-footer border-0 pt-3 mb-3">
                             <router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/signup"><i class="ai-arrow-right"></i></router-link>
@@ -35,7 +35,7 @@ const BaseComponent = {
                     <div class="card h-100 border-0 rounded-5">
                         <div class="card-body pb-3">
                             <h3 class="h4">Recover Account</h3>
-                            <p class="mb-0">Don't have an account? do sign up'.</p>
+                            <p class="mb-0">Don't have an account? do sign up.</p>
                         </div>
                         <div class="card-footer border-0 pt-3 mb-3">
                             <router-link class="btn btn-icon btn-sm btn-outline-primary stretched-link" to="/account/accountrecovery"><i class="ai-arrow-right"></i></router-link>
