@@ -170,6 +170,46 @@ namespace theCoffeeroom.Controllers.Dedicated
             return new JsonResult(data);
         }
 
+        [HttpGet]
+        [Route("api/blogs/categories/load")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> LoadCategories()
+        {
+            List<object> data = new();
+            using var connection = new SqlConnection(connectionString);
+            await connection.OpenAsync();
+            var command = new SqlCommand(
+                                        @"SELECT
+                                            BC.Id AS CategoryId,
+                                            BC.Title AS CategoryTitle,
+                                            BC.Locator AS CategoryLocator,
+                                            COUNT(BM.Id) AS NumberOfItems
+                                        FROM 
+                                            coffeeroomdb.dbo.TblBlogCategory BC
+                                        LEFT JOIN 
+                                            coffeeroomdb.dbo.TblBlogMaster BM ON BC.Id = BM.CategoryId AND BM.IsActive = 1
+                                        GROUP BY 
+                                        BC.Id, BC.Title, BC.Locator",
+                                         connection);
+
+            var reader =await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                var row = new
+                {
+                    id = reader.GetInt32(0),
+                    title = reader.GetString(1),
+                    locator = reader.GetString(2),      
+                    qty = reader.GetString(3)          
+                };
+
+                data.Add(row);
+            }
+            await reader.CloseAsync();
+            await connection.CloseAsync();
+            return new JsonResult(data);
+        }
+
 
         [HttpPost]
         [Route("api/blog/comment/add")]
@@ -234,14 +274,14 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
     
         }
-
+        
 
         [HttpPost]
         [Route("api/blog/comments/load")]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LoadComments([FromBody] BlogComment blogComment)
         {
-
+            
             Dictionary<int, dynamic> comments = new();
             using var connection = new SqlConnection(connectionString);
             await connection.OpenAsync();

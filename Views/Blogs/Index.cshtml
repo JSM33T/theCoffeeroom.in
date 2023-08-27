@@ -62,20 +62,16 @@
                     <!-- Category links-->
                     <h4 class="pt-1 pt-lg-0 mt-lg-n2">Categories:</h4>
                     <ul class="nav flex-column mb-lg-5 mb-4">
-
-
                         <li class="mb-2"><router-link id="cat_all" class="nav-link d-flex p-0" to="/blogs">All categories</router-link></li>
-                       
-                                <li class="mb-2"><router-link to="/blogs/category/binge" id="binge" class="nav-link d-flex p-0 "> Binge<span class="fs-sm text-muted ms-2">(1)</span></router-link></li>
-
-                        @* <li class="mb-2"><router-link to="/blogs" class="nav-link d-flex p-0 ">Home<span class="fs-sm text-muted ms-2">(0)</span></router-link></li>
-                        <li class="mb-2"><router-link to="/blogs/category/binge" class="nav-link d-flex p-0 ">About<span class="fs-sm text-muted ms-2">(0)</span></router-link></li>*@
+                            <li class="mb-2" v-for="category in categories" :key="category.id">
+                                <router-link :to="'/blogs/category/' + category.locator" class="nav-link d-flex p-0 ">{{ category.title }}<span class="fs-sm text-muted ms-2">{{category.qty}}</span></router-link>
+                            </li>
                     </ul>
 
                     <h4 class="pt-1 pt-lg-0 mt-lg-n2">Year:</h4>
                     <ul class="nav flex-column mb-lg-5 mb-4">
                         <li class="mb-2"><router-link to="/blogs/year/2023" class="nav-link d-flex p-0 ">2023</router-link></li>
-                        <li class="mb-2"><router-link to="/blogs/year/2022" class="nav-link d-flex p-0 ">2022</router-link></li>
+                        <li class="mb-2"><router-link to="/blogs/year/2022" class="nav-link disabled d-flex p-0 ">2022</router-link></li>
                     </ul>
 
                 </div>

@@ -203,8 +203,12 @@ const app = Vue.createApp({
     data() {
         return {
             isLoading: true,
-            titleItem: 'Blogs'
+            titleItem: 'Blogs',
+            categories:[]
         };
+    },
+    async mounted(){
+        this.loadCategories();
     },
     methods:{
         async navigateToBlog() {
@@ -217,6 +221,19 @@ const app = Vue.createApp({
                     
                         }
                     });
+              },
+              async loadCategories()
+              {
+                try {
+                    const response = await axios.get('/api/blogs/categories/load');
+                    const data = response.data;
+                    this.categories = data;
+                    console.log(data);
+                } catch (error) {
+                    console.error('Error fetching data from API:', error);
+                } finally {
+                        this.isLoading = false;
+                }
               }
     }
 

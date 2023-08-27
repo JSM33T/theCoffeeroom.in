@@ -51,6 +51,18 @@
 		{
             "find": ":  ",
             "replace": ": "
+        },
+        {
+            "find": "\" ",
+            "replace": "\""
+        },
+        {
+            "find": " \"",
+            "replace": "\""
+        },
+        {
+            "find":"\n",
+            "replace":" "
         }
 		
 
