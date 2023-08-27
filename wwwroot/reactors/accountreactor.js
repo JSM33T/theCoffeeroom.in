@@ -182,14 +182,14 @@ const SignupComponent = {
                     <div class="pb-3 mb-3">
                         <div class="position-relative">
                             <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                            <input name="email" type="email" v-model="email" @keyup.enter="submitLogin" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
+                            <input name="email" type="email" v-model="email" @keyup.enter="submitSignup" class="form-control form-control-lg ps-5 bindenter" placeholder="Email" maxlength="50" />
                         </div>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 pb-2 mb-2">
                         <div class="position-relative pb-4">
                             <div class="password-toggle">
                                 <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                                <input name="password" type="password" @keyup.enter="submitLogin" v-model="password" class=" form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
+                                <input name="password" type="password" @keyup.enter="submitSignup" v-model="password" class="form-control form-control-lg ps-5 bindenter" placeholder="Password" maxlength="20" />
                                 <label class="password-toggle-btn" aria-label="Show/hide password">
                                     <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                                 </label>
@@ -205,7 +205,7 @@ const SignupComponent = {
                               </div>
                         </div>
                     </div>
-                                <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" @keyup.enter="submitLogin" v-on:click="submitLogin"><span v-html="buttonText"></span></button>
+                                <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" @keyup.enter="submitSignup" v-on:click="submitSignup"><span v-html="buttonText"></span></button>
                 </form>
             </div>
             <!-- Copyright-->
@@ -232,8 +232,16 @@ const SignupComponent = {
         });
     },
     methods: {
-        submitLogin() {
-            if (this.password !== this.passconfirm) {
+        submitSignup() {
+            if (this.firstname == "")
+            {
+                toaster('error', 'first name is mandatory!!');
+            }
+            else if (this.username == "") {
+                toaster('error', 'username is mandatory!!');
+            }
+            else if (this.password !== this.passconfirm)
+            {
                 toaster('error', 'passwords dont match!!');
             }
             else {

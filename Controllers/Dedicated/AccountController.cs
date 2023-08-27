@@ -83,23 +83,23 @@ namespace theCoffeeroom.Controllers.Dedicated
             string message = "something working", type = "error";
             if (userProfile.UserName != null && userProfile.Password!= null)
             {
-                if (userProfile.FirstName == "")
+                if (userProfile.FirstName.Trim() == "")
                 {
                     message = "first name is mandatory";
                 }
-                else if (userProfile.LastName == "")
+                else if (userProfile.UserName.Trim() == "")
                 {
                     message = "username is mandatory";
                 }
-                else if (!Validators.IsAlphaNumeric(userProfile.UserName))
+                else if (!Validators.IsAlphaNumeric(userProfile.UserName.Trim()))
                 {
                     message = "only alphanumeric characters are allowed";
                 }
-                else if (userProfile.EMail == "")
+                else if (userProfile.EMail.Trim() == "")
                 {
                     message = "email is mandatory";
                 }
-                else if (Validators.IsValidEmail(userProfile.EMail) == false)
+                else if (Validators.IsValidEmail(userProfile.EMail.Trim()) == false)
                 {
                     message = "invalid email format";
                 }
@@ -149,12 +149,12 @@ namespace theCoffeeroom.Controllers.Dedicated
                                         int newId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
                                         cmd = new("insert into TblUserProfile (Id,FirstName,LastName,EMail,UserName,IsActive,IsVerified,OTP,OTPTime,Role,Bio,Gender,Phone,AvatarId,DateJoined,CryptedPassword) VALUES(@Id,@firstname,@lastname,@email,@username,1,0,@otp,@otptime,'user','','','',1,@datejoined,@cryptedpassword)", connection);
                                         cmd.Parameters.AddWithValue("@Id", newId);
-                                        cmd.Parameters.AddWithValue("@firstname", userProfile.FirstName);
+                                        cmd.Parameters.AddWithValue("@firstname", userProfile.FirstName.Trim());
                                         cmd.Parameters.AddWithValue("@lastname", userProfile.LastName);
                                         cmd.Parameters.AddWithValue("@email", userProfile.EMail);
-                                        cmd.Parameters.AddWithValue("@username", FilteredUsername);
-                                        cmd.Parameters.AddWithValue("@cryptedpassword",EnDcryptor.Encrypt(userProfile.Password));
-                                        cmd.Parameters.AddWithValue("@otp", otp);
+                                        cmd.Parameters.AddWithValue("@username", FilteredUsername.Trim());
+                                        cmd.Parameters.AddWithValue("@cryptedpassword",EnDcryptor.Encrypt(userProfile.Password.Trim()));
+                                        cmd.Parameters.AddWithValue("@otp", otp.Trim());
                                         cmd.Parameters.Add("@otptime", SqlDbType.DateTime).Value = DateTime.Now;
                                         cmd.Parameters.Add("@datejoined", SqlDbType.DateTime).Value = DateTime.Now;
 
