@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Serilog;
 using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Interfaces;
+using theCoffeeroom.Models.DAModels;
 using theCoffeeroom.Models.Domain;
 
 namespace theCoffeeroom.Controllers.Dedicated
@@ -27,15 +28,23 @@ namespace theCoffeeroom.Controllers.Dedicated
                 if (ModelState.IsValid)
                 {
                     try
-                    {
-                        await _dataAccessRepo.AddMailAsync(mail);
+                    {     
+                        DataSave result = await _dataAccessRepo.AddMailAsync(mail);
                         Log.Information("mail added to newsletter:" + mail.EMailId);
-                        return Ok("email submitted!!");
+                        if (result.Status)
+                        {
+                            return Ok("email submitted");
+                        }
+                        else
+                        {
+                            return BadRequest(result.Message);
+                        }
+                       
                     }
                     catch (Exception ex)
                     {
                         Log.Error("email submission in page:" + ex.Message.ToString());
-                        return BadRequest(ex.Message.ToString());
+                        return BadRequest("something went wrong");
                     }
                 }
                 else

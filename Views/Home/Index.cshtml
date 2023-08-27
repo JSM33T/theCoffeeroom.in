@@ -102,11 +102,11 @@
                 <div class="row g-4">
                     <div class="col-sm-10 offset-sm-1">
                         <label class="form-label fs-base" for="email">Your email</label>
-                        <input class="form-control form-control-lg" type="email" v-model="emailValue" placeholder="Your email" autocomplete="off">
+                            <input class="form-control form-control-lg" type="text" v-model="emailValue" @@keyup.enter="submitMail" placeholder="Your email" autocomplete="off">
                     </div>
 
                     <div class="col-sm-12 text-center pt-4">
-                        <button class="btn btn-lg btn-primary btn-dark ripple" v-on:click="submitMail" type="button" v-html="btnTxt"></button>
+                            <button type="button" class="btn btn-lg btn-primary btn-dark ripple"  v-on:click="submitMail" v-html="btnTxt"></button>
                     </div>
                 </div>
             </form>

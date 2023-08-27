@@ -2,6 +2,7 @@
 using Serilog;
 using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Interfaces;
+using theCoffeeroom.Models.DAModels;
 using theCoffeeroom.Models.Domain;
 
 namespace theCoffeeroom.Repositories
@@ -21,7 +22,7 @@ namespace theCoffeeroom.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<string> AddMailAsync(Mail mail)
+        public async Task<DataSave> AddMailAsync(Mail mail)
         {
             using SqlConnection connection = new(connectionString);
             await connection.OpenAsync();
@@ -47,11 +48,23 @@ namespace theCoffeeroom.Repositories
                     addEmailCmd.Parameters.AddWithValue("@dateadded", DateTime.Now);
                     await addEmailCmd.ExecuteNonQueryAsync();
                     Log.Information("mail added to newsletter:" + mail.EMailId);
-                    return "Email submitted";
+
+                    return new DataSave 
+                    {
+                        Status = true,
+                        Message = "Data saved successfully",
+                        Type = true
+                    };
+                  
                 }
                 else
                 {
-                    return "Email already submitted";
+                    return new DataSave 
+                    { 
+                        Status = true,
+                        Message = "Email is already submitted", 
+                        Type = false 
+                    };
                 }
             }
             catch(Exception ex)

@@ -233,28 +233,34 @@ const SignupComponent = {
     },
     methods: {
         submitLogin() {
-            this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Signing Up...';
-            const details = {
-                FirstName: this.firstname,
-                LastName: this.lastname,
-                UserName: this.username,
-                Password: this.password,
-                EMail: this.email
-            };
-            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-            axios.defaults.headers.common['RequestVerificationToken'] = token;
-            axios.post('/api/account/signup', details)
-                .then((response) => {
-                    console.log(response.data);
-                    toaster("success", response.data.message);
-                })
-                .catch((error) => {
-                    toaster("error", error.response.data);
-                })
-                .finally(() => {
-                    this.buttonText = 'Sign Up';
-                    this.lala = 'Sign Up';
-                });
+            if (this.password !== this.passconfirm) {
+                toaster('error', 'passwords dont match!!');
+            }
+            else {
+                this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Signing Up...';
+                const details = {
+                    FirstName: this.firstname,
+                    LastName: this.lastname,
+                    UserName: this.username,
+                    Password: this.password,
+                    EMail: this.email
+                };
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                axios.defaults.headers.common['RequestVerificationToken'] = token;
+                axios.post('/api/account/signup', details)
+                    .then((response) => {
+                        console.log(response.data);
+                        toaster("success", response.data.message);
+                    })
+                    .catch((error) => {
+                        toaster("error", error.response.data);
+                    })
+                    .finally(() => {
+                        this.buttonText = 'Sign Up';
+                        this.lala = 'Sign Up';
+                    });
+            }
+          
         },
     },
 };
