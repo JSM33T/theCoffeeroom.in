@@ -1,0 +1,34 @@
+﻿
+
+@{
+    ViewData["Title"] = "Log File Content";
+}
+
+
+
+<section class="container mt-5 pt-5">
+    <h2>Log File: @ViewData["FileName"]</h2>
+
+<pre>
+        @foreach (var line in (List<string>)ViewData["FileLines"])
+        {
+            @if (line.Substring(32, 3) == "ERR")
+            {
+            <span style="color:#FF6961;word-wrap: break-word;"><i class="ai-circle-slash me-2 ms-n1"></i>@line</span>       
+            }
+            else
+            {
+            <span style="color:#0AA3CF;"><i class="ai-activity me-2 ms-n1"></i>@line</span>    
+            }
+            
+
+        }
+</pre>
+
+ 
+</section>
+
+
+
+
+

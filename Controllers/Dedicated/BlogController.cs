@@ -200,7 +200,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     id = reader.GetInt32(0),
                     title = reader.GetString(1),
                     locator = reader.GetString(2),      
-                    qty = reader.GetString(3)          
+                    qty = reader.GetInt32(3)          
                 };
 
                 data.Add(row);

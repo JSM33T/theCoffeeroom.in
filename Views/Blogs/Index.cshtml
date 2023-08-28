@@ -8,8 +8,6 @@
     ViewData["OgImage"] ??= "/assets/images/logos/";
 
 
-
-
     ViewData["ActiveCategory"] = "";
     ViewData["ActiveYear"] = "";
     ViewData["ActiveTag"] = "";
@@ -61,11 +59,11 @@
                     </div>
                     <!-- Category links-->
                     <h4 class="pt-1 pt-lg-0 mt-lg-n2">Categories:</h4>
-                    <ul class="nav flex-column mb-lg-5 mb-4">
+                    <ul class="nav flex-column mb-lg-5 mb-4">   
                         <li class="mb-2"><router-link id="cat_all" class="nav-link d-flex p-0" to="/blogs">All categories</router-link></li>
                             <li class="mb-2" v-for="category in categories" :key="category.id">
-                                <router-link :to="'/blogs/category/' + category.locator" class="nav-link d-flex p-0 ">{{ category.title }}<span class="fs-sm text-muted ms-2">{{category.qty}}</span></router-link>
-                            </li>
+                            <router-link :to="'/blogs/category/' + category.locator" class="nav-link d-flex p-0" v-bind:class="{ disabled: category.qty === 0 }">{{ category.title }}<span class="fs-sm text-muted ms-2">({{category.qty}})</span></router-link>
+                        </li>
                     </ul>
 
                     <h4 class="pt-1 pt-lg-0 mt-lg-n2">Year:</h4>

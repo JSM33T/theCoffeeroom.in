@@ -309,6 +309,7 @@ const PasswordReset = {
             stringRec: '',
             password: '',
             showOtpPanel: false,
+            email:'',
         };
     },
     async mounted() {
@@ -320,26 +321,32 @@ const PasswordReset = {
     },
     methods: {
         passReset() {
-            this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading...';
-            const details = {
-                StringRec: this.email
-            };
+            if (this.email == "") {
+                toaster('error', 'please enter your username or email!!');
+            }
+            else {
+                this.buttonText = '<span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading...';
+                const details = {
+                    StringRec: this.email
+                };
 
-            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-            axios.defaults.headers.common['RequestVerificationToken'] = token;
-            axios.post('/api/account/recover', details)
-                .then((response) => {
-                    toaster("success", response.data);
-                    this.showOtpPanel = true;
-                    this.isReadOnly = true;
-                    this.$refs.otpBox.focus();
-                })
-                .catch((error) => {
-                    toaster("error", error.response.data);
-                })
-                .finally(() => {
-                    this.buttonText = 'Send Recovery Key';
-                });
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                axios.defaults.headers.common['RequestVerificationToken'] = token;
+                axios.post('/api/account/recover', details)
+                    .then((response) => {
+                        toaster("success", response.data);
+                        this.showOtpPanel = true;
+                        this.isReadOnly = true;
+                        this.$refs.otpBox.focus();
+                    })
+                    .catch((error) => {
+                        toaster("error", error.response.data);
+                    })
+                    .finally(() => {
+                        this.buttonText = 'Send Recovery Key';
+                    });
+            }
+           
         },
         loginViaOtp()
         {

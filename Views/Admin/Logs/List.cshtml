@@ -1,0 +1,33 @@
+﻿@model List<string>
+
+
+<section class="container mt-5 pt-5">
+
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>DumpDate</th>
+            </tr>
+            </thead>
+            <tbody>
+               
+                 @{var slno = 0;}
+                @foreach (var fileName in Model)
+                {
+                slno = slno + 1;
+                <tr>
+                    <th scope="row">@slno</th>
+                        <td><a href="/admin/log/@fileName.Substring(9,8)">@fileName.Substring(9, 4)-@fileName.Substring(13, 2)-@fileName.Substring(15, 2)</a></td>
+                </tr>
+                }
+                
+               
+            </tbody>
+    </table>
+</div>
+
+</section>

@@ -1,0 +1,178 @@
+﻿<div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+    <div class="row pt-sm-2 pt-lg-0">
+        <!-- Sidebar (offcanvas on sreens < 992px)-->
+      
+        <!-- Page content-->
+        <div class="col-lg-12 pt-4 pb-2 pb-sm-4">
+          
+            <div class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4">
+                <div class="col-md-3 mx-5">
+                    <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/admin/logs">Logs</a>
+                </div>
+               
+                <div class="card-body">
+                    <!-- Stats-->
+                    <div class="row g-3 g-xl-4">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="h-100 bg-secondary rounded-3 text-center p-4">
+                                <h2 class="h6 pb-2 mb-1">Members (active)</h2>
+                                <div class="h2 text-primary mb-2">$842.00</div>
+                                <p class="fs-sm text-muted mb-0">Sales 8/1/2022 - 8/15/2022</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="h-100 bg-secondary rounded-3 text-center p-4">
+                                <h2 class="h6 pb-2 mb-1">Your balance</h2>
+                                <div class="h2 text-primary mb-2">$735.00</div>
+                                <p class="fs-sm text-muted mb-0">To be paid on 8/15/2022</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="h-100 bg-secondary rounded-3 text-center p-4">
+                                <h2 class="h6 pb-2 mb-1">Lifetime earnings</h2>
+                                <div class="h2 text-primary mb-2">$9,156.74</div>
+                                <p class="fs-sm text-muted mb-0">Based on list price</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4 py-4">
+                        <!-- Sales value line chart-->
+                        <div class="col-md-8">
+                            <div class="h-100 border rounded-3 p-4">
+                                <h2 class="h6 text-center text-sm-start mb-4">Sales value, USD</h2>
+                                <canvas data-chart="{
+                    &quot;type&quot;: &quot;line&quot;,
+                    &quot;data&quot;: {
+                      &quot;labels&quot;: [&quot;22 Jul&quot;, &quot;&quot;, &quot;24 Jul&quot;, &quot;&quot;, &quot;26 Jul&quot;, &quot;&quot;, &quot;28 Jul&quot;, &quot;&quot;, &quot;30 Jul&quot;, &quot;&quot;, &quot;01 Aug&quot;, &quot;&quot;, &quot;03 Aug&quot;, &quot;&quot;, &quot;05 Aug&quot;],
+                      &quot;datasets&quot;: [
+                        {
+                          &quot;label&quot;: &quot;Sales, USD&quot;,
+                          &quot;fill&quot;: true,
+                          &quot;data&quot;: [0, 100, 200, 175, 100, 50, 75, 0, 0, 50, 50, 50, 0, 100, 0],
+                          &quot;backgroundColor&quot;: &quot;rgba(68,140,116,.1)&quot;,
+                          &quot;borderWidth&quot;: 2,
+                          &quot;borderColor&quot;: &quot;rgba(68,140,116,.6)&quot;,
+                          &quot;pointBackgroundColor&quot;: &quot;#448c74&quot;,
+                          &quot;pointBorderWidth&quot;: 3,
+                          &quot;pointBorderColor&quot;: &quot;#448c74&quot;,
+                          &quot;pointHoverBorderColor&quot;: &quot;#448c74&quot;,
+                          &quot;pointHoverBorderWidth&quot;: 6
+                        }
+                      ]
+                    },
+                    &quot;options&quot;: {
+                      &quot;responsive&quot;: true,
+                      &quot;scales&quot;: {
+                        &quot;y&quot;: {
+                          &quot;beginAtZero&quot;: true,
+                          &quot;border&quot;: {
+                            &quot;color&quot;: &quot;rgba(133,140,151,.18)&quot;
+                          },
+                          &quot;grid&quot;: {
+                            &quot;color&quot;: &quot;rgba(133,140,151,.18)&quot;
+                          }
+                        },
+                        &quot;x&quot;: {
+                          &quot;border&quot;: {
+                            &quot;color&quot;: &quot;rgba(133,140,151,.18)&quot;
+                          },
+                          &quot;grid&quot;: {
+                            &quot;color&quot;: &quot;rgba(133,140,151,.18)&quot;
+                          }
+                        }
+                      }
+                    }
+                  }"></canvas>
+                            </div>
+                        </div>
+                        <!-- Country sales-->
+                        <div class="col-md-4">
+                            <div class="h-100 border rounded-3 p-4">
+                                <h2 class="h6 text-center text-sm-start mb-4">Your top countries</h2>
+                                <div class="d-flex justify-content-between text-muted fs-sm"><span>Country</span><span>Value</span></div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center fs-sm text-dark pb-1 mb-2"><img src="assets/img/account/flags/usa.png" width="16" alt="USA"><span class="ms-2">United States</span><span class="ms-auto">$352</span></div>
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center fs-sm text-dark pb-1 mb-2"><img src="assets/img/account/flags/sweden.png" width="16" alt="Sweden"><span class="ms-2">Sweden</span><span class="ms-auto">$218</span></div>
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center fs-sm text-dark pb-1 mb-2"><img src="assets/img/account/flags/india.png" width="16" alt="India"><span class="ms-2">India</span><span class="ms-auto">$97</span></div>
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 14%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center fs-sm text-dark pb-1 mb-2"><img src="assets/img/account/flags/france.png" width="16" alt="France"><span class="ms-2">France</span><span class="ms-auto">$40</span></div>
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 6%" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center fs-sm text-dark pb-1 mb-2"><img src="assets/img/account/flags/south-africa.png" width="16" alt="Argentina"><span class="ms-2">South Africa</span><span class="ms-auto">$16</span></div>
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 3%" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <!-- Device shares pie chart-->
+                        <div class="col-md-8 col-lg-12 col-xl-8 text-center text-sm-start">
+                            <div class="border rounded-3 p-4">
+                                <h2 class="h6 mb-4">Purchases from devices, %</h2>
+                                <div class="px-sm-4 my-n4 my-sm-n5">
+                                    <canvas data-chart="{
+                      &quot;type&quot;: &quot;pie&quot;,
+                      &quot;data&quot;: {
+                        &quot;labels&quot;: [&quot;Mobile - 64%&quot;, &quot;Desktop - 19%&quot;, &quot;Tablet - 10%&quot;, &quot;Other - 7%&quot;],
+                        &quot;datasets&quot;: [
+                          {
+                            &quot;label&quot;: &quot;Device share, %&quot;,
+                            &quot;data&quot;: [64, 19, 10, 7],
+                            &quot;borderWidth&quot;: 0,
+                            &quot;backgroundColor&quot;: [
+                              &quot;#448c74&quot;,
+                              &quot;rgba(68,140,116,.64)&quot;,
+                              &quot;rgba(68,140,116,.4)&quot;,
+                              &quot;rgba(68,140,116,.2)&quot;
+                            ]
+                          }
+                        ]
+                      },
+                      &quot;options&quot;: {
+                        &quot;plugins&quot;: {
+                          &quot;legend&quot;: {
+                            &quot;position&quot;: &quot;right&quot;,
+                            &quot;labels&quot;: {
+                              &quot;usePointStyle&quot;: true,
+                              &quot;boxWidth&quot;: 12,
+                              &quot;boxHeight&quot;: 12,
+                              &quot;useBorderRadius&quot;: true,
+                              &quot;borderRadius&quot;: 8,
+                              &quot;padding&quot;: 20,
+                              &quot;font&quot;: {
+                                &quot;family&quot;: &quot;'Inter', sans-serif&quot;,
+                                &quot;size&quot;: 15
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

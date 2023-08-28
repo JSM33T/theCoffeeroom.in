@@ -55,7 +55,9 @@ namespace theCoffeeroom.Controllers.Dedicated
                         HttpContext.Session.SetString("role", role);
                         HttpContext.Session.SetString("fullname", fullname);
                         HttpContext.Session.SetString("avatar", avatar.ToString());
+                        Log.Information(loginCreds.UserName + " logged in");
                         return Ok("logging in...");
+                       
                     }
                     else
                     {
@@ -63,7 +65,6 @@ namespace theCoffeeroom.Controllers.Dedicated
                     }
                 }
                 await connection.CloseAsync();
-
                 return BadRequest("Invalid Credentials");
             }
             catch (Exception ex)
@@ -259,16 +260,18 @@ namespace theCoffeeroom.Controllers.Dedicated
                 {
                     try
                     {
+                        string LoggedUser = HttpContext.Session.GetString("username").ToString();
                         using SqlConnection connection = new(connectionString);
 
                         await connection.OpenAsync();
                         SqlCommand insertCommand = new("UPDATE TblUserProfile SET CryptedPassword = @cryptedpassword,DateUpdated = @dateupdated where UserName = @username", connection);
-                        insertCommand.Parameters.AddWithValue("@username", HttpContext.Session.GetString("username").ToString());
+                        insertCommand.Parameters.AddWithValue("@username", LoggedUser);
                         insertCommand.Parameters.AddWithValue("@cryptedpassword", Core.EnDcryptor.Encrypt(userProfile.Password));
                         insertCommand.Parameters.Add("@dateupdated", SqlDbType.DateTime).Value = DateTime.Now;
 
                         await insertCommand.ExecuteNonQueryAsync();
                         await connection.CloseAsync();
+                        Log.Information(LoggedUser + " changed their password");
                         return Ok("Changes Saved");
                     }
                     catch (Exception ex)
@@ -365,7 +368,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         try
                         {
 
-                         string body = "<h1>Hey there,</h1><br> Here is an OTP to log into your account. It will be valid for a day do change your acc password within a day. You can log into your account using this OTP only once &nbsp; <b>" + otp + "</b>";
+                         string body = "<h1>Hey there,</h1><br> Here is an OTP to log into your account. It will be valid for a day do change your acc password within a day. You can log into your account using this OTP only once &nbsp;<br> <h1><b>" + otp + "</b></h1>";
 
                             int stat = Mailer.MailSignup(subject, body, Useremail);
                             if (stat == 1)
@@ -416,7 +419,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
             else
             {
-                return BadRequest("Invalid Data");
+                return BadRequest("Invalid Username/Email!!");
             }
 
 
