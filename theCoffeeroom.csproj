@@ -12,21 +12,29 @@
     <Compile Remove="Controllers\Routers\Apps\**" />
     <Compile Remove="Views\Magazines\Content\**" />
     <Compile Remove="Views\Studio\Content\**" />
+    <Compile Remove="wwwroot\content\blogcontent\global\**" />
+    <Compile Remove="wwwroot\content\musiccontent\**" />
     <Compile Remove="wwwroot\logs\**" />
     <Content Remove="Controllers\Dedicated\Apps\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Views\Magazines\Content\**" />
     <Content Remove="Views\Studio\Content\**" />
+    <Content Remove="wwwroot\content\blogcontent\global\**" />
+    <Content Remove="wwwroot\content\musiccontent\**" />
     <Content Remove="wwwroot\logs\**" />
     <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Views\Magazines\Content\**" />
     <EmbeddedResource Remove="Views\Studio\Content\**" />
+    <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
+    <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
     <None Remove="Controllers\Dedicated\Apps\**" />
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Views\Magazines\Content\**" />
     <None Remove="Views\Studio\Content\**" />
+    <None Remove="wwwroot\content\blogcontent\global\**" />
+    <None Remove="wwwroot\content\musiccontent\**" />
     <None Remove="wwwroot\logs\**" />
   </ItemGroup>
 
@@ -37,20 +45,20 @@
     <Folder Include="wwwroot\assets\vendor\jarallax\typings\" />
     <Folder Include="wwwroot\content\appcontent\" />
     <Folder Include="wwwroot\content\archivecontent\" />
-    <Folder Include="wwwroot\content\blogcontent\global\" />
     <Folder Include="wwwroot\content\gallerycontent\the-birdies\lossless\" />
     <Folder Include="wwwroot\content\gallerycontent\the-birdies\thumbs\" />
-    <Folder Include="wwwroot\content\musiccontent\albums\" />
-    <Folder Include="wwwroot\content\musiccontent\global\" />
-    <Folder Include="wwwroot\content\musiccontent\radio-cuts\" />
-    <Folder Include="wwwroot\content\musiccontent\singles\" />
+    <Folder Include="wwwroot\content\studiocontent\albums\Thecoffeeroom Bootleg Compilation%282023%29\mp3\" />
+    <Folder Include="wwwroot\content\studiocontent\albums\Thecoffeeroom Bootleg Compilation%282023%29\flac\" />
+    <Folder Include="wwwroot\content\studiocontent\global\" />
+    <Folder Include="wwwroot\content\studiocontent\radio-cuts\" />
+    <Folder Include="wwwroot\content\studiocontent\singles\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="wwwroot\scripts\adminperm.bat" />
-    <None Include="wwwroot\scripts\deploy.bat" />
+    <None Include="wwwroot\scripts\batch\adminperm.bat" />
+    <None Include="wwwroot\scripts\batch\deploy.bat" />
   </ItemGroup>
 
   <ItemGroup>
