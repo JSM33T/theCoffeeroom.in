@@ -118,6 +118,8 @@
 
 @section jsScripts{
     <script>
+        
+       
         const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         const { createApp, ref } = Vue;
         const app = createApp({
@@ -125,6 +127,7 @@
                 const emailValue = ref('');
                 const btnTxt = ref('Submit');
                 const submitMail = async () => {
+                    
                     btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
                     try {
                         axios.defaults.headers.common['RequestVerificationToken'] = token;
@@ -138,6 +141,7 @@
                         toaster("error", error.response.data);
                     } finally{
                         btnTxt.value = 'Submit';
+                        
                     }
                 };
 

@@ -38,20 +38,20 @@
                     <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">@ViewData["role"]</h6>
                     @if (ViewData["role"].ToString() == "guest")
                     {
-                        <a class="dropdown-item" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
+                        <a class="dropdown-item next-link" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
                     }
                     @if (ViewData["role"].ToString() == "admin")
                     {
-                        <a class="dropdown-item" href="/admin"><i class="ai-settings fs-lg opacity-70 me-2"></i>Admin Panel</a>
+                        <a class="dropdown-item next-link" href="/admin"><i class="ai-settings fs-lg opacity-70 me-2"></i>Admin Panel</a>
                     }
-                    <a class="dropdown-item" href="/personalize"><i class="ai-paint-roll fs-lg opacity-70 me-2"></i>Personalize</a>
+                    <a class="dropdown-item next-link" href="/personalize"><i class="ai-paint-roll fs-lg opacity-70 me-2"></i>Personalize</a>
 
                     @if (ViewData["role"].ToString() == "admin" || ViewData["role"].ToString() == "user")
                     {
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">Account</h6>
-                        <a class="dropdown-item" href="/profile/"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Profile</a>
-                        <a class="dropdown-item" href="javascriptVoid(0)" data-bs-toggle="modal" data-bs-target="#modalLogout"><i class="ai-logout fs-lg opacity-70 me-2"></i>Log Out</a>
+                        <a class="dropdown-item next-link" href="/profile/"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Profile</a>
+                        <a class="dropdown-item next-link" href="javascriptVoid(0)" data-bs-toggle="modal" data-bs-target="#modalLogout"><i class="ai-logout fs-lg opacity-70 me-2"></i>Log Out</a>
                     }
                 </div>
             </div>
@@ -64,10 +64,10 @@
                             <div class="d-lg-flex">
                                 <div class="mega-dropdown-column pt-1 pt-lg-3 pb-lg-4">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Home" ? "active" : "") " href="/">Home</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "") " href="/blogs">Blogs</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Home" ? "active" : "") " href="/">Home</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "") " href="/blogs">Blogs</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
                                     </ul>
                                 </div>
                                 <div class="mega-dropdown-column position-relative border-start zindex-3"></div>
@@ -79,22 +79,22 @@
                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown">
-                                <a class="dropdown-item  @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a>
+                                <a class="dropdown-item next-link  @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
+                                <a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item disabled @(ViewData["ActivePage"].ToString() == "Apps" ? "active" : "")" href="/apps">Apps</a>
+                                <a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Apps" ? "active" : "")" href="/apps">Apps</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "")" href="/blogs">Blogs</a>
+                                <a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "")" href="/blogs">Blogs</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item disabled" href="/archives">Archives</a>
+                                <a class="dropdown-item next-link disabled" href="/archives">Archives</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item disabled" href="/shop">Shop</a>
+                                <a class="dropdown-item next-link disabled" href="/shop">Shop</a>
                             </li>
                         </ul>
                     </li>
@@ -118,21 +118,21 @@
                             <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">@ViewData["role"]</h6>
                             @if (ViewData["role"].ToString() == "guest")
                             {
-                                <a class="dropdown-item" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
+                                <a class="dropdown-item next-link" href="/account/login"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Log In</a>
                             }
                             @if (ViewData["role"].ToString() == "admin")
                             {
-                                <a class="dropdown-item" href="/admin"><i class="ai-settings fs-lg opacity-70 me-2"></i>Admin Panel</a>
+                                <a class="dropdown-item next-link" href="/admin"><i class="ai-settings fs-lg opacity-70 me-2"></i>Admin Panel</a>
                             }
-                            <a class="dropdown-item" href="/personalize"><i class="ai-paint-roll fs-lg opacity-70 me-2"></i>Personalize</a>
+                            <a class="dropdown-item next-link" href="/personalize"><i class="ai-paint-roll fs-lg opacity-70 me-2"></i>Personalize</a>
 
 
                             @if (ViewData["role"].ToString() == "admin" || ViewData["role"].ToString() == "user")
                             {
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">Account</h6>
-                                <a class="dropdown-item" href="/profile"><i class="ai-settings fs-lg opacity-70 me-2"></i>Profile</a>
-                                <a class="dropdown-item" href="javascriptVoid(0)" data-bs-toggle="modal" data-bs-target="#modalLogout"><i class="ai-logout fs-lg opacity-70 me-2"></i>Log Out</a>
+                                <a class="dropdown-item next-link" href="/profile"><i class="ai-settings fs-lg opacity-70 me-2"></i>Profile</a>
+                                <a class="dropdown-item next-link" href="javascriptVoid(0)" data-bs-toggle="modal" data-bs-target="#modalLogout"><i class="ai-logout fs-lg opacity-70 me-2"></i>Log Out</a>
                             }
                         </div>
                     </li>

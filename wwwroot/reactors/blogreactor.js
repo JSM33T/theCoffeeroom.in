@@ -27,13 +27,15 @@ const CategorisedBlogComponent = {
     methods: {
         async loadDefault() {
             try {
+                startProg()
                 const response = await axios.get('/api/blogs/0/' + this.param1 + '/' + this.param2);
                 const data = response.data;
                 this.blogs = data;
             } catch (error) {
                 console.error('Error fetching data from API:', error);
             } finally {
-                    this.isLoading = false;
+                this.isLoading = false;
+                endProg();
             }
         },
     },
@@ -131,6 +133,7 @@ const HomeComponent = {
             behavior: 'smooth',
         });
         try {
+            startProg()
             const response = await axios.get('/api/blogs/0/na/na');
             const data = response.data;
             this.blogs = data;
@@ -138,7 +141,8 @@ const HomeComponent = {
         } catch (error) {
             console.error('Error fetching data from API:', error);
         } finally {
-                this.isLoading = false;
+            this.isLoading = false;
+            endProg();
         }
     },
     watch: {
@@ -161,6 +165,7 @@ const HomeComponent = {
     methods: {
         async loadDefaults() {
             try {
+                startProg()
                 const response = await axios.get('/api/blogs/0/na/na');
                 const data = response.data;
                 this.blogs = data;
@@ -169,6 +174,7 @@ const HomeComponent = {
                 console.error('Error fetching data from API:', error);
             } finally {
                 this.isLoading = false;
+                endProg();
             }
         },
         async loadSearches(newSearchValue) {
