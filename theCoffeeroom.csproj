@@ -11,28 +11,24 @@
     <Compile Remove="Controllers\Dedicated\Apps\**" />
     <Compile Remove="Controllers\Routers\Apps\**" />
     <Compile Remove="Views\Magazines\Content\**" />
-    <Compile Remove="Views\Studio\Content\**" />
     <Compile Remove="wwwroot\content\blogcontent\global\**" />
     <Compile Remove="wwwroot\content\musiccontent\**" />
     <Compile Remove="wwwroot\logs\**" />
     <Content Remove="Controllers\Dedicated\Apps\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Views\Magazines\Content\**" />
-    <Content Remove="Views\Studio\Content\**" />
     <Content Remove="wwwroot\content\blogcontent\global\**" />
     <Content Remove="wwwroot\content\musiccontent\**" />
     <Content Remove="wwwroot\logs\**" />
     <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Views\Magazines\Content\**" />
-    <EmbeddedResource Remove="Views\Studio\Content\**" />
     <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
     <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
     <None Remove="Controllers\Dedicated\Apps\**" />
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Views\Magazines\Content\**" />
-    <None Remove="Views\Studio\Content\**" />
     <None Remove="wwwroot\content\blogcontent\global\**" />
     <None Remove="wwwroot\content\musiccontent\**" />
     <None Remove="wwwroot\logs\**" />
@@ -41,17 +37,16 @@
   <ItemGroup>
     <Folder Include="Views\Archive\Content\" />
     <Folder Include="Views\Shop\Content\" />
+    <Folder Include="Views\Studio\Content\Podcasts\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
+    <Folder Include="wwwroot\assets\images\github\" />
     <Folder Include="wwwroot\assets\vendor\jarallax\typings\" />
     <Folder Include="wwwroot\content\appcontent\" />
     <Folder Include="wwwroot\content\archivecontent\" />
     <Folder Include="wwwroot\content\gallerycontent\the-birdies\lossless\" />
     <Folder Include="wwwroot\content\gallerycontent\the-birdies\thumbs\" />
-    <Folder Include="wwwroot\content\studiocontent\albums\Thecoffeeroom Bootleg Compilation%282023%29\mp3\" />
-    <Folder Include="wwwroot\content\studiocontent\albums\Thecoffeeroom Bootleg Compilation%282023%29\flac\" />
     <Folder Include="wwwroot\content\studiocontent\global\" />
     <Folder Include="wwwroot\content\studiocontent\radio-cuts\" />
-    <Folder Include="wwwroot\content\studiocontent\singles\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -45,7 +45,7 @@ const CategorisedBlogComponent = {
         };
     },
     template: `
-                        <h1 class="pb-3 pb-lg-4" id="titleBlog">{{titleItem}}</h1>
+        <h1 class="pb-3 pb-lg-4" id="titleBlog">{{titleItem}}</h1>
         <div v-if="isLoading">
            <article class="row g-0 border-0 mb-4">
               <a class="col-sm-5 rounded-5 placeholder placeholder-wave" style="min-height:14rem"></a>
@@ -64,7 +64,7 @@ const CategorisedBlogComponent = {
         </div>
         <div v-else>
            <div v-for="blog in blogs" :key="blog.title">
-              <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
+              <article class="row g-0 border-0 mb-4 fade-in">
                  <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
                  <div class="col-sm-7">
                     <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
@@ -97,7 +97,7 @@ const HomeComponent = {
         <div v-else>
          <div v-if="blogs.length > 0">
             <div v-for="blog in blogs" :key="blog.title">
-              <article class="row g-0 border-0 mb-4 fade-in-smooth-pop">
+              <article class="row g-0 border-0 mb-4 fade-in">
                  <a class="col-sm-5 bg-repeat-0 bg-size-cover bg-position-center rounded-5" v-bind:href="'/blog/' + blog.datePosted.substring(0,4) + '/' + blog.urlHandle " v-bind:style="{ 'background-image': 'url(/content/blogcontent/' + blog.datePosted.substring(0, 4) + '/' + blog.urlHandle + '/cover.jpg)', 'min-height': '14rem' }"></a>
                  <div class="col-sm-7">
                     <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
@@ -112,7 +112,7 @@ const HomeComponent = {
            </div>
          </div>
          <div v-else>
-            <h1 class="fade-in-smooth-pop">no blogs found!!</h1>
+            <h1 class="fade-in">no blogs found!!</h1>
          </div>
         
         </div>

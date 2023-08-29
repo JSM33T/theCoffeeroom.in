@@ -253,8 +253,7 @@ html {
 
 
 .toast {
-    bottom: 6px;
-    right: 6px;
+    top: 30px;
     position: fixed;
     z-index: 9999;
     border-color: var(--ar-primary);

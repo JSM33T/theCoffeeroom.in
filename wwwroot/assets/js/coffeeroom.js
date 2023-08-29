@@ -139,7 +139,21 @@ function load_images_temp() {
 }
 
 function toaster(title, message) {
-    //removed trim from message and title
+
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const seconds = currentTime.getSeconds();
+    let ampm = 'am';
+
+    if (hours >= 12) {
+        ampm = 'pm';
+    }
+
+    let formattedHours = hours % 12;
+    formattedHours = formattedHours === 0 ? 12 : formattedHours;
+
+    document.getElementById("toastTime").innerText = formattedHours + ":" + minutes +" "+ ampm;
     document.getElementById("toastBody").innerText = message;
     document.getElementById("toastTitle").innerText = title;
     var toastElement = document.getElementById("toastBox");

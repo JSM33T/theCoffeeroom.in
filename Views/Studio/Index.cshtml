@@ -5,6 +5,15 @@
     ViewData["ActivePage"] = "Music";
 }
 
+@section cssStyles{
+    <style>
+        .noclick {
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
+}
 
 <section class="container py-5 mt-5 mb-xl-3 mb-xxl-5">
     <div class="row pt-2">
@@ -174,77 +183,77 @@
         <!-- Grid of portfolio items-->
         <div class="masonry-grid" data-columns="4">
             <!-- Item-->
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
-                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 512px;">
-                    <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/07.jpg" alt="Image"></div>
-                    </div>
-                    <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/single/title">Titli</a></h2>
-                        <div class="d-flex justify-content-between fs-lg text-muted"><span>Drum and Bass Bootleg</span><span>2019</span></div>
-                    </div>
-                </div>
-            </article>
-            <!-- Item-->
             <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 704px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/08.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/albums/tcr-bootlet-compilation-2023/cover_thumb.png" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Coffeeroom Bootlegs</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/tcr-bootleg-compilation-2023">Coffeeroom Bootlegs</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>various artists</span><span>2023</span></div>
                     </div>
                 </div>
             </article>
-            <!-- Item-->
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
-                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 467px;">
+
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 512px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/09.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/singles/titli/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Bulleya</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/single/titli-remix">Titli</a></h2>
+                        <div class="d-flex justify-content-between fs-lg text-muted"><span>Drum and Bass Bootleg</span><span>2019</span></div>
+                    </div>
+                </div>
+            </article>
+          
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;single&quot;]">
+                <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 467px;">
+                    <div class="zoom-effect-wrapper">
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/singles/bulleya/cover_thumb.jpg" alt="Image"></div>
+                    </div>
+                    <div class="pt-4 mt-lg-2">
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/single/bulleya-remix">Bulleya</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>single, Packaging</span><span>2019</span></div>
                     </div>
                 </div>
             </article>
             <!-- Item-->
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;single&quot;]">
                 <div class="zoom-effect position-relative border-bottom ms-auto pb-3" style="max-width: 605px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/10.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/singles/kabhi-jo-baadal-barse/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Kabhi Jo Badal Barse</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/single/kabhi-jo-baadal-barse-orchestral.cshtml">Kabhi Jo Badal Barse</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>Orchestral Rendition</span><span>2019</span></div>
                     </div>
                 </div>
             </article>
             <!-- Item-->
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;album&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/albums/recuerdos-2/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Recuerdos 2</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/recuerdos-2">Recuerdos 2</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2019</span></div>
                     </div>
                 </div>
             </article>
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;album&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/albums/recuerdos-1/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="portfolio-single-v2.html">Recuerdos 1</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/recuerdos-1">Recuerdos 1</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>single, album</span><span>2016-17</span></div>
                     </div>
                 </div>
             </article>
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;collection&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;collection&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
                     <div class="zoom-effect-wrapper">
                         <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
@@ -255,7 +264,7 @@
                     </div>
                 </div>
             </article>
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;collection&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;collection&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
                     <div class="zoom-effect-wrapper">
                         <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
@@ -267,7 +276,7 @@
                 </div>
             </article>
 
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;podcast&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;podcast&quot;]">
                 <div class="zoom-effect position-relative border-bottom pb-3" style="max-width: 550px;">
                     <div class="zoom-effect-wrapper">
                         <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/11.jpg" alt="Image"></div>
@@ -279,10 +288,10 @@
                 </div>
             </article>
             <!-- Item-->
-            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;single&quot;]">
+            <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5 noclick opacity-30" data-groups="[&quot;single&quot;]">
                 <div class="zoom-effect position-relative border-bottom mx-auto pb-3" style="max-width: 470px;">
                     <div class="zoom-effect-wrapper">
-                        <div class="zoom-effect-img"><img src="assets/img/portfolio/grid/12.jpg" alt="Image"></div>
+                        <div class="zoom-effect-img"><img src="/content/studiocontent/singles/melancholy/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
                         <h2 class="h4 mb-2"><a class="stretched-link" href="/music/melancholy">Melancholy</a></h2>
@@ -293,91 +302,6 @@
         </div>
         <!-- Button-->
         <div class="text-center pb-sm-2 pb-md-4 mt-n1 mt-lg-n2"><a class="btn btn-lg btn-outline-dark rounded-0" href="#">Let's work together</a></div>
-    </div>
-</section>
-<section class="container pt-2 pt-xxl-3 pb-5 mb-sm-2 mb-lg-3 mb-xl-4 mb-xxl-5">
-    <div class="row pb-md-3">
-        <div class="col-md-4 mb-2 mb-sm-3 mb-md-4 pb-2" style="margin-top: -120px;">
-            <div class="position-sticky top-0" style="padding-top: 120px;">
-                <h2 class="display-3 mb-0 mb-md-3 pb-lg-3">Featured Artists</h2><a class="btn btn-lg btn-link px-0" href="#">View all 16 members<i class="ai-arrow-right ms-2"></i></a>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row row-cols-1 row-cols-sm-2 g-4">
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/01.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-stack-overflow rounded-circle mx-2" href="#"><i class="ai-stack-overflow"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Nick Black</h3><span class="fs-lg text-muted">Web Designer</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/02.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-instagram rounded-circle mx-2" href="#"><i class="ai-instagram"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Emilia Denver</h3><span class="fs-lg text-muted">Identity Designer</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/03.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-twitter rounded-circle mx-2" href="#"><i class="ai-twitter"></i></a><a class="btn btn-light btn-icon btn-sm btn-google rounded-circle mx-2" href="#"><i class="ai-google"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Jane Cooper</h3><span class="fs-lg text-muted">Marketing Coordinator</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/04.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Jenny Wilson</h3><span class="fs-lg text-muted">Web Designer</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 me-sm-1 pe-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/05.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-instagram rounded-circle mx-2" href="#"><i class="ai-instagram"></i></a><a class="btn btn-light btn-icon btn-sm btn-dribbble rounded-circle mx-2" href="#"><i class="ai-dribbble"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Robert Fox</h3><span class="fs-lg text-muted">Graphic Designer</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card-hover pb-3 mb-lg-2 mb-xl-3 ms-sm-1 ps-xl-3">
-                        <div class="position-relative">
-                            <img src="assets/img/landing/creative-agency/team/06.jpg" alt="Image">
-                            <div class="d-flex justify-content-center position-absolute start-0 bottom-0 w-100 px-3 mb-4 opacity-0"><a class="btn btn-light btn-icon btn-sm btn-facebook rounded-circle mx-2" href="#"><i class="ai-facebook"></i></a><a class="btn btn-light btn-icon btn-sm btn-twitter rounded-circle mx-2" href="#"><i class="ai-twitter"></i></a><a class="btn btn-light btn-icon btn-sm btn-behance rounded-circle mx-2" href="#"><i class="ai-behance"></i></a></div>
-                        </div>
-                        <div class="border-bottom pt-4 pb-3">
-                            <h3 class="h4 mb-2">Jacob Jones</h3><span class="fs-lg text-muted">Branding Designer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 @section cssLib{

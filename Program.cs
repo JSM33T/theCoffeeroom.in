@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using theCoffeeroom.Interfaces;
 using theCoffeeroom.Repositories;
@@ -17,7 +18,6 @@ builder.Services.AddSession(options =>
 
 //DA service
 builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
-//builder.Services.AddScoped<ViewRenderService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie(options =>
        {
@@ -66,5 +66,4 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();

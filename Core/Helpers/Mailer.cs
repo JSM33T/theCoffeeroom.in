@@ -13,19 +13,6 @@ namespace theCoffeeroom.Core.Helpers
             // string tobase64 = encrotp.Replace('/', '_');
             try
             {
-                //MailMessage message = new();
-                //message.From = new MailAddress("mail@jsm33t.com","Jsm33t.com");
-                //message.To.Add(email);
-                //message.Subject = subject;
-                //message.Body = body;
-                //message.IsBodyHtml = true;
-                //SmtpClient smtpClient = new();
-                //smtpClient.Host = "jsm33t.com";
-                //smtpClient.Port = 587; // or 465 for SSL
-                //smtpClient.EnableSsl = false; // or true for SSL
-                //smtpClient.Credentials = new NetworkCredential("mail@jsm33t.com", ConfigHelper.WebMailKey.ToString());
-                //smtpClient.Timeout = 10000;
-                //smtpClient.Send(message);
                 MailMessage message = new MailMessage
                 {
                     From = new MailAddress("mail@thecoffeeroom.in", "thecoffeeroom.in"),
