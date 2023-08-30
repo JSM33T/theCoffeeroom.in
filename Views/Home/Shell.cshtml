@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery Shelly: Web-based Shell Terminal Emulator Examples</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-13/css/all.min.css"
+          integrity="sha512-MdXcgiHaL1yFyNjJtThjw0XkwR8tcd1aDcewr+2/whtekkfCbr79HXBNVQB4x+cVZKwnVt1mm3fP1Amj0cGClw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/shell/css/style.css">
+    <link rel="stylesheet" href="/shell/css/sample.css">
+    
+</head>
+<body>
+    <div class="shell" id="command-line">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/shell/js/Queue.src.js"></script>
+    <script src="/shell/js/textTyper.js"></script>
+    <script src="/shell/js/shelly.js"></script>
+
+    <script>        let shell = $("#command-line").shell({  // calls the init method
+            enableGlitch: false,
+            User: "guest",
+            startup: function (shell) {
+                shell.print(" shell", "<i class='fab fa-linux carrot'></i>");
+
+            }
+        });
+
+        shell.register("exit", function (shell, command) {
+            window.location.href = '/';
+        });
+
+        shell.register("clean", function (shell, command) {
+            window.scrollTo(0, document.body.scrollHeight);
+            shell.print(" shell", "1. Localstorage");
+            shell.print(" shell", "2. Cookies");
+            shell.print(" shell", "3. ClearAll");
+            shell.register("1", function (shell, command) {
+                alert("1 pressed");
+
+            });
+            shell.register("2", function (shell, command) {
+                alert("2 pressed");
+            });
+        });
+        
+
+        let variables = {};
+
+       
+
+    </script>
+</body>
+</html>

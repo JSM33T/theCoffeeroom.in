@@ -11,10 +11,21 @@ namespace theCoffeeroom.Controllers.Tests
     {
 
 
-        [Route("/test")]
+        [Route("/testfallback")]
         public IActionResult Index()
         {
-            return View();
+            // Path to the fallback HTML file
+            string fallbackFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fallback.html");
+
+            if (System.IO.File.Exists(fallbackFilePath))
+            {
+                // Read and serve the fallback HTML file
+                return PhysicalFile(fallbackFilePath, "text/html");
+            }
+            else
+            {
+                return NotFound(); // Fallback file not found
+            }
         }
 
         [HttpGet]

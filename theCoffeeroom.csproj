@@ -54,6 +54,9 @@
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="wwwroot\scripts\batch\adminperm.bat" />
     <None Include="wwwroot\scripts\batch\deploy.bat" />
+    <None Include="wwwroot\shell\js\Queue.src.js" />
+    <None Include="wwwroot\shell\js\shelly.js" />
+    <None Include="wwwroot\shell\js\textTyper.js" />
   </ItemGroup>
 
   <ItemGroup>
