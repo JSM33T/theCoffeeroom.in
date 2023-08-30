@@ -1,5 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    
+    ViewData["Title"] ??= "The Coffee Room";
+    ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography,magazines, creative";
+    ViewData["Description"] ??= "The Coffee Room";
+    ViewData["Authors"] ??= "Jass and others";
+    ViewData["ActivePage"] = "Home";
 }
 
 @section cssStyles{

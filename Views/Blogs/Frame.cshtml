@@ -15,6 +15,13 @@
         ViewData["BlogRole"] = "guest";
     }
 }
+@section cssStyles{
+    <style>
+        .liked{
+            
+        }
+    </style>
+} 
 
 @Html.AntiForgeryToken()
 
@@ -36,6 +43,7 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
                 <div class="d-flex align-items-center mb-4 me-4"><span class="fs-sm me-2">By:</span><span class=" position-relative fw-semibold p-0"><span id="authorsPlaceholder2"></span></span></div>
                 <div class="d-flex align-items-center mb-4">
+                    <button type="button" id="likeButton" class="fs-sm me-2 btn btn-sm btn-outline-secondary rounded-pill"><i class="ai-heart-filled liked"></i>&nbsp23</button>
                     <button type="button" id="shareButton" class="fs-sm me-2 btn btn-sm btn-outline-secondary rounded-pill"><i class="ai-share"></i></button>
                 </div>
             </div>
@@ -484,7 +492,81 @@
             
         }
 
+        function loadComments() {
+            const roleData = "@ViewData["BlogRole"]";
+            const data = {
+                Slug: '@Model.Slug'
+            };
 
+            axios.post("/api/blog/comments/load", data, config)
+                .then((response) => {
+                    response.data.sort((a, b) => a.id - b.id);
+                    let commentsHTML = "";
+                    if (response.data.length == 0) {
+                        commentsHTML = "";
+                    }
+                    else {
+                        for (let i = 0; i < response.data.length; i++) {
+                            const comment = response.data[i];
+                            var c = i + 1;
+                            commentsHTML += '<div class="border-bottom py-4 mt-2 mb-4">' +
+                                '<div class="d-flex align-items-center pb-1 mb-3"> <img class="rounded-circle" src="/assets/images/avatars/default/' + comment.avatar + '.png" width="48" alt="Comment author">' +
+                                '<div class="ps-3">' +
+                                '<h6 class="mb-0">' + comment.fullname + ' </h6><span class="fs-sm text-muted">' + comment.date + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="btn-group-sm me-2 ml-2 mx-2" style="float:right;" role="group" aria-label="Settings group">' +
+                                (roleData !== 'guest' ? '<button type="button" id="repl_' + comment.id + '" onclick="cmntReply(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-redo"></i></button>&nbsp;' : '') +
+                                (comment.edit ? '<button type="button" id="edt_' + comment.id + '" onclick="cmntEdit(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
+                                (comment.edit ? '<button type="button" id="dlt_' + comment.id + '" onclick="cmntDelete(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
+                                '</div>' +
+                                '<span class="pb-2 mb-0" id="cm_' + comment.id + '">' + comment.comment + '</span>';
+
+                            if (comment.replies && comment.replies.length > 0) {
+                                comment.replies.sort((a, b) => a.replyId - b.replyId);
+                                for (let j = 0; j < comment.replies.length; j++) {
+                                    const reply = comment.replies[j];
+                                    commentsHTML +=
+                                        '<div class="card card-body border-0 bg-secondary mt-4">' +
+                                        '    <div class="d-flex align-items-center pb-1 mb-3">' +
+                                        '        <img class="rounded-circle" src="/assets/images/avatars/default/' + reply.replyAvatar + '.png" width="48" alt="Comment author">' +
+                                        '        <div class="ps-3">' +
+                                        '            <h6 class="mb-0">' + reply.replyFullName + '</h6><span class="fs-sm text-muted">' + reply.replyDate + '</span>' +
+                                        '        </div>' +
+                                        '    </div>' +
+                                        '    <div class="d-flex align-items-center justify-content-between mb-3" role="group" aria-label="Settings group">' +
+                                        '        <p class="mb-0"><a class="fw-bold text-decoration-none" href="#">@@' + comment.username + '</a>&nbsp;&nbsp;<span id="reply_' + reply.replyId + '">' + reply.replyComment + '</span></p>' +
+                                        '        <div>' +
+                                        (reply.replyEdit ? '<button type="button" id="edt' + reply.replyId + '" onclick="replyEdit(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
+                                        (reply.replyEdit ? '<button type="button" id="repldlt_' + reply.replyId + '" onclick="replyDelete(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
+                                        '        </div>' +
+                                        '    </div>' +
+                                        '</div>';
+
+                                }
+                            }
+                            commentsHTML += `</div>`;
+                        }
+                    }
+
+                    document.getElementById("comments").innerHTML = commentsHTML;
+                    document.getElementById("blogcount").innerHTML = c;
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        const errorMessage = error.response.data.error;
+                        console.error(errorMessage);
+                    } else if (error.request) {
+                        console.error('Network error:', error.request);
+                    } else {
+                        console.error('Error:', error.message);
+
+                    }
+                    document.getElementById("comments").innerHTML = "";
+                    document.getElementById("blogcount").innerHTML = "0";
+
+                });
+        }
     </script>
     <script>
       
@@ -531,86 +613,14 @@
                         element.setAttribute("src", modifiedString);
                     });
                 }
-                const loadComments = async () =>{
-                    const roleData = "@ViewData["BlogRole"]";
-                    const data = {
-                        Slug: '@Model.Slug'
-                    };
-
-                    axios.post("/api/blog/comments/load", data, config)
-                        .then((response) => {
-                             response.data.sort((a, b) => a.id - b.id);
-                            let commentsHTML = "";
-                            if (response.data.length == 0) {
-                                commentsHTML = "";
-                            }
-                            else {
-                                for (let i = 0; i < response.data.length; i++) {
-                                    const comment = response.data[i];
-                                    var c = i + 1;
-                                    commentsHTML += '<div class="border-bottom py-4 mt-2 mb-4">' +
-                                        '<div class="d-flex align-items-center pb-1 mb-3"> <img class="rounded-circle" src="/assets/images/avatars/default/' + comment.avatar + '.png" width="48" alt="Comment author">' +
-                                        '<div class="ps-3">' +
-                                        '<h6 class="mb-0">' + comment.fullname + ' </h6><span class="fs-sm text-muted">' + comment.date + '</span>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '<div class="btn-group-sm me-2 ml-2 mx-2" style="float:right;" role="group" aria-label="Settings group">' +
-                                        (roleData !== 'guest' ? '<button type="button" id="repl_' + comment.id + '" onclick="cmntReply(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-redo"></i></button>&nbsp;' : '') +
-                                        (comment.edit ? '<button type="button" id="edt_' + comment.id + '" onclick="cmntEdit(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
-                                        (comment.edit ? '<button type="button" id="dlt_' + comment.id + '" onclick="cmntDelete(' + comment.id + ')" class="btn btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
-                                        '</div>' +
-                                        '<span class="pb-2 mb-0" id="cm_' + comment.id + '">' + comment.comment + '</span>';
-
-                                    if (comment.replies && comment.replies.length > 0) {
-                                        comment.replies.sort((a, b) => a.replyId - b.replyId);
-                                        for (let j = 0; j < comment.replies.length; j++) {
-                                            const reply = comment.replies[j];
-                                            commentsHTML +=
-                                                '<div class="card card-body border-0 bg-secondary mt-4">' +
-                                                '    <div class="d-flex align-items-center pb-1 mb-3">' +
-                                                '        <img class="rounded-circle" src="/assets/images/avatars/default/' + reply.replyAvatar + '.png" width="48" alt="Comment author">' +
-                                                '        <div class="ps-3">' +
-                                                '            <h6 class="mb-0">' + reply.replyFullName + '</h6><span class="fs-sm text-muted">' + reply.replyDate + '</span>' +
-                                                '        </div>' +
-                                                '    </div>' +
-                                                '    <div class="d-flex align-items-center justify-content-between mb-3" role="group" aria-label="Settings group">' +
-                                                '        <p class="mb-0"><a class="fw-bold text-decoration-none" href="#">@@' + comment.username + '</a>&nbsp;&nbsp;<span id="reply_' + reply.replyId + '">' + reply.replyComment + '</span></p>' +
-                                                '        <div>' +
-                                                (reply.replyEdit ? '<button type="button" id="edt' + reply.replyId + '" onclick="replyEdit(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-edit"></i></button>&nbsp;' : '') +
-                                                (reply.replyEdit ? '<button type="button" id="repldlt_' + reply.replyId + '" onclick="replyDelete(' + reply.replyId + ')" class="btn btn-sm btn-secondary btn-icon px-2"><i class="ai-trash"></i></button>&nbsp;' : '') +
-                                                '        </div>' +
-                                                '    </div>' +
-                                                '</div>';
-
-                                        }
-                                    }
-                                    commentsHTML += `</div>`;
-                                }
-                            }
-
-                            document.getElementById("comments").innerHTML = commentsHTML;
-                            document.getElementById("blogcount").innerHTML = c;
-                        })
-                        .catch((error) => {
-                            if (error.response) {
-                                const errorMessage = error.response.data.error;
-                                console.error(errorMessage);
-                            } else if (error.request) {
-                                console.error('Network error:', error.request);
-                            } else {
-                                console.error('Error:', error.message);
-
-                            }
-                            document.getElementById("comments").innerHTML = "";
-                            document.getElementById("blogcount").innerHTML = "0";
-
-                        });
+                const loadCommentsV = async () =>{
+                    loadComments();
                 }
                 return {
                     loadTags,
                     loadAuthors,
                     lazyloadImages,
-                    loadComments
+                    loadCommentsV
 
                 };
             },
@@ -618,7 +628,7 @@
                 await this.lazyloadImages();
                 await this.loadTags();
                 await this.loadAuthors();
-                await this.loadComments();
+                await this.loadCommentsV();
                 //await this.replyMdl();
             }
         });
