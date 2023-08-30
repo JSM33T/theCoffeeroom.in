@@ -61,7 +61,7 @@ namespace theCoffeeroom.Repositories
                 {
                     return new DataSave 
                     { 
-                        Status = true,
+                        Status = false,
                         Message = "Email is already submitted", 
                         Type = false 
                     };

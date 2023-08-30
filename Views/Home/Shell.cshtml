@@ -23,16 +23,23 @@
     <script src="/shell/js/textTyper.js"></script>
     <script src="/shell/js/shelly.js"></script>
 
-    <script>        let shell = $("#command-line").shell({  // calls the init method
+    <script>        let shell = $("#command-line").shell({ 
             enableGlitch: false,
             User: "guest",
             startup: function (shell) {
                 shell.print(" shell", "<i class='fab fa-linux carrot'></i>");
-
             }
         });
 
         shell.register("exit", function (shell, command) {
+            window.location.href = '/';
+        });
+
+          shell.register("founders", function (shell, command) {
+            window.location.href = '/';
+        });
+
+        shell.register("credits", function (shell, command) {
             window.location.href = '/';
         });
 
@@ -43,7 +50,6 @@
             shell.print(" shell", "3. ClearAll");
             shell.register("1", function (shell, command) {
                 alert("1 pressed");
-
             });
             shell.register("2", function (shell, command) {
                 alert("2 pressed");
