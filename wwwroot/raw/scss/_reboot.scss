@@ -1,0 +1,118 @@
+//
+// Reboot
+// --------------------------------------------------
+
+
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Sticky footer
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.page-wrapper {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+// Root
+:root {
+  --#{$prefix}user-selection-color: #{$user-selection-color};
+  --#{$prefix}heading-color: #{$headings-color};
+  --#{$prefix}heading-font-weight: #{$headings-font-weight};
+  --#{$prefix}heading-link-color: #{$nav-link-color};
+  --#{$prefix}heading-link-hover-color: #{$nav-link-hover-color};
+  --#{$prefix}blockquote-color: #{$blockquote-color};
+  --#{$prefix}blockquote-font-size: #{$blockquote-font-size};
+  --#{$prefix}blockquote-footer-color: #{$blockquote-footer-color};
+  --#{$prefix}blockquote-footer-font-size: #{$blockquote-footer-font-size};
+  --#{$prefix}blockquote-mark-size: #{$blockquote-mark-size};
+  --#{$prefix}blockquote-mark-color: #{$blockquote-mark-color};
+  --#{$prefix}nav-link-color: #{$nav-link-color};
+}
+
+// Links
+a {
+  transition: $link-transition;
+  &:focus { outline: none; }
+}
+
+// Background transition for links
+a[class^='bg-']:not(.btn),
+a[class*='bg-']:not(.btn) {
+  transition: background-color .25s ease;
+}
+
+
+// Images
+// Responsive images (ensure images don't scale beyond their parents)
+img,
+figure {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+svg { max-width: 100%; }
+.dark-mode-img { display: none; }
+
+// Responsive iframes
+iframe {
+  width: 100%;
+}
+
+// Text Selection Color
+::selection {
+  background: var(--#{$prefix}user-selection-color);
+}
+::-moz-selection {
+  background: var(--#{$prefix}user-selection-color);
+}
+
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+small { font-weight: inherit; }
+
+// Disable button :focus outline
+button:focus {
+  outline: none;
+}
+
+
+// Section that is wider that container on left/right side
+
+.container-start {
+  margin-left: calc((100% - (map-get($container-max-widths, 'xxl') - $grid-gutter-width)) / 2);
+}
+.container-end {
+  margin-right: calc((100% - (map-get($container-max-widths, 'xxl') - $grid-gutter-width)) / 2);
+}
+@include media-breakpoint-down(xxl) {
+  .container-start {
+    margin-left: calc((100% - (map-get($container-max-widths, 'xl') - $grid-gutter-width)) / 2);
+  }
+  .container-end {
+    margin-right: calc((100% - (map-get($container-max-widths, 'xl') - $grid-gutter-width)) / 2);
+  }
+}
+@include media-breakpoint-down(sm) {
+  .container-start,
+  .container-end {
+    width: 100%;
+    padding: 0 $grid-gutter-width * .5;
+    margin: {
+      right: auto;
+      left: auto;
+    }
+  }
+}

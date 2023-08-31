@@ -1,0 +1,302 @@
+//
+// Navbar
+// --------------------------------------------------
+
+
+// Brand
+
+.navbar-brand {
+  --#{$prefix}navbar-brand-padding-y: #{$navbar-brand-padding-y};
+  --#{$prefix}navbar-brand-margin-end: #{$navbar-brand-margin-end};
+  --#{$prefix}navbar-brand-font-size: #{$navbar-brand-font-size};
+  --#{$prefix}navbar-brand-font-weight: #{$navbar-brand-font-weight};
+
+  display: flex;
+  align-items: center;
+  padding: calc(var(--#{$prefix}navbar-brand-padding-y) * .5) 0;
+  font-weight: var(--#{$prefix}navbar-brand-font-weight);
+}
+
+
+// Navbar nav / collapse
+
+.navbar-collapse {
+  margin-top: $spacer;
+  border: $border-width solid transparent;
+  border-radius: var(--#{$prefix}border-radius-lg);
+}
+
+.navbar-nav {
+  --#{$prefix}nav-link-font-weight: #{$nav-link-font-weight};
+  --#{$prefix}mega-dropdown-column-width: #{$mega-dropdown-column-width};
+
+  padding: $spacer * .75 $spacer * 1.25;
+  .nav-link {
+    padding: {
+      top: calc(var(--#{$prefix}nav-link-padding-y) * .75);
+      bottom: calc(var(--#{$prefix}nav-link-padding-y) * .75);
+    }
+  }
+}
+
+
+// Menu toggler
+
+.navbar-toggler {
+  position: relative;
+  width: $navbar-toggler-bar-width + $navbar-toggler-padding-x * 2;
+  height: $navbar-toggler-bar-height * 3 + $navbar-toggler-bar-spacing * 2 + $navbar-toggler-padding-y * 2;
+}
+
+.navbar-toggler-icon {
+  display: block;
+  top: 50%;
+  margin-top: $navbar-toggler-bar-height * -.5;
+  transition-duration: 0.075s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  &, &::before, &::after {
+    position: absolute;
+    width: $navbar-toggler-bar-width;
+    height: $navbar-toggler-bar-height;
+    transition-property: transform;
+    background-color: var(--#{$prefix}navbar-toggler-color);
+  }
+  &::before, &::after {
+    display: block;
+    width: $navbar-toggler-bar-width * .7;
+    content: '';
+  }
+  &:after {
+    right: 0;
+  }
+  &::before {
+    top: ($navbar-toggler-bar-spacing + $navbar-toggler-bar-height) * -1;
+    transition: top 0.075s 0.12s ease, opacity 0.075s ease, width .15s ease-in-out;
+  }
+  &::after {
+    bottom: ($navbar-toggler-bar-spacing + $navbar-toggler-bar-height) * -1;
+    transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19), width .15s ease-in-out;
+  }
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+  &, &::before, &::after {
+    width: $navbar-toggler-bar-width;
+  }
+}
+
+[aria-expanded=true] {
+  .navbar-toggler-icon {
+    transform: rotate(45deg);
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    &::before, &::after {
+      width: $navbar-toggler-bar-width;
+    }
+    &::before {
+      top: 0;
+      opacity: 0;
+      transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+    }
+    &::after {
+      bottom: 0;
+      transform: rotate(-90deg);
+      transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+}
+
+
+// Navbar dropdowns
+
+.navbar {
+  .dropdown-toggle::after {
+    margin-top: .0625rem;
+    font-size: 1.25em;
+  }
+
+  .navbar-nav .dropdown-menu {
+    padding: {
+      top: calc(var(--#{$prefix}dropdown-padding-y) * .25);
+      bottom: calc(var(--#{$prefix}dropdown-padding-y) * .5);
+    }
+    border: 0;
+    border-left: var(--#{$prefix}dropdown-border-width, 1px) solid var(--#{$prefix}border-color);
+    @include border-radius(0);
+    background-color: transparent;
+    background: none;
+    box-shadow: none;
+    &.dropdown-menu-dark {
+      --#{$prefix}border-color: #{$dropdown-dark-border-color};
+    }
+    .dropdown-menu {
+      margin: {
+        right: .75rem;
+        left: .75rem;
+      }
+    }
+    .dropdown-toggle::after {
+      margin: {
+        top: -.0625rem;
+        right: 0;
+        left: .125rem;
+      }
+    }
+    .dropdown-divider { display: none; }
+    &[data-bs-popper] {
+      margin-top: 0;
+    }
+  }
+}
+
+// Dropdown animation
+@keyframes dropdown-show {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+// Styles for expanded navbar only
+
+.navbar-expand {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &#{$infix} {
+      @include media-breakpoint-up($next) {
+        .navbar-brand { padding: var(--#{$prefix}navbar-brand-padding-y) 0; }
+        .navbar-collapse {
+          margin-top: 0;
+          border: 0 !important;
+          background-color: transparent !important;
+        }
+        .navbar-nav {
+          padding: 0;
+          .nav-link {
+            padding: {
+              top: var(--#{$prefix}nav-link-padding-y);
+              bottom: var(--#{$prefix}nav-link-padding-y);
+            }
+          }
+        }
+        .offcanvas {
+          background-color: transparent !important;
+          @include box-shadow(none);
+        }
+        .offcanvas-header { display: none; }
+        .dropdown-divider { display: block; }
+        .navbar-nav .dropdown-menu {
+          padding: {
+            top: var(--#{$prefix}dropdown-padding-y);
+            bottom: var(--#{$prefix}dropdown-padding-y);
+          }
+          margin-top: var(--#{$prefix}dropdown-spacer) !important;
+          border: var(--#{$prefix}dropdown-border-width) solid var(--#{$prefix}dropdown-border-color);
+          @include border-radius(var(--#{$prefix}dropdown-border-radius));
+          background-color: var(--#{$prefix}dropdown-bg);
+          box-shadow: var(--#{$prefix}dropdown-box-shadow);
+        }
+        .dropdown-menu.show { display: none; }
+        .dropdown {
+          &::before {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: $dropdown-spacer + .125rem;
+            content: '';
+          }
+          &:hover > .dropdown-menu {
+            display: block;
+            animation: dropdown-show .25s cubic-bezier(.68, -.55, .265, 1.55);
+          }
+          .dropdown {
+            .dropdown-toggle {
+              display: flex;
+              align-items: center;
+              &::after {
+                margin: {
+                  top: 0;
+                  right: -.3125rem;
+                  left: auto;
+                }
+                font-size: 1.375em;
+                content: '\e939';
+              }
+            }
+            .dropdown-menu {
+              top: calc((var(--#{$prefix}dropdown-item-padding-y) + var(--#{$prefix}dropdown-padding-y)) * -1);
+              left: 100%;
+              margin: {
+                right: 0;
+                left: -.375rem;
+              }
+            }
+          }
+          .dropdown-menu-end {
+            left: auto;
+            right: 0;
+          }
+        }
+        .mega-dropdown-column {
+          width: var(--#{$prefix}mega-dropdown-column-width);
+          padding: 0 .5rem;
+
+          li:hover > .mega-dropdown-column.opacity-0 {
+            opacity: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// Navbar light (default)
+
+.navbar {
+  --#{$prefix}navbar-stuck-bg: var(--#{$prefix}light);
+  --#{$prefix}navbar-toggler-color: #{$navbar-light-toggler-bar-color};
+  --#{$prefix}navbar-collapse-bg: var(--#{$prefix}light);
+  --#{$prefix}navbar-collapse-border-color: var(--#{$prefix}border-color);
+
+  transition: $navbar-transition;
+  
+  &.navbar-stuck {
+    background-color: var(--#{$prefix}navbar-stuck-bg);
+  }
+  .navbar-collapse {
+    border-color: var(--#{$prefix}navbar-collapse-border-color);
+    background-color: var(--#{$prefix}navbar-collapse-bg);
+  }
+  .nav-item {
+    &:hover > .nav-link:not(.disabled),
+    .nav-link.show:not(.disabled) {
+      color: var(--#{$prefix}navbar-hover-color);
+    }
+    &.active > .nav-link:not(.disabled) {
+      color: var(--#{$prefix}navbar-active-color);
+    }
+  }
+  .dropdown:hover > .nav-link {
+    color: var(--#{$prefix}navbar-hover-color);
+  }
+}
+
+
+// Navbar dark
+
+.navbar-dark {
+  --#{$prefix}navbar-stuck-bg: var(--#{$prefix}dark);
+  --#{$prefix}navbar-toggler-color: #{$navbar-dark-toggler-bar-color};
+  --#{$prefix}navbar-collapse-bg: var(--#{$prefix}dark);
+  --#{$prefix}navbar-collapse-border-color: #{$border-light-color};
+}
