@@ -14,28 +14,24 @@
     <Compile Remove="wwwroot\content\blogcontent\global\**" />
     <Compile Remove="wwwroot\content\musiccontent\**" />
     <Compile Remove="wwwroot\logs\**" />
-    <Compile Remove="wwwroot\raw\js\components\**" />
     <Content Remove="Controllers\Dedicated\Apps\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Views\Magazines\Content\**" />
     <Content Remove="wwwroot\content\blogcontent\global\**" />
     <Content Remove="wwwroot\content\musiccontent\**" />
     <Content Remove="wwwroot\logs\**" />
-    <Content Remove="wwwroot\raw\js\components\**" />
     <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Views\Magazines\Content\**" />
     <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
     <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
-    <EmbeddedResource Remove="wwwroot\raw\js\components\**" />
     <None Remove="Controllers\Dedicated\Apps\**" />
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Views\Magazines\Content\**" />
     <None Remove="wwwroot\content\blogcontent\global\**" />
     <None Remove="wwwroot\content\musiccontent\**" />
     <None Remove="wwwroot\logs\**" />
-    <None Remove="wwwroot\raw\js\components\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,13 +52,6 @@
   <ItemGroup>
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="wwwroot\raw\js\customizer.js" />
-    <None Include="wwwroot\raw\scss\components\_modal.scss" />
-    <None Include="wwwroot\raw\scss\components\_nav.scss" />
-    <None Include="wwwroot\raw\scss\components\_navbar.scss" />
-    <None Include="wwwroot\raw\scss\components\_parallax.scss" />
-    <None Include="wwwroot\raw\scss\components\_toasts.scss" />
-    <None Include="wwwroot\raw\scss\theme.scss" />
     <None Include="wwwroot\scripts\batch\adminperm.bat" />
     <None Include="wwwroot\scripts\batch\deploy.bat" />
     <None Include="wwwroot\shell\js\Queue.src.js" />
