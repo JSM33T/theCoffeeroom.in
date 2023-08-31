@@ -33,27 +33,27 @@ namespace theCoffeeroom.Controllers.Dedicated
             string targetDirectory = "";
             if (Subdir1 == null)
             {
-                targetDirectory = "wwwroot/";
+                targetDirectory = "wwwroot/content/";
             }
             else if (Subdir2 == null)
             {
-                targetDirectory = "wwwroot/" + Subdir1.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower();
             }
             else if (Subdir3 == null)
             {
-                targetDirectory = "wwwroot/" + Subdir1.ToLower() + "/" + Subdir2.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower();
             }
             else if (Subdir4 == null)
             {
-                targetDirectory = "wwwroot/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower();
             }
             else if(Subdir5 == null)
             {
-                targetDirectory = "wwwroot/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower();
             }
              else
             {
-                targetDirectory = "wwwroot/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower() + "/"  + Subdir5.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower() + "/"  + Subdir5.ToLower();
             }
 
 

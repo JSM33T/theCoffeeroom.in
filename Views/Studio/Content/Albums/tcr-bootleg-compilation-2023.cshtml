@@ -1,29 +1,19 @@
 ﻿@{
-    bool isLoggedIn = false;
+    ViewData["FileBase"] = "/content/studiocontent/albums/tcr-bootleg-compilation-2023";
+    var baseadd = ViewData["FileBase"];
+    bool isLoggedIn = true;
     if (Context.Session.GetString("username") != null)
     {
         isLoggedIn = true;
     }
+    else
+    {
+        isLoggedIn = false;
+    }
+    
 }
 
 
-@* <section class="overflow-hidden bg-faded-primary">
-    <div class="container  pt-2 pt-sm-4 pb-sm-2 pb-md-4 py-xl-5 mt-5">
-        <div class="row align-items-center py-5 mt-md-2 my-lg-3 my-xl-4 my-xxl-5">
-            <div class="col-lg-7 order-lg-2 d-flex justify-content-center justify-content-lg-end mb-4 mb-md-5 mb-lg-0 pb-3 pb-md-0">
-                <div class="parallax me-lg-n4 me-xl-n5" style="max-width: 667px;">
-                    <div class="parallax-layer" data-depth="0.1"><img src="/content/studiocontent/albums/tcr-bootlet-compilation-2023/cover_thumb.png" alt="Layer"></div>
-                    <div class="parallax-layer" data-depth="-0.2"><img src="/assets/img/landing/business-consulting/hero/02.png" alt="Layer"></div>
-                    <div class="parallax-layer" data-depth="0.25"><img src="/assets/img/landing/business-consulting/hero/03.png" alt="Layer"></div>
-                </div>
-            </div>
-            <div class="col-lg-5 order-lg-1">
-                <h1 class="display-4 text-center text-lg-start">TheCoffeeroom Bootleg Compilation</h1>
-                <p class="fs-lg text-center text-lg-start pb-xl-2 mx-md-auto mx-sm-auto mb-5 editiontext" style="max-width: 420px;"><code>edition - 2023</code></p>
-            </div>
-        </div>
-    </div>
-</section> *@
 <section class="position-relative pt-sm-3 pt-md-5 mb-xl-3 mb-xxl-5">
     <div class="position-absolute top-0 end-0 overflow-hidden mt-n5 mt-md-0">
         <svg class="d-block mt-n5 mt-md-0 me-md-n5 me-xxl-0" width="1207" height="894" viewBox="0 0 1207 894" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: var(--ar-gray-100);">
@@ -64,18 +54,21 @@
             <!-- Text-->
             <div class="col-md-7 col-lg-6 col-xxl-5 order-md-1 position-relative zindex-3 text-center text-md-start pb-sm-3 pb-md-5 pt-4 mb-md-5 mt-2">
                 <h1 class="display-3 text-uppercase mb-sm-4">
-                    <span class='fw-medium'>Choose only</span> <span class='text-info fw-bold'>high quality sound</span><img class="d-none d-xl-inline-block align-middle ms-3" src="/assets/img/landing/product/soundwave.svg" width="200" alt="Sound wave">
+                    <span class='fw-medium'>The Coffeeroom</span> <span class='text-info fw-bold'>Bootlegs</span>
                 </h1>
                 <div class="mx-auto mx-md-0" style="max-width: 400px;">
-                    <p class="pb-2 pb-lg-0 mb-4 mb-lg-5">Now you can fully hear every detail and experience superior sound with a wide soundstage with deep tight bass that will surprise you.</p><a class="btn btn-outline-dark" href="#">Support us on Kickstarter</a>
+                    <p class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+                        5 of our bass fueld tracks, remasatered.Available in mp3 and HQ flacs.
+                    </p>
+                    <a class="btn btn-outline-dark" href="#">Support us on Kickstarter</a>
                     <div class="d-flex justify-content-center justify-content-md-between pt-4 pt-sm-5 mt-2 mt-sm-0 mt-lg-4 mt-xl-5 ms-md-n3">
                         <div class="px-3">
-                            <div class="h4 mb-1">60-200 Hz</div>
-                            <div class="fs-sm">frequency range</div>
+                            <div class="h4 mb-1">mp3/flac</div>
+                            <div class="fs-sm">versions</div>
                         </div>
                         <div class="px-3">
-                            <div class="h4 mb-1">0.75 kg</div>
-                            <div class="fs-sm">weight, kg</div>
+                            <div class="h4 mb-1">A-shay</div>
+                            <div class="fs-sm"></div>
                         </div>
                         <div class="px-3">
                             <div class="h4 mb-1">60 h</div>
@@ -86,27 +79,31 @@
                     <div class="d-none d-md-block d-xxl-none" style="height: 240px;"></div>
                     <div class="d-md-none" style="height: 50px;"></div>
                     <div data-aos="fade-up" data-aos-duration="800" data-aos-offset="250" data-disable-parallax-down="md">
-                        <h2 class="h1 pb-sm-2 pb-md-3">You can take the music anywhere in posuere the music</h2>
-                        <p>Turpis nullam netus sed aliquam consectetur at felis  consequat tincidunt orci varius arcu urna neque eget maecenas consequat lacus habitasse adipiscing in.</p><a class="btn btn-link text-dark px-0" href="#">Read more<i class="ai-arrow-right ms-2"></i></a>
+                        <h2 class="h1 pb-sm-2 pb-md-3">Bass-Fueled</h2>
+                        <p>
+                       Presenting you the rhythms of future bass and drum and bass seamlessly blended with iconic Bollywood tracks, creating a fusion that's both nostalgic and cutting-edge
+                        </p><a class="btn btn-link text-dark px-0" href="#downloadlist">Download/Stream<i class="ai-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="bg-secondary py-5">
+<section class="bg-secondary py-5" id="downloadlist">
     <div class="container py-md-2 py-lg-3 py-xl-5 my-2 my-sm-3 my-md-4 my-xxl-5">
         <div class="row">
             <div class="col-md-4 text-center text-md-start">
                 <h2 class="h1">Download/Stream Tracks</h2>
-                @if(isLoggedIn == true)
-                {
-                    <p class="pb-3 pb-sm-4">Download mp3 and flac</p>
-                }
-                else
-                {
-                    <p class="pb-3 pb-sm-4">Download mp3 (128kbps & 320kbps). <a href="/account/login">Login</a> to download HQ .flac files</p>
-                }
+               
+                    @if(isLoggedIn == true)
+                    {
+                        <p class="pb-3 pb-sm-4">Mp3 and flac</p>
+                    }
+                    else
+                    {
+                        <p class="pb-3 pb-sm-4">Mp3 (128kbps & 320kbps). <a href="/account/login">Login</a> to download HQ .flac files</p>
+                    }
+                
 
                 <div class="d-none d-md-flex justify-content-center">
                     <svg class="text-warning ms-n4" width="200" height="211" viewBox="0 0 200 211" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,159 +111,48 @@
                     </svg>
                 </div>
             </div>
-            <div class="col-md-8 col-lg-7 offset-lg-1">
+            <div class="col-md-8 col-lg-7 offset-lg-1" id="appTracks">
                 <div class="accordion" id="faq">
+
+        
                     <div class="accordion-item bg-light">
                         <h3 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#questionOne" aria-expanded="true" aria-controls="questionOne">Download mp3 and flac(members only) versions </button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#questionOne" aria-expanded="true" aria-controls="questionOne">Mp3 and flac(members only) versions </button>
                         </h3>
                         <div class="accordion-collapse collapse show" id="questionOne" aria-labelledby="headingOne" data-bs-parent="#faq">
                             <div class="accordion-body fs-sm">Adipiscing sagittis neque egestas id platea accumsan. Morbi inpa platea urna curabitur habitant pulvinar lacinia neque. Netus gravida amet, aliquam quam turpis aliquet cras. Find aute irure dolor in reprehenderit voluptate velit esse cillum dolore eu nulla pariatur. Sit amet, adipiscing elit.</div>
                         </div>
                     </div>
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionTwo" aria-expanded="false" aria-controls="questionTwo">01. Kabhi Jo Baadal Barse (Orchestral Mix)</button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionTwo" aria-labelledby="headingTwo" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
-                                <p>prod: JSM33T</p>
-                                <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                @if (isLoggedIn == true)
-                                {
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                }
-                                else
-                                {
-                                    <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                }
-                             </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionThree" aria-expanded="false" aria-controls="questionThree">
-                                02. Ab Firse Jab Baarish Hogi (Future Bass)
-                            </button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionThree" aria-labelledby="headingThree" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
-                                <p>
-                                    prod: S.O.U.V.I.K
-                                </p>
-                                <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                <a type="button"  class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Ab%20Phirse%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                @if (isLoggedIn == true)
-                                {
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                }
-                                else
-                                {
-                                    <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingFour">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionFour" aria-expanded="false" aria-controls="questionFour">
-                                03. Titli (Drum n Bass)
-                            </button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionFour" aria-labelledby="headingFour" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
+
+                    <div v-for="item in items" :key="item.id" class="pb-2">
+                        
+                        <div class="accordion-item bg-light">
+                            <h3 class="accordion-header" :id="'hd' + item.id">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#trk' + item.id" aria-expanded="false" aria-controls="questionTwo">
+                                {{ item.name }}
+                                </button>
+                            </h3>
+                            <div class="accordion-collapse collapse" :id="'trk' + item.id" :aria-labelledby="'hd' + item.id" data-bs-parent="#faq">
                                 <div class="accordion-body fs-sm">
-                                    <p>
-                                        prod: JSM33T
-                                    </p>
-                                    <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Ab%20Phirse%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                    @if (isLoggedIn == true)
-                                    {
-                                        <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                    }
+                                    <p>prod: JSM33T</p>
+                                    <button class="btn-sm btn mx-1 btn-outline-primary mb-2">Stream</button>
+                                    <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="'@baseadd/mp3/' + item.link.mp3" download>Mp3</a>                                
+
+                                @if(isLoggedIn == true)
+                                {
+                                      <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="'@baseadd/flac/' + item.link.flac" download>FLAC</a>
+                                }
+                                else
+                                {
+                                   <a class="disabled btn-sm btn mb-2 btn-outline-primary">Download flac</a>
+                                }
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingFive">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionFive" aria-expanded="false" aria-controls="questionFive">
-                                04. Zara Zara (Future Bass)
-                            </button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionFive" aria-labelledby="headingFive" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
-                                <p>
-                                    prod: A-Shay
-                                </p>
-                                <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Ab%20Phirse%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                @if (isLoggedIn == true)
-                                {
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                }
-                                else
-                                {
-                                    <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingSix">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionSix" aria-expanded="false" aria-controls="questionSix">
-                                05. Le Dooba (Future Bass)
-                            </button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionSix" aria-labelledby="headingSix" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
-                                <p>
-                                    prod: S.O.U.V.I.K
-                                </p>
-                                <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Ab%20Phirse%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                @if (isLoggedIn == true)
-                                {
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                }
-                                else
-                                {
-                                    <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item bg-light">
-                        <h3 class="accordion-header" id="headingSeven">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#questionSeven" aria-expanded="false" aria-controls="questionSeven">
-                                06. Bulleya (Drum n Bass)
-                            </button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="questionSeven" aria-labelledby="headingSeven" data-bs-parent="#faq">
-                            <div class="accordion-body fs-sm">
-                                <p>
-                                    prod: JSM33T
-                                </p>
-                                <button class="btn-sm btn mx-auto btn-outline-primary">Stream</button>
-                                <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/mp3/01.%20Ab%20Phirse%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                @if (isLoggedIn == true)
-                                {
-                                    <a type="button" class="btn-sm btn mx-auto btn-outline-primary" href="/content/studiocontent/albums/tcr-bootlet-compilation-2023/flac/01.%20Kabhi%20Jo%20Baadal%20Barse%20(Orchestral%20Rendition)%20-%20Jsm33t.mp3" download>Download Mp3</a>
-                                }
-                                else
-                                {
-                                    <a class="disabled btn-sm btn btn-outline-primary">Download flac</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
+                   
+                  
+                  
                 </div>
             </div>
         </div>
@@ -290,3 +176,34 @@
     </style>
 }
 
+
+@section jsScripts{
+    <script>
+        
+         const app = Vue.createApp({
+            setup() {
+                const items = Vue.ref([]);
+
+                const getTracks = async () => {
+                    console.log("Fetching tracks...");
+                    try {
+                        const response = await fetch('@baseadd/tracklist.json');
+                        const data = await response.json();
+                        items.value = data;
+                    } catch (error) {
+                        console.error('Error fetching data:', error);
+                    }
+                };
+
+                getTracks(); // Call the function immediately upon setup
+
+                return {
+                    items,
+                };
+            }
+        });
+
+        app.mount('#appTracks');
+    </script>
+
+}

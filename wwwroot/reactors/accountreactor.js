@@ -71,7 +71,7 @@ const BaseComponent = {
 const LoginComponent = {
     template: `
       <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
-        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 ">
+        <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
               <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/signup"><i class="ai-user ms-n1 me-2"></i>Signup</router-link></div>
            
@@ -93,8 +93,6 @@ const LoginComponent = {
                   </div>
                 </div>
               </div>
-
-
                 <div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
                     <form-check class="my-1">
                         <input class="form-check-input" type="checkbox" id="keep-signedin" disabled>
