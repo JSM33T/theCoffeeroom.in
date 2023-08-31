@@ -52,8 +52,8 @@ namespace theCoffeeroom.Repositories
                     return new DataSave 
                     {
                         Status = true,
-                        Message = "Data saved successfully",
-                        Type = true
+                        Message = "Email saved successfully",
+                        Remark = mail.EMailId.ToString()
                     };
                   
                 }
@@ -62,8 +62,8 @@ namespace theCoffeeroom.Repositories
                     return new DataSave 
                     { 
                         Status = false,
-                        Message = "Email is already submitted", 
-                        Type = false 
+                        Message = "Email is already submitted",
+                        Remark = mail.EMailId.ToString()
                     };
                 }
             }

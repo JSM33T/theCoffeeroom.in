@@ -65,8 +65,8 @@
                                 <div class="mega-dropdown-column pt-1 pt-lg-3 pb-lg-4">
                                     <ul class="list-unstyled mb-0">
                                         <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Home" ? "active" : "") " href="/">Home</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
-                                        <li><a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
                                         <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "") " href="/blogs">Blogs</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
                                     </ul>
                                 </div>
@@ -79,10 +79,10 @@
                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown">
-                                <a class="dropdown-item next-link disabled  @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a>
+                                <a class="dropdown-item next-link  @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
+                                <a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Apps" ? "active" : "")" href="/apps">Apps</a>

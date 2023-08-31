@@ -30,10 +30,10 @@ namespace theCoffeeroom.Controllers.Dedicated
                     try
                     {     
                         DataSave result = await _dataAccessRepo.AddMailAsync(mail);
-                        Log.Information("mail added to newsletter:" + mail.EMailId);
+                       
                         if (result.Status)
                         {
-                            return Ok("email submitted");
+                            return Ok(result.Message);   
                         }
                         else
                         {
