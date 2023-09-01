@@ -10,6 +10,11 @@ namespace theCoffeeroom.Controllers.Tests
     public class TestsController : Controller
     {
 
+        [Route("/test")]
+        public IActionResult Main()
+        {
+                return View("Views/Tests/Index.cshtml");
+        }
 
         [Route("/testfallback")]
         public IActionResult Index()

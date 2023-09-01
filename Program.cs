@@ -21,7 +21,11 @@ builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie(options =>
        {
-           options.ExpireTimeSpan = TimeSpan.FromDays(30); // Set the expiration time for the persistent cookie
+           options.LoginPath = "/account/login";
+           options.LogoutPath = "/account/logout";
+           options.Cookie.HttpOnly = true;
+           options.Cookie.IsEssential = true;
+           options.ExpireTimeSpan = TimeSpan.FromDays(30);
            options.SlidingExpiration = true; // Extend the expiration time with each request
        });
 

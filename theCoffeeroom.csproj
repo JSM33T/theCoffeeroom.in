@@ -43,6 +43,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Migrations\TblUserAwards.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\TblUserAwards.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Studio\Content\Podcasts\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
     <Folder Include="wwwroot\assets\images\github\" />
