@@ -9,21 +9,6 @@ using theCoffeeroom.Models.Frame;
 
 namespace theCoffeeroom.Controllers.Dedicated
 {
-    public class BlogThumbz
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string UrlHandle { get; set; }
-        public string PostContent { get; set; }
-        public string Category { get; set; }
-        public string Author { get; set; }
-        public string Tags { get; set; }
-        public string Yr { get; set; }
-        public string Locator { get; set; }
-        public string PostLikes { get; set; }
-        public int Comments { get; set; }
-        public DateTime DatePosted { get; set; }
-    }
     public class BlogTriggers
     {
         public string Mode { get; set; }
@@ -134,7 +119,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
             return new JsonResult(thumbs);
         }
-
 
         [HttpGet]
         [Route("api/blog/{Slug}/authors")]
@@ -334,7 +318,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             return new JsonResult(data);
         }
 
-
         [HttpPost]
         [Route("api/blog/comment/add")]
         [IgnoreAntiforgeryToken]
@@ -398,7 +381,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
     
         }
-        
 
         [HttpPost]
         [Route("api/blog/comments/load")]
@@ -531,7 +513,6 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         }
 
-
         [HttpPost]
         [Route("api/blog/comment/edit")]
         [IgnoreAntiforgeryToken]
@@ -567,7 +548,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
             
         }
-
 
         [HttpPost]
         [Route("api/blog/comment/delete")]
@@ -613,7 +593,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
            
         }
-
 
         [HttpPost]
         [Route("api/blog/reply/add")]
@@ -665,7 +644,6 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
         }
 
-
         [HttpPost]
         [Route("api/blog/reply/edit")]
         [IgnoreAntiforgeryToken]
@@ -701,7 +679,6 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         }
 
-
         [HttpPost]
         [Route("api/blog/reply/delete")]
         [IgnoreAntiforgeryToken]
@@ -734,47 +711,6 @@ namespace theCoffeeroom.Controllers.Dedicated
 
         }
 
-        //[HttpPost]
-        //[Route("api/blog/like/add")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddLike([FromBody] BlogLoad blogload)
-        //{
-        //    if (blogload.Slug != null)
-        //    {
-        //        try
-        //        {
-                  
-        //                using var connection = new SqlConnection(connectionString);
-        //                await connection.OpenAsync();
-        //                var command = new SqlCommand("SELECT Id FROM TblUserProfile WHERE UserName = @username", connection);
-        //                command.Parameters.AddWithValue("@username", HttpContext.Session.GetString("username").ToString());
-        //                var reader = await command.ExecuteReaderAsync();
-        //                if (await reader.ReadAsync())
-        //                {
-        //                    userid = reader.GetInt32(0).ToString();
-        //                }
-        //                reader.Close();
-        //                SqlCommand maxIdCommand = new("SELECT ISNULL(MAX(Id), 0) + 1 FROM TblBlogReply", connection);
-        //                int newId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
-
-        //                command = new SqlCommand("insert into TblBlogReply(Id,CommentId,UserId,Reply,IsActive,DatePosted) values(" + newId + ",'" + blogReply.CommentId + "','" + userid + "','" + encodedreply + "',1,@dateposted)", connection);
-        //                command.Parameters.Add("@dateposted", SqlDbType.DateTime).Value = DateTime.Now;
-        //                await command.ExecuteNonQueryAsync();
-        //                return Ok("reply added");
-                   
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Log.Information("error in adding reply by" + HttpContext.Session.GetString("username") + "on a blog :" + ex.Message.ToString());
-        //            return BadRequest("Something went wrong");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return BadRequest("Invalid request");
-        //    }
-        //}
 
     }
 }
