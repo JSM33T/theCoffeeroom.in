@@ -1,10 +1,8 @@
 ﻿using theCoffeeroom.Core.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using System.Text.Json;
 using theCoffeeroom.Models.Domain;
 using System.Web;
-using System;
 using Serilog;
 using System.Data;
 

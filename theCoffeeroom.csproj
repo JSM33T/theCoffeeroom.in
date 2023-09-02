@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="Controllers\Dedicated\Apps\**" />
     <Compile Remove="Controllers\Routers\Apps\**" />
+    <Compile Remove="Migrations\**" />
     <Compile Remove="Views\Archive\Content\**" />
     <Compile Remove="Views\Magazines\Content\**" />
     <Compile Remove="Views\Shop\Content\**" />
@@ -18,6 +19,7 @@
     <Compile Remove="wwwroot\logs\**" />
     <Content Remove="Controllers\Dedicated\Apps\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
+    <Content Remove="Migrations\**" />
     <Content Remove="Views\Archive\Content\**" />
     <Content Remove="Views\Magazines\Content\**" />
     <Content Remove="Views\Shop\Content\**" />
@@ -26,6 +28,7 @@
     <Content Remove="wwwroot\logs\**" />
     <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Views\Archive\Content\**" />
     <EmbeddedResource Remove="Views\Magazines\Content\**" />
     <EmbeddedResource Remove="Views\Shop\Content\**" />
@@ -34,20 +37,13 @@
     <EmbeddedResource Remove="wwwroot\logs\**" />
     <None Remove="Controllers\Dedicated\Apps\**" />
     <None Remove="Controllers\Routers\Apps\**" />
+    <None Remove="Migrations\**" />
     <None Remove="Views\Archive\Content\**" />
     <None Remove="Views\Magazines\Content\**" />
     <None Remove="Views\Shop\Content\**" />
     <None Remove="wwwroot\content\blogcontent\global\**" />
     <None Remove="wwwroot\content\musiccontent\**" />
     <None Remove="wwwroot\logs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Migrations\TblUserAwards.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\TblUserAwards.sql" />
   </ItemGroup>
 
   <ItemGroup>

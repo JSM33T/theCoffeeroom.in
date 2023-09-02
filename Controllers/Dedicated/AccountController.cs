@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Data;
 using theCoffeeroom.Core;

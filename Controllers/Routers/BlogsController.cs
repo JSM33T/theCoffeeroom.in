@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
 using System;
 using theCoffeeroom.Core.Helpers;
-using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
-using theCoffeeroom.Models.Route;
+
 
 namespace theCoffeeroom.Controllers.Routers
 {

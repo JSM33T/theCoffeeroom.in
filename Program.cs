@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using theCoffeeroom.Interfaces;
 using theCoffeeroom.Repositories;

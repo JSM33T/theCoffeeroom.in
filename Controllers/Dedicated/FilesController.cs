@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace theCoffeeroom.Controllers.Dedicated
 {
