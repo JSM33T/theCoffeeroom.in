@@ -22,7 +22,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest("Invalid Data");
+                return BadRequest("Invalid Credentials");
             }
             try
             {

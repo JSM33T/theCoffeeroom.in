@@ -5,6 +5,7 @@ using theCoffeeroom.Models.Domain;
 using System.Web;
 using Serilog;
 using System.Data;
+using theCoffeeroom.Models.Frame;
 
 namespace theCoffeeroom.Controllers.Dedicated
 {
@@ -41,6 +42,7 @@ namespace theCoffeeroom.Controllers.Dedicated
     public class BlogController : Controller
     {
         readonly string connectionString = ConfigHelper.NewConnectionString;
+
         [HttpGet]
         [Route("api/blogs/{mode}/{classify}/{key}")]
         public async Task<JsonResult> GetBlogs(string mode, string classify, string key)
@@ -166,6 +168,130 @@ namespace theCoffeeroom.Controllers.Dedicated
             await reader.CloseAsync();
             await connection.CloseAsync();
             return new JsonResult(data);
+        }
+
+        [HttpGet]
+        [Route("api/blog/{Slug}/likes")]
+        [IgnoreAntiforgeryToken]
+        public async Task<int> LoadLikes(string Slug)
+        {
+            List<object> data = new();
+            try {
+                using var connection = new SqlConnection(connectionString);
+                await connection.OpenAsync();
+                var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where b.UrlHandle = @UrlHandle  and b.Id = a.BlogId", connection);
+                command.Parameters.AddWithValue("@UrlHandle", Slug);
+                int reader = (int)await command.ExecuteScalarAsync();
+                await connection.CloseAsync();
+                return reader;
+            }
+            catch {
+                return 0;
+            }
+
+        }
+
+        [HttpPost]
+        [Route("api/blog/addlike")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> AddLike(BlogLike blogLike)
+        {
+
+            if (HttpContext.Session.GetString("user_id") != null)
+            {
+                List<object> data = new();
+                var SessionUserId = HttpContext.Session.GetString("user_id");
+               // var SessionUserId = 1;
+                try
+                {
+                    using var connection = new SqlConnection(connectionString);
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where a.UserId = @userid and b.UrlHandle = @slug and b.Id = a.BlogId", connection);
+                    command.Parameters.AddWithValue("@userid", SessionUserId);
+                    command.Parameters.AddWithValue("@slug", blogLike.Slug);
+                    int likecounter = (int)(await command.ExecuteScalarAsync());
+
+                    SqlCommand blogIdFind = new("SELECT Id from TblBlogMaster where UrlHandle = @blogslug", connection);
+                    blogIdFind.Parameters.AddWithValue("@blogslug", blogLike.Slug);
+                    int blogId = Convert.ToInt32(blogIdFind.ExecuteScalar());
+
+                    if (likecounter == 1)
+                    {
+                        command = new SqlCommand("DELETE FROM TblBlogLike where UserId = @userid and BlogId = @blogid", connection);
+                        command.Parameters.AddWithValue("@blogid", blogId);
+                        command.Parameters.AddWithValue("@userid", SessionUserId);
+                        command.ExecuteNonQuery();
+                        await connection.CloseAsync();
+                        return Ok("Like deleted");
+                    }
+                    else
+                    {
+                        SqlCommand maxIdCommand = new("SELECT ISNULL(MAX(Id), 0) + 1 FROM TblBlogLike", connection);
+                        int newLikeId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
+
+                        SqlCommand commandIns = new("INSERT INTO TblBlogLike(Id,BlogId,UserId,DateAdded) values(@id,@blogid,@userid,@dateadded)", connection);
+                        commandIns.Parameters.AddWithValue("@id", newLikeId);
+                        commandIns.Parameters.AddWithValue("@blogid", blogId);
+                        commandIns.Parameters.AddWithValue("@userid", SessionUserId);
+                        commandIns.Parameters.AddWithValue("@slug", blogLike.Slug);
+                        commandIns.Parameters.AddWithValue("@dateadded", DateTime.Now);
+                        commandIns.ExecuteNonQuery();
+                        await connection.CloseAsync();
+                        return Ok("Like added");
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("load user's isLiked message:" + ex.Message.ToString());
+                    return BadRequest("Something went wrong");
+                }
+            }
+            else
+            {
+                return BadRequest("Unauthorized attempt");
+            }
+        }
+
+        [HttpPost]
+        [Route("api/blog/likestat")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> IsLiked(BlogLike blogLike)
+        {
+          
+            if (HttpContext.Session.GetString("user_id") != null)
+            {
+                string LoggedInUserId = HttpContext.Session.GetString("user_id").ToString();
+                List<object> data = new();
+                try
+                {
+                    using var connection = new SqlConnection(connectionString);
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where a.UserId = @userid and b.UrlHandle = @slug and b.Id = a.BlogId", connection);
+                    command.Parameters.AddWithValue("@userid", HttpContext.Session.GetString("user_id"));
+                    command.Parameters.AddWithValue("@slug", blogLike.Slug);
+                    int likecounter = (int)(await command.ExecuteScalarAsync());
+                    await connection.CloseAsync();
+                    if (likecounter == 1)
+                    {
+                        return Ok(true);
+                    }
+                    else
+                    {
+                        return Ok(false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("load user's isLiked message:" + ex.Message.ToString() + " user logged in:" + HttpContext.Session.GetString("username").ToString());
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet]
@@ -607,6 +733,48 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
 
         }
+
+        //[HttpPost]
+        //[Route("api/blog/like/add")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddLike([FromBody] BlogLoad blogload)
+        //{
+        //    if (blogload.Slug != null)
+        //    {
+        //        try
+        //        {
+                  
+        //                using var connection = new SqlConnection(connectionString);
+        //                await connection.OpenAsync();
+        //                var command = new SqlCommand("SELECT Id FROM TblUserProfile WHERE UserName = @username", connection);
+        //                command.Parameters.AddWithValue("@username", HttpContext.Session.GetString("username").ToString());
+        //                var reader = await command.ExecuteReaderAsync();
+        //                if (await reader.ReadAsync())
+        //                {
+        //                    userid = reader.GetInt32(0).ToString();
+        //                }
+        //                reader.Close();
+        //                SqlCommand maxIdCommand = new("SELECT ISNULL(MAX(Id), 0) + 1 FROM TblBlogReply", connection);
+        //                int newId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
+
+        //                command = new SqlCommand("insert into TblBlogReply(Id,CommentId,UserId,Reply,IsActive,DatePosted) values(" + newId + ",'" + blogReply.CommentId + "','" + userid + "','" + encodedreply + "',1,@dateposted)", connection);
+        //                command.Parameters.Add("@dateposted", SqlDbType.DateTime).Value = DateTime.Now;
+        //                await command.ExecuteNonQueryAsync();
+        //                return Ok("reply added");
+                   
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Log.Information("error in adding reply by" + HttpContext.Session.GetString("username") + "on a blog :" + ex.Message.ToString());
+        //            return BadRequest("Something went wrong");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("Invalid request");
+        //    }
+        //}
 
     }
 }

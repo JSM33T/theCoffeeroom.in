@@ -27,7 +27,7 @@ namespace theCoffeeroom.Controllers.Routers
             BlogLoad blogLoad = null;
             using var connection = new SqlConnection(connectionString);
             connection.Open();
-            var command = new SqlCommand("SELECT Id, Tags,Title,UrlHandle FROM TblBlogMaster WHERE UrlHandle = @urlhandle", connection);
+            var command = new SqlCommand("SELECT a.Id, a.Tags, a.Title, a.UrlHandle, COUNT(b.blogid) AS LikeCount FROM TblBlogMaster a LEFT JOIN TblBlogLike b ON a.Id = b.blogid WHERE a.UrlHandle = 'top-5-must-watch-series-for-beginners' GROUP BY a.Id, a.Tags, a.Title, a.UrlHandle; ", connection);
             command.Parameters.AddWithValue("@urlhandle", Slug);
             var reader = command.ExecuteReader();
             string tags = string.Empty;
@@ -40,7 +40,8 @@ namespace theCoffeeroom.Controllers.Routers
                 Tags = reader["Tags"].ToString(),
                 Title = reader["Title"].ToString(),
                 Slug = reader["UrlHandle"].ToString(),
-                Year = Year
+                Year = Year,
+                Likes = reader["LikeCount"].ToString(),
                 };
                 
             }
