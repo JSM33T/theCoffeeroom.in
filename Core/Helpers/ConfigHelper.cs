@@ -2,11 +2,11 @@
 {
     public class ConfigHelper
     {
-            private static readonly IConfigurationRoot _config;
+        private static readonly IConfigurationRoot _config;
 
-            static ConfigHelper() => _config = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .Build();
+        static ConfigHelper() => _config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
         public static string NewConnectionString => _config.GetConnectionString("coffeeString");
         
