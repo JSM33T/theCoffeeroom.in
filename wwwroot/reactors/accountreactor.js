@@ -1,7 +1,7 @@
 const routerViewElement = document.querySelector('router-view');
 
 const BaseComponent = {
-    template: 
+    template:
     `
     <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
     <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1  bg-secondary">
@@ -61,7 +61,7 @@ const BaseComponent = {
         });
     },
     methods: {
-     
+
 
     }
 };
@@ -72,7 +72,7 @@ const LoginComponent = {
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
               <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/signup"><i class="ai-user ms-n1 me-2"></i>Signup</router-link></div>
-           
+
             <form class="needs-validation" id="loginForm" novalidate>
                 <div class="pb-3 mb-3">
                     <div class="position-relative">
@@ -80,7 +80,7 @@ const LoginComponent = {
                         <input class="form-control form-control-lg ps-5" v-model="username" @keyup.enter="submitLogin" type="text" placeholder="Username or email" value="" autocomplete="off" required>
                     </div>
                 </div>
-            
+
               <div class="mb-4">
                 <div class="position-relative"><i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                   <div class="password-toggle">
@@ -144,7 +144,7 @@ const LoginComponent = {
                     {
                         window.location.href = "/";
                     }
-                    
+
                 })
                 .catch((error) => {
                     toaster("error", error.response.data);
@@ -192,7 +192,7 @@ const SignupComponent = {
                             </div>
                         </div>
                         <div class="position-relative">
-                          
+
                             <div class="password-toggle">
                                 <input name="passconfirm" v-model="passconfirm" class="form-control form-control-lg ps-5" type="password" placeholder="Password" required="">
                                 <label class="password-toggle-btn" aria-label="Show/hide password">
@@ -264,7 +264,7 @@ const SignupComponent = {
                         this.lala = 'Sign Up';
                     });
             }
-          
+
         },
     },
 };
@@ -342,11 +342,11 @@ const PasswordReset = {
                         this.buttonText = 'Send Recovery Key';
                     });
             }
-           
+
         },
         loginViaOtp()
         {
-            
+
             const loginDeets= {
                 otp : this.otp,
                 username: this.email
@@ -504,3 +504,4 @@ app.config.globalProperties.$initToggle = function () {
 };
 app.use(router);
 app.mount('#app');
+

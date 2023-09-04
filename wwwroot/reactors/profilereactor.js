@@ -226,9 +226,11 @@ const EditProfile = {
                 .then(response => {
                     document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + this.avatars + '.png';
                     toaster("success", response.data);
+                    document.getElementById('title_master').innerHTML = this.firstname;
                 })
                 .catch(error => {
                     toaster("Error", "Something went wrong");
+                    this.getDetails();
                 });
         },
         async handleChange(event) {

@@ -5,25 +5,54 @@
     <div class="row pt-sm-2 pt-lg-0" id="app">
 
         <!-- Page content-->
-        <div class="col-lg-12 pt-4 pb-2 pb-sm-4">
-            <h1 id="sectionTitle" class="h2 mb-4">{{viewTitle}}</h1>
-            <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 fade-in">
+        <div class="col-lg-12 pb-2 pb-sm-4">
+           
+            <section class="card border-0 mb-4 fade-in">
                 @Html.AntiForgeryToken()
-                <div class="card-body">
-                    <router-view></router-view>
-                </div>
+                
+                    <div class="col-lg-12 pb-2 pb-sm-4">
+
+                        <div class="row position-relative overflow-hidden gx-2 zindex-1">
+                        
+                            <div class="col-xl-12">
+                            <div class="card border-0" id="appWall">
+                            <router-view></router-view>
+                            </div>
+                                   </div>
+                        </div>
+                    </div>
+
+
+                    
             </section>
         </div>
     </div>
 </div>
-<hr class="d-none d-dark-mode-block">
+<hr class="d-none d-dark-mode-block"/>
+  
 
-
+@section cssLib{
+    <link rel="stylesheet" media="screen" href="/assets/vendor/simplebar/dist/simplebar.min.css"/>
+}
+@section jsLib{
+    <script src="/assets/vendor/simplebar/dist/simplebar.min.js"></script>
+}
 @section jsScripts{
+
+    <!-- Development Environment -->
     <environment include="development">
         <script src="/reactors/wallreactor.js" asp-append-version="true"></script>
     </environment>
+    <!-- Production Environment -->
     <environment include="production">
         <script src="/reactors/wallreactor.prod.js" asp-append-version="true"></script>
     </environment>
-}
+
+}   
+
+
+
+
+
+ 
+  

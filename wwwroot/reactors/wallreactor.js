@@ -1,367 +1,121 @@
-const Security = {
-    template: `<div class="fade-in">
-                              <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                       <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit Profile</router-link></div>
-                                    </div>
-                                            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
-                                            <div class="col-md-6">
-                                                   <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" @keyup.enter="saveCredentials" placeholder="Password" autocomplete="off" required="">
-                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
-                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                                                    </label>
-                                                  </div>
-                                                  </div>
-                                        <div class="col-md-6">
-                                                <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="confirmPassword" @keyup.enter="saveCredentials" type="password" placeholder="Password" autocomplete="off" required="">
-                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
-                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                                                    </label>
-                                                  </div>
-                                                  </div>
+﻿
+const WallPostsFiltered = {
+    props: ['param1'],
+    setup(props) {
+        const { param1 } = Vue.toRefs(props);
+        const title = Vue.ref("Home");
 
-                                                <div class="col-12 d-flex justify-content-end pt-3">
-                                                    <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveCredentials">Save Profile</button>
-                                                </div>
-                                            </div>
-                </div>`,
-    data() {
-        return {
-            username: '',
-            passWord: '',
-        };
-
-    },
-    async mounted() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
+        Vue.onMounted(() =>
+        {
+            title.value = param1.value === "" ? "#all" : "#" + param1.value;
         });
+
+        Vue.watch(param1, (newVal, oldVal) =>
+        {
+            title.value = newVal === undefined || newVal === "" ? "#all" : "#" + newVal;
+        });
+
+        return {
+            param1,
+            title,
+            isLoading: Vue.ref(false),
+        };
     },
-    methods: {
-        saveCredentials() {
-            if (this.newPassword === "" || this.newPassword == null)
-            {
-                toaster('error', 'please enter the password');
-            }
-            else if (this.newPassword.length < 6)
-            {
-                toaster('error', 'Password cannot be less than 6 characters');
-            }
-            else if (this.newPassword != this.confirmPassword)
-            {
-                toaster('error', 'Passwords don\'t match');
-            }
-            else {
-                const data = {
-                    password: this.newPassword,
-                    confirmPassword: this.confirmPassword
-                };
-                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-                axios.defaults.headers.common['RequestVerificationToken'] = token;
-                axios.post("/api/profile/password/update", data)
-                    .then(response => {
-                        toaster("success", response.data);
-                    })
-                    .catch(error => {
-                        toaster("Error", error.response.data);
-                    });
-            }
-          
-            //toaster("success", "button clickworking");
-        }
 
-    }
-}
-
-const EditProfile = {
     template: `
-            <div class="fade-in">
-                              <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                      <div class="ms-auto"><router-link class="btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
-                              </div>
-                                    <div id="profilepanel">
-                                        <div class="d-md-flex align-items-center">
-                                            <div class="d-sm-flex align-items-center">
-                                                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
-                                                <div class="pt-3 pt-sm-0 ps-sm-3">
-                                                    <h3 class="h5 mb-2">
-                                                        <span id="profilename">
-                                                            {{firstname}} {{lastname}}
-                                                        </span>
-                                                    </h3>
-                                                    <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
-                                                        <div class="d-flex align-items-center me-3">
-                                                            <i class="ai-user me-1"></i>
-                                                           {{role}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="w-100 pt-3 pt-md-0 ms-md-auto col-sm-12" style="max-width: 212px;">
-                                                <div class="d-flex justify-content-between fs-sm pb-1 mb-2">Select your avatar</div>
-                                                <select v-model="avatars" id="avatars" class="form-select" @change="handleChange">
-                                                         <option v-for="option in options" :data-id="option.id" :value="option.image" :key="option.title">{{ option.title }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="fn">First name</label>
-                                                    <input type="text" v-model="firstname" class="form-control " aria-autocomplete="none" value="" maxlength="20" />
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="ln">Last name</label>
-                                                            <input type="text" v-model="lastname" class="form-control " aria-autocomplete="none" value="" maxlength="20" />
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label class="form-label" for="phone">Phone <span class='text-muted'>(optional)</span></label>
-                                                    <input v-model="phone" type="text" id="phone" class="form-control" value="" placeholder="" maxlength="15" />
-                                                </div>
-                                                <div class="col-12">
-                                                    <label class="form-label" for="phone">Bio <span class='text-muted'>(optional)</span></label>
-                                                    <textarea v-model="bio" type="text" id="bio" class="form-control" placeholder="enter a bio" maxlength="100"></textarea>
-                                                </div>
-
-                                                <div class="col-sm-12 col-md-6  d-sm-flex align-items-center pt-sm-2 pt-md-3">
-                                                    <div class="form-label text-muted mb-2 mb-sm-0 me-sm-4">Gender:</div>
-                                                    <div class="form-check form-check-inline mb-0">
-                                                        <input value="m" v-model="gender" type="radio" id="male" class="form-check-input"/>
-                                                        <label class="form-check-label" for="male">Male</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline mb-0">
-                                                        <input value="f" v-model="gender" type="radio" id="female" class="form-check-input"/>
-                                                        <label class="form-check-label" for="female">Female</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline mb-0">
-                                                        <input value="o" v-model="gender" type="radio" id="other" class="form-check-input"/>
-                                                        <label class="form-check-label" for="other">Other</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 d-flex justify-content-end pt-3">
-                                                    <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveDetails">Save Profile</button>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        `,
-    data() {
-        return {
-            options: [],
-            title: "Edit Info",
-            username: '',
-            firstname: '',
-            lastname: '',
-            email: '',
-            phone: '',
-            avatars: '',
-            avatar: 'default.png',
-            bio: '',
-            gender: '',
-            role: ''
-        };
-    },
-    async mounted() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
        
-        this.fetchAvatars();
-        this.getDetails();
-    },
-    watch: {
-        avatar(){},
-        avatars(){ }
-    },
-    methods: {
-        async getDetails() {
-            await axios.get("/api/profile/getdetails")
-                .then(response => {
-                    console.log(response.data);
-                    this.username = response.data.userName;
-                    this.firstname = response.data.firstName;
-                    this.lastname = response.data.lastName;
-                    this.phone = response.data.phone;
-                    this.bio = response.data.bio;
-                    this.avatars = response.data.avatarImg;
-                    this.avatar = response.data.avatarImg + ".png";
-                    this.gender = response.data.gender;
-                    this.role = response.data.role;
-
-                })
-                .catch(error => {
-                    console.log(error);
-                    toaster("error", "something went wrong");
-                });
-        },
-        async fetchAvatars() {
-            await axios.get("/api/getavatars")
-                .then(response => {
-                    this.options = response.data;
-                })
-                .catch(error => {
-                    toaster("error", "something went wrong");
-                });
-        },
-        async saveDetails() {
-
-            let dropdown = document.getElementById("avatars");
-            let selectedOption = dropdown.options[dropdown.selectedIndex];
-            let avtId = selectedOption.getAttribute("data-id");
-            let avtVal = selectedOption.getAttribute("value");
-
-            const data = {
-                firstname: this.firstname,
-                lastname: this.lastname,
-                bio: this.bio,
-                phone: this.phone,
-                gender: this.gender,
-                avatarId: avtId,
-            };
-            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-            axios.defaults.headers.common['RequestVerificationToken'] = token;
-            axios.post("/api/profile/update", data)
-                .then(response => {
-                    document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + this.avatars + '.png';
-                    toaster("success", response.data);
-                })
-                .catch(error => {
-                    toaster("Error", "Something went wrong");
-                });
-        },
-        async handleChange(event) {
-            var dropdown = document.getElementById("avatars");
-            var selectedOption = dropdown.options[dropdown.selectedIndex];
-            var selectedOptionDataId = selectedOption.getAttribute("data-id");
-            var selectedOptionValue = selectedOption.getAttribute("value");
-            this.avatar = selectedOptionValue + ".png";
-        }
-    },
-   
-    
-
-};
-
-
-const Dashboard = {
-    template: `
-            <div class="fade-in">
-                    <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
-            <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/security"><i class="ai-user ms-n1 me-2"></i>Security</router-link></div>
+        <div v-if="isLoading">
+            Loading...
         </div>
-        <div class="d-md-flex align-items-center">
-            <div class="d-sm-flex align-items-center">
-                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
-                <div class="pt-3 pt-sm-0 ps-sm-3">
-                    <h3 class="h5 mb-2">{{firstname}} {{lastname}}<i class="ai-circle-check-filled fs-base text-success ms-2"></i></h3>
-                    <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
-                        <div class="d-flex align-items-center me-3"><i class="ai-mail me-1"></i>{{email}}</div>
+        <div v-else>
+            <div class="navbar card-header w-100">
+                <h1 class="fade-in px-4" id="sectionTitle" class="h2 ">{{title}}</h1>
+                <div>
+                    <router-link :to="'/wall'" class="btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#all</router-link>
+                    <router-link :to="'/wall/bug'" class="btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#bug</router-link>
+                    <router-link :to="'/wall/feedback'" class="btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#feedback</router-link>
+                    <router-link :to="'/wall/admin'" class=" btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#admin</router-link>
+                </div>
+            </div>
+            <!-- Body-->
+            <div class="card-body pb-0 fade-in" data-simplebar style="max-height: 580px;">
+                <div class="text-muted text-center mb-4">May 27, 2022</div>
+                <!-- Message-->
+                <div class="mb-3" style="max-width: 392px;">
+                    <div class="d-flex align-items-end mb-2">
+                        <div class="flex-shrink-0 pe-2 me-1"><img class="rounded-circle" src="/assets/img/avatar/19.jpg" width="48" alt="Avatar"></div>
+                        <div class="message-box-start text-dark">Thank you for recommending me as a designer. I have an interview tomorrow!</div>
+                    </div>
+                    <div class="fs-xs text-muted text-end">11:32 am</div>
+                </div>
+                <!-- Message-->
+                <div class="ms-auto mb-3" style="max-width: 392px;">
+                    <div class="d-flex align-items-end mb-2">
+                        <div class="message-box-end bg-primary text-white">Oh no thanks! I just know that you are a great specialist!</div>
+                        <div class="flex-shrink-0 ps-2 ms-1"><img class="rounded-circle" src="/assets/img/avatar/01.jpg" width="48" alt="Avatar"></div>
+                    </div>
+                    <div class="fs-xs text-muted"><i class="ai-checks text-primary fs-xl mt-n1 me-1"></i>2:18 pm</div>
+                </div>
+                <div class="text-muted text-center my-4">May 29, 2022</div>
+                <div class="mb-3" style="max-width: 392px;">
+                    <div class="d-flex align-items-end mb-2">
+                        <div class="flex-shrink-0 pe-2 me-1"><img class="rounded-circle" src="/assets/img/avatar/19.jpg" width="48" alt="Avatar"></div>
+                        <div class="w-100">
+                            <div class="message-box-start text-dark mb-2">I have great news, I've been hired! 🚀</div>
+                            <div class="message-box-start text-dark">Thanks again!</div>
+                        </div>
+                    </div>
+                    <div class="fs-xs text-muted text-end">4:04 am</div>
+                </div>
+                <div class="ms-auto mb-3" style="max-width: 392px;">
+                    <div class="d-flex align-items-end mb-2">
+                        <div class="message-box-end bg-primary text-white">You are welcome!</div>
+                        <div class="flex-shrink-0 ps-2 ms-1"><img class="rounded-circle" src="/assets/img/avatar/01.jpg" width="48" alt="Avatar"></div>
+                    </div>
+                    <div class="fs-xs text-muted"><i class="ai-check text-primary fs-xl mt-n1 me-1"></i>2:18 pm</div>
+                </div>
+                <div class="text-muted text-center my-4">Today</div>
+                <div class="mb-3" style="max-width: 392px;">
+                    <div class="d-flex align-items-end mb-2">
+                        <div class="flex-shrink-0 pe-2 me-1"><img class="rounded-circle" src="/assets/img/avatar/19.jpg" width="48" alt="Avatar"></div>
+                        <div  class="message-box-start text-dark">I'm so happy to be part of the team and work with you on this new exciting project. Can't thank you enough 😊</div>
+                    </div>
+                    <div class="fs-xs text-muted text-end">10:17 am</div>
+                </div>
+            </div>
+
+
+            <div class="card-footer w-100 border-0 mx-0 px-4">
+                <div class="d-flex align-items-end border rounded-3 pb-3 pe-3 mx-sm-3">
+                    <textarea class="form-control border-0" rows="3" placeholder="Type a message" style="resize: none;"></textarea>
+                    <div class="nav flex-nowrap align-items-center">
+                        <a class="nav-link text-muted p-1 me-1"><i class="ai-paperclip fs-xl"></i></a><a class="nav-link text-muted p-1" href="#"><i class="ai-emoji-smile fs-xl"></i></a>
+                        <button href="#" class="btn btn-sm btn-secondary ms-3" type="button">Send</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row py-3 mb-2 mb-sm-3">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <table class="table mb-0">
-                    <tr>
-                        <td class="border-0 text-muted py-1 px-0">Username</td>
-                        <td class="border-0 text-dark fw-medium py-1 ps-3">{{username}}</td>
-                    </tr>
-                    <tr>
-                        <td class="border-0 text-muted py-1 px-0">Phone</td>
-                        <td class="border-0 text-dark fw-medium py-1 ps-3">{{phone}}</td>
-                    </tr>
-                    <tr>
-                        <td class="border-0 text-muted py-1 px-0">EMail</td>
-                        <td class="border-0 text-dark fw-medium py-1 ps-3">{{email}}</td>
-                    </tr>
-                    <tr>
-                        <td class="border-0 text-muted py-1 px-0">Gender</td>
-                        <td class="border-0 text-dark fw-medium py-1 ps-3">{{gender}}</td>
-                    </tr>
-                    <tr>
-                        <td class="border-0 text-muted py-1 px-0">Bio</td>
-                        <td class="border-0 text-dark fw-medium py-1 ps-3">{{bio}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6 d-md-flex justify-content-end">
-                <div class="w-100 border rounded-3 p-4" style="max-width: 242px;">
-                    <img class="d-block mb-2" src="/assets/img/account/gift-icon.svg" width="24" alt="Gift icon">
-                    <h4 class="h5 lh-base mb-0">(ID)</h4>
-                    <p class="fs-sm text-muted mb-0">birthday</p>
-                </div>
-            </div>
-        </div>
-        </div>
-        `,
-    data() {
-        return {
-            title: "Dashboard",
-            username: '',
-            firstname: '',
-            lastname: '',
-            email: '',
-            phone: '',
-            avatar: 'default.png',
-            bio: '',
-            gender: '',
-            role: ''
-        };
-    },
-    async mounted() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-        this.getDetails();
-    },
-    methods: {
-        async getDetails() {
-            await axios.get("/api/profile/getdetails")
-                .then(response => {
-                    console.log(response.data);
-                    this.username = response.data.userName;
-                    this.firstname = response.data.firstName;
-                    this.lastname = response.data.lastName;
-                    this.phone = response.data.phone;
-                    this.bio = response.data.bio;
-                    this.avatar = response.data.avatarImg + ".png";
-                    this.gender = response.data.gender;
-                    this.email = response.data.eMail;
-
-                })
-                .catch(error => {
-                    console.log(error);
-                    toaster("error", "something went wrong");
-                });
-        },
-    }
+                        
+    `,
 };
 
-
-
-
-
 const routes = [
-    { path: '/profile', component: Dashboard },
-    { path: '/profile/edit', component: EditProfile },
-    { path: '/profile/security', component: Security }
+    {
+        path: '/wall/:param1?',
+        component: WallPostsFiltered,
+        props: true,
+        watchQuery: ['param1']
+    },
 ];
+
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
-    routes
+    routes,
 });
 
 const app = Vue.createApp({
-    data() {
-        return {
-            isLoading: true,
-            viewTitle: "Profile",
-        };
-    },
+    
 });
+
 app.use(router);
-app.mount('#app');
+app.mount('#appWall');
