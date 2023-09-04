@@ -302,3 +302,4 @@ node_modules/
 
 /wwwroot/assets/css/theme.css
 /wwwroot/assets/css/theme.min.css
+/appsettings.Production.json
