@@ -12,7 +12,6 @@
     <Compile Remove="Controllers\Routers\Apps\**" />
     <Compile Remove="Migrations\**" />
     <Compile Remove="Views\Archive\Content\**" />
-    <Compile Remove="Views\Magazines\Content\**" />
     <Compile Remove="Views\Shop\Content\**" />
     <Compile Remove="wwwroot\content\blogcontent\global\**" />
     <Compile Remove="wwwroot\content\musiccontent\**" />
@@ -21,7 +20,6 @@
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Migrations\**" />
     <Content Remove="Views\Archive\Content\**" />
-    <Content Remove="Views\Magazines\Content\**" />
     <Content Remove="Views\Shop\Content\**" />
     <Content Remove="wwwroot\content\blogcontent\global\**" />
     <Content Remove="wwwroot\content\musiccontent\**" />
@@ -30,7 +28,6 @@
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Views\Archive\Content\**" />
-    <EmbeddedResource Remove="Views\Magazines\Content\**" />
     <EmbeddedResource Remove="Views\Shop\Content\**" />
     <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
     <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
@@ -39,7 +36,6 @@
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Migrations\**" />
     <None Remove="Views\Archive\Content\**" />
-    <None Remove="Views\Magazines\Content\**" />
     <None Remove="Views\Shop\Content\**" />
     <None Remove="wwwroot\content\blogcontent\global\**" />
     <None Remove="wwwroot\content\musiccontent\**" />

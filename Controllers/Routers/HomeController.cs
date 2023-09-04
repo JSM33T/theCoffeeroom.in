@@ -2,7 +2,6 @@
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using theCoffeeroom.Core.Helpers;
-using theCoffeeroom.Models;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
 
@@ -14,6 +13,12 @@ namespace theCoffeeroom.Controllers.Routers
         public IActionResult Index(string level)
         {
             return View(level);
+        }
+
+        [Route("/wall/{subLvla?}/{subLvlb?}/{subLvlc?}")]
+        public IActionResult Wall()
+        {
+            return View("Views/Home/Wall.cshtml");
         }
 
 

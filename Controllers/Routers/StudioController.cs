@@ -2,7 +2,7 @@
 
 namespace theCoffeeroom.Controllers.Routers
 {
-    public class MusicController : Controller
+    public class StudioController : Controller
     {
         [Route("studio")]
         public IActionResult Index()
