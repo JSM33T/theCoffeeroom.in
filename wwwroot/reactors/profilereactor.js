@@ -116,6 +116,10 @@ const EditProfile = {
                                                     <label class="form-label" for="ln">Last name</label>
                                                             <input type="text" v-model="lastname" class="form-control " aria-autocomplete="none" value="" maxlength="20" />
                                                 </div>
+                                                  <div class="col-sm-6">
+                                                    <label class="form-label" for="username">userName <span class='text-muted'></span></label>
+                                                    <input v-model="username" type="text" id="username" class="form-control" value="" placeholder="" maxlength="15" />
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <label class="form-label" for="phone">Phone <span class='text-muted'>(optional)</span></label>
                                                     <input v-model="phone" type="text" id="phone" class="form-control" value="" placeholder="" maxlength="15" />
@@ -193,7 +197,8 @@ const EditProfile = {
                 })
                 .catch(error => {
                     console.log(error);
-                    toaster("error", "something went wrong");
+                    //toaster("error", "something went wrong");
+                    toaster("error", error.response.data);
                 });
         },
         async fetchAvatars() {
@@ -219,6 +224,7 @@ const EditProfile = {
                 phone: this.phone,
                 gender: this.gender,
                 avatarId: avtId,
+                username: this.username,
             };
             const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             axios.defaults.headers.common['RequestVerificationToken'] = token;
@@ -229,7 +235,7 @@ const EditProfile = {
                     document.getElementById('title_master').innerHTML = this.firstname;
                 })
                 .catch(error => {
-                    toaster("Error", "Something went wrong");
+                    toaster("Error", error.response.data);
                     this.getDetails();
                 });
         },

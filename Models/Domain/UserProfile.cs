@@ -18,5 +18,6 @@ namespace theCoffeeroom.Models.Domain
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string AvatarImg { get; set; }
+        public int Id { get; internal set; }
     }
 }

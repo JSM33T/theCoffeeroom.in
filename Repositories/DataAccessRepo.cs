@@ -12,16 +12,7 @@ namespace theCoffeeroom.Repositories
         public string connectionString = ConfigHelper.NewConnectionString;
 
         //=====================================ADD========================================
-        public Task<Blog> AddBlogAsync(Blog blog)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BlogCat> AddBlogCatAsync(BlogCat blogCat)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public async Task<DataSave> AddMailAsync(Mail mail)
         {
             using SqlConnection connection = new(connectionString);
@@ -74,41 +65,7 @@ namespace theCoffeeroom.Repositories
             }
         }
 
-        public Task<UserProfile> AddUserProfileAsync(UserProfile userProfile)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        //=====================================DELETE========================================
-        public Task<Blog> DeleteBlogAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BlogCat> DeleteBlogCatAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Mail> DeleteMailAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserProfile> DeleteUserProfileAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        //=====================================GET LIST========================================
-        public Task<IEnumerable<Blog>> GetAllBlogCatAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Blog>> GetAllBlogsAsync()
         {
             throw new NotImplementedException();
         }
@@ -118,52 +75,12 @@ namespace theCoffeeroom.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserProfile>> GetAllUserProfiles()
-        {
-            throw new NotImplementedException();
-        }
-
-
-        //=====================================GET ITEM BY ID========================================
-        public Task<Blog> GetBlogAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BlogCat> GetBlogCatAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Mail> GetMailAsync(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserProfile> GetUserProfileAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        //=====================================UPDATE========================================
-        public Task<Blog> UpdateBlogAsync(Blog blog)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BlogCat> UpdateBlogCatAsync(BlogCat blogCat)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Mail> UpdateMailAsync(Mail mail)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserProfile> UpdateUserProfileAsync(UserProfile userProfile)
         {
             throw new NotImplementedException();
         }

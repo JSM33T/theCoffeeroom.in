@@ -4,4 +4,5 @@ call "blogreactor.js.bat"
 call "profilereactor.js.bat"
 call "docsreactor.js.bat"
 call "musicreactor.js.bat"
+call "wallreactor.js.bat"
 

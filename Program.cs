@@ -24,7 +24,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
            options.LogoutPath = "/account/logout";
            options.Cookie.HttpOnly = true;
            options.Cookie.IsEssential = true;
-           options.ExpireTimeSpan = TimeSpan.FromDays(30);
+           options.ExpireTimeSpan = TimeSpan.FromDays(100);
            options.SlidingExpiration = true; // Extend the expiration time with each request
        });
 

@@ -7,6 +7,7 @@ const BaseComponent = {
     <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1  bg-secondary">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
             <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
+            <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
                 <div class="col-md-12">
                     <div class="card h-100 border-0 rounded-5">
                         <div class="card-body pb-3">
@@ -50,7 +51,6 @@ const BaseComponent = {
     `,
     data() {
         return {
-
         };
     },
     async mounted() {
@@ -134,7 +134,7 @@ const LoginComponent = {
             axios.defaults.headers.common['RequestVerificationToken'] = token;
             axios.post('/api/account/login', details)
                 .then((response) => {
-                    toaster("success", "Logging in..");
+                    //toaster("success", "Logging in..");
                     let prevlink = localStorage.getItem("prev_link");
                     if(prevlink !== '' && prevlink !== undefined && prevlink !== '/account/login')
                     {
