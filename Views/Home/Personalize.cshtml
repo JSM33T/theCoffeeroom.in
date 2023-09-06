@@ -43,7 +43,7 @@
                                                 <span class="d-block rounded-square"
                                                       style="width: 5rem; height: 1.5rem; border-radius: 5px; background-color: @theme.PrimaryCol ;"></span>
                                                 <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                                                    <button type="button" id="@theme.Id" style="color: @theme.PrimaryCol ;" class="btn rounded-pill outline" onclick="applTheme(this.id)"><i class="ai-arrow-right"></i> Apply </button>
+                                                            <button type="button" id="@theme.Id" style="color: @theme.PrimaryCol ;" class="btn btn-md rounded-pill outline" onclick="applTheme(this.id)"><i class="ai-arrow-right"></i> <span class="applybtn" id="apply_@theme.Id">Apply </span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,6 +137,12 @@
                     }
                     let badgeid = "badge_" + localStorage.getItem("badge");
                     document.getElementById(badgeid).innerText = "Active";
+                    let applyid = "apply_" + localStorage.getItem("badge");
+
+                    
+                    document.querySelector('.applybtn').innerHTML =  "Apply";
+                    document.getElementById(applyid).innerText = "Applied";
+                    document.getElementById(localStorage.getItem("badge")).classList.add('selected','no-click');
                     toaster("success", "applied")
                 })
                 .catch(function (error) {
@@ -177,6 +183,13 @@
     <style>
         .hidden {
             display: none !important;
+            
+        }
+
+        .no-click {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.1;
         }
     </style>
    }
