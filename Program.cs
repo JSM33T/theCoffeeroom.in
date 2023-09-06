@@ -17,6 +17,8 @@ builder.Services.AddSession(options =>
 
 //DA service
 builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
+builder.Services.AddScoped<IAvatarRepo, AvatarRepo>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie(options =>
        {

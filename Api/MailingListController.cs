@@ -6,7 +6,7 @@ using theCoffeeroom.Interfaces;
 using theCoffeeroom.Models.DAModels;
 using theCoffeeroom.Models.Domain;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class MailingListController : Controller
     {
@@ -28,18 +28,18 @@ namespace theCoffeeroom.Controllers.Dedicated
                 if (ModelState.IsValid)
                 {
                     try
-                    {     
+                    {
                         DataSave result = await _dataAccessRepo.AddMailAsync(mail);
-                       
+
                         if (result.Status)
                         {
-                            return Ok(result.Message);   
+                            return Ok(result.Message);
                         }
                         else
                         {
                             return BadRequest(result.Message);
                         }
-                       
+
                     }
                     catch (Exception ex)
                     {

@@ -11,7 +11,7 @@ namespace theCoffeeroom.Repositories
     {
         public string connectionString = ConfigHelper.NewConnectionString;
 
-        //=====================================ADD========================================
+        //=====================================MAIL========================================
       
         public async Task<DataSave> AddMailAsync(Mail mail)
         {

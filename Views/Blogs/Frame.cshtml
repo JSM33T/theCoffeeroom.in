@@ -20,7 +20,6 @@
         .liked{
             
         }
-
         .ai-heart-filled{
         color:red;
             animation: bounce 0.5s ease;
@@ -71,14 +70,6 @@
                 </div>
             </div>
             @await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/Body.cshtml")
-            @{
-                string tags = Model.Tags.ToString();
-                string[] tagArray = tags.Split(',');
-            }
-            @foreach (string tag in tagArray)
-            {
-                <a class="nav-link fs-sm py-1 px-0 me-3" href="/blogs/tags/@tag.Trim().ToString()"><span class="text-primary">#</span>@tag.Trim()</a>
-            }
         </div>
         @await Html.PartialAsync("Content/"+ Model.Year+ "/" + Model.Slug + "/SideBar.cshtml")
     </div>

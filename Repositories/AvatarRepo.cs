@@ -1,10 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
 using theCoffeeroom.Core.Helpers;
+using theCoffeeroom.Interfaces;
 using theCoffeeroom.Models.Domain;
 
 namespace theCoffeeroom.Repositories
 {
-    public class AvatarRepo
+    public class AvatarRepo : IAvatarRepo
     {
         public string connectionString = ConfigHelper.NewConnectionString;
         public async Task<List<Avatar>> GetAvatarsAsync()
@@ -21,7 +22,7 @@ namespace theCoffeeroom.Repositories
 
             while (await dataReader.ReadAsync())
             {
-                Avatar entry = new Avatar
+                Avatar entry = new()
                 {
                     Id = dataReader["Id"] as int? ?? 0,
                     Title = dataReader["Title"] as string ?? "",
@@ -32,5 +33,7 @@ namespace theCoffeeroom.Repositories
 
             return entries;
         }
+
+       
     }
 }

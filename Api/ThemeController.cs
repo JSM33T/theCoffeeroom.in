@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class ThemeController : Controller
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class AdminController : Controller
     {
@@ -39,7 +39,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 return View("Views/Home/AccessDenied.cshtml");
             }
-           
+
         }
 
         [Route("/admin/log/{filename}")]
@@ -49,8 +49,8 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 if (HttpContext.Session.GetString("role") == "admin")
                 {
-                     string logsDirectory = "Logs"; 
-                    string filePath = Path.Combine(logsDirectory,"coffeelog" +fileName + ".txt");
+                    string logsDirectory = "Logs";
+                    string filePath = Path.Combine(logsDirectory, "coffeelog" + fileName + ".txt");
 
                     if (!System.IO.File.Exists(filePath))
                     {
@@ -75,7 +75,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             }
         }
 
-    
+
 
 
     }

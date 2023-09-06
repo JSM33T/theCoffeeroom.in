@@ -84,14 +84,24 @@
                         <p class="mb-0">Shops,Apps,Presets,Gallery and more in checklist. Stay tuned</p>
                     </div>
                 </div>
-                <div class="d-sm-flex justify-content-center justify-content-lg-start pt-5 mt-lg-2"><a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/personalize">Explore themes..</a><a class="btn btn-lg btn-link" href="/blogs">Explore blogs<i class="ai-arrow-right ms-2"></i></a></div>
+                    <div class="d-sm-flex justify-content-center justify-content-lg-start pt-5 mt-lg-2">
+                    @if (Context.Session.GetString("username") == null)
+                    {
+                       <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/account">SignUp/Login</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/personalize">Personalize</a>
+                    }
+                        <a class="btn btn-lg btn-link" href="/blogs">Explore blogs<i class="ai-arrow-right ms-2"></i></a>
+                    </div>
             </div>
         </div>
     </div>
 </section>
-    <section class="bg-dark position-relative overflow-hidden py-5">
+    <section class="position-relative overflow-hidden py-5">
         <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
-        <div class="container dark-mode position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
+        <div class="container  position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
             <div class="row align-items-center py-xxl-2" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
                 <div class="col-md-5 pb-3 pb-md-0 mb-3 mb-md-0 " data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
                     <div class="ps-md-4 ps-lg-0">
@@ -102,16 +112,16 @@
                         <a class="btn btn-lg btn-link px-0" href="/studio">Learn more<i class="ai-arrow-right ms-2"></i></a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-5 col-xxl-5 offset-lg-2"><img src="assets/img/about/product/features/01.png" width="420" alt="Image"></div>
+                <div class="col-md-6 col-lg-5 col-xxl-5 offset-lg-2"><img src="~/content/homecontent/studio-cta.svg" width="420" alt="Image"></div>
 
             </div>
         </div>
     </section>
-    <section class="bg-faded-primary position-relative overflow-hidden py-5">
+    <section class="position-relative bg-faded-primary overflow-hidden py-5">
         <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
-        <div class="container dark-mode position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
+        <div class="container position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
             <div class="row align-items-center py-xxl-2" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
-                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="assets/img/about/product/features/01.png" width="420" alt="Image"></div>
+                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="~/content/homecontent/blogs-cta.svg" width="420" alt="Image"></div>
                 <div class="col-md-6 col-lg-5 col-xxl-6 " data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
                     <div class="ps-md-4 ps-lg-0">
                         <h2 class="mb-lg-4">Blogs to keep you involved!!!</h2>

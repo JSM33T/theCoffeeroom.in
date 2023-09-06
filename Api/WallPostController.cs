@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class WallPostController : Controller
     {

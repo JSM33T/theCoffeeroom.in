@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class FilesController : Controller
     {
@@ -27,7 +27,7 @@ namespace theCoffeeroom.Controllers.Dedicated
 
 
         [Route("browser/{Subdir1?}/{Subdir2?}/{Subdir3?}/{Subdir4?}/{Subdir5?}")]
-        public IActionResult Something(string Subdir1,string Subdir2,string Subdir3,string Subdir4,string Subdir5)
+        public IActionResult Something(string Subdir1, string Subdir2, string Subdir3, string Subdir4, string Subdir5)
         {
             string targetDirectory = "";
             if (Subdir1 == null)
@@ -46,13 +46,13 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower();
             }
-            else if(Subdir5 == null)
+            else if (Subdir5 == null)
             {
                 targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower();
             }
-             else
+            else
             {
-                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower() + "/"  + Subdir5.ToLower();
+                targetDirectory = "wwwroot/content/" + Subdir1.ToLower() + "/" + Subdir2.ToLower() + "/" + Subdir3.ToLower() + "/" + Subdir4.ToLower() + "/" + Subdir5.ToLower();
             }
 
 
@@ -62,7 +62,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                                              var info = new DirectoryInfo(path);
                                              return new
                                              {
-                                                 Name = info.Name,
+                                                 info.Name,
                                                  IsDirectory = info.Attributes.HasFlag(FileAttributes.Directory),
                                                  CreatedAt = info.CreationTime,
                                                  Path = path,
@@ -71,9 +71,9 @@ namespace theCoffeeroom.Controllers.Dedicated
                                          .OrderByDescending(item => item.CreatedAt)
                                          .ToList();
 
-                    return Json(items); // Return JSON response with directories and files
-               
-           
+            return Json(items); // Return JSON response with directories and files
+
+
         }
 
 

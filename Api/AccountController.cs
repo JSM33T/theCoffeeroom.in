@@ -11,7 +11,7 @@ using theCoffeeroom.Models.Frame;
 using Validators = theCoffeeroom.Core.Helpers.Validators;
 using theCoffeeroom.Repositories;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     //[AutoValidateAntiforgeryToken]
     public class AccountController : Controller
@@ -23,7 +23,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserLogin([FromBody] LoginCreds loginCreds)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Credentials");
             }
@@ -39,7 +39,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     " and p.IsVerified = 1 " +
                     " and p.AvatarId = a.Id", connection);
                 checkcommand.Parameters.AddWithValue("@username", loginCreds.UserName.ToLower());
-                checkcommand.Parameters.AddWithValue("@password",Core.EnDcryptor.Encrypt(loginCreds.Password));
+                checkcommand.Parameters.AddWithValue("@password", EnDcryptor.Encrypt(loginCreds.Password));
                 using (var reader = await checkcommand.ExecuteReaderAsync())
                 {
                     if (reader.Read())
@@ -59,11 +59,11 @@ namespace theCoffeeroom.Controllers.Dedicated
                         HttpContext.Session.SetString("avatar", avatar.ToString());
                         Log.Information(loginCreds.UserName + " logged in");
                         return Ok("logging in...");
-                       
+
                     }
                     else
                     {
-                        Log.Information("invalid creds by username:" + loginCreds.UserName);                      
+                        Log.Information("invalid creds by username:" + loginCreds.UserName);
                     }
                 }
                 await connection.CloseAsync();
@@ -73,7 +73,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 Log.Error(ex.Message.ToString() + " : in login form,user : " + loginCreds.UserName);
                 return StatusCode(500, "soomething went wrong");
-               
+
             }
         }
 
@@ -82,9 +82,9 @@ namespace theCoffeeroom.Controllers.Dedicated
         public async Task<IActionResult> UserSignUp([FromBody] UserProfile userProfile)
         {
             string body, subject;
-           
+
             string message = "something working", type = "error";
-            if (userProfile.UserName != null && userProfile.Password!= null)
+            if (userProfile.UserName != null && userProfile.Password != null)
             {
                 if (userProfile.FirstName.Trim() == "")
                 {
@@ -156,7 +156,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                                         cmd.Parameters.AddWithValue("@lastname", userProfile.LastName);
                                         cmd.Parameters.AddWithValue("@email", userProfile.EMail);
                                         cmd.Parameters.AddWithValue("@username", FilteredUsername.Trim());
-                                        cmd.Parameters.AddWithValue("@cryptedpassword",EnDcryptor.Encrypt(userProfile.Password.Trim()));
+                                        cmd.Parameters.AddWithValue("@cryptedpassword", EnDcryptor.Encrypt(userProfile.Password.Trim()));
                                         cmd.Parameters.AddWithValue("@otp", otp.Trim());
                                         cmd.Parameters.Add("@otptime", SqlDbType.DateTime).Value = DateTime.Now;
                                         cmd.Parameters.Add("@datejoined", SqlDbType.DateTime).Value = DateTime.Now;
@@ -330,7 +330,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         await connection.OpenAsync();
                         SqlCommand insertCommand = new("UPDATE TblUserProfile SET CryptedPassword = @cryptedpassword,DateUpdated = @dateupdated where UserName = @username", connection);
                         insertCommand.Parameters.AddWithValue("@username", LoggedUser);
-                        insertCommand.Parameters.AddWithValue("@cryptedpassword", Core.EnDcryptor.Encrypt(userProfile.Password));
+                        insertCommand.Parameters.AddWithValue("@cryptedpassword", EnDcryptor.Encrypt(userProfile.Password));
                         insertCommand.Parameters.Add("@dateupdated", SqlDbType.DateTime).Value = DateTime.Now;
 
                         await insertCommand.ExecuteNonQueryAsync();
@@ -344,14 +344,14 @@ namespace theCoffeeroom.Controllers.Dedicated
                         return BadRequest("Something went wrong");
                     }
                 }
-               
+
             }
             else
             {
                 return BadRequest("Invalid Password Format");
             }
         }
-        
+
         [HttpPost]
         [Route("api/profile/update")]
         [ValidateAntiForgeryToken]
@@ -376,7 +376,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         return BadRequest("Username taken");
                     }
                 }
-                
+
                 await UpdateUserProfileAsync(connection, userProfile, transaction);
 
                 transaction.Commit();
@@ -678,7 +678,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         [HttpPost]
         [Route("api/account/loginviaotp")]
         [IgnoreAntiforgeryToken]
-        public  IActionResult LogInViaOtp([FromBody] LoginCreds loginCreds)
+        public IActionResult LogInViaOtp([FromBody] LoginCreds loginCreds)
         {
             try
             {
@@ -699,47 +699,47 @@ namespace theCoffeeroom.Controllers.Dedicated
                 else
                 { currUserId = ""; };
                 readera.Close();
-                    SqlCommand checkcommand = new("select p.*,a.Image " +
-                       "from TblUserProfile p,TblAvatarMaster a " +
-                       "where p.Id = @id " +
-                       "and p.IsActive= 1 " +
-                       "and p.IsVerified = 1 " +
-                       "and p.AvatarId = a.Id", connection);
-                    checkcommand.Parameters.AddWithValue("@id", currUserId);
-                    using var reader = checkcommand.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        var username = reader.GetString(reader.GetOrdinal("UserName"));
-                        var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
-                        var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
-                        var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
-                        var role = reader.GetString(reader.GetOrdinal("Role"));
-                        var avatar = reader.GetString(reader.GetOrdinal("Image"));
-                        //set session
-                        HttpContext.Session.SetString("user_id", user_id.ToString());
-                        HttpContext.Session.SetString("username", username);
-                        HttpContext.Session.SetString("first_name", firstname);
-                        HttpContext.Session.SetString("role", role);
-                        HttpContext.Session.SetString("fullname", fullname);
-                        HttpContext.Session.SetString("avatar", avatar.ToString());
-                        connection.Close();
-                        return Ok("logging in...");
+                SqlCommand checkcommand = new("select p.*,a.Image " +
+                   "from TblUserProfile p,TblAvatarMaster a " +
+                   "where p.Id = @id " +
+                   "and p.IsActive= 1 " +
+                   "and p.IsVerified = 1 " +
+                   "and p.AvatarId = a.Id", connection);
+                checkcommand.Parameters.AddWithValue("@id", currUserId);
+                using var reader = checkcommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    var username = reader.GetString(reader.GetOrdinal("UserName"));
+                    var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
+                    var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
+                    var role = reader.GetString(reader.GetOrdinal("Role"));
+                    var avatar = reader.GetString(reader.GetOrdinal("Image"));
+                    //set session
+                    HttpContext.Session.SetString("user_id", user_id.ToString());
+                    HttpContext.Session.SetString("username", username);
+                    HttpContext.Session.SetString("first_name", firstname);
+                    HttpContext.Session.SetString("role", role);
+                    HttpContext.Session.SetString("fullname", fullname);
+                    HttpContext.Session.SetString("avatar", avatar.ToString());
+                    connection.Close();
+                    return Ok("logging in...");
 
-                    }
-                    else
-                    {
-                        connection.Close();
-                        return BadRequest("Invalid/Expired Otp");
-                    }
+                }
+                else
+                {
+                    connection.Close();
+                    return BadRequest("Invalid/Expired Otp");
+                }
             }
-            catch(Exception ex2)
+            catch (Exception ex2)
             {
                 Log.Error(ex2.Message.ToString());
                 return BadRequest("Something went wrong");
             }
-            
 
-           
+
+
         }
 
         [HttpGet]
@@ -778,11 +778,11 @@ namespace theCoffeeroom.Controllers.Dedicated
                 await reader.CloseAsync();
                 await connection.CloseAsync();
 
-                return Json(userProfile); 
+                return Json(userProfile);
             }
             else
             {
-                return Json(new { message = "Access denied" }); 
+                return Json(new { message = "Access denied" });
             }
         }
 

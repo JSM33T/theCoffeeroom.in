@@ -7,7 +7,7 @@ using Serilog;
 using System.Data;
 using theCoffeeroom.Models.Frame;
 
-namespace theCoffeeroom.Controllers.Dedicated
+namespace theCoffeeroom.Api
 {
     public class BlogTriggers
     {
@@ -37,7 +37,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             _ = new List<BlogThumbz>();
             if (mode != "n")
             {
-                
+
                 using SqlConnection connection = new(connectionString);
                 await connection.OpenAsync();
                 string sql = "";
@@ -80,7 +80,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                         sql = "SELECT m.Id, m.Title,m.Description,m.UrlHandle,m.DatePosted,m.Tags,YEAR(m.DatePosted) AS Year,c.Title AS Category,c.Locator,COUNT(bc.Id) AS Comments FROM TblBlogMaster m " +
                              "LEFT JOIN TblBlogComment bc ON m.Id = bc.PostId " +
                              "JOIN TblBlogCategory c ON m.CategoryId = c.Id " +
-                             "WHERE m.CategoryId = c.Id and (m.Title like '%" + key + "%' OR m.Description like '%"+key+ "%'  OR m.Tags like '%"+key+"%' ) AND m.IsActive = 1" +
+                             "WHERE m.CategoryId = c.Id and (m.Title like '%" + key + "%' OR m.Description like '%" + key + "%'  OR m.Tags like '%" + key + "%' ) AND m.IsActive = 1" +
                              "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                              "ORDER BY Id OFFSET " + mode + " " +
                              "ROWS FETCH NEXT 2 ROWS ONLY";
@@ -134,7 +134,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                                         "JOIN TblAvatarMaster AS avt ON u.AvatarId = avt.Id where b.UrlHandle = @UrlHandle ", connection);
             //added scalar vars
             command.Parameters.AddWithValue("@UrlHandle", Slug);
-            var reader =await command.ExecuteReaderAsync();
+            var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
                 var row = new
@@ -160,7 +160,8 @@ namespace theCoffeeroom.Controllers.Dedicated
         public async Task<int> LoadLikes(string Slug)
         {
             List<object> data = new();
-            try {
+            try
+            {
                 using var connection = new SqlConnection(connectionString);
                 await connection.OpenAsync();
                 var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where b.UrlHandle = @UrlHandle  and b.Id = a.BlogId", connection);
@@ -169,7 +170,8 @@ namespace theCoffeeroom.Controllers.Dedicated
                 await connection.CloseAsync();
                 return reader;
             }
-            catch {
+            catch
+            {
                 return 0;
             }
 
@@ -185,7 +187,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 List<object> data = new();
                 var SessionUserId = HttpContext.Session.GetString("user_id");
-               // var SessionUserId = 1;
+                // var SessionUserId = 1;
                 try
                 {
                     using var connection = new SqlConnection(connectionString);
@@ -193,7 +195,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where a.UserId = @userid and b.UrlHandle = @slug and b.Id = a.BlogId", connection);
                     command.Parameters.AddWithValue("@userid", SessionUserId);
                     command.Parameters.AddWithValue("@slug", blogLike.Slug);
-                    int likecounter = (int)(await command.ExecuteScalarAsync());
+                    int likecounter = (int)await command.ExecuteScalarAsync();
 
                     SqlCommand blogIdFind = new("SELECT Id from TblBlogMaster where UrlHandle = @blogslug", connection);
                     blogIdFind.Parameters.AddWithValue("@blogslug", blogLike.Slug);
@@ -243,7 +245,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> IsLiked(BlogLike blogLike)
         {
-          
+
             if (HttpContext.Session.GetString("user_id") != null)
             {
                 string LoggedInUserId = HttpContext.Session.GetString("user_id").ToString();
@@ -255,7 +257,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                     var command = new SqlCommand("SELECT COUNT(*) FROM TblBlogLike a,TblBlogMaster b where a.UserId = @userid and b.UrlHandle = @slug and b.Id = a.BlogId", connection);
                     command.Parameters.AddWithValue("@userid", HttpContext.Session.GetString("user_id"));
                     command.Parameters.AddWithValue("@slug", blogLike.Slug);
-                    int likecounter = (int)(await command.ExecuteScalarAsync());
+                    int likecounter = (int)await command.ExecuteScalarAsync();
                     await connection.CloseAsync();
                     if (likecounter == 1)
                     {
@@ -300,15 +302,15 @@ namespace theCoffeeroom.Controllers.Dedicated
                                         BC.Id, BC.Title, BC.Locator",
                                          connection);
 
-            var reader =await command.ExecuteReaderAsync();
+            var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
                 var row = new
                 {
                     id = reader.GetInt32(0),
                     title = reader.GetString(1),
-                    locator = reader.GetString(2),      
-                    qty = reader.GetInt32(3)          
+                    locator = reader.GetString(2),
+                    qty = reader.GetInt32(3)
                 };
 
                 data.Add(row);
@@ -379,7 +381,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 return BadRequest("Something went wrong");
             }
-    
+
         }
 
         [HttpPost]
@@ -387,7 +389,7 @@ namespace theCoffeeroom.Controllers.Dedicated
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LoadComments([FromBody] BlogComment blogComment)
         {
-            
+
             Dictionary<int, dynamic> comments = new();
             using var connection = new SqlConnection(connectionString);
             await connection.OpenAsync();
@@ -525,7 +527,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                 {
 
                     using var connection = new SqlConnection(connectionString);
-                    
+
                     await connection.OpenAsync();
                     var sql = "UPDATE TblBlogComment SET Comment = @Commentval WHERE Id = @Idval AND UserId = @UserId";
                     var command = new SqlCommand(sql, connection);
@@ -546,7 +548,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 return BadRequest("Access denied");
             }
-            
+
         }
 
         [HttpPost]
@@ -591,7 +593,7 @@ namespace theCoffeeroom.Controllers.Dedicated
             {
                 return BadRequest("Access Denied");
             }
-           
+
         }
 
         [HttpPost]
@@ -702,7 +704,7 @@ namespace theCoffeeroom.Controllers.Dedicated
                 {
                     return BadRequest("Something went wrong");
                 }
-               
+
             }
             else
             {

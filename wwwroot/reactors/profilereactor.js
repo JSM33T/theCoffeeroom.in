@@ -263,7 +263,7 @@ const Dashboard = {
             <div class="d-sm-flex align-items-center">
                 <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
                 <div class="pt-3 pt-sm-0 ps-sm-3">
-                    <h3 class="h5 mb-2">{{firstname}} {{lastname}}<i class="ai-circle-check-filled fs-base text-success ms-2"></i></h3>
+                    <h3 class="h5 mb-2">{{firstname}} {{lastname}} <img src="/assets/svg/badges/contributor3.svg" /> <img src="/assets/svg/badges/contributor3.svg"/> <img src="/assets/svg/badges/contributor3.svg"/></h3>
                     <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
                         <div class="d-flex align-items-center me-3"><i class="ai-mail me-1"></i>{{email}}</div>
                     </div>

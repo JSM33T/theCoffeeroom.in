@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\Dedicated\Apps\**" />
     <Compile Remove="Controllers\Routers\Apps\**" />
     <Compile Remove="Migrations\**" />
     <Compile Remove="Views\Archive\Content\**" />
@@ -16,7 +15,6 @@
     <Compile Remove="wwwroot\content\blogcontent\global\**" />
     <Compile Remove="wwwroot\content\musiccontent\**" />
     <Compile Remove="wwwroot\logs\**" />
-    <Content Remove="Controllers\Dedicated\Apps\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Migrations\**" />
     <Content Remove="Views\Archive\Content\**" />
@@ -24,7 +22,6 @@
     <Content Remove="wwwroot\content\blogcontent\global\**" />
     <Content Remove="wwwroot\content\musiccontent\**" />
     <Content Remove="wwwroot\logs\**" />
-    <EmbeddedResource Remove="Controllers\Dedicated\Apps\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Views\Archive\Content\**" />
@@ -32,7 +29,6 @@
     <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
     <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
-    <None Remove="Controllers\Dedicated\Apps\**" />
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Migrations\**" />
     <None Remove="Views\Archive\Content\**" />
