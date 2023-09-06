@@ -9,7 +9,6 @@ using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
 using Validators = theCoffeeroom.Core.Helpers.Validators;
-using theCoffeeroom.Repositories;
 
 namespace theCoffeeroom.Api
 {
@@ -40,34 +39,31 @@ namespace theCoffeeroom.Api
                     " and p.AvatarId = a.Id", connection);
                 checkcommand.Parameters.AddWithValue("@username", loginCreds.UserName.ToLower());
                 checkcommand.Parameters.AddWithValue("@password", EnDcryptor.Encrypt(loginCreds.Password));
-                using (var reader = await checkcommand.ExecuteReaderAsync())
+                using var reader = await checkcommand.ExecuteReaderAsync();
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        var username = reader.GetString(reader.GetOrdinal("UserName"));
-                        var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
-                        var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
-                        var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
-                        var role = reader.GetString(reader.GetOrdinal("Role"));
-                        var avatar = reader.GetString(reader.GetOrdinal("Image"));
-                        //set session
-                        HttpContext.Session.SetString("user_id", user_id.ToString());
-                        HttpContext.Session.SetString("username", username);
-                        HttpContext.Session.SetString("first_name", firstname);
-                        HttpContext.Session.SetString("role", role);
-                        HttpContext.Session.SetString("fullname", fullname);
-                        HttpContext.Session.SetString("avatar", avatar.ToString());
-                        Log.Information(loginCreds.UserName + " logged in");
-                        return Ok("logging in...");
+                    var username = reader.GetString(reader.GetOrdinal("UserName"));
+                    var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
+                    var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
+                    var role = reader.GetString(reader.GetOrdinal("Role"));
+                    var avatar = reader.GetString(reader.GetOrdinal("Image"));
+                    //set session
+                    HttpContext.Session.SetString("user_id", user_id.ToString());
+                    HttpContext.Session.SetString("username", username);
+                    HttpContext.Session.SetString("first_name", firstname);
+                    HttpContext.Session.SetString("role", role);
+                    HttpContext.Session.SetString("fullname", fullname);
+                    HttpContext.Session.SetString("avatar", avatar.ToString());
+                    Log.Information(loginCreds.UserName + " logged in");
+                    return Ok("logging in...");
 
-                    }
-                    else
-                    {
-                        Log.Information("invalid creds by username:" + loginCreds.UserName);
-                    }
                 }
-                await connection.CloseAsync();
-                return BadRequest("Invalid Credentials");
+                else
+                {
+                    Log.Information("invalid creds by username:" + loginCreds.UserName);
+                    return BadRequest("Invalid Credentials");
+                }
             }
             catch (Exception ex)
             {
@@ -246,68 +242,42 @@ namespace theCoffeeroom.Api
         //    }
         //}
 
-        //[HttpGet]
-        //[Route("/api/getavatars")]
-        //public async Task<IActionResult> GetAvatars()
-        //{
-        //    try
-        //    {
-        //        using SqlConnection connection = new(connectionString);
-        //        await connection.OpenAsync();
-
-        //        string sql = "SELECT * FROM TblAvatarMaster";
-
-        //        using SqlCommand command = new(sql, connection);
-        //        using SqlDataReader dataReader = await command.ExecuteReaderAsync().ConfigureAwait(false);
-
-        //        List<Avatar> entries = new List<Avatar>();
-
-        //        while (await dataReader.ReadAsync())
-        //        {
-        //            Avatar entry = new Avatar
-        //            {
-        //                Id = dataReader["Id"] as int? ?? 0,
-        //                Title = dataReader["Title"] as string ?? "",
-        //                Image = dataReader["Image"] as string ?? ""
-        //            };
-        //            entries.Add(entry);
-        //        }
-
-        //        return Ok(entries);
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        Log.Error("SQL error in GetAvatars: " + ex.Message);
-        //        return BadRequest("An error occurred while fetching avatars.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.Error("Error in GetAvatars: " + ex.Message);
-        //        return BadRequest("An unexpected error occurred.");
-        //    }
-        //}
         [HttpGet]
         [Route("/api/getavatars")]
         public async Task<IActionResult> GetAvatars()
         {
             try
             {
-                AvatarRepo repository = new AvatarRepo();
-                List<Avatar> entries = await repository.GetAvatarsAsync();
+                using SqlConnection connection = new(connectionString);
+                await connection.OpenAsync();
+
+                string sql = "SELECT * FROM TblAvatarMaster";
+
+                using SqlCommand command = new(sql, connection);
+                using SqlDataReader dataReader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+
+                List<Avatar> entries = new();
+
+                while (await dataReader.ReadAsync())
+                {
+                    Avatar entry = new()
+                    {
+                        Id = dataReader["Id"] as int? ?? 0,
+                        Title = dataReader["Title"] as string ?? "",
+                        Image = dataReader["Image"] as string ?? ""
+                    };
+                    entries.Add(entry);
+                }
 
                 return Ok(entries);
             }
             catch (SqlException ex)
             {
                 Log.Error("SQL error in GetAvatars: " + ex.Message);
-                return BadRequest("An error occurred while fetching avatars.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error in GetAvatars: " + ex.Message);
-                return BadRequest("An unexpected error occurred.");
+                return BadRequest("Unable to fetch avatars");
             }
         }
+
 
         [HttpPost]
         [Route("api/profile/password/update")]
@@ -423,111 +393,24 @@ namespace theCoffeeroom.Api
             HttpContext.Session.SetString("username", userProfile.UserName);
             HttpContext.Session.SetString("first_name", userProfile.FirstName.Trim());
             HttpContext.Session.SetString("fullname", userProfile.FirstName.Trim() + " " + userProfile.LastName.Trim());
-            HttpContext.Session.SetString("avatar", GetAvatar(userProfile.AvatarId)); // Implement GetAvatar based on your needs
+            HttpContext.Session.SetString("avatar", GetAvatar(userProfile.AvatarId));
         }
 
         private string GetAvatar(int avatarId)
         {
-            using (var connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+            using var connection = new SqlConnection(connectionString);
+            connection.Open();
 
-                // Assuming you have a table TblAvatarMaster with a column Image and Id
-                var sql = "SELECT Image FROM TblAvatarMaster WHERE Id = @avtrid";
-                using var command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@avtrid", avatarId);
+            var sql = "SELECT Image FROM TblAvatarMaster WHERE Id = @avtrid";
+            using var command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@avtrid", avatarId);
 
-                var avatar = (string)command.ExecuteScalar();
+            var avatar = (string)command.ExecuteScalar();
 
-                return avatar;
-            }
+            return avatar;
         }
 
 
-        //[HttpPost]
-        //[Route("api/account/recover")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> RecoverAccount([FromBody] GenericReceiver genericReceiver)
-        //{
-        //    //UserProfile userProfile = null ;
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            using SqlConnection connection = new(connectionString);
-        //            SqlCommand CheckCommand = new("SELECT * FROM TblUserProfile WHERE UserName = @username or EMail = @username", connection);
-        //            CheckCommand.Parameters.AddWithValue("@username", genericReceiver.StringRec);
-        //            await connection.OpenAsync();
-        //            using SqlDataReader reader = CheckCommand.ExecuteReader();
-
-        //            if (reader.Read())
-        //            {
-        //                int Id = reader.GetInt32(reader.GetOrdinal("Id"));
-        //                string Username = reader.GetString(reader.GetOrdinal("UserName"));
-        //                string Useremail = reader.GetString(reader.GetOrdinal("EMail"));
-        //                string secret = StringProcessors.GenerateRandomString(10);
-        //                var otp = OTPGenerator.GenerateOTP(secret);
-        //               string subject = "Recover Your Account | TheCoffeeroom";
-        //                await reader.CloseAsync();
-        //                try
-        //                {
-
-        //                 string body = "<h1>Hey there,</h1><br> Here is an OTP to log into your account with username  <b>"+ Username + "</b>. It will be valid for a day do change your acc password within a day. You can log into your account using this OTP only once &nbsp;<br> <h1><b>" + otp + "</b></h1>";
-
-        //                    int stat = Mailer.MailSignup(subject, body, Useremail);
-        //                    if (stat == 1)
-        //                    {
-        //                        try
-        //                        {
-        //                            SqlCommand maxIdCommand = new("SELECT ISNULL(MAX(Id), 0) + 1 FROM TblPasswordReset", connection);
-        //                            int newId = Convert.ToInt32(maxIdCommand.ExecuteScalar());
-        //                            SqlCommand cmd = new("insert into TblPasswordReset (Id,UserId,Token,DateAdded,IsValid) VALUES(@id,@userid,@token,@dateadded,@isvalid)", connection);
-        //                            cmd.Parameters.AddWithValue("@id", newId);
-        //                            cmd.Parameters.AddWithValue("@userid", Id);
-        //                            cmd.Parameters.AddWithValue("@token", otp);
-        //                            cmd.Parameters.AddWithValue("@isvalid", true);
-        //                            cmd.Parameters.Add("@dateadded", SqlDbType.DateTime).Value = DateTime.Now;
-
-        //                            await cmd.ExecuteNonQueryAsync();
-        //                            return Ok("OTP sent to your mail please enter the OTP to login");
-        //                        }
-        //                        catch (Exception exm)
-        //                        {
-        //                            Log.Error("Error while user registration: " + exm.Message.ToString());
-        //                            return BadRequest("Something went wrong");
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        //log to be added later
-        //                        return BadRequest("Unable to send mail");
-        //                    }
-        //                }
-        //                catch (Exception ex2)
-        //                {
-        //                    Log.Error(ex2.Message.ToString());
-        //                    return BadRequest("Something went wrong");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                await connection.CloseAsync();
-        //                return BadRequest("no record found with given username/email");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Log.Error("error updating profile:" + ex.Message.ToString());
-        //            return BadRequest("Something went wrong");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return BadRequest("Invalid Username/Email!!");
-        //    }
-
-
-        //}
 
         [HttpPost]
         [Route("api/account/recover")]
@@ -612,7 +495,7 @@ namespace theCoffeeroom.Api
                 : null;
         }
 
-        private async Task<bool> SendOTPByEmailAsync(string subject, string otp, string userEmail)
+        private static async Task<bool> SendOTPByEmailAsync(string subject, string otp, string userEmail)
         {
             try
             {
@@ -649,7 +532,7 @@ namespace theCoffeeroom.Api
         }
 
 
-        private async Task<bool> SaveOTPInDatabaseAsync(SqlConnection connection, int userId, string otp)
+        private static async Task<bool> SaveOTPInDatabaseAsync(SqlConnection connection, int userId, string otp)
         {
             try
             {

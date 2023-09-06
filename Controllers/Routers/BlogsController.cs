@@ -18,7 +18,7 @@ namespace theCoffeeroom.Controllers.Routers
         }
 
 
-        //SEO
+        //SEO-prerender
         [HttpGet]
         [Route("/blog/{Year?}/{Slug}")]
         public IActionResult Blogs(string Year,string Slug)
