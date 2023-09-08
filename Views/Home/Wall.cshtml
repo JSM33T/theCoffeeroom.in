@@ -9,28 +9,24 @@
            
             <section class="card border-0 mb-4 fade-in">
                 @Html.AntiForgeryToken()
-                
-                    <div class="col-lg-12 pb-2 pb-sm-4">
-
-                        <div class="row position-relative overflow-hidden gx-2 zindex-1">
-                        
-                            <div class="col-xl-12">
+                <div class="col-lg-12 pb-2 pb-sm-4">
+                    <div class="row position-relative overflow-hidden gx-2 zindex-1">
+                        <div class="col-xl-12">
                             <div class="card border-0" id="appWall">
-                            <router-view></router-view>
+                                <router-view :key="$route.path"></router-view>
                             </div>
-                                   </div>
                         </div>
                     </div>
-
-
-                    
+                </div>
             </section>
         </div>
     </div>
 </div>
 <hr class="d-none d-dark-mode-block"/>
   
+@section cssStyles{
 
+}
 @section cssLib{
     <link rel="stylesheet" media="screen" href="/assets/vendor/simplebar/dist/simplebar.min.css"/>
 }

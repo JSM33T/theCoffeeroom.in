@@ -22,35 +22,6 @@
 
 
 
-
-    Context.Response.Cookies.Append("falana", "dhimkana");
-
-    var mySessionVariable = Context.Session.GetString("username");
-    if (mySessionVariable != null)
-    {
-        ViewData["user_name"] = Context.Session.GetString("username").ToString();
-        ViewData["first_name"] = Context.Session.GetString("first_name").ToString();
-        ViewData["role"] = Context.Session.GetString("role").ToString();
-        ViewData["avatar"] = Context.Session.GetString("avatar").ToString();
-        ViewData["user_id"] = Context.Session.GetString("user_id").ToString();
-        ViewData["fullname"] = Context.Session.GetString("fullname").ToString();
-    }
-    else
-    {
-        //if (Context.Request.Cookies.TryGetValue("falana", out string cookieValue))
-        //{
-        //    ViewData["CookieValue"] = cookieValue;
-
-        //}
-        //else
-        //{
-        ViewData["first_name"] = "guest";
-        ViewData["role"] = "guest";
-        ViewData["avatar"] = "default";
-        ViewData["user_id"] = "0";
-        // }
-
-    }
 }
 <!DOCTYPE html>
 <html lang="en">

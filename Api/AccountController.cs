@@ -9,6 +9,7 @@ using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
 using Validators = theCoffeeroom.Core.Helpers.Validators;
+using System.Reflection.Metadata;
 
 namespace theCoffeeroom.Api
 {
@@ -22,6 +23,7 @@ namespace theCoffeeroom.Api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserLogin([FromBody] LoginCreds loginCreds)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid Credentials");
@@ -55,6 +57,29 @@ namespace theCoffeeroom.Api
                     HttpContext.Session.SetString("role", role);
                     HttpContext.Session.SetString("fullname", fullname);
                     HttpContext.Session.SetString("avatar", avatar.ToString());
+
+                    string SessionKey = StringProcessors.GenerateRandomString(20);
+
+
+                    await reader.CloseAsync();
+                    SqlCommand setKey = new()
+                    {
+                        CommandText = "UPDATE TblUserProfile SET SessionKey = @sessionkey WHERE Id = @userid",
+                        Connection = connection
+                    };
+                    setKey.Parameters.AddWithValue("@sessionkey", SessionKey);
+                    setKey.Parameters.AddWithValue("@userid", user_id);
+                    await setKey.ExecuteNonQueryAsync();
+
+                  
+
+                    // Create a cookie with the data
+                    Response.Cookies.Append("SessionKey", SessionKey, new CookieOptions
+                    {
+                        Expires = DateTime.Now.AddDays(30) 
+                    });
+
+
                     Log.Information(loginCreds.UserName + " logged in");
                     return Ok("logging in...");
 
@@ -499,7 +524,7 @@ namespace theCoffeeroom.Api
         {
             try
             {
-                string body = "<h1>Hey there,</h1><br> This is for the recovery of your account. Your OTP is: <b>" + otp + "</b> which is valid for 30 minutes. You can use this OTP to reset your password. Alternatively, you can click here to reset your password directly: <a href=\"https://thecoffeeroom.in/account/resetpassword?uzrnm=" + userEmail + "&key=" + otp + "\"><b>RESET PASSWORD</b></a>";
+                string body = "<h1>Hey there,</h1><br> This is for the recovery of your account \"<b>"+userEmail +"</b>\" . Your OTP is: <b>" + otp + "</b> which is valid for 30 minutes. You can use this OTP to reset your password.";
 
                 MailMessage message = new()
                 {

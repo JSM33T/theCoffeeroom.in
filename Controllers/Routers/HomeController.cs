@@ -7,8 +7,10 @@ using theCoffeeroom.Models.Frame;
 
 namespace theCoffeeroom.Controllers.Routers
 {
+   
     public class HomeController : Controller
     {
+        public string connectionString = ConfigHelper.NewConnectionString;
         [Route("/")]
         public IActionResult Index(string level)
         {
@@ -56,7 +58,7 @@ namespace theCoffeeroom.Controllers.Routers
         [Route("/personalize")]
         public async Task<IActionResult> Personalize()
         {
-            string connectionString = ConfigHelper.NewConnectionString;
+            
             List<Theme> ThemeDD;
             ThemeDD = new List<Theme>();
             using var connection = new SqlConnection(connectionString);
@@ -80,13 +82,6 @@ namespace theCoffeeroom.Controllers.Routers
             }
             await reader.CloseAsync();
             return View(ThemeDD);
-        }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

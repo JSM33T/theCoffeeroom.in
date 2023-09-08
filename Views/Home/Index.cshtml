@@ -10,22 +10,91 @@
 @section cssStyles{
     <style>
         .fade-inhome {
-    opacity: 0;
-    transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */
-    animation: fadeInAnimation 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
+            opacity: 0;
+            transform: translateY(10px); /* Slide in from 20px below, you can change this as per your preference */
+            animation: fadeInAnimation 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
 
     @@keyframes fadeInAnimation {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-}
     </style>
 }
+@section cssLib{
 
+    <link rel="stylesheet" media="screen" href="/assets/vendor/swiper/swiper-bundle.min.css" />
+}
+
+@section jsScripts{
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script>
+     
+
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const emailValue = ref('');
+                const blogs = ref([]);
+                const btnTxt = ref('Submit');
+                const isLoading = ref(true);
+                const submitMail = async () => {
+
+                    btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
+                    try {
+                        axios.defaults.headers.common['RequestVerificationToken'] = token;
+                        const response = await axios.post('/api/newsletter', {
+                            EMailId: emailValue.value,
+                            Origin: "/"
+                        });
+                        toaster("success", response.data);
+                        emailValue.value = '';
+                    } catch (error) {
+                        toaster("error", error.response.data);
+                    } finally {
+                        btnTxt.value = 'Submit';
+
+                    }
+                };
+                const loadTopBlogs = async () => {
+                    try {
+                        const response = await axios.get('/api/topblogs/get');
+                        const data = response.data;
+                        console.log(data);
+                        blogs.value = data; // Update the reactive blogs ref
+                    } catch (error) {
+                        console.error('Error fetching data from API:', error);
+                    } finally {
+                        isLoading.value = false; // Update the loading state
+                    }
+                };
+                return {
+                    emailValue,
+                    blogs,
+                    btnTxt,
+                    submitMail,
+                    loadTopBlogs,
+                    isLoading
+
+                };
+            },
+            async mounted() {
+                this.loadTopBlogs();
+
+
+            }
+        });
+        app.mount('#appHome');
+    </script>
+
+}
 @section jsLib{
     <script src="~/assets/vendor/parallax-js/dist/parallax.min.js"></script>
+    
+    
 }
 <div id="appHome">
 <section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5 fade-inhome">
@@ -109,7 +178,7 @@
                         <p class="pb-lg-2 mb-xl-4">
                             Bootlegs, Originals , Podcasts and much more..
                         </p>
-                        <a class="btn btn-lg btn-link px-0" href="/studio">Learn more<i class="ai-arrow-right ms-2"></i></a>
+                        <a class="btn btn-lg btn-link px-0 disabled" href="/studio">Coming Soon..<i class="ai-arrow-right ms-2"></i></a>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 col-xxl-5 offset-lg-2"><img src="~/content/homecontent/studio-cta.svg" width="420" alt="Image"></div>
@@ -117,22 +186,25 @@
             </div>
         </div>
     </section>
+    
+    @* =================================================== CTA-Gallery ====================================================== *@
     <section class="position-relative bg-faded-primary overflow-hidden py-5">
         <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
         <div class="container position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
             <div class="row align-items-center py-xxl-2" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
-                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="~/content/homecontent/blogs-cta.svg" width="420" alt="Image"></div>
+                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="~/content/homecontent/gallery-cta.svg" width="420" alt="Image"></div>
                 <div class="col-md-6 col-lg-5 col-xxl-6 " data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
                     <div class="ps-md-4 ps-lg-0">
-                        <h2 class="mb-lg-4">Blogs to keep you involved!!!</h2>
-                        <p class="pb-lg-2 mb-xl-4">Segmentation allows you to divide users according to a given criterion, and then for each of the groups to develop an ads and product. Bibendum velit mi, ac sed ac malesuada ultrices non lectus mi pellentesque vel at tempus cras sed a eleifend augue amet mauris, leo ac amet erat malesuada ultrices.</p><a class="btn btn-lg btn-link px-0" href="/blogs">Check out<i class="ai-arrow-right ms-2"></i></a>
+                        <h2 class="mb-lg-4">Photo Gallery</h2>
+                        <p class="pb-lg-2 mb-xl-4">A captivating visual journey through different aspects of the world, including flora & fauna, Abandoned places(urbex) and vlogs</p><a class="btn btn-lg btn-link px-0 disabled" href="/gallery">coming soon..<i class="ai-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="container pt-5 mt-lg-2 mt-xl-4 mt-xxl-5">
+    
+    @* ===================================================== WEB APPS ======================================================== *@
+   @*  <section class="container pt-5 mt-lg-2 mt-xl-4 mt-xxl-5">
         <div class="row align-items-center pt-2 pt-sm-4 pt-md-5 mt-xl-2 mt-xxl-3" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
             <div class="col-md-7 offset-xl-1 pb-3 pb-md-0 mb-3 mb-md-0 order-md-2"><img class="d-dark-mode-none" src="assets/img/about/product/features/02-light.png" width="744" alt="Image"><img class="d-none d-dark-mode-block" src="assets/img/about/product/features/02-dark.png" width="744" alt="Image"></div>
             <div class="col-md-5 col-xl-4 order-md-1" data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
@@ -153,80 +225,94 @@
             </div>
         </div>
     </section>
-<section class="container dark-mode pt-5 mt-5">
-    <div class="card border-0 bg-primary position-relative py-lg-4 py-xl-5">
-        <!-- Decorative shapes-->
-        <svg class="position-absolute end-0 mt-n2" width="242" height="331" viewBox="0 0 242 331" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M172.014 250.127C137.236 227.74 112.349 192.144 144.586 153.591C157.686 137.932 176.759 127.973 196.524 122.046C234.647 110.639 277.027 113.361 313.349 129.576C338.19 140.666 361.129 159.183 369.934 184.502C383.476 223.496 359.75 260.161 321.569 273.118C288.832 284.223 247.685 279.513 214.885 269.837C201.003 265.743 185.745 258.966 172.014 250.127Z" fill="#121519" fill-opacity=".07"></path>
-            <path d="M20.3265 69.264C19.7064 43.0736 29.8071 17.1878 62.3851 19.8622C75.6229 20.9505 87.9525 27.2066 98.3563 35.3132C118.426 50.9253 132.424 73.896 136.952 98.6413C140.044 115.562 138.424 134.218 127.978 148C111.901 169.236 83.4531 170.283 62.5246 155.209C44.5807 142.281 32.0983 119.217 25.3391 98.6799C22.4836 89.9885 20.5616 79.6021 20.3265 69.264Z" fill="#121519" fill-opacity=".07"></path>
-        </svg>
-        <svg class="position-absolute start-0 bottom-0 ms-3" width="169" height="217" viewBox="0 0 169 217" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34.2574 90.0177C29.666 97.6253 26.6254 106.591 24.9502 114.96C19.9522 140.043 26.4112 168.792 49.6162 181.885C66.0705 191.17 91.0017 189.904 108.062 183.692C125.725 177.266 135.045 168.04 142.29 150.389C151.409 128.174 150.912 99.6904 125.93 91.6429C115.423 88.254 104.723 86.5065 94.2249 82.5889C84.6622 79.0248 74.8545 72.1766 64.4411 71.6149C50.8011 70.8777 40.9122 79.0146 34.2574 90.0177Z" fill="#121519" fill-opacity="0.07"></path>
-            <path d="M147.005 75.6331C152.135 70.7783 156.106 64.2374 159.153 57.9073C166.014 43.6372 174.127 22.1368 160.207 9.68505C152.924 3.17188 139.243 3.86644 130.324 5.29774C118.428 7.20428 107.295 8.85077 96.5031 14.783C85.8056 20.6599 79.0155 33.6997 77.0014 45.6686C75.4978 54.5776 79.63 63.6672 84.7391 70.7453C91.8208 80.5571 103.503 84.2003 114.817 84.3975C121.101 84.5081 127.716 84.0527 133.89 82.8121C138.932 81.7962 143.273 79.1597 147.005 75.6331Z" fill="#121519" fill-opacity="0.07"></path>
-        </svg>
-        <div class="card-body position-relative zindex-2 py-5">
-            <form class="mx-auto" style="max-width: 800px;">
-                @Html.AntiForgeryToken()
-                <h2 class="h1 card-title text-center pb-4">Join our mailing list!! {{username}}</h2>
-                <div class="row g-4">
-                    <div class="col-sm-10 offset-sm-1">
-                        <label class="form-label fs-base" for="email">Your email</label>
-                            <input class="form-control form-control-lg" type="text" v-model="emailValue" @@keyup.enter="submitMail" placeholder="Your email" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-12 text-center pt-4">
-                            <button type="button" class="btn btn-lg btn-primary btn-dark ripple"  v-on:click="submitMail" v-html="btnTxt"></button>
-                    </div>
-                </div>
-            </form>
+ *@
+    @* ===================================================== BLOGS ======================================================== *@
+    <section class="bg-secondary py-5">
+        <div class="container d-flex align-items-center pt-lg-2 pt-xl-4 pt-xxl-5 pb-3 mt-1 mt-sm-3 mb-3 my-md-4">
+            <h2 class="h1 mb-0">Recent Blogs</h2>
         </div>
-    </div>
-</section>
+        <!-- Swiper slider-->
+        <div class="container-start">
+       
+                <div class="swiper-wrapper">
+                   
+                  
+                    <div v-if="isLoading">
+                        <article class="swiper-slide w-sm-auto h-auto">
+                            <div class="card h-100 border-0 mx-auto" style="max-width: 416px;">
+                            <a href="blog-single-v1.html"><img class="card-img-top" src="assets/img/blog/grid/01.jpg" alt="Post image"></a>
+                                <div class="card-body pb-4">
+                                    <div class="d-flex align-items-center mb-4 mt-n1"><span class="fs-sm text-muted">12 hours ago</span><span class="fs-xs opacity-20 mx-3">|</span><a class="badge text-nav fs-xs border" href="#">Books</a></div>
+                                    <h3 class="h4 card-title"><a href="blog-single-v1.html">Loading....</a></h3>
+                                    <p class="card-text">Vulputate auctor lacus imperdiet facilisi tristique nisl pulvinar porta diam duis...</p>
+                                </div>
+                                <div class="card-footer pt-3">
+                                    <a class="d-flex align-items-center text-decoration-none pb-2" href="#">
+                                        <img class="rounded-circle" src="assets/img/avatar/06.jpg" width="48" alt="Post author">
+                                        <h6 class="ps-3 mb-0">Jenny Wilson</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div v-else>
+                        <div v-for="blog in blogs" :key="blog.d">
+                            <article class="swiper-slide w-sm-auto h-auto">
+                                <div class="card h-100 border-0 mx-auto" style="max-width: 416px;">
+                                <a :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle"><img class="card-img-top" :src="'/content/blogcontent/2023/' + blog.urlHandle + '/cover.jpg'" alt="Post image"></a>
+                                    <div class="card-body pb-4">
+                                        @* <div class="d-flex align-items-center mb-4 mt-n1"><span class="fs-sm text-muted">12 hours ago</span><span class="fs-xs opacity-20 mx-3">|</span><a class="badge text-nav fs-xs border" href="#">Books</a></div> *@
+                                    <h3 class="h4 card-title"><a :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle"> {{ blog.title }}</a></h3>
+                                        <p class="card-text">{{blog.description}}</p>
+                                    </div>
+                                    @* <div class="card-footer pt-3">
+                                        <a class="d-flex align-items-center text-decoration-none pb-2" href="#">
+                                            <img class="rounded-circle" src="assets/img/avatar/06.jpg" width="48" alt="Post author">
+                                            <h6 class="ps-3 mb-0">Jenny Wilson</h6>
+                                        </a>
+                                    </div> *@
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        <!-- All articles button-->
+        <div class="container text-center pt-4 pb-1 pb-sm-3 pb-md-4 py-lg-5 mb-xl-1 mb-xxl-4 mt-2 mt-lg-0"><a class="btn btn-primary mb-1" href="/blogs">More Blogs</a></div>
+    </section>
+
+    @* =================================================== MAILING LIST ==================================================== *@
+    <section class="container dark-mode pt-5 mt-5">
+        <div class="card border-0 bg-primary position-relative py-lg-4 py-xl-5">
+            <!-- Decorative shapes-->
+            <svg class="position-absolute end-0 mt-n2" width="242" height="331" viewBox="0 0 242 331" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M172.014 250.127C137.236 227.74 112.349 192.144 144.586 153.591C157.686 137.932 176.759 127.973 196.524 122.046C234.647 110.639 277.027 113.361 313.349 129.576C338.19 140.666 361.129 159.183 369.934 184.502C383.476 223.496 359.75 260.161 321.569 273.118C288.832 284.223 247.685 279.513 214.885 269.837C201.003 265.743 185.745 258.966 172.014 250.127Z" fill="#121519" fill-opacity=".07"></path>
+                <path d="M20.3265 69.264C19.7064 43.0736 29.8071 17.1878 62.3851 19.8622C75.6229 20.9505 87.9525 27.2066 98.3563 35.3132C118.426 50.9253 132.424 73.896 136.952 98.6413C140.044 115.562 138.424 134.218 127.978 148C111.901 169.236 83.4531 170.283 62.5246 155.209C44.5807 142.281 32.0983 119.217 25.3391 98.6799C22.4836 89.9885 20.5616 79.6021 20.3265 69.264Z" fill="#121519" fill-opacity=".07"></path>
+            </svg>
+            <svg class="position-absolute start-0 bottom-0 ms-3" width="169" height="217" viewBox="0 0 169 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M34.2574 90.0177C29.666 97.6253 26.6254 106.591 24.9502 114.96C19.9522 140.043 26.4112 168.792 49.6162 181.885C66.0705 191.17 91.0017 189.904 108.062 183.692C125.725 177.266 135.045 168.04 142.29 150.389C151.409 128.174 150.912 99.6904 125.93 91.6429C115.423 88.254 104.723 86.5065 94.2249 82.5889C84.6622 79.0248 74.8545 72.1766 64.4411 71.6149C50.8011 70.8777 40.9122 79.0146 34.2574 90.0177Z" fill="#121519" fill-opacity="0.07"></path>
+                <path d="M147.005 75.6331C152.135 70.7783 156.106 64.2374 159.153 57.9073C166.014 43.6372 174.127 22.1368 160.207 9.68505C152.924 3.17188 139.243 3.86644 130.324 5.29774C118.428 7.20428 107.295 8.85077 96.5031 14.783C85.8056 20.6599 79.0155 33.6997 77.0014 45.6686C75.4978 54.5776 79.63 63.6672 84.7391 70.7453C91.8208 80.5571 103.503 84.2003 114.817 84.3975C121.101 84.5081 127.716 84.0527 133.89 82.8121C138.932 81.7962 143.273 79.1597 147.005 75.6331Z" fill="#121519" fill-opacity="0.07"></path>
+            </svg>
+            <div class="card-body position-relative zindex-2 py-5">
+                <form class="mx-auto" style="max-width: 800px;">
+                    @Html.AntiForgeryToken()
+                    <h2 class="h1 card-title text-center pb-4">Join our mailing list!! {{username}}</h2>
+                    <div class="row g-4">
+                        <div class="col-sm-10 offset-sm-1">
+                            <label class="form-label fs-base" for="email">Your email</label>
+                                <input class="form-control form-control-lg" type="text" v-model="emailValue" @@keyup.enter="submitMail" placeholder="Your email" autocomplete="off">
+                        </div>
+
+                        <div class="col-sm-12 text-center pt-4">
+                                <button type="button" class="btn btn-lg btn-primary btn-dark ripple"  v-on:click="submitMail" v-html="btnTxt"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
 
 </div>
 
-
-@section jsScripts{
-    <script>
-        
-       
-        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-        const { createApp, ref } = Vue;
-        const app = createApp({
-            setup() {
-                const emailValue = ref('');
-                const btnTxt = ref('Submit');
-                const submitMail = async () => {
-                    
-                    btnTxt.value = '<span class="spinner-grow bg-dark spinner-grow-sm me-2" role="status" aria-hidden="true"></span>Loading..';
-                    try {
-                        axios.defaults.headers.common['RequestVerificationToken'] = token;
-                        const response = await axios.post('/api/newsletter', {
-                            EMailId: emailValue.value,
-                            Origin: "/"
-                        });
-                        toaster("success", response.data);
-                        emailValue.value = ''; 
-                    } catch (error) {
-                        toaster("error", error.response.data);
-                    } finally{
-                        btnTxt.value = 'Submit';
-                        
-                    }
-                };
-
-                return {
-                    emailValue,
-                    btnTxt,
-                    submitMail,
-                  
-                };
-            },
-            async mounted() {
-              
-            }
-        });
-        app.mount('#appHome');
-    </script>
-
-}

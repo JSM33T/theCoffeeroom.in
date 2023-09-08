@@ -4,21 +4,27 @@ const WallPostsFiltered = {
     setup(props) {
         const { param1 } = Vue.toRefs(props);
         const title = Vue.ref("Home");
+        const isLoading = Vue.ref(true);
 
+        const loadPosts = () => {
+            console.log("posts loaded");
+        }
         Vue.onMounted(() =>
         {
             title.value = param1.value === "" ? "#all" : "#" + param1.value;
+            isLoading.value = false;
         });
 
         Vue.watch(param1, (newVal, oldVal) =>
         {
             title.value = newVal === undefined || newVal === "" ? "#all" : "#" + newVal;
+            console.log("route changed");
         });
 
         return {
             param1,
             title,
-            isLoading: Vue.ref(false),
+            isLoading
         };
     },
 
@@ -35,19 +41,13 @@ const WallPostsFiltered = {
                     <router-link :to="'/wall/bug'" class="btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#bug</router-link>
                     <router-link :to="'/wall/feedback'" class="btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#feedback</router-link>
                     <router-link :to="'/wall/admin'" class=" btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>#admin</router-link>
+                    <router-link :to="'/wallposts'" class=" btn btn-sm btn-secondary ripple mx-1"><i class="ai-user ms-n1 me-2"></i>test test</router-link>
                 </div>
             </div>
             <!-- Body-->
-            <div class="card-body pb-0 fade-in" data-simplebar style="max-height: 580px;">
-                <div class="text-muted text-center mb-4">May 27, 2022</div>
-                <!-- Message-->
-                <div class="mb-3" style="max-width: 392px;">
-                    <div class="d-flex align-items-end mb-2">
-                        <div class="flex-shrink-0 pe-2 me-1"><img class="rounded-circle" src="/assets/img/avatar/19.jpg" width="48" alt="Avatar"></div>
-                        <div class="message-box-start text-dark">Thank you for recommending me as a designer. I have an interview tomorrow!</div>
-                    </div>
-                    <div class="fs-xs text-muted text-end">11:32 am</div>
-                </div>
+            <div class="card-body fade-in-smooth-pop pb-0" data-simplebar style="max-height: 580px;">
+                <div class="text-muted text-center mb-4 ">May 27, 2022</div>
+              
                 <!-- Message-->
                 <div class="ms-auto mb-3" style="max-width: 392px;">
                     <div class="d-flex align-items-end mb-2">
@@ -99,13 +99,15 @@ const WallPostsFiltered = {
     `,
 };
 
+
+
 const routes = [
     {
         path: '/wall/:param1?',
         component: WallPostsFiltered,
         props: true,
         watchQuery: ['param1']
-    },
+    }
 ];
 
 const router = VueRouter.createRouter({
@@ -114,7 +116,7 @@ const router = VueRouter.createRouter({
 });
 
 const app = Vue.createApp({
-    
+   
 });
 
 app.use(router);

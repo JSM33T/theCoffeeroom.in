@@ -14,5 +14,6 @@
         public string PostLikes { get; set; }
         public int Comments { get; set; }
         public DateTime DatePosted { get; set; }
+        public int Id { get; internal set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.Data.SqlClient;
+@using theCoffeeroom.Core.Helpers;
+@{
+
     //SEO Stuff
     ViewData["Title"] ??= "The Coffee Room";
     ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography,magazines, creative";
@@ -22,11 +25,40 @@
 
 }
 @{
-
-   
+    if (Context.Request.Cookies["SessionKey"] != null)
+    {
+        Context.Request.Cookies.TryGetValue("SessionKey", out string cookieValue);
+        using SqlConnection connection = new(ConfigHelper.NewConnectionString);
+        await connection.OpenAsync();
+        SqlCommand checkcommand = new("select p.*,a.Image " +
+            "from TblUserProfile p,TblAvatarMaster a " +
+            "WHERE SessionKey = @sessionkey" +
+            " and p.IsActive= 1 " +
+            " and p.IsVerified = 1 " +
+            " and p.AvatarId = a.Id", connection);
+        checkcommand.Parameters.AddWithValue("@sessionkey", cookieValue);
+        using var reader = await checkcommand.ExecuteReaderAsync();
+        if (reader.Read())
+        {
+            var username = reader.GetString(reader.GetOrdinal("UserName"));
+            var user_id = reader.GetInt32(reader.GetOrdinal("Id"));
+            var firstname = reader.GetString(reader.GetOrdinal("FirstName"));
+            var fullname = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName"));
+            var role = reader.GetString(reader.GetOrdinal("Role"));
+            var avatar = reader.GetString(reader.GetOrdinal("Image"));
+            //set session
+            Context.Session.SetString("user_id", user_id.ToString());
+            Context.Session.SetString("username", username);
+            Context.Session.SetString("first_name", firstname);
+            Context.Session.SetString("role", role);
+            Context.Session.SetString("fullname", fullname);
+            Context.Session.SetString("avatar", avatar.ToString());
+        }
+    }
     
+   
 
-    Context.Response.Cookies.Append("falana", "dhimkana");
+    // Context.Response.Cookies.Append("falana", "dhimkana");
 
     var mySessionVariable = Context.Session.GetString("username");
     if (mySessionVariable != null)
@@ -40,18 +72,12 @@
     }
     else
     {
-        //if (Context.Request.Cookies.TryGetValue("falana", out string cookieValue))
-        //{
-        //    ViewData["CookieValue"] = cookieValue;
-
-        //}
-        //else
-        //{
+       
             ViewData["first_name"] = "guest";
             ViewData["role"] = "guest";
             ViewData["avatar"] = "default";
             ViewData["user_id"] = "0";
-       // }
+       
        
     }
 }
