@@ -154,14 +154,7 @@
                     </div>
                 </div>
                     <div class="d-sm-flex justify-content-center justify-content-lg-start pt-5 mt-lg-2">
-                    @if (Context.Session.GetString("username") == null)
-                    {
-                       <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/account">SignUp/Login</a>
-                    }
-                    else
-                    {
                         <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/personalize">Personalize</a>
-                    }
                         <a class="btn btn-lg btn-link" href="/blogs">Explore blogs<i class="ai-arrow-right ms-2"></i></a>
                     </div>
             </div>

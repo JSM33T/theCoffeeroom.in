@@ -263,7 +263,11 @@ const Dashboard = {
             <div class="d-sm-flex align-items-center">
                 <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0" :style="{ width: '80px', height: '80px', backgroundImage:'url(/assets/images/avatars/default/'+ avatar +')' }"></div>
                 <div class="pt-3 pt-sm-0 ps-sm-3">
-                    <h3 class="h5 mb-2">{{firstname}} {{lastname}} <img src="/assets/svg/badges/contributor3.svg" /> <img src="/assets/svg/badges/contributor3.svg"/> <img src="/assets/svg/badges/contributor3.svg"/></h3>
+                    <h3 class="h5 mb-2">{{firstname}} {{lastname}} 
+                    <span v-for="badge in badges" :key="badge.id">
+                        <img :src="'/assets/svg/badges/' + badge.icon + '.svg'" style="width: 22px;" class="mx-1"/>
+                    </span>
+                    </h3>
                     <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
                         <div class="d-flex align-items-center me-3"><i class="ai-mail me-1"></i>{{email}}</div>
                     </div>
@@ -316,6 +320,7 @@ const Dashboard = {
             avatar: 'default.png',
             bio: '',
             gender: '',
+            badges: [],
             role: ''
         };
     },
@@ -325,12 +330,12 @@ const Dashboard = {
             behavior: 'smooth',
         });
         this.getDetails();
+        this.loadBadges();
     },
     methods: {
         async getDetails() {
             await axios.get("/api/profile/getdetails")
                 .then(response => {
-                    console.log(response.data);
                     this.username = response.data.userName;
                     this.firstname = response.data.firstName;
                     this.lastname = response.data.lastName;
@@ -346,6 +351,17 @@ const Dashboard = {
                     toaster("error", "something went wrong");
                 });
         },
+        async loadBadges() {
+            await axios.get("/api/profile/userbadges")
+                .then(response => {
+                    this.badges = response.data;
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    toaster("error", "something went wrong");
+                });
+        }
     }
 };
 

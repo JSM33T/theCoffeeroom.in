@@ -76,7 +76,7 @@ namespace theCoffeeroom.Api
                     // Create a cookie with the data
                     Response.Cookies.Append("SessionKey", SessionKey, new CookieOptions
                     {
-                        Expires = DateTime.Now.AddDays(30) 
+                        Expires = DateTime.Now.AddDays(150) 
                     });
 
 
@@ -679,7 +679,7 @@ namespace theCoffeeroom.Api
                         Phone = reader.GetString(5),
                         Gender = reader.GetString(6),
                         Bio = reader.GetString(11),
-                        AvatarImg = reader.GetString(17)
+                        AvatarImg = reader.GetString(18)
                     };
                 }
 

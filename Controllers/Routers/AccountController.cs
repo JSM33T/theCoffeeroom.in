@@ -21,7 +21,7 @@ namespace theCoffeeroom.Controllers.Routers
             }
             else
             {
-                return View("Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -62,7 +62,6 @@ namespace theCoffeeroom.Controllers.Routers
                 {
                     Response.Cookies.Delete("UserLoginCookie");
                     return View("Views/Account/Index.cshtml");
-                    
                 }
                
             }
@@ -72,8 +71,6 @@ namespace theCoffeeroom.Controllers.Routers
             }
             
         }
-
-     
 
         [Route("/account/verification/{Uzrnm}/{OTP}")]
         public async Task<IActionResult> Verification(string Uzrnm,string OTP)
