@@ -115,9 +115,9 @@ namespace theCoffeeroom.Api
                 {
                     message = "username is mandatory";
                 }
-                else if (!Validators.IsAlphaNumeric(userProfile.UserName.Trim()))
+                else if (userProfile.UserName.Trim().Contains(" "))
                 {
-                    message = "only alphanumeric characters are allowed";
+                    message = "spaces aren't allowed in a username";
                 }
                 else if (userProfile.EMail.Trim() == "")
                 {
