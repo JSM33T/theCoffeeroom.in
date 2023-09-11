@@ -4,7 +4,7 @@
   <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com/?lines=Community%20Driven%20Project;Blogs;Studio&center=true&width=500&height=50"></a>
 </p>
 
-<img src="wwwroot/assets/images/github/gitbanner.png" style="border-radius:2px">
+<center><img src="wwwroot/assets/images/github/gitbanner.png" style="border-radius:2px"></center>
 
 :coffee: **The Coffeeroom** is a a community hobby driven project.
 
