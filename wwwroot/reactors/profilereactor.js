@@ -265,9 +265,9 @@ const Dashboard = {
                 <div class="pt-3 pt-sm-0 ps-sm-3">
                     <h3 class="h5 mb-2">{{firstname}} {{lastname}} 
                     <span v-for="badge in badges" :key="badge.id">
-                        <img :src="'/assets/svg/badges/' + badge.icon + '.svg'" style="width: 22px;" class="mx-1"/>
+                        <img :src="'/assets/svg/badges/' + badge.icon + '.svg'" style="width: 22px;" class="mx-1"  data-bs-toggle="tooltip" data-bs-placement="top" :title="badge.title"/>
                     </span>
-                    </h3>
+                    </h3> 
                     <div class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center">
                         <div class="d-flex align-items-center me-3"><i class="ai-mail me-1"></i>{{email}}</div>
                     </div>

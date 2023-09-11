@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["BodyBg"] = "bg-secondary";
+}
+@section cssStyles{
+
+}
+<div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+    <div class="row pt-sm-2 pt-lg-0" id="appMembers">
+
+        <!-- Page content-->
+        <div class="col-lg-12 pt-4 pb-2 pb-sm-4">
+            <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 fade-in">
+                @Html.AntiForgeryToken()
+                <div class="card-body">
+                    <router-view></router-view>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<hr class="d-none d-dark-mode-block">
+
+
+@section jsScripts{
+    <environment include="development">
+        <script src="/reactors/memberlistreactor.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="production">
+        <script src="/reactors/memberlistreactor.prod.js" asp-append-version="true"></script>
+    </environment>
+}

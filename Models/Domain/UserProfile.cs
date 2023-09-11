@@ -19,5 +19,6 @@ namespace theCoffeeroom.Models.Domain
         public string ConfirmPassword { get; set; }
         public string AvatarImg { get; set; }
         public int Id { get; internal set; }
+        public string Badges { get; internal set; }
     }
 }
