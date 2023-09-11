@@ -108,6 +108,50 @@ namespace theCoffeeroom.Api
             }
         }
 
-      
+        [HttpGet]
+        [Route("/api/member/getdetails/{username}")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> Index()
+        {
+            UserProfile userProfile = null;
+            string connectionString = ConfigHelper.NewConnectionString;
+            var sessionStat = HttpContext.Session.GetString("role");
+
+            if (sessionStat != null && (sessionStat == "user" || sessionStat == "admin"))
+            {
+                using var connection = new SqlConnection(connectionString);
+                await connection.OpenAsync();
+                var command = new SqlCommand("SELECT a.*,b.Image FROM TblUserProfile a, TblAvatarMaster b WHERE UserName = @Id and a.AvatarId = b.Id", connection);
+                command.Parameters.AddWithValue("@Id", "jsm33t");
+                var reader = await command.ExecuteReaderAsync();
+
+                if (await reader.ReadAsync())
+                {
+                    userProfile = new UserProfile()
+                    {
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        UserName = reader.GetString(3),
+                        Role = reader.GetString(10),
+                        EMail = reader.GetString(4),
+                        Phone = reader.GetString(5),
+                        Gender = reader.GetString(6),
+                        Bio = reader.GetString(11),
+                        AvatarImg = reader.GetString(18)
+                    };
+                }
+
+                await reader.CloseAsync();
+                await connection.CloseAsync();
+
+                return Json(userProfile);
+            }
+            else
+            {
+                return Json(new { message = "Access denied" });
+            }
+        }
+
+
     }
 }

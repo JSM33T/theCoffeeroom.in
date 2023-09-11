@@ -153,18 +153,26 @@
                             </h3>
                             <div class="accordion-collapse collapse" :id="'trk' + item.id" :aria-labelledby="'hd' + item.id" data-bs-parent="#faq">
                                 <div class="accordion-body fs-sm">
-                                    <p>prod: {{item.artist}}</p>
-                                    <button class="btn-sm btn mx-1 btn-outline-primary mb-2">Stream</button>
-                                    <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="item.link.mp3" target="_blank" download><i class="ai-download fs-sm"></i>&nbsp;&nbsp;Mp3</a>
+                                    <p>prod: {{ item.artist }}</p>
+                                    <a type="button"
+                                       class="btn-sm btn mx-1 mb-2 btn-outline-primary"
+                                       :class="{ 'disabled': isStreamLinkBlank(item.link.stream) }"
+                                       :href="item.link.stream"
+                                       target="_blank">
+                                        <i class="ai-download fs-sm"></i>&nbsp;&nbsp;Stream
+                                    </a>
+                                    <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="item.link.mp3" target="_blank" download>
+                                        <i class="ai-download fs-sm"></i>&nbsp;&nbsp;Mp3
+                                    </a>
 
-                                    @if(isLoggedIn == true)
-                                {
+                                    @if (isLoggedIn == true)
+                                    {
                                         <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="item.link.flac" target="_blank" download><i class="ai-download fs-sm"></i>&nbsp;&nbsp;FLAC</a>
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
                                         <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary disabled" href="#" download><i class="ai-download fs-sm"></i>&nbsp;&nbsp;FLAC</a>
-                                }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -202,7 +210,6 @@
          const app = Vue.createApp({
             setup() {
                 const items = Vue.ref([]);
-
                 const getTracks = async () => {
                     console.log("Fetching tracks...");
                     try {
@@ -213,12 +220,17 @@
                         console.error('Error fetching data:', error);
                     }
                 };
+                const isStreamLinkBlank = (streamLink) => {
+                    return streamLink === '';
+                };
 
-                getTracks();
-
+                Vue.onMounted(getTracks);
                 return {
                     items,
+                    getTracks,
+                    isStreamLinkBlank,
                 };
+
             }
         });
 
