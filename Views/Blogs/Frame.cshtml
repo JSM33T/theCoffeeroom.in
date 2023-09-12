@@ -604,8 +604,8 @@
                             var authorsdat2 = "";
                             if (data.length != 0) {
                                 for (var i = 0; i < data.length; i++) {
-
-                                    authorsdat2 = authorsdat2 + data[i].firstName + ' ' + data[i].lastName + ' , ';
+                                    
+                                    authorsdat2 = authorsdat2 + '<a href="/member/' +data[i].userName + '">' + data[i].firstName + ' ' + data[i].lastName + '</a>, ';
                                 }
                                 document.getElementById('authorsPlaceholder2').innerHTML = authorsdat2.slice(0, authorsdat2.lastIndexOf(',')) + authorsdat2.slice(authorsdat2.lastIndexOf(',') + 1);
                             }
