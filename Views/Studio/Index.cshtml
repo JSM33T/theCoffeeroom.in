@@ -12,6 +12,15 @@
             pointer-events: none;
             opacity: 0.5;
         }
+           /* Add CSS to control the image size */
+        .image-container {
+            width: 50%; /* You can adjust the width as needed */
+        }
+
+        .image-container img {
+            width: 100%; /* This ensures the image scales proportionally to the container width */
+            height: auto; /* This maintains the aspect ratio */
+        }
     </style>
 }
 
@@ -43,102 +52,9 @@
             </ul>
         </div>
 
-        <!-- Services (grid of cards)-->
+        @* cover image *@
         <div class="col-lg-6">
-            <div class="row row-cols-1 row-cols-sm-2 g-1">
-                <div class="col">
-                    <a class="card-flip" href="#">
-                        <div class="card-flip-inner">
-                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/01.jpg);">
-                                <div class="d-flex flex-column h-100 ignore-dark-mode">
-                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Singles</h2>
-                                </div>
-                            </div>
-                            <div class="card-flip-back bg-secondary">
-                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                                    <h3 class="h4">Strategy</h3>
-                                    <p class="text-body mb-3">Leo vitae sem eget eget at in vivamus placerat in sodales tristique a risusiis senectusic vitae sem eget eget at in vivamus placerat in sodales.</p>
-                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a class="card-flip" href="#">
-                        <div class="card-flip-inner">
-                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/02.jpg);">
-                                <div class="d-flex flex-column h-100 ignore-dark-mode">
-                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Albums</h2>
-                                </div>
-                            </div>
-                            <div class="card-flip-back bg-secondary">
-                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                                    <h3 class="h4">Social</h3>
-                                    <ul class="text-body ps-4 mb-3">
-                                        <li class="mb-2">Social media posts</li>
-                                        <li class="mb-2">Content plan</li>
-                                        <li class="mb-2">Advertising launch</li>
-                                        <li class="mb-2">Photo and video content</li>
-                                        <li class="mb-1">Cases and portfolio</li>
-                                    </ul>
-                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col order-sm-2">
-                    <a class="card-flip" href="#">
-                        <div class="card-flip-inner">
-                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/04.jpg);">
-                                <div class="d-flex flex-column h-100 ignore-dark-mode">
-                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Podcasts</h2>
-                                </div>
-                            </div>
-                            <div class="card-flip-back bg-secondary">
-                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                                    <h3 class="h4">original design</h3>
-                                    <p class="text-body mb-3">Pharetra in morbi quis is massa maecenas arcu vulputate in pulvinar elit non nullage a, duis tortor mi massa ipsum in eu eu eget libero.</p>
-                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col order-sm-1">
-                    <a class="card-flip" href="#">
-                        <div class="card-flip-inner">
-                            <div class="card-flip-front" style="background-image: url(assets/img/landing/creative-agency/services/03.jpg);">
-                                <div class="d-flex flex-column h-100 ignore-dark-mode">
-                                    <h2 class="fs-lg fw-normal mb-0 mt-auto">Bootlegs</h2>
-                                </div>
-                            </div>
-                            <div class="card-flip-back bg-secondary">
-                                <div class="d-flex flex-column h-100 px-sm-2 pt-sm-2 px-lg-0 pt-lg-0 px-xl-3 pt-xl-3">
-                                    <h3 class="h4">album</h3>
-                                    <ul class="text-body ps-4 mb-3">
-                                        <li class="mb-2">Identity design</li>
-                                        <li class="mb-2">Brand book creation</li>
-                                        <li class="mb-2">Colors and fonts</li>
-                                        <li class="mb-2">Banners and covers</li>
-                                        <li class="mb-1">Visual style</li>
-                                    </ul>
-                                    <div class="text-end pt-3 pt-sm-2 pt-xl-4 mt-auto me-sm-n2 me-lg-0 me-xl-n3">
-                                        <div class="btn btn-sm btn-icon btn-outline-primary rounded-circle"><i class="ai-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                <img src="~/assets/images/covers/studio-cover-min.png" alt="Studio Cover">
         </div>
     </div>
 </section>

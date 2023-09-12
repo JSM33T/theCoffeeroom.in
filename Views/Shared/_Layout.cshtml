@@ -145,7 +145,7 @@
           preloader.classList.remove('active');
           setTimeout(function () {
             preloader.remove();
-          },500);
+          },1000);
 
                 let elem_theme = window.localStorage.getItem("cust_theme");
                 if (elem_theme !== undefined && elem_theme !== "" && elem_theme !== null) {
@@ -221,6 +221,7 @@
         <link rel="stylesheet" href="~/assets/css/coffeeroom.min.css" asp-append-version="true" />
     </environment>
   <style>
+  
         #progress-container {
             position: fixed;
             top: 0;
@@ -355,7 +356,11 @@
 <body class="@ViewData["BodyBg"]">
     <div class="page-loading active">
         <div class="page-loading-inner">
-            <div class="page-spinner"></div><span>Loading...</span>
+
+            
+                <img  class="page-spinner" src="~/assets/svg/logos/tcr-bean.svg" width="400"/>
+            
+            <span>Loading...</span>
         </div>
     </div>
     <div id="progress-container">

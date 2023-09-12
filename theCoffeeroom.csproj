@@ -42,6 +42,7 @@
     <Folder Include="Logs\" />
     <Folder Include="Views\Studio\Content\Podcasts\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
+    <Folder Include="wwwroot\assets\images\gallery\home\" />
     <Folder Include="wwwroot\assets\vendor\jarallax\typings\" />
     <Folder Include="wwwroot\content\appcontent\" />
     <Folder Include="wwwroot\content\archivecontent\" />

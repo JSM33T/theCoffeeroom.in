@@ -1,49 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
-   <defs>
-      <filter x="0%" y="0%" width="100%" height="100%" id="6e90a7853d">
-         <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" color-interpolation-filters="sRGB"/>
-      </filter>
-     
-      
-      <clipPath id="ae20b55a77">
-         <path d="M 372.519531 44.394531 L 353.179688 352.789062 L 2.117188 330.773438 L 21.457031 22.378906 Z M 372.519531 44.394531 " clip-rule="nonzero"/>
-      </clipPath>
-      <mask id="d4a8cea387">
-         <g filter="url(#6e90a7853d)">
-            <rect x="-37.5" width="450" fill="#4d6876" y="-37.499999" height="449.999989" fill-opacity="1"/>
-         </g>
-      </mask>
-      <clipPath id="e214acfef5">
-         <path d="M 74 64 L 228 64 L 228 230 L 74 230 Z M 74 64 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="173b8ee474">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="c90ad6bfd0">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="f3c1e61213">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="7cf988eca6">
-         <path d="M 108 100 L 262 100 L 262 266 L 108 266 Z M 108 100 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="bf189aa8dd">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="720c64b357">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="f979e950ff">
-         <path d="M 48.671875 0.304688 L 331.050781 48.734375 L 282.617188 331.109375 L 0.242188 282.679688 Z M 48.671875 0.304688 " clip-rule="nonzero"/>
-      </clipPath>
-      <clipPath id="82062d299d">
-         <rect x="0" width="332" y="0" height="332"/>
-      </clipPath>
-   </defs>
-
    <g mask="url(#d4a8cea387)">
-      <g transform="matrix(1, 0, 0, 1, 22, 22)">
+      <g transform="matrix(1, 0, 0, 1, 22, 22)" >
          <g clip-path="url(#82062d299d)">
             <g clip-path="url(#e214acfef5)">
                <g clip-path="url(#173b8ee474)">
