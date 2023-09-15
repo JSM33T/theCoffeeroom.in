@@ -38,7 +38,6 @@ builder.Services.AddWebMarkupMin(options =>
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
     options.MinificationSettings.RemoveHtmlCommentsFromScriptsAndStyles = true;
-    options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.MinifyEmbeddedJsCode = true;
 })
 .AddXmlMinification()

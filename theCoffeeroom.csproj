@@ -40,9 +40,9 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="Views\Studio\Content\Podcasts\" />
     <Folder Include="wwwroot\assets\images\gallery\albums\" />
     <Folder Include="wwwroot\assets\images\gallery\home\" />
+    <Folder Include="wwwroot\assets\meta\images\" />
     <Folder Include="wwwroot\assets\vendor\jarallax\typings\" />
     <Folder Include="wwwroot\content\appcontent\" />
     <Folder Include="wwwroot\content\archivecontent\" />
@@ -68,6 +68,8 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Telegram" Version="0.2.1" />
+    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
     <PackageReference Include="WebMarkupMin.AspNetCore7" Version="2.14.1" />
   </ItemGroup>
 

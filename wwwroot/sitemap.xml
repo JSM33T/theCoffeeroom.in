@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,47 +9,67 @@
 
 <url>
   <loc>https://thecoffeeroom.in/</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/account/login</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/personalize</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/members</loc>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/studio</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/gallery</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/blogs</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/us</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/docs/attributions</loc>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://thecoffeeroom.in/docs/faq</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://thecoffeeroom.in/gallery/garden-state</loc>
-  <lastmod>2023-08-25T11:47:51+00:00</lastmod>
+  <loc>https://thecoffeeroom.in/docs/changelog</loc>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/studio/album/recuerdos-2</loc>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://thecoffeeroom.in/studio/album/recuerdos-1</loc>
+  <lastmod>2023-09-12T11:30:55+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 

@@ -223,7 +223,9 @@ namespace theCoffeeroom.Api
                         commandIns.Parameters.AddWithValue("@dateadded", DateTime.Now);
                         commandIns.ExecuteNonQuery();
                         await connection.CloseAsync();
+                        await TeleLog.Logstuff("*" + HttpContext.Session.GetString("username") + "* liked a blog:\n\"" + blogLike.Slug + "\"");
                         return Ok("Like added");
+
 
                     }
 

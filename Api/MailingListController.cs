@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Serilog;
 using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
+using theCoffeeroom.Models.Frame;
 
 namespace theCoffeeroom.Api
 {
@@ -43,6 +44,7 @@ namespace theCoffeeroom.Api
                             addEmailCmd.Parameters.AddWithValue("@dateadded", DateTime.Now);
                             await addEmailCmd.ExecuteNonQueryAsync();
                             Log.Information("mail added to newsletter:" + mail.EMailId);
+                            await TeleLog.Logstuff(" #MAILINGLIST \nmail added to newsletter:\n\"*" + mail.EMailId + "*\" ");
 
                             return Ok("Email added to the list");
 

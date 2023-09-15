@@ -81,6 +81,7 @@ namespace theCoffeeroom.Api
 
 
                     Log.Information(loginCreds.UserName + " logged in");
+                    await TeleLog.Logstuff("*" + loginCreds.UserName + "* logged in") ;
                     return Ok("logging in...");
 
                 }
@@ -185,6 +186,7 @@ namespace theCoffeeroom.Api
                                         await cmd.ExecuteNonQueryAsync();
                                         message = "verification email send please verify your account";
                                         type = "success";
+                                  await TeleLog.Logstuff(userProfile.FirstName + " registered, Email: " + userProfile.EMail + " at " + DateTime.Now.ToString());
                                         Log.Information(userProfile.FirstName + " registered, Email: " + userProfile.EMail);
                                     }
                                     catch (Exception exm)

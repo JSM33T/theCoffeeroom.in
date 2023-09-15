@@ -13,5 +13,7 @@
         public static string WebMailKey => _config["WebMailPassword"];
 
         public static string CryptoKey => _config["EncryptionKey"];
+        public static string TeleBotToken => _config["TeleBotToken"];
+        public static string TelelogId => _config["TeleLogChannelId"];
     }
 }
