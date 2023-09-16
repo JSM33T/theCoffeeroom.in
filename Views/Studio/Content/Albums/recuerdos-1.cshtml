@@ -2,31 +2,21 @@
     ViewData["FileBase"] = "/content/studiocontent/albums/recuerdos-1";
     var baseadd = ViewData["FileBase"];
 
-    bool isLoggedIn = true;
-    if (Context.Session.GetString("username") != null)
-    {
-        isLoggedIn = true;
-    }
-    else
-    {
-        isLoggedIn = false;
-    }
-
 }
 
 
         
- <div class="ignore-dark-mode rounded-1 overflow-hidden mt-5 pt-2" style="background-color: #e3e5e9;">
-          <div class="row align-items-center g-0">
-            <div class="col-md-6 offset-xl-1 text-center text-md-start">
-              <div class="py-4 px-4 px-sm-5 pe-md-0 ps-xl-4">
+<div class="ignore-dark-mode rounded-1 overflow-hidden pt-2" style="margin-top:36px; background-color: #e3e5e9;">
+    <div class="row align-items-center g-0">
+        <div class="col-md-6 offset-xl-1 text-center text-md-start">
+            <div class="py-4 px-4 px-sm-5 pe-md-0 ps-xl-4">
                 <p class="fs-xs text-uppercase pt-3 pt-md-0 mb-3 mb-lg-4">BOOTLEGS FROM 2016-17</p>
-                <h2 class="h1 pb-2 pb-xl-3">RECUERDOS<span class='text-primary'>  EP 1</span></h2><a class="btn btn-sm btn-outline-dark ignore-dark-mode" href="#downloadList"  data-scroll>Explore</a>
-              </div>
+                <h2 class="h1 pb-2 pb-xl-3">RECUERDOS<span class='text-primary'> EP 1</span></h2><a class="btn btn-sm btn-outline-dark ignore-dark-mode" href="#downloadList" data-scroll>Explore</a>
             </div>
-            <div class="col-md-6 col-xl-5 d-flex justify-content-end"><img src="/assets/img/shop/banner.jpg" width="491" alt="Banner"></div>
-          </div>
         </div>
+        <div class="col-md-6 col-xl-5 d-flex justify-content-end"><img src="~/content/studiocontent/albums/recuerdos-1/cover.jpg" width="491" alt="Banner"></div>
+    </div>
+</div>
 
 <section class="bg-secondary py-5" id="downloadlist">
     <div class="container py-md-2 py-lg-3 py-xl-5 my-2 my-sm-3 my-md-4 my-xxl-5">

@@ -18,7 +18,7 @@ namespace theCoffeeroom.Api
         [HttpPost]
         [Route("api/telegram/post/imagetextbtn")]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> PingBot2(TgBot tgBot)
+        public async Task<IActionResult> MakePost(TgBot tgBot)
         {   
             var botClient = new TelegramBotClient(tgBot.Token);
             var markdownText = tgBot.Message;

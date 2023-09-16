@@ -26,11 +26,6 @@
 }
 @{
 
-
-
-
-    // Context.Response.Cookies.Append("falana", "dhimkana");
-
     var mySessionVariable = Context.Session.GetString("username");
     if (mySessionVariable != null)
     {
@@ -86,8 +81,6 @@
                 ViewData["avatar"] = "default";
                 ViewData["user_id"] = "0";
             }
-
-
         }
         else
         {
@@ -96,10 +89,6 @@
             ViewData["avatar"] = "default";
             ViewData["user_id"] = "0";
         }
-
-        
-       
-       
     }
 }
 <!DOCTYPE html>
@@ -107,7 +96,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Coffeeroom</title>
+    <title>@ViewData["Title"] - thecoffeeroom</title>
     <!-- SEO Meta Tags-->
     <meta name="keywords" content="@ViewData["Tags"]">
     <meta name="description" content="@ViewData["Description"]">
@@ -354,7 +343,7 @@
     @await RenderSectionAsync("cssStyles", required: false)
 </head>
 <body class="@ViewData["BodyBg"]">
-    <div class="page-loading">
+    <div class="page-loading active">
         <div class="page-loading-inner">
 
                 <img  class="page-spinner" src="~/assets/svg/logos/tcr-bean.svg" width="400"/>

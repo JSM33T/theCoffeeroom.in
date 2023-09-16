@@ -14,7 +14,7 @@
             <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
                 <div class="card-body">
                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                        <i class="ai-user text-primary lead pe-1 me-2"></i>
+                        <i class="ai-paint-roll text-primary lead pe-1 me-2"></i>
                         <h2 class="h4 mb-0">Themes</h2>
                     </div>
                     <div class="col-lg-12 fade-in">
@@ -61,7 +61,7 @@
             <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
                 <div class="card-body">
                     <div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
-                        <i class="ai-bell text-primary lead pe-1 me-2"></i>
+                        <i class="ai-tool text-primary lead pe-1 me-2"></i>
                         <h2 class="h4 mb-0">Accessibility</h2>
                     </div>
                     <div class="form-check form-switch d-flex pb-md-2 mb-4">
@@ -91,6 +91,40 @@
                 </div>
             </section>
 
+            <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+                        <i class="ai-refresh text-primary lead pe-1 me-2"></i>
+                        <h2 class="h4 mb-0">Clear Preferences</h2>
+                    </div>
+                <div class="alert alert-info d-flex my-3 my-sm-4"><i class="ai-circle-info fs-xl me-2"></i>
+                  <p class="mb-0"> Preferences like your dark mode,selected theme and other data will be cleared.You won't be logged out!'</p>
+                </div>
+                <div class="d-flex justify-content-end pt-3">
+                  <button class="btn btn-primary ms-3" onclick="clearPrefs()" type="button">Clear Preferences</button>
+                </div>
+
+                </div>
+            </section>
+
+            <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+                        <i class="ai-user-x text-primary lead pe-1 me-2"></i>
+                        <h2 class="h4 mb-0">Cookies (ID)</h2>
+                    </div>
+                <div class="alert alert-info d-flex my-3 my-sm-4"><i class="ai-circle-info fs-xl me-2"></i>
+                  <p class="mb-0">Cookies will be cleared and you will be logged out</p>
+                </div>
+                <div class="d-flex justify-content-end pt-3">
+                  <button class="btn btn-primary ms-3 disabled" onclick="clearCookies()" type="button">Clear Cookies</button>
+                </div>
+
+                </div>
+            </section>
+
+
+           
 
         </div>
     </div>
@@ -101,8 +135,29 @@
     <script>
 
 
+        function clearPrefs() { 
+            localStorage.clear();
+            toaster("Info", "Preferences cleared page will now refresh");
+            setTimeout(function() {
+                location.reload();
+            }, 1000); 
+        }
 
+        function deleteCookie(cookieName) {
+                  document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                }
 
+        function clearCookies() {
+          const cookies = document.cookie.split("; ");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookieParts = cookies[i].split("=");
+            const cookieName = cookieParts[0];
+            deleteCookie(cookieName);
+          }
+           setTimeout(function() {
+                location.reload();
+            }, 1000); 
+        }
 
         var checkbox = document.getElementById("dmode-trigger");
         var checkbox2 = document.getElementById("theme-mode");

@@ -18,14 +18,18 @@ namespace theCoffeeroom.Api
         public async Task<IActionResult> GetBadges()
         {
 
-
             string Connectionstring = ConfigHelper.NewConnectionString;
             List<UserAwards> badges = new();
 
             using SqlConnection conn = new(Connectionstring);
             await conn.OpenAsync();
-            SqlCommand cmd = new("SELECT a.*, m.Titile,m.Description,m.Icon FROM TblUserAwards a INNER JOIN TblAwardMaster m ON m.Id = a.AwardId WHERE a.UserId = @userid", conn);
-            cmd.Parameters.AddWithValue("@userid", 1);
+            SqlCommand cmd = new("SELECT a.*, m.Titile,m.Description,m.Icon " +
+                                    "FROM TblUserAwards a " +
+                                    "INNER JOIN TblAwardMaster m " +
+                                    "ON m.Id = a.AwardId " +
+                                    "WHERE a.UserId = @userid", conn);
+
+            cmd.Parameters.AddWithValue("@userid", HttpContext.Session.GetString("user_id"));
 
             try
             {
