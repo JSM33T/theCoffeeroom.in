@@ -81,7 +81,7 @@ namespace theCoffeeroom.Api
 
 
                     Log.Information(loginCreds.UserName + " logged in");
-                    await TeleLog.Logstuff("*" + loginCreds.UserName + "* logged in") ;
+                   // await TeleLog.Logstuff("*" + loginCreds.UserName + "* logged in") ;
                     return Ok("logging in...");
 
                 }
