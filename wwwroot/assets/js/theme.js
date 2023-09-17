@@ -278,7 +278,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   */
 
   var gallery = function () {
+
     var gallery = document.querySelectorAll('.gallery');
+     // Modify the zoom settings
+     var zoomSettings = {
+      scale: 1.5, // Set the initial zoom scale (1.0 is the default, increase for more zoom)
+      actualSize: true // Allow users to view the image at its actual size
+    };
     if (gallery.length) {
       for (var i = 0; i < gallery.length; i++) {
         var thumbnails = gallery[i].dataset.thumbnails ? true : false,
@@ -291,6 +297,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         lightGallery(gallery[i], {
           selector: '.gallery-item',
           plugins: plugins,
+          zoom:true,
+          zoomSettings: zoomSettings,
           licenseKey: 'D4194FDD-48924833-A54AECA3-D6F8E646',
           youtubePlayerParams: {
             modestbranding: 1,
