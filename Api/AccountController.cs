@@ -4,26 +4,20 @@ using Serilog;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
-using theCoffeeroom.Core;
-using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
-using Validators = theCoffeeroom.Core.Helpers.Validators;
+using Validators = theCoffeeroom.Services.Helpers.Validators;
 using System.Reflection.Metadata;
+using theCoffeeroom.Services;
+using theCoffeeroom.Services.Helpers;
 
 namespace theCoffeeroom.Api
 {
     //[AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
-        private readonly SqlService _sqlService;
 
-        //ctor injection
-        public AccountController(SqlService sqlService)
-        {
-            this._sqlService = sqlService;
-        }
-
+        readonly string connectionString = ConfigHelper.NewConnectionString;
 
         [HttpPost("/api/account/login")]
         [ValidateAntiForgeryToken]
@@ -36,7 +30,8 @@ namespace theCoffeeroom.Api
             }
             try
             {
-                using SqlConnection connection = _sqlService.GetConnection();
+                using SqlConnection connection = new(connectionString);
+                await connection.OpenAsync();
                 SqlCommand checkcommand = new("select p.*,a.Image " +
                     "from TblUserProfile p,TblAvatarMaster a " +
                     "where (p.UserName = @username OR p.email = @username)" +
@@ -146,7 +141,8 @@ namespace theCoffeeroom.Api
                     try
                     {
                         string FilteredUsername = userProfile.UserName.Trim().ToLower().ToString();
-                        using SqlConnection connection = _sqlService.GetConnection();
+                        using SqlConnection connection = new(connectionString);
+                        await connection.OpenAsync();
                         SqlCommand cmd = new("select count(*) from TblUserProfile where UserName = @inputusername or EMail = @inputemail", connection);
                         cmd.Parameters.AddWithValue("@inputusername", FilteredUsername);
                         cmd.Parameters.AddWithValue("@inputemail", userProfile.EMail);
@@ -162,6 +158,13 @@ namespace theCoffeeroom.Api
                                 body = "<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Verification Confirmation</title></head><body style=\"margin:0;padding:0;font-family:Arial,sans-serif;line-height:1.4;color:#111;background-color:#fff\"><div style=\"max-width:600px;margin:0 auto;background-color:#fff;padding:20px;border-radius:5px\"><h1 style=\"color:#111;margin-bottom:20px;font-size:24px\">Complete Signup</h1><p>Hey there,</p><div style=\"text-align:center;margin-bottom:20px\"><img src=\"https://thecoffeeroom.in/assets/favicon/apple-touch-icon.png\" width=\"100\" alt=\"Image\" style=\"max-width:100%;height:auto;border-radius:5px\"></div><p>Thank you for signing up for the coffeeroom. Please click the button below to verify your email address:</p><p>" +
                                     "<a href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"" +
                                     " style=\"display:inline-block;padding:10px 20px;background-color:#111;color:#fff;text-decoration:none;border-radius:4px\">Verify Email</a></p><p>If you did not sign up for this account, please ignore this email.</p><div style=\"margin-top:20px;text-align:center;font-size:12px;color:#999\"><p>This is an automated email, please do not reply.</p></div></div></body></html>";
+
+                                //body = "<h1>Hey there,</h1>" +
+                                //        "<p> This is for the verification of your account @TheCoffeeRoom." +
+                                //        "" + otp + " is your OTP which is valid for 30 minutes </p>." +
+                                //        "Or alternatively you can click here to verify directly:" +
+                                //        "<button type=\"button\" href=\"https://thecoffeeroom.in/account/verification/" + FilteredUsername + "/" + otp + "\"><b> VERIFY </b></button>";
+
                                 int stat = Mailer.MailSignup(subject, body, userProfile.EMail.ToString());
                                 if (stat == 1)
                                 {
@@ -228,6 +231,43 @@ namespace theCoffeeroom.Api
             return new JsonResult(keys);
         }
 
+        //[HttpGet]
+        //[Route("/api/getavatars")]
+        //public async Task<IActionResult> GetAvatars()
+        //{
+        //    try
+        //    {
+        //        List<Avatar> entries = new();
+        //        string sql;
+
+        //        using (SqlConnection connection = new(connectionString))
+        //        {
+        //            await connection.OpenAsync();
+        //            sql = "select * from TblAvatarMaster";
+        //            using SqlCommand command = new(sql, connection);
+        //            using SqlDataReader dataReader = await command.ExecuteReaderAsync();
+
+        //            while (await dataReader.ReadAsync())
+        //            {
+        //                Avatar entry = new()
+        //                {
+        //                    Id = Int32.Parse(dataReader["Id"].ToString()),
+        //                    Title = (string)dataReader["Title"],
+        //                    Image = (string)dataReader["Image"]
+        //                };
+        //                entries.Add(entry);
+        //            }
+        //            await connection.CloseAsync();
+        //        }
+        //        //Thread.Sleep(2000);
+        //        return new JsonResult(entries);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Error("error in live search: " + ex.Message.ToString());
+        //        return BadRequest("something went wrong");
+        //    }
+        //}
 
         [HttpGet]
         [Route("/api/getavatars")]
@@ -235,7 +275,9 @@ namespace theCoffeeroom.Api
         {
             try
             {
-                using SqlConnection connection = _sqlService.GetConnection();
+                using SqlConnection connection = new(connectionString);
+                await connection.OpenAsync();
+
                 string sql = "SELECT * FROM TblAvatarMaster";
 
                 using SqlCommand command = new(sql, connection);
@@ -280,8 +322,9 @@ namespace theCoffeeroom.Api
                     try
                     {
                         string LoggedUser = HttpContext.Session.GetString("username").ToString();
-                        using SqlConnection connection = _sqlService.GetConnection();
+                        using SqlConnection connection = new(connectionString);
 
+                        await connection.OpenAsync();
                         SqlCommand insertCommand = new("UPDATE TblUserProfile SET CryptedPassword = @cryptedpassword,DateUpdated = @dateupdated where UserName = @username", connection);
                         insertCommand.Parameters.AddWithValue("@username", LoggedUser);
                         insertCommand.Parameters.AddWithValue("@cryptedpassword", EnDcryptor.Encrypt(userProfile.Password));
@@ -318,7 +361,9 @@ namespace theCoffeeroom.Api
 
             try
             {
-                using var connection = _sqlService.GetConnection();
+                using var connection = new SqlConnection(connectionString);
+                await connection.OpenAsync();
+
                 using var transaction = connection.BeginTransaction();
                 if (userProfile.UserName != HttpContext.Session.GetString("username"))
                 {
@@ -380,7 +425,8 @@ namespace theCoffeeroom.Api
 
         private string GetAvatar(int avatarId)
         {
-            using var connection = _sqlService.GetConnection();
+            using var connection = new SqlConnection(connectionString);
+            connection.Open();
 
             var sql = "SELECT Image FROM TblAvatarMaster WHERE Id = @avtrid";
             using var command = new SqlCommand(sql, connection);
@@ -405,7 +451,10 @@ namespace theCoffeeroom.Api
 
             try
             {
-                using SqlConnection connection = _sqlService.GetConnection());
+                using SqlConnection connection = new(connectionString);
+                await connection.OpenAsync();
+
+                // Check if a user exists with the provided username or email
                 var user = await GetUserByUsernameOrEmailAsync(connection, genericReceiver.StringRec);
 
                 if (user != null)
@@ -544,7 +593,9 @@ namespace theCoffeeroom.Api
             try
             {
 
-                using SqlConnection connection = _sqlService.GetConnection();
+                using SqlConnection connection = new(connectionString);
+                connection.Open();
+
                 SqlCommand checkOTP = new("SELECT * FROM TblPasswordReset WHERE Token = @otp", connection);
                 checkOTP.Parameters.AddWithValue("@otp", loginCreds.Otp);
 
@@ -612,7 +663,8 @@ namespace theCoffeeroom.Api
 
             if (sessionStat != null && (sessionStat == "user" || sessionStat == "admin"))
             {
-                using var connection = _sqlService.GetConnection();
+                using var connection = new SqlConnection(connectionString);
+                await connection.OpenAsync();
                 var command = new SqlCommand("SELECT a.*,b.Image FROM TblUserProfile a, TblAvatarMaster b WHERE UserName = @Id and a.AvatarId = b.Id", connection);
                 command.Parameters.AddWithValue("@Id", HttpContext.Session.GetString("username"));
                 var reader = await command.ExecuteReaderAsync();

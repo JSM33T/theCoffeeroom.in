@@ -1,7 +1,7 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
-
+using theCoffeeroom.Services.Helpers;
 
 public class SqlService
 {
@@ -10,11 +10,13 @@ public class SqlService
     private readonly object poolLock = new object();
     private const int MaxConnections = 10;
 
-    public SqlService(string connectionString)
+    public SqlService()
     {
-        this.connectionString = connectionString;
+        connectionString = ConfigHelper.NewConnectionString;
         connectionPool = new SqlConnection[MaxConnections];
     }
+
+
 
     public SqlConnection GetConnection()
     {

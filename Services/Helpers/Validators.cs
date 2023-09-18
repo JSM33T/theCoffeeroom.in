@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Text.RegularExpressions;
 
-namespace theCoffeeroom.Core.Helpers
+namespace theCoffeeroom.Services.Helpers
 {
     public class Validators
     {

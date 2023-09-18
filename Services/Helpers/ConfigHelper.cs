@@ -1,4 +1,4 @@
-﻿namespace theCoffeeroom.Core.Helpers
+﻿namespace theCoffeeroom.Services.Helpers
 {
     public class ConfigHelper
     {
@@ -9,7 +9,7 @@
                 .Build();
 
         public static string NewConnectionString => _config.GetConnectionString("coffeeString");
-        
+
         public static string WebMailKey => _config["WebMailPassword"];
 
         public static string CryptoKey => _config["EncryptionKey"];

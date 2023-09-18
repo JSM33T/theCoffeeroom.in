@@ -4,8 +4,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot;
 using theCoffeeroom.Models.Domain;
 using Serilog;
+using theCoffeeroom.Services.Helpers;
 
-namespace theCoffeeroom.Core.Helpers
+namespace theCoffeeroom.Services
 {
     public class TeleLog
     {
@@ -16,9 +17,10 @@ namespace theCoffeeroom.Core.Helpers
 
             var markdownText = LogMessage;
 
-            long chatId = long.Parse(ConfigHelper.TelelogId);                
+            long chatId = long.Parse(ConfigHelper.TelelogId);
 
-            try{
+            try
+            {
                 await botClient.SendTextMessageAsync(chatId, markdownText, parseMode: ParseMode.Markdown);
             }
 

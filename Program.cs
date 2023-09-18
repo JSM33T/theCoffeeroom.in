@@ -17,12 +17,12 @@ builder.Services.AddSession(options =>
 //DA service
 //builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 //builder.Services.AddScoped<IAvatarRepo, AvatarRepo>();
-builder.Services.AddSingleton<SqlService>(provider =>
-{
-    string connectionString = ConfigHelper.NewConnectionString;
-    return new SqlService(connectionString);
-});
-
+//builder.Services.AddSingleton<SqlService>(provider =>
+//{
+//    string connectionString = ConfigHelper.NewConnectionString.ToString();
+//    return new SqlService(connectionString);
+//});
+builder.Services.AddSingleton<SqlService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie(options =>

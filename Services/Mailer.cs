@@ -1,8 +1,9 @@
 ﻿using Serilog;
 using System.Net.Mail;
 using System.Net;
+using theCoffeeroom.Services.Helpers;
 
-namespace theCoffeeroom.Core.Helpers
+namespace theCoffeeroom.Services
 {
     public class Mailer
     {

@@ -1,8 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using theCoffeeroom.Core.Helpers;
 
-namespace theCoffeeroom.Core
+namespace theCoffeeroom.Services.Helpers
 {
     public class EnDcryptor
     {

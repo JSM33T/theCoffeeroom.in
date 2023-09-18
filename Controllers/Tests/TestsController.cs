@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using theCoffeeroom.Core;
+using theCoffeeroom.Services.Helpers;
 
 namespace theCoffeeroom.Controllers.Tests
 {

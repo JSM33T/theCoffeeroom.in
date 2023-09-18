@@ -1,4 +1,4 @@
-﻿namespace theCoffeeroom.Core
+﻿namespace theCoffeeroom.Services
 {
     using Serilog;
     using Serilog.Core;
@@ -15,9 +15,9 @@
 
         public TelegramSink(string botToken, long chatId)
         {
-            this.telegramBotToken = botToken;
+            telegramBotToken = botToken;
             this.chatId = chatId;
-            this.httpClient = new HttpClient();
+            httpClient = new HttpClient();
         }
 
         public void Emit(LogEvent logEvent)

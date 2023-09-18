@@ -1,4 +1,4 @@
-﻿namespace theCoffeeroom.Core.Helpers
+﻿namespace theCoffeeroom.Services.Helpers
 {
     public class StringProcessors
     {

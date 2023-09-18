@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace theCoffeeroom.Core.Helpers
+namespace theCoffeeroom.Services.Helpers
 {
     public class OTPGenerator
     {

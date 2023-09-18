@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
+using theCoffeeroom.Services.Helpers;
 
 namespace theCoffeeroom.Api
 {

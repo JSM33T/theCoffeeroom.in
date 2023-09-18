@@ -2,8 +2,8 @@
 using Microsoft.Data.SqlClient;
 using Serilog;
 using System.Text.RegularExpressions;
-using theCoffeeroom.Core.Helpers;
 using theCoffeeroom.Models.Domain;
+using theCoffeeroom.Services.Helpers;
 
 namespace theCoffeeroom.Api
 {
