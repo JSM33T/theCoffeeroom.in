@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
+using theCoffeeroom.Core.Helpers;
 using WebMarkupMin.AspNetCore7;
 using WebMarkupMin.Core;
 
@@ -16,6 +17,12 @@ builder.Services.AddSession(options =>
 //DA service
 //builder.Services.AddScoped<IDataAccessRepo, DataAccessRepo>();
 //builder.Services.AddScoped<IAvatarRepo, AvatarRepo>();
+builder.Services.AddSingleton<SqlService>(provider =>
+{
+    string connectionString = ConfigHelper.NewConnectionString;
+    return new SqlService(connectionString);
+});
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
        .AddCookie(options =>
