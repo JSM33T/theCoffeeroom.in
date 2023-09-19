@@ -5,7 +5,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using theCoffeeroom.Core.Helpers;
+using theCoffeeroom.Services.Helpers;
 using theCoffeeroom.Models.Domain;
 
 namespace theCoffeeroom.Api

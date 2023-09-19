@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using theCoffeeroom.Core;
+using theCoffeeroom.Services;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
 using theCoffeeroom.Services.Helpers;

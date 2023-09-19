@@ -1,6 +1,6 @@
-﻿@    using Microsoft.Data.SqlClient;
-@    using theCoffeeroom.Core.Helpers;
-    using theCoffeeroom.Services.Helpers;
+﻿@using Microsoft.Data.SqlClient;
+@using theCoffeeroom.Services.Helpers;
+
 @{
 
     //SEO Stuff
@@ -8,7 +8,7 @@
     ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography,magazines, creative";
     ViewData["Description"] ??= "The Coffee Room";
     ViewData["Authors"] ??= "jsm33t";
-    ViewData["OgType"] ??= "website";
+    ViewData["OgType"] ??= "website"; 
     ViewData["OgImage"] ??= "/assets/images/covers/ogimage.png";
      
 
@@ -107,6 +107,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="@ViewData["OgType"]" />
     <meta property="og:site_name" content="The Coffeeroom" />
+    @* fetch current string *@
     <meta property="og:url" content="https://@Context.Request.Host@Context.Request.Path@Context.Request.QueryString" />
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">

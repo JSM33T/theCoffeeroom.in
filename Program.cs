@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
-using theCoffeeroom.Core.Helpers;
+using theCoffeeroom.Services.Helpers;
 using WebMarkupMin.AspNetCore7;
 using WebMarkupMin.Core;
 
