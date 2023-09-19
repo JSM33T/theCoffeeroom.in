@@ -51,7 +51,7 @@ namespace theCoffeeroom.Api
                               "WHERE c.Locator = '" + key + "' and m.IsActive = 1" +
                               "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                               "ORDER BY Id OFFSET " + mode + " " +
-                              "ROWS FETCH NEXT 2 ROWS ONLY";
+                              "ROWS FETCH NEXT 5 ROWS ONLY";
                     }
                     else if (classify == "year")
                     {
@@ -61,7 +61,7 @@ namespace theCoffeeroom.Api
                              "WHERE m.CategoryId = c.Id and YEAR(m.DatePosted) = '" + key + "' AND m.IsActive = 1" +
                              "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                              "ORDER BY Id OFFSET " + mode + " " +
-                             "ROWS FETCH NEXT 2 ROWS ONLY";
+                             "ROWS FETCH NEXT 5 ROWS ONLY";
 
                     }
                     else if (classify == "tag")
@@ -72,7 +72,7 @@ namespace theCoffeeroom.Api
                              "WHERE m.CategoryId = c.Id and Tags like '%" + key + "%' AND m.IsActive = 1" +
                              "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                              "ORDER BY Id OFFSET " + mode + " " +
-                             "ROWS FETCH NEXT 2 ROWS ONLY";
+                             "ROWS FETCH NEXT 5 ROWS ONLY";
                     }
 
                     else if (classify == "search")
@@ -83,7 +83,7 @@ namespace theCoffeeroom.Api
                              "WHERE m.CategoryId = c.Id and (m.Title like '%" + key + "%' OR m.Description like '%" + key + "%'  OR m.Tags like '%" + key + "%' ) AND m.IsActive = 1" +
                              "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                              "ORDER BY Id OFFSET " + mode + " " +
-                             "ROWS FETCH NEXT 2 ROWS ONLY";
+                             "ROWS FETCH NEXT 5 ROWS ONLY";
                     }
                 }
                 else
@@ -94,7 +94,7 @@ namespace theCoffeeroom.Api
                             "WHERE m.CategoryId = c.Id  AND m.IsActive = 1" +
                             "GROUP BY m.Id, m.Title,m.Description,m.UrlHandle, m.DatePosted,m.Tags,c.Title,c.Locator " +
                             "ORDER BY Id OFFSET " + mode + " " +
-                            "ROWS FETCH NEXT 2 ROWS ONLY";
+                            "ROWS FETCH NEXT 5 ROWS ONLY";
                 }
                 using SqlCommand command = new(sql, connection);
                 using SqlDataReader dataReader = await command.ExecuteReaderAsync();
@@ -295,13 +295,17 @@ namespace theCoffeeroom.Api
                                             BC.Id AS CategoryId,
                                             BC.Title AS CategoryTitle,
                                             BC.Locator AS CategoryLocator,
-                                            COUNT(BM.Id) AS NumberOfItems
+                                            COALESCE(COUNT(BM.Id), 0) AS NumberOfItems
                                         FROM 
                                             coffeeroomdb.dbo.TblBlogCategory BC
-                                        LEFT JOIN 
-                                            coffeeroomdb.dbo.TblBlogMaster BM ON BC.Id = BM.CategoryId AND BM.IsActive = 1
+                                            
+                                        LEFT JOIN (
+                                            SELECT CategoryId, Id
+                                            FROM coffeeroomdb.dbo.TblBlogMaster
+                                        ) BM ON BC.Id = BM.CategoryId
                                         GROUP BY 
-                                        BC.Id, BC.Title, BC.Locator",
+                                            BC.Id, BC.Title, BC.Locator
+                                        ",
                                          connection);
 
             var reader = await command.ExecuteReaderAsync();

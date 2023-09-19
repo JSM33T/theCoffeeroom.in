@@ -19,15 +19,14 @@ namespace theCoffeeroom.Controllers.Routers
 
         //SEO-prerender
         [HttpGet]
-        [Route("/blog/{Year?}/{Slug}")]
+        [Route("/blog/{Year}/{Slug}")]
         public IActionResult Blogs(string Year,string Slug)
         {
             string connectionString = ConfigHelper.NewConnectionString;
             BlogLoad blogLoad = null;
             using var connection = new SqlConnection(connectionString);
             connection.Open();
-            var command = new SqlCommand("SELECT a.Id, a.Tags, a.Title, a.UrlHandle, COUNT(b.blogid) AS LikeCount FROM TblBlogMaster a LEFT JOIN TblBlogLike b ON a.Id = b.blogid WHERE a.UrlHandle = 'top-5-must-watch-series-for-beginners' GROUP BY a.Id, a.Tags, a.Title, a.UrlHandle; ", connection);
-            command.Parameters.AddWithValue("@urlhandle", Slug);
+            var command = new SqlCommand("SELECT a.Id, a.Tags, a.Title, a.UrlHandle, COUNT(b.blogid) AS LikeCount FROM TblBlogMaster a LEFT JOIN TblBlogLike b ON a.Id = b.blogid WHERE a.UrlHandle = '"+Slug+"' GROUP BY a.Id, a.Tags, a.Title, a.UrlHandle; ", connection);
             var reader = command.ExecuteReader();
             string tags = string.Empty;
 
