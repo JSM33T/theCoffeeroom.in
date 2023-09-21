@@ -297,11 +297,11 @@ namespace theCoffeeroom.Api
                                             BC.Locator AS CategoryLocator,
                                             COALESCE(COUNT(BM.Id), 0) AS NumberOfItems
                                         FROM 
-                                            coffeeroomdb.dbo.TblBlogCategory BC
+                                            TblBlogCategory BC
                                             
                                         LEFT JOIN (
                                             SELECT CategoryId, Id
-                                            FROM coffeeroomdb.dbo.TblBlogMaster
+                                            FROM TblBlogMaster
                                         ) BM ON BC.Id = BM.CategoryId
                                         GROUP BY 
                                             BC.Id, BC.Title, BC.Locator
