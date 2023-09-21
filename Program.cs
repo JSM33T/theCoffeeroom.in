@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Session;
 using Serilog;
 using theCoffeeroom.Services.Helpers;
 using WebMarkupMin.AspNetCore7;
@@ -40,7 +41,7 @@ builder.Services.AddWebMarkupMin(options =>
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = true;
+    options.MinificationSettings.PreserveNewLines = false;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
@@ -64,10 +65,11 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+app.UseMiddleware<SessionMiddleware>();
 app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-//app.UseWebMarkupMin();
+app.UseWebMarkupMin();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllerRoute(

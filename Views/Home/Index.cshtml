@@ -60,16 +60,16 @@
                     }
                 };
                 const loadTopBlogs = async () => {
-                    try {
-                        const response = await axios.get('/api/topblogs/get');
-                        const data = response.data;
-                        console.log(data);
-                        blogs.value = data;
-                    } catch (error) {
-                        console.error('Error fetching data from API:', error);
-                    } finally {
-                        isLoading.value = false;
-                    }
+                    // try {
+                    //     const response = await axios.get('/api/topblogs/get');
+                    //     const data = response.data;
+                    //     console.log(data);
+                    //     blogs.value = data;
+                    // } catch (error) {
+                    //     console.error('Error fetching data from API:', error);
+                    // } finally {
+                    //     isLoading.value = false;
+                    // }
                 };
                 return {
                     emailValue,
@@ -136,7 +136,7 @@
                 <h1 class="display-2"><span class='fw-normal'>The Coffeeroom</span></h1>
                 
                     <div class="col-12 pb-3">
-                        <p class="mb-3 mx-3">Shops,Apps,Presets,Gallery and more on the way. Stay tuned</p>
+                        <p class="mb-3 mx-3">Blogs, Music, Apps, Presets, Gallery and much more on the way. Stay tuned</p>
                     </div>
                 
                     <div class="d-sm-flex justify-content-center justify-content-lg-start mt-lg-2">
@@ -168,14 +168,22 @@
     
   @*   =================================================== CTA-Gallery ====================================================== *@
     <section class="position-relative bg-faded-primary overflow-hidden py-5">
-        <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
+        <div class="d-none d-dark-mode-block position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);">
+        </div>
         <div class="container position-relative zindex-2 pt-3 pb-sm-3 pt-sm-4 py-md-5 my-lg-2 my-xl-3 my-xxl-4">
             <div class="row align-items-center py-xxl-2" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
-                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="~/assets/images/covers/gallery-cover.png" width="420" alt="Image"></div>
+                <div class="col-md-6 pb-3 pb-md-0 mb-3 mb-md-0"><img src="~/assets/images/covers/gallery-cover.png" width="420" alt="Image">
+                </div>
                 <div class="col-md-6 col-lg-5 col-xxl-6 " data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
                     <div class="ps-md-4 ps-lg-0">
                         <h2 class="mb-lg-4">Photo Gallery</h2>
-                        <p class="pb-lg-2 mb-xl-4">A captivating visual journey through different aspects of the world, including flora & fauna, Abandoned places(urbex) and vlogs</p><a class="btn btn-lg btn-link px-0" href="/gallery">Browse..<i class="ai-arrow-right ms-2"></i></a>
+                        <p class="pb-lg-2 mb-xl-4">A captivating visual journey through different aspects of the world, including flora & fauna, Abandoned places(urbex) and vlogs</p>
+                        <a 
+                            class="btn btn-lg btn-link px-0" 
+                            href="/gallery"
+                        >
+                            Browse..<i class="ai-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -183,7 +191,7 @@
     </section>
     
     @* ===================================================== WEB APPS ======================================================== *@
-    <section class="container pt-5 mt-lg-2 mt-xl-4 mt-xxl-5">
+@*     <section class="container pt-5 mt-lg-2 mt-xl-4 mt-xxl-5">
         <div class="row align-items-center pt-2 pt-sm-4 pt-md-5 mt-xl-2 mt-xxl-3" data-aos="fade-up" data-aos-duration="600" data-aos-offset="300" data-disable-parallax-down="md">
             <div class="col-md-7 offset-xl-1 pb-3 pb-md-0 mb-3 mb-md-0 order-md-2"><img class="d-dark-mode-none" src="assets/img/about/product/features/02-light.png" width="744" alt="Image"><img class="d-none d-dark-mode-block" src="assets/img/about/product/features/02-dark.png" width="744" alt="Image"></div>
             <div class="col-md-5 col-xl-4 order-md-1" data-aos="fade-up" data-aos-duration="850" data-aos-offset="200" data-disable-parallax-down="md">
@@ -203,11 +211,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> *@
 
     @* ===================================================== BLOGS ======================================================== *@
          <!-- Latest posts-->
-      <section class="container py-5 my-md-2 my-lg-3 my-xl-4 my-xxl-5">
+     @*  <section class="container py-5 my-md-2 my-lg-3 my-xl-4 my-xxl-5">
         <h2 class="h1 pb-3 py-md-4">Latest posts</h2>
         <div class="row pb-md-4 pb-lg-5">
           <!-- Featured article-->
@@ -220,12 +228,9 @@
                 <div class="d-flex align-items-center"><span class="fs-sm text-light opacity-50">9 hours ago</span><span class="fs-xs text-light opacity-30 mx-3">|</span><a class="badge text-ligh fs-xs border border-light" href="#">Travel</a></div>
               </div>
             </article>
-            
           </div>
-          <!-- Other articles-->
           <div class="col-lg-6">
             <div class="row row-cols-1 row-cols-sm-2 g-4">
-
               <article v-for="blog in blogs" :key="blog.d" class="col py-1 py-xl-2">
                 <div class="border-bottom pb-4 ms-xl-3">
                   <h3 class="h4"><a  :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle">{{blog.title}}</a></h3>
@@ -233,14 +238,10 @@
                   <div class="d-flex align-items-center"><span class="fs-xs opacity-50 mx-2">{{blog.dateFormatted}}</span><a class="badge text-nav fs-xs border" href="#">Books</a></div>
                 </div>
               </article>
-
-
-            
             </div>
           </div>
         </div>
-      </section>
-
+      </section> *@
 
     @* =================================================== MAILING LIST ==================================================== *@
     <section class="container dark-mode pt-5 mt-5">
