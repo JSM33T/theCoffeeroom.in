@@ -592,7 +592,6 @@ namespace theCoffeeroom.Api
         {
             try
             {
-
                 using SqlConnection connection = new(connectionString);
                 connection.Open();
 

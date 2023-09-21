@@ -15,5 +15,6 @@
         public int Comments { get; set; }
         public DateTime DatePosted { get; set; }
         public int Id { get; internal set; }
+        public string DateFormatted { get; internal set; }
     }
 }

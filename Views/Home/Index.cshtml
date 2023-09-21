@@ -132,19 +132,14 @@
                     </div> 
                 </div>
             </div>
-            <div class="col-lg-6 pb-3 mb-3 text-center text-lg-start">
-                <h1 class="display-2 pb-3 mb-4"><span class='fw-normal'>The Coffeeroom</span></h1>
-                <div class="row row-cols-3">
-                    <div class="col-4">
-                        <i class="ai-bulb-alt d-block fs-1 text-dark mb-2 pb-1"></i>
-                        <p class="mb-0">Blogs to keep you involved</p>
+            <div class="col-lg-6 pb-5 mb-5 text-center text-lg-start">
+                <h1 class="display-2"><span class='fw-normal'>The Coffeeroom</span></h1>
+                
+                    <div class="col-12 pb-3">
+                        <p class="mb-3 mx-3">Shops,Apps,Presets,Gallery and more on the way. Stay tuned</p>
                     </div>
-                    <div class="col-8">
-                        <i class="ai-circle-check-filled d-block fs-3 text-dark mb-3"></i>
-                        <p class="mb-0">Shops,Apps,Presets,Gallery and more in checklist. Stay tuned</p>
-                    </div>
-                </div>
-                    <div class="d-sm-flex justify-content-center justify-content-lg-start pt-5 mt-lg-2">
+                
+                    <div class="d-sm-flex justify-content-center justify-content-lg-start mt-lg-2">
                         <a class="btn btn-lg btn-primary w-100 w-sm-auto mb-2 mb-sm-0 me-sm-1" href="/personalize">Personalize</a>
                         <a class="btn btn-lg btn-link" href="/blogs">Explore blogs<i class="ai-arrow-right ms-2"></i></a>
                     </div>
@@ -211,58 +206,41 @@
     </section>
 
     @* ===================================================== BLOGS ======================================================== *@
-    <section class="bg-secondary py-5">
-        <div class="container d-flex align-items-center pt-lg-2 pt-xl-4 pt-xxl-5 pb-3 mt-1 mt-sm-3 mb-3 my-md-4">
-            <h2 class="h1 mb-0">Recent Blogs</h2>
-        </div>
-        <!-- Swiper slider-->
-        <div class="container-start">
-       
-                <div class="swiper-wrapper">
-                    <div v-if="isLoading">
-                        <article class="swiper-slide w-sm-auto h-auto">
-                            <div class="card h-100 border-0 mx-auto" style="max-width: 416px;">
-                            <a href="blog-single-v1.html"><img class="card-img-top" src="assets/img/blog/grid/01.jpg" alt="Post image"></a>
-                                <div class="card-body pb-4">
-                                    <div class="d-flex align-items-center mb-4 mt-n1"><span class="fs-sm text-muted">1</span><span class="fs-xs opacity-20 mx-3">|</span><a class="badge text-nav fs-xs border" href="#">Books</a></div>
-                                    <h3 class="h4 card-title"><a href="blog-single-v1.html">Loading....</a></h3>
-                                    <p class="card-text">Vulputate auctor lacus imperdiet facilisi tristique nisl pulvinar porta diam duis...</p>
-                                </div>
-                                <div class="card-footer pt-3">
-                                    <a class="d-flex align-items-center text-decoration-none pb-2" href="#">
-                                        <img class="rounded-circle" src="assets/img/avatar/06.jpg" width="48" alt="Post author">
-                                        <h6 class="ps-3 mb-0">Jenny Wilson</h6>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div v-else>
-                        <div v-for="blog in blogs" :key="blog.d">
-                            <article class="swiper-slide w-sm-auto h-auto">
-                                <div class="card h-100 border-0 mx-auto" style="max-width: 416px;">
-                                <a :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle"><img class="card-img-top" :src="'/content/blogcontent/2023/' + blog.urlHandle + '/cover.jpg'" alt="Post image"></a>
-                                    <div class="card-body pb-4">
-                                        <div class="d-flex align-items-center mb-4 mt-n1"><span class="fs-sm text-muted">{{blog.datePosted}}</span></div>
-                                    <h3 class="h4 card-title"><a :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle"> {{ blog.title }}</a></h3>
-                                        <p class="card-text">{{blog.description}}</p>
-                                    </div>
-                                    @* <div class="card-footer pt-3">
-                                        <a class="d-flex align-items-center text-decoration-none pb-2" href="#">
-                                            <img class="rounded-circle" src="assets/img/avatar/06.jpg" width="48" alt="Post author">
-                                            <h6 class="ps-3 mb-0">Jenny Wilson</h6>
-                                        </a>
-                                    </div> *@
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    
+         <!-- Latest posts-->
+      <section class="container py-5 my-md-2 my-lg-3 my-xl-4 my-xxl-5">
+        <h2 class="h1 pb-3 py-md-4">Latest posts</h2>
+        <div class="row pb-md-4 pb-lg-5">
+          <!-- Featured article-->
+          <div class="col-lg-6 pb-2 pb-lg-0 mb-4 mb-lg-0">
+            <article class="card h-100 border-0 position-relative overflow-hidden bg-size-cover bg-position-center me-lg-4" style="background-image: url(assets/img/landing/blog/04.jpg);">
+              <div class="bg-dark position-absolute top-0 start-0 w-100 h-100 opacity-60"></div>
+              <div class="card-body d-flex flex-column position-relative zindex-2 mt-sm-5">
+                <h3 class="pt-5 mt-4 mt-sm-5 mt-lg-auto"><a class="stretched-link text-light" href="/">5 K-Dramas to watch as a beginner</a></h3>
+                <p class="card-text text-light opacity-70">Featured blogs description</p>
+                <div class="d-flex align-items-center"><span class="fs-sm text-light opacity-50">9 hours ago</span><span class="fs-xs text-light opacity-30 mx-3">|</span><a class="badge text-ligh fs-xs border border-light" href="#">Travel</a></div>
+              </div>
+            </article>
+            
+          </div>
+          <!-- Other articles-->
+          <div class="col-lg-6">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+
+              <article v-for="blog in blogs" :key="blog.d" class="col py-1 py-xl-2">
+                <div class="border-bottom pb-4 ms-xl-3">
+                  <h3 class="h4"><a  :href="'/blog/' + blog.datePosted.slice(0, 4) + '/' + blog.urlHandle">{{blog.title}}</a></h3>
+                  <p>{{blog.description}}</p>
+                  <div class="d-flex align-items-center"><span class="fs-xs opacity-50 mx-2">{{blog.dateFormatted}}</span><a class="badge text-nav fs-xs border" href="#">Books</a></div>
                 </div>
+              </article>
+
+
+            
             </div>
-        <!-- All articles button-->
-        <div class="container text-center pt-4 pb-1 pb-sm-3 pb-md-4 py-lg-5 mb-xl-1 mb-xxl-4 mt-2 mt-lg-0"><a class="btn btn-primary mb-1" href="/blogs">More Blogs</a></div>
-    </section>
+          </div>
+        </div>
+      </section>
+
 
     @* =================================================== MAILING LIST ==================================================== *@
     <section class="container dark-mode pt-5 mt-5">

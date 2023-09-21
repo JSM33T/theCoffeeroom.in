@@ -1,4 +1,4 @@
-﻿<div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+﻿<div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5" id="appAdmin">
     <div class="row pt-sm-2 pt-lg-0">
         <!-- Sidebar (offcanvas on sreens < 992px)-->
       
@@ -16,7 +16,7 @@
                         <div class="col-md-4 col-sm-6">
                             <div class="h-100 bg-secondary rounded-3 text-center p-4">
                                 <h2 class="h6 pb-2 mb-1">Members (active)</h2>
-                                <div class="h2 text-primary mb-2">$842.00</div>
+                                <div class="h2 text-primary mb-2">{{activeMembers}}</div>
                                 <p class="fs-sm text-muted mb-0">Sales 8/1/2022 - 8/15/2022</p>
                             </div>
                         </div>
@@ -176,3 +176,54 @@
         </div>
     </div>
 </div>
+
+
+@section jsScripts{
+<script>
+        
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        const { createApp, ref } = Vue;
+        const app = createApp({
+            setup() {
+                const activeMembers = ref(0);
+                const blogs = ref([]);
+                const isLoading = ref(true);
+                const loadMembers = async () => {
+                    try {
+                        axios.defaults.headers.common['RequestVerificationToken'] = token;
+                        const response = await axios.post('/api/newsletter', {
+                            EMailId: emailValue.value,
+                            Origin: "/"
+                        });
+                        toaster("success", response.data);
+                        emailValue.value = '';
+                    } catch (error) {
+                        toaster("error", error.response.data);
+                    } finally {
+                        btnTxt.value = 'Submit';
+
+                    }
+                };
+                return {
+                    loadMembers,
+                    isLoading
+
+                };
+            },
+            async mounted() {
+                this.loadTopBlogs();
+
+
+            },
+            computed: {
+                formattedDate() {
+                  const date = new Date(this.blog.datePosted);
+                  // Define your desired date format (e.g., "MMM dd, yyyy hh:mm a" for Sep 16, 2023 12:34 PM)
+                  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+                  return date.toLocaleDateString(undefined, options);
+                },
+              },
+        });
+        app.mount('#appAdmin');
+</script>
+}

@@ -45,8 +45,8 @@ namespace theCoffeeroom.Api
                             addEmailCmd.Parameters.AddWithValue("@dateadded", DateTime.Now);
                             await addEmailCmd.ExecuteNonQueryAsync();
                             Log.Information("mail added to newsletter:" + mail.EMailId);
-                            await TeleLog.Logstuff(" #MAILINGLIST \nmail added to newsletter:\n\"*" + mail.EMailId + "*\" ");
 
+                            await TeleLog.Logstuff(" #MAILINGLIST \nmail added to newsletter:\n\"*" + mail.EMailId + "*\" ");
                             return Ok("Email added to the list");
 
                         }
