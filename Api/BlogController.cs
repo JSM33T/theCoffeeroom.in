@@ -303,6 +303,7 @@ namespace theCoffeeroom.Api
                                             SELECT CategoryId, Id
                                             FROM TblBlogMaster
                                         ) BM ON BC.Id = BM.CategoryId
+                                        where BM.IsActive = 1
                                         GROUP BY 
                                             BC.Id, BC.Title, BC.Locator
                                         ",
