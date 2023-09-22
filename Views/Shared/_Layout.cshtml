@@ -192,8 +192,19 @@
 @*     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js" asp-fallback-src="~/assets/vendor/vue/vue.global.prod.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/4.2.4/vue-router.global.prod.min.js" asp-fallback-src="~/assets/vendor/vue-router/vue-router.global.prod.min.js"></script> *@
     
-    <script src="~/assets/vendor/vue/vue.global.prod.min.js" asp-append-version="true"></script>
-    <script src="~/assets/vendor/vue-router/vue-router.global.prod.min.js" asp-append-version="true"></script>
+
+       <!--Vue --> 
+     <environment include="development">
+       <script src="~/assets/vendor/vue/vue.global.js" asp-append-version="true"></script>
+        <script src="~/assets/vendor/vue-router/vue-router.global.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="production">
+        <script src="~/assets/vendor/vue/vue.global.prod.min.js" asp-append-version="true"></script>
+        <script src="~/assets/vendor/vue-router/vue-router.global.prod.min.js" asp-append-version="true"></script>
+    </environment>
+
+  
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
