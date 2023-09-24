@@ -56,8 +56,10 @@
                     </div>
                     <h4 class="pt-1 pt-lg-0 mt-lg-n2">Categories:</h4>
                     <ul class="nav flex-column mb-lg-5 mb-4">   
-                        <li class="mb-2"><router-link id="cat_all" class="nav-link d-flex p-0" to="/blogs">All categories</router-link></li>
-                            <li class="mb-2" v-for="category in categories" :key="category.id">
+                        <li class="mb-2">
+                            <router-link id="cat_all" class="nav-link d-flex p-0" to="/blogs">All categories</router-link>
+                        </li>
+                        <li class="mb-2" v-for="category in categories" :key="category.id">
                             <router-link :to="'/blogs/category/' + category.locator" class="nav-link d-flex p-0" v-bind:class="{ disabled: category.qty === 0 }">{{ category.title }}<span class="fs-sm text-muted ms-2">({{category.qty}})</span></router-link>
                         </li>
                     </ul>
@@ -300,7 +302,8 @@
                 return {
                     isLoading: true,
                     titleItem: 'Blogs',
-                    categories: []
+                    categories: [],
+                    inputValue:''
                 };
             },
             async mounted() {
@@ -323,7 +326,7 @@
                         const response = await axios.get('/api/blogs/categories/load');
                         const data = response.data;
                         this.categories = data;
-                        console.log(data);
+                      //  console.log(data);
                     } catch (error) {
                         console.error('Error fetching data from API:', error);
                     } finally {

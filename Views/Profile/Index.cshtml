@@ -9,8 +9,9 @@
             <h1 id="sectionTitle" class="h2 mb-4">{{viewTitle}}</h1>
             <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 fade-in">
                 @Html.AntiForgeryToken()
-                
+                <div class="card-body">
                     <router-view></router-view>
+                    </div>
             </section>
         </div>
     </div>

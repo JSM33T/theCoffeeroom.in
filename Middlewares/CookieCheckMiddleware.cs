@@ -21,7 +21,7 @@ public class CookieCheckMiddleware
             //Log.Information("no session found");
             if (context.Request.Cookies.ContainsKey("SessionKey"))
             {
-                Log.Information("remember me active");
+             //   Log.Information("remember me active");
                 context.Request.Cookies.TryGetValue("SessionKey", out string cookieValue);
                 using SqlConnection connection = new(ConfigHelper.NewConnectionString);
                 await connection.OpenAsync();

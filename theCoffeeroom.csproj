@@ -74,4 +74,11 @@
     <PackageReference Include="WebMarkupMin.AspNetCore7" Version="2.14.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\content\studiocontent\singles\melancholy\tracklist.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

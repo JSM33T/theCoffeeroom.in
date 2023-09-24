@@ -295,16 +295,19 @@ namespace theCoffeeroom.Api
                                             BC.Id AS CategoryId,
                                             BC.Title AS CategoryTitle,
                                             BC.Locator AS CategoryLocator,
-                                            COALESCE(COUNT(BM.Id), 0) AS NumberOfItems
+                                            COALESCE(COUNT(BM.Id), 0) AS NumberOfActiveItems
                                         FROM 
                                             TblBlogCategory BC
-                                            
+
                                         LEFT JOIN (
                                             SELECT CategoryId, Id
                                             FROM TblBlogMaster
+                                            WHERE IsActive = 1 -- Add this condition to filter active blogs
                                         ) BM ON BC.Id = BM.CategoryId
+
                                         GROUP BY 
                                             BC.Id, BC.Title, BC.Locator
+
                                         ",
                                          connection);
 
