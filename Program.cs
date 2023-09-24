@@ -72,6 +72,7 @@ app.UseStaticFiles();
 app.UseWebMarkupMin();
 app.UseRouting();
 app.UseAuthorization();
+app.UseCookieCheckMiddleware();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

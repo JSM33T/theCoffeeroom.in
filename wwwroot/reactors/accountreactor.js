@@ -3,11 +3,10 @@ const routerViewElement = document.querySelector('router-view');
 const BaseComponent = {
     template:
     `
-    <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+    <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4 homebtn" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
     <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-1 px-lg-1  bg-secondary">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
-            <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
-            <div class="row  g-4 pb-xl-2 pt-5 mt-3 pb-xxl-3">
+            <div class="row  g-4 pb-xl-2 pt-2 mt-3 pb-xxl-3">
                 <div class="col-md-12">
                     <div class="card h-100 border-0 rounded-5">
                         <div class="card-body pb-3">
@@ -68,7 +67,7 @@ const BaseComponent = {
 
 const LoginComponent = {
     template: `
-      <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+      <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4 homebtn" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
         <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
               <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/signup"><i class="ai-user ms-n1 me-2"></i>Signup</router-link></div>
@@ -158,7 +157,7 @@ const LoginComponent = {
 
 const SignupComponent = {
     template: `
-            <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+            <a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4 homebtn" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
 
         <div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5 fade-in">
             <div class="w-100 mt-auto" style="max-width: 526px;">
