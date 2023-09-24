@@ -1,31 +1,35 @@
 const Security = {
-    template: `<div class="fade-in">
-                              <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
-                                       <div class="ms-auto"><router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit Profile</router-link></div>
-                                    </div>
-                                            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
-                                            <div class="col-md-6">
-                                                   <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" @keyup.enter="saveCredentials" placeholder="Password" autocomplete="off" required="">
-                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
-                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                                                    </label>
-                                                  </div>
-                                                  </div>
-                                        <div class="col-md-6">
-                                                <div class="password-toggle">
-                                                    <input class="form-control form-control-lg ps-5" v-model="confirmPassword" @keyup.enter="saveCredentials" type="password" placeholder="Password" autocomplete="off" required="">
-                                                    <label class="password-toggle-btn" aria-label="Show/hide password">
-                                                      <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                                                    </label>
-                                                  </div>
-                                                  </div>
-
-                                                <div class="col-12 d-flex justify-content-end pt-3">
-                                                    <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveCredentials">Save Profile</button>
-                                                </div>
-                                            </div>
-                </div>`,
+    template: `
+    <div class="fade-in">
+       <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+          <div class="ms-auto">
+             <router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link>
+             <router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit Profile</router-link>
+          </div>
+       </div>
+       <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+          <div class="col-md-6">
+             <div class="password-toggle">
+                <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" @keyup.enter="saveCredentials" placeholder="Password" autocomplete="off" required="">
+                <label class="password-toggle-btn" aria-label="Show/hide password">
+                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                </label>
+             </div>
+          </div>
+          <div class="col-md-6">
+             <div class="password-toggle">
+                <input class="form-control form-control-lg ps-5" v-model="confirmPassword" @keyup.enter="saveCredentials" type="password" placeholder="Password" autocomplete="off" required="">
+                <label class="password-toggle-btn" aria-label="Show/hide password">
+                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                </label>
+             </div>
+          </div>
+          <div class="col-12 d-flex justify-content-end pt-3">
+             <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @click="saveCredentials">Save Profile</button>
+          </div>
+       </div>
+</div>
+    `,
     data() {
         return {
             username: '',
@@ -302,8 +306,9 @@ const Dashboard = {
             <div class="col-md-6 d-md-flex justify-content-end">
                 <div class="w-100 border rounded-3 p-4" style="max-width: 242px;">
                     <img class="d-block mb-2" src="/assets/img/account/gift-icon.svg" width="24" alt="Gift icon">
-                    <h4 class="h5 lh-base mb-0">(ID)</h4>
-                    <p class="fs-sm text-muted mb-0">birthday</p>
+                    <p class="fs-sm lh-base text-muted mb-0">membe since</p>
+                    <h4 class="h5  mb-0">{{dateElement}}</h4>
+                    
                 </div>
             </div>
         </div>
@@ -315,7 +320,8 @@ const Dashboard = {
             username: '',
             firstname: '',
             lastname: '',
-            email: '',
+            email: '', 
+            dateElement: '',
             phone: '',
             avatar: 'default.png',
             bio: '',
@@ -344,6 +350,7 @@ const Dashboard = {
                     this.avatar = response.data.avatarImg + ".png";
                     this.gender = response.data.gender;
                     this.email = response.data.eMail;
+                    this.dateElement = response.data.dateElement;
 
                 })
                 .catch(error => {
@@ -355,7 +362,7 @@ const Dashboard = {
             await axios.get("/api/profile/userbadges")
                 .then(response => {
                     this.badges = response.data;
-                    console.log(response.data);
+                  //  console.log(response.data);
                 })
                 .catch(error => {
                     console.log(error);

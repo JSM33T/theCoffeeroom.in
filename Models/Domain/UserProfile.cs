@@ -13,6 +13,7 @@ namespace theCoffeeroom.Models.Domain
         public int AvatarId { get; set; }
         public string Bio { get; set; }
         public DateTime DateJoined { get; set; }
+        public string DateElement { get; set; }
         public DateTime DateEdited { get; set; }
         public string Role { get; set; }
         public string Password { get; set; }

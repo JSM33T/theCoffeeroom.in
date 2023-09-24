@@ -9,6 +9,7 @@
         const lastName = Vue.ref("");
         const eMail = Vue.ref("");
         const gender = Vue.ref("");
+        const dateElement = Vue.ref("");
         const phone = Vue.ref("");
         const bio = Vue.ref("");
         const avatarImg = Vue.ref("default");
@@ -54,6 +55,7 @@
                     avatarImg.value = response.data.avatarImg;
                     gender.value = response.data.gender;
                     role.value = response.data.role;
+                    dateElement.value = response.data.dateElement;
 
                 })
                 .catch(error => {
@@ -82,6 +84,7 @@
             isLoading,
             fetchMemberData,
             gender,
+            dateElement,
             role,
             firstName,
             avatarImg,
@@ -140,8 +143,9 @@
             <div class="col-md-6 d-md-flex justify-content-end">
                 <div class="w-100 border rounded-3 p-4" style="max-width: 242px;">
                     <img class="d-block mb-2" src="/assets/img/account/gift-icon.svg" width="24" alt="Gift icon">
-                    <h4 class="h5 lh-base mb-0">(ID)</h4>
-                    <p class="fs-sm text-muted mb-0">birthday</p>
+                    <p class="fs-sm text-muted mb-0">member since</p>
+                    <h4 class="h5 lh-base mb-0">{{dateElement}}</h4>
+                    
                 </div>
             </div>
         </div>

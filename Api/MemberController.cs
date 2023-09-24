@@ -118,21 +118,22 @@ namespace theCoffeeroom.Api
             
                 using var connection = new SqlConnection(connectionString);
                 await connection.OpenAsync();
-                var command = new SqlCommand("SELECT a.*,b.Image FROM TblUserProfile a, TblAvatarMaster b WHERE UserName = @Id and a.AvatarId = b.Id", connection);
-                command.Parameters.AddWithValue("@Id", UserName);
+                var command = new SqlCommand("SELECT a.FirstName,a.LastName,a.UserName,a.Role,a.Gender,a.Bio,a.DateJoined,b.Image FROM TblUserProfile a, TblAvatarMaster b WHERE UserName = @username and a.AvatarId = b.Id", connection);
+                command.Parameters.AddWithValue("@username", UserName);
                 var reader = await command.ExecuteReaderAsync();
 
                 if (await reader.ReadAsync())
                 {
                     userProfile = new UserProfile()
                     {
-                        FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
-                        UserName = reader.GetString(3),
-                        Role = reader.GetString(10),
-                        Gender = reader.GetString(6),
-                        Bio = reader.GetString(11),
-                        AvatarImg = reader.GetString(18)
+                        FirstName = reader.GetString(0),
+                        LastName = reader.GetString(1),
+                        UserName = reader.GetString(2),
+                        Role = reader.GetString(3),
+                        Gender = reader.GetString(4),
+                        Bio = reader.GetString(5),
+                        DateElement = reader.GetDateTime(6).ToString("D"),
+                        AvatarImg = reader.GetString(7)
                     };
                 }
 
