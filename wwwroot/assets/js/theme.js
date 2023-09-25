@@ -203,6 +203,79 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     }
   }();
 
+  /**
+   * Interactive map
+   * @requires https://github.com/Leaflet/Leaflet
+  */
+
+  var interactiveMap = function () {
+    var mapList = document.querySelectorAll('.interactive-map');
+    if (mapList.length === 0) return;
+    for (var i = 0; i < mapList.length; i++) {
+      var mapOptions = mapList[i].dataset.mapOptions,
+        mapOptionsExternal = mapList[i].dataset.mapOptionsJson,
+        map = void 0;
+
+      // Map options: Inline JSON data
+      if (mapOptions && mapOptions !== '') {
+        var mapOptionsObj = JSON.parse(mapOptions),
+          mapLayer = mapOptionsObj.mapLayer || 'https://api.maptiler.com/maps/pastel/{z}/{x}/{y}.png?key=BO4zZpr0fIIoydRTOLSx',
+          mapCenter = mapOptionsObj.center ? mapOptionsObj.center : [0, 0],
+          mapZoom = mapOptionsObj.zoom || 1,
+          scrollWheelZoom = mapOptionsObj.scrollWheelZoom === false ? false : true,
+          markers = mapOptionsObj.markers;
+
+        // Map setup
+        map = L.map(mapList[i], {
+          scrollWheelZoom: scrollWheelZoom
+        }).setView(mapCenter, mapZoom);
+
+        // Tile layer
+        L.tileLayer(mapLayer, {
+          tileSize: 512,
+          zoomOffset: -1,
+          minZoom: 1,
+          attribution: "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>",
+          crossOrigin: true
+        }).addTo(map);
+
+        // Markers
+        if (markers) {
+          for (var n = 0; n < markers.length; n++) {
+            var iconUrl = markers[n].iconUrl,
+              shadowUrl = markers[n].shadowUrl,
+              markerIcon = L.icon({
+                iconUrl: iconUrl || 'assets/img/map/marker-icon.png',
+                iconSize: [30, 43],
+                iconAnchor: [14, 43],
+                shadowUrl: shadowUrl || 'assets/img/map/marker-shadow.png',
+                shadowSize: [41, 41],
+                shadowAnchor: [13, 41],
+                popupAnchor: [1, -40]
+              }),
+              popup = markers[n].popup;
+            var marker = L.marker(markers[n].position, {
+              icon: markerIcon
+            }).addTo(map);
+            if (popup) {
+              marker.bindPopup(popup);
+            }
+          }
+        }
+
+        // Map option: No options provided
+      } else {
+        map = L.map(mapList[i]).setView([0, 0], 1);
+        L.tileLayer('https://api.maptiler.com/maps/pastel/{z}/{x}/{y}.png?key=BO4zZpr0fIIoydRTOLSx', {
+          tileSize: 512,
+          zoomOffset: -1,
+          minZoom: 1,
+          attribution: "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>",
+          crossOrigin: true
+        }).addTo(map);
+      }
+    }
+  }();
 
   /**
    * Mouse move parallax effect
@@ -221,63 +294,63 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
    * @requires https://github.com/nolimits4web/swiper
   */
 
-  //var carousel = function () {
-  //  // forEach function
-  //  var forEach = function forEach(array, callback, scope) {
-  //    for (var i = 0; i < array.length; i++) {
-  //      callback.call(scope, i, array[i]); // passes back stuff we need
-  //    }
-  //  };
+  var carousel = function () {
+    // forEach function
+    var forEach = function forEach(array, callback, scope) {
+      for (var i = 0; i < array.length; i++) {
+        callback.call(scope, i, array[i]); // passes back stuff we need
+      }
+    };
 
-  //  // Carousel initialisation
-  //  var carousels = document.querySelectorAll('.swiper');
-  //  forEach(carousels, function (index, value) {
-  //    var options;
-  //    if (value.dataset.swiperOptions != undefined) options = JSON.parse(value.dataset.swiperOptions);
+    // Carousel initialisation
+    var carousels = document.querySelectorAll('.swiper');
+    forEach(carousels, function (index, value) {
+      var options;
+      if (value.dataset.swiperOptions != undefined) options = JSON.parse(value.dataset.swiperOptions);
 
-  //    // Thumbnails
-  //    if (options.thumbnails) {
-  //      var images = options.thumbnails.images;
-  //      options = Object.assign({}, options, {
-  //        pagination: {
-  //          el: options.thumbnails.el,
-  //          clickable: true,
-  //          bulletActiveClass: 'active',
-  //          renderBullet: function renderBullet(index, className) {
-  //            return "<li class='swiper-thumbnail ".concat(className, "'>\n              <img src='").concat(images[index], "' alt='Thumbnail'>\n            </li>");
-  //          }
-  //        }
-  //      });
-  //    }
-  //    var swiper = new Swiper(value, options);
+      // Thumbnails
+      if (options.thumbnails) {
+        var images = options.thumbnails.images;
+        options = Object.assign({}, options, {
+          pagination: {
+            el: options.thumbnails.el,
+            clickable: true,
+            bulletActiveClass: 'active',
+            renderBullet: function renderBullet(index, className) {
+              return "<li class='swiper-thumbnail ".concat(className, "'>\n              <img src='").concat(images[index], "' alt='Thumbnail'>\n            </li>");
+            }
+          }
+        });
+      }
+      var swiper = new Swiper(value, options);
 
-  //    // Controlled slider
-  //    if (options.controlledSlider) {
-  //      var controlledSlider = document.querySelector(options.controlledSlider),
-  //        controlledSliderOptions;
-  //      if (controlledSlider.dataset.swiperOptions != undefined) controlledSliderOptions = JSON.parse(controlledSlider.dataset.swiperOptions);
-  //      var swiperControlled = new Swiper(controlledSlider, controlledSliderOptions);
-  //      swiper.controller.control = swiperControlled;
-  //    }
+      // Controlled slider
+      if (options.controlledSlider) {
+        var controlledSlider = document.querySelector(options.controlledSlider),
+          controlledSliderOptions;
+        if (controlledSlider.dataset.swiperOptions != undefined) controlledSliderOptions = JSON.parse(controlledSlider.dataset.swiperOptions);
+        var swiperControlled = new Swiper(controlledSlider, controlledSliderOptions);
+        swiper.controller.control = swiperControlled;
+      }
 
-  //    // Binded content
-  //    if (options.bindedContent) {
-  //      swiper.on('activeIndexChange', function (e) {
-  //        var targetItem = document.querySelector(e.slides[e.activeIndex].dataset.swiperBinded),
-  //          previousItem = document.querySelector(e.slides[e.previousIndex].dataset.swiperBinded);
-  //        previousItem.classList.remove('active');
-  //        targetItem.classList.add('active');
-  //      });
-  //    }
-  //  });
-  //}();
+      // Binded content
+      if (options.bindedContent) {
+        swiper.on('activeIndexChange', function (e) {
+          var targetItem = document.querySelector(e.slides[e.activeIndex].dataset.swiperBinded),
+            previousItem = document.querySelector(e.slides[e.previousIndex].dataset.swiperBinded);
+          previousItem.classList.remove('active');
+          targetItem.classList.add('active');
+        });
+      }
+    });
+  }();
 
   /**
    * Gallery like styled lightbox component for presenting various types of media
    * @requires https://github.com/sachinchoolur/lightGallery
   */
 
-  var gallery = function () {
+   var gallery = function () {
 
     var gallery = document.querySelectorAll('.gallery');
      // Modify the zoom settings
@@ -453,6 +526,56 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     });
   }();
 
+  /**
+   * Form validation
+  */
+
+  var formValidation = function () {
+    var selector = 'needs-validation';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName(selector);
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (e) {
+          if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  }();
+
+  /**
+   * Input fields formatter
+   * @requires https://github.com/nosir/cleave.js
+  */
+
+  var inputFormatter = function () {
+    var input = document.querySelectorAll('[data-format]');
+    if (input.length === 0) return;
+    var _loop4 = function _loop4(i) {
+      var targetInput = input[i],
+        cardIcon = targetInput.parentNode.querySelector('.credit-card-icon'),
+        options = void 0,
+        formatter = void 0;
+      if (targetInput.dataset.format != undefined) options = JSON.parse(targetInput.dataset.format);
+      if (cardIcon) {
+        formatter = new Cleave(targetInput, _objectSpread(_objectSpread({}, options), {}, {
+          onCreditCardTypeChanged: function onCreditCardTypeChanged(type) {
+            cardIcon.className = 'credit-card-icon ' + type;
+          }
+        }));
+      } else {
+        formatter = new Cleave(targetInput, options);
+      }
+    };
+    for (var i = 0; i < input.length; i++) {
+      _loop4(i);
+    }
+  }();
 
   /**
    * Update the text of the label when radio button / checkbox changes
@@ -615,10 +738,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
           selector: 'this',
           plugins: [lgVideo],
           licenseKey: 'D4194FDD-48924833-A54AECA3-D6F8E646',
-          download: true,
+          download: false,
           youtubePlayerParams: {
             modestbranding: 1,
-            showinfo: 1,
+            showinfo: 0,
             rel: 0
           },
           vimeoPlayerParams: {
