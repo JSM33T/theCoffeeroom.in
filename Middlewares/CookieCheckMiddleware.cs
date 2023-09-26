@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Serilog;
 using System.Threading.Tasks;
 using theCoffeeroom.Services.Helpers;

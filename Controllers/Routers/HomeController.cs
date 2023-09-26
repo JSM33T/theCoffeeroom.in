@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using System.Diagnostics;
 using theCoffeeroom.Models.Domain;
 using theCoffeeroom.Models.Frame;
 using theCoffeeroom.Services.Helpers;

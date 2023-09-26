@@ -56,8 +56,8 @@
                                     <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :class="{ 'disabled': isStreamLinkBlank(item.link.stream) }" :href="item.link.stream" target="_blank">
                                         <i class="ai-download fs-sm"></i>&nbsp;&nbsp;Stream
                                     </a>
-                                    <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :href="item.link.buy" target="_blank" download>
-                                        <i class="ai-download fs-sm"></i>&nbsp;&nbsp;Mp3
+                                    <a type="button" class="btn-sm btn mx-1 mb-2 btn-outline-primary" :class="{ 'disabled': isStreamLinkBlank(item.link.buy) }" :href="item.link.buy" target="_blank" download>
+                                        <i class="ai-download fs-sm"></i>&nbsp;&nbsp;Purchase
                                     </a>
                                 </div>
                             </div>

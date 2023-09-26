@@ -38,7 +38,7 @@
             catch (Exception ex)
             {
                 // Handle errors and exceptions here
-                Console.WriteLine($"Error sending log message to Telegram: {ex.Message}");
+                Log.Error($"Error sending log message to Telegram: {ex.Message}");
             }
         }
     }
