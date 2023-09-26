@@ -98,7 +98,6 @@ namespace theCoffeeroom.Api
                 }
                 using SqlCommand command = new(sql, connection);
                 using SqlDataReader dataReader = await command.ExecuteReaderAsync();
-
                 if (dataReader.HasRows)
                 {
                     while (await dataReader.ReadAsync())

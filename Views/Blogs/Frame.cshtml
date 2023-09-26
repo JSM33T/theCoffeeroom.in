@@ -611,7 +611,7 @@
                     parts.forEach(function (part) {
                         var words = part.split(' ');
                         for (var i = 0; i < words.length; i++) {
-                            tags = tags + `<a class="btn btn-outline-secondary rounded-pill mt-3 ms-3" href="/blogs/tag/${words[i]}">${words[i]}</a>`;
+                            tags = tags + `<a class="badge bg-secondary rounded-pill pt-2 py-2 mt-2 ms-2" href="/blogs/tag/${words[i]}">${words[i]}</a>`;
                         }
                     });
                     document.getElementById('tagsPlaceholder').innerHTML = tags;
