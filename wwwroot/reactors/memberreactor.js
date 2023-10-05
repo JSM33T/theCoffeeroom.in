@@ -103,13 +103,10 @@
         <div v-else>
             <div class="navbar card-header w-100">
                 <div>
-                    <router-link :to="'/members/'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><i class="ai-user ms-n1 me-2"></i>Back</router-link>
-                   
-                   
+                    <router-link :to="'/members/'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><i class="ai-user ms-n1 me-2"></i>Back</router-link>                                     
                 </div>
             </div>
-                             <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">
-            
+                 <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3 ">            
         </div>
         <div class="d-md-flex align-items-center">
             <div class="d-sm-flex align-items-center">
@@ -140,15 +137,14 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-6 d-md-flex justify-content-end">
-                <div class="w-100 border rounded-3 p-4" style="max-width: 242px;">
-                    <img class="d-block mb-2" src="/assets/img/account/gift-icon.svg" width="24" alt="Gift icon">
-                    <p class="fs-sm text-muted mb-0">member since</p>
-                    <h4 class="h5 lh-base mb-0">{{dateElement}}</h4>
-                    
+                <div class="col-md-6 d-md-flex justify-content-end">
+                    <div class="w-100 border rounded-3 p-4" style="max-width: 242px;">
+                        <img class="d-block mb-2" src="/assets/img/account/gift-icon.svg" width="24" alt="Gift icon">
+                        <p class="fs-sm text-muted mb-0">member since</p>
+                        <h4 class="h5 lh-base mb-0">{{dateElement}}</h4>                    
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
                         
     `,

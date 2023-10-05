@@ -60,7 +60,6 @@ namespace theCoffeeroom.Api
 
                     string SessionKey = StringProcessors.GenerateRandomString(20);
 
-
                     await reader.CloseAsync();
                     SqlCommand setKey = new()
                     {
@@ -69,9 +68,7 @@ namespace theCoffeeroom.Api
                     };
                     setKey.Parameters.AddWithValue("@sessionkey", SessionKey);
                     setKey.Parameters.AddWithValue("@userid", user_id);
-                    await setKey.ExecuteNonQueryAsync();
-
-                  
+                    await setKey.ExecuteNonQueryAsync();                  
 
                     // Create a cookie with the data
                     Response.Cookies.Append("SessionKey", SessionKey, new CookieOptions
@@ -526,7 +523,7 @@ namespace theCoffeeroom.Api
         {
             try
             {
-                string body = "<h1>Hey there,</h1><br> This is for the recovery of your account \"<b>"+userEmail +"</b>\" . Your OTP is: <b>" + otp + "</b> which is valid for 30 minutes. You can use this OTP to reset your password.";
+                string body = "<h1>Hey there,</h1><br> This is for the recovery of your account \"<b>" + userEmail + "</b>\" . Your OTP is: <b>" + otp + "</b> which is valid for 30 minutes. You can use this OTP to reset your password.";
 
                 MailMessage message = new()
                 {

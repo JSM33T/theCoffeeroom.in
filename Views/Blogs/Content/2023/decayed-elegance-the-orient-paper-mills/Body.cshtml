@@ -10,10 +10,24 @@
     ViewData["ActivePage"] = "Blogs";
     ViewData["asset"] = "/content/blogcontent/2023/decayed-elegance-the-orient-paper-mills";
 }
+@{
+   
+    var bodyMdl = new
+    {
+        Name = "John Doe",
+        Img1 = "",
+        Img2 = "",
+        Img3 = "",
+        Img4 = "",
+        Img5 = "",
+        Img6 = "",
+        Img7 = ""
+    };
+}
 
     <img 
         class="figure-img rounded-5 mb-3 img_placeholder" 
-        src="@ViewData["asset"]/images/intro2.jpg" width="1024" alt="Image">
+        src="@ViewData["asset"]/header.jpg" width="1024" alt="Image">
 
     <!-- Post content-->
     <p class="fs-lg pt-2 pt-sm-3">
@@ -151,7 +165,7 @@
           <div class="swiper-wrapper gallery">
             <!-- Item-->
             <div class="swiper-slide">
-                <div class="card-hover position-relative rounded-1">
+                <div class="card-hover position-relative rounded-1 mb-2">
                   <a class="gallery-item d-block card-hover zoom-effect" href="@ViewData["asset"]/images/intro2.jpg" data-lg-id="">
                   <div
                       class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 rounded-4 overflow-hidden zindex-2 opacity-0">
@@ -159,7 +173,7 @@
                       <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-40"></div>
                   </div>
                   <div class="zoom-effect-wrapper rounded-4"><img class="zoom-effect-img"
-                      src="@ViewData["asset"]/images/intro2.jpg" alt="Auditorium">
+                      src="@ViewData["asset"]/reel1/@bodyMdl.Img1" alt="Auditorium">
                   </div>
                   </a>        
                 </div>

@@ -1,7 +1,7 @@
 ﻿@{
     
     ViewData["Title"] ??= "The Coffee Room";
-    ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography,magazines, creative";
+    ViewData["Tags"] ??= "coffeeroom, blogs, space, shop, apps, social,music,software development, gallery, photography, magazines, creative, services";
     ViewData["Description"] ??= "The Coffee Room";
     ViewData["Authors"] ??= "Jass and others";
     ViewData["ActivePage"] = "Home";
@@ -103,9 +103,9 @@
     <script src="~/assets/vendor/parallax-js/dist/parallax.min.js"></script>
 }
 <div id="appHome">
-<section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-5 fade-in">
+<section class="bg-faded-primary d-flex min-vh-100 overflow-hidden py-2 fade-in">
     <div class="container d-flex justify-content-center pb-sm-3 py-md-4 py-xl-5">
-        <div class="row align-items-center pt-5 mt-4 mt-xxl-0">
+        <div class="row align-items-center pt-4 mt-4 mt-xxl-0">
             <!-- Video + Parallax-->
             <div class="col-lg-6 mb-4 mb-lg-0 mb-sm-2 pb-3 pb-lg-0">
                 <div class="parallax mx-auto mx-lg-0" style="max-width: 582px;">
@@ -266,7 +266,7 @@
                         </div>
 
                         <div class="col-sm-12 text-center pt-4">
-                                <button type="button" class="btn btn-lg btn-primary btn-dark ripple"  v-on:click="submitMail" v-html="btnTxt"></button>
+                            <button type="button" class="btn btn-lg btn-primary btn-dark ripple"  v-on:click="submitMail" v-html="btnTxt"></button>
                         </div>
                     </div>
                 </form>
