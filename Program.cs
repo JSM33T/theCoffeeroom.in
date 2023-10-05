@@ -36,8 +36,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddWebMarkupMin(options =>
 {
-    options.AllowMinificationInDevelopmentEnvironment = false;
-    options.AllowCompressionInDevelopmentEnvironment = false;
+    options.AllowMinificationInDevelopmentEnvironment = true;
+    options.AllowCompressionInDevelopmentEnvironment = true;
 })
 .AddHtmlMinification(options =>
 {

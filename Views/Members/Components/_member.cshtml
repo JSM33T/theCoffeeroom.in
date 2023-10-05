@@ -1,0 +1,43 @@
+﻿<div v-if="isLoading">
+    Loading...
+</div>
+<div v-else>
+    <div class="navbar card-header w-100">
+        <h1 class="fade-in px-4 h2" id="sectionTitle">
+            {{ title === 'all' ? title : title + 's'}}
+        </h1>
+        <div>
+            <router-link :to="'/members/'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><img src="/assets/svg/badges/badges.svg" width="20">&nbsp;Badged Members</router-link>
+            <router-link :to="'/members/pioneer'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><img src="/assets/svg/badges/pioneer.svg" width="20">&nbsp;Pioneers</router-link>
+            <router-link :to="'/members/contributor'" class=" btn btn-sm btn-secondary my-1 ripple mx-1"><img src="/assets/svg/badges/contributor.svg" width="20">&nbsp;Contributors</router-link>
+            <router-link :to="'/members/founder'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><img src="/assets/svg/badges/founder.svg" width="20">&nbsp;Founders</router-link>
+            <router-link :to="'/members/vip'" class="btn btn-sm btn-secondary ripple my-1 mx-1"><img src="/assets/svg/badges/vip.svg" width="20">&nbsp;VIP</router-link>
+        </div>
+    </div>
+    <div class="fade-in row mt-2">
+        <div v-for="member in members" :key="member.userName" class="col-md-6 pb-2 pt-2">
+            <div class="card h-100 rounded-3 p-3 p-sm-4">
+                <div class="d-flex align-items-center pb-2 mb-1">
+                    <h3 class="h6 text-nowrap text-truncate mb-0"><router-link :to="'/member/' + member.userName ">
+                                {{ member.userName }}
+                            </router-link></h3>
+                    <span class="badge fs-xs ms-1" :class="getBadgeClass(badge)" v-for="badge in member.badges.split(',')" :key="badge">
+                        <router-link :to="'/members/'+ badge.trim().toLowerCase()"> {{badge}}</router-link>
+                    </span>
+                    <div class="d-flex ms-auto">
+                        <div class="mx-1" v-for="badge in member.badges.split(',')" :key="badge">
+                            <router-link :to="'/members/'+ badge.trim().toLowerCase()"><img :src="'/assets/svg/badges/'+ badge.trim().toLowerCase() +'.svg'" width="22"></router-link>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <img width="50" style="border-radius:30px" :src="'/assets/images/avatars/default/' + member.avatarImg + '.png'">
+                    <div class="ps-3 fs-sm">
+                        <router-link :to="'/member/' + member.userName "><div class="text-dark">{{member.firstName}} {{member.lastName}}</div></router-link>
+                        <div class="text-muted">#{{member.id}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

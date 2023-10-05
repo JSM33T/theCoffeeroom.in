@@ -22,10 +22,217 @@
 
 
 @section jsScripts{
-    <environment include="development">
-        <script src="/reactors/memberreactor.js" asp-append-version="true"></script>
-    </environment>
-    <environment include="production">
-        <script src="/reactors/memberreactor.prod.js" asp-append-version="true"></script>
-    </environment>
+    <script>
+        const MemberDashboard = {
+            props: ['param2'],
+            setup(props) {
+                const { param2 } = Vue.toRefs(props);
+                const title = Vue.ref("Home");
+                const endPoint = Vue.ref("");
+                const userName = Vue.ref("");
+                const firstName = Vue.ref("");
+                const lastName = Vue.ref("");
+                const eMail = Vue.ref("");
+                const gender = Vue.ref("");
+                const dateElement = Vue.ref("");
+                const phone = Vue.ref("");
+                const bio = Vue.ref("");
+                const avatarImg = Vue.ref("default");
+                const role = Vue.ref("");
+                const isLoading = Vue.ref(true);
+                //const getBadgeClass = (badge) => {
+
+                //    badgeval = badge.trim().toLowerCase();
+                //    console.log(badgeval);
+                //    if (badgeval === 'contributor') {
+                //        return 'bg-faded-success text-success';
+                //    } else if (badgeval === 'vip') {
+                //        return 'bg-faded-warning text-warning';
+                //    } else if (badgeval === 'founder') {
+                //        return 'bg-faded-info text-danger';
+                //    } else {
+                //        return 'bg-faded-primary text-primary';
+                //    }
+
+                //};
+                //const fetchBadges = async () => {
+                //    try {
+                //        startProg();
+                //        endPoint.value = param2.value;
+                //        const response = await axios.get('/api/member/getdetails/' + endPoint.value);
+                //        members.value = response.data;
+                //    } catch (error) {
+                //        console.error('Error fetching user badges:', error);
+                //    }
+                //    finally {
+                //        endProg();
+                //    }
+                //};
+                const fetchMemberData = async () => {
+                    await axios.get("/api/member/getdetails/" + param2.value)
+                        .then(response => {
+                            userName.value = response.data.userName;
+                            firstName.value = response.data.firstName;
+                            lastName.value = response.data.lastName;
+                            phone.value = response.data.phone;
+                            eMail.value = response.data.eMail;
+                            bio.value = response.data.bio;
+                            avatarImg.value = response.data.avatarImg;
+                            gender.value = response.data.gender;
+                            role.value = response.data.role;
+                            dateElement.value = response.data.dateElement;
+
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            toaster("error", error.response);
+                        });
+                }
+
+
+
+                Vue.onMounted(() => {
+                    isLoading.value = false;
+                    fetchMemberData();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                });
+
+                return {
+                    param2,
+                    title,
+                    phone,
+                    bio,
+                    eMail,
+                    isLoading,
+                    fetchMemberData,
+                    gender,
+                    dateElement,
+                    role,
+                    firstName,
+                    avatarImg,
+                    lastName,
+                    userName
+
+
+                };
+            },
+
+            template: `
+
+              @await Html.PartialAsync("Components/_dashboard")
+
+            `,
+        };
+
+        const MembersComp = {
+            props: ['param1'],
+            setup(props) {
+                const { param1 } = Vue.toRefs(props);
+                const title = Vue.ref("Home");
+                const members = Vue.ref([]);
+                const endPoint = Vue.ref("");
+                const isLoading = Vue.ref(true);
+                const getBadgeClass = (badge) => {
+
+                    badgeval = badge.trim().toLowerCase();
+                    if (badgeval === 'contributor') {
+                        return 'bg-faded-success text-success';
+                    } else if (badgeval === 'vip') {
+                        return 'bg-faded-warning text-warning';
+                    } else if (badgeval === 'founder') {
+                        return 'bg-faded-info text-danger';
+                    } else {
+                        return 'bg-faded-primary text-primary';
+                    }
+
+                };
+                const fetchMembers = async () => {
+                    try {
+                        startProg();
+                        endPoint.value = param1.value === "" ? "all" : param1.value;
+                        const response = await axios.get('/api/members/getmembers/' + endPoint.value);
+                        members.value = response.data;
+
+                    } catch (error) {
+                        console.error('Error fetching user badges:', error);
+                    }
+                    finally {
+                        endProg();
+                    }
+                }
+
+                const loadPosts = () => {
+                    console.log("posts loaded");
+                }
+                Vue.onMounted(() => {
+                    title.value = param1.value === "" ? "all" : param1.value;
+                    fetchMembers();
+                    isLoading.value = false;
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+
+                });
+
+                Vue.watch(param1, (newVal, oldVal) => {
+                    title.value = newVal === undefined || newVal === "" ? "all" : newVal;
+                    fetchMembers();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                });
+
+                return {
+                    param1,
+                    title,
+                    isLoading,
+                    members,
+                    fetchMembers,
+                    getBadgeClass
+
+
+                };
+            },
+
+            template: `
+                @await Html.PartialAsync("Components/_member")
+            `,
+        };
+
+
+
+        const routes = [
+            {
+                path: '/members/:param1?',
+                component: MembersComp,
+                props: true,
+                watchQuery: ['param1']
+            },
+            {
+                path: '/member/:param2?',
+                component: MemberDashboard,
+                props: true,
+                watchQuery: ['param2']
+            }
+        ];
+
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHistory(),
+            routes,
+        });
+
+        const app = Vue.createApp({
+
+        });
+
+        app.use(router);
+        app.mount('#appMembers');
+
+
+    </script>
 }
