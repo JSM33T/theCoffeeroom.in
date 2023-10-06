@@ -1,0 +1,39 @@
+﻿<a class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4 homebtn" href="/" data-bs-toggle="tooltip" data-bs-placement="left" title="Back to home"><i class="ai-home"></i></a>
+<div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
+    <div class="w-100 mt-auto fade-in" style="max-width: 526px;">
+        <div class="ms-auto pb-4"><router-link class=" btn btn-sm btn-secondary ripple" to="/account"><i class="ai-user ms-n1 me-2"></i>Menu</router-link><router-link class="btn btn-sm btn-secondary ripple mx-2" to="/account/signup"><i class="ai-user ms-n1 me-2"></i>Signup</router-link></div>
+
+        <form class="needs-validation" id="loginForm" novalidate>
+            <div class="pb-3 mb-3">
+                <div class="position-relative">
+                    <i class="ai-mail fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                    <input class="form-control form-control-lg ps-5" v-model="username" @@keyup.enter="submitLogin" type="text" placeholder="Username or email" value="" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="position-relative">
+                    <i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                    <div class="password-toggle">
+                        <input class="form-control form-control-lg ps-5" v-model="password" @@keyup.enter="submitLogin" type="password" placeholder="Password" autocomplete="password" value="" required="">
+                        <label class="password-toggle-btn" aria-label="Show/hide password">
+                            <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
+                <form-check class="my-1">
+                    <input class="form-check-input" type="checkbox" id="keep-signedin" disabled>
+                    <label class="form-check-label ms-1" for="keep-signedin">Keep me signed in (id)</label>
+                </form-check><router-link class="fs-sm fw-semibold text-decoration-none my-1" to="/account/accountrecovery">Forgot password?</router-link>
+            </div>
+            <button class="btn btn-lg btn-primary w-100 mb-4 fade-in-delay" type="button" v-on:click="submitLogin"><span v-html="buttonText"></span></button>
+
+        </form>
+    </div>
+    <!-- Copyright-->
+    <p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px;"><span class="text-muted">thecoffeeroom.in</span></p>
+
+    <div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="background-image: url(/assets/images/covers/login.jpg);"></div>
+</div>

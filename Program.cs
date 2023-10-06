@@ -30,23 +30,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
        {
            options.Cookie.HttpOnly = true;
            options.Cookie.IsEssential = true;
-           options.ExpireTimeSpan = TimeSpan.FromDays(100);
+           options.ExpireTimeSpan = TimeSpan.FromDays(150);
            options.SlidingExpiration = true; // Extend the expiration time with each request
        });
 
 builder.Services.AddWebMarkupMin(options =>
 {
-    options.AllowMinificationInDevelopmentEnvironment = true;
-    options.AllowCompressionInDevelopmentEnvironment = true;
+    options.AllowMinificationInDevelopmentEnvironment = false;
+    options.AllowCompressionInDevelopmentEnvironment = false;
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = false;
+    options.MinificationSettings.PreserveNewLines = true;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
     options.MinificationSettings.RemoveHtmlCommentsFromScriptsAndStyles = true;
-    options.MinificationSettings.MinifyEmbeddedJsCode = true;
+    options.MinificationSettings.MinifyEmbeddedJsCode = false;
 })
 .AddXmlMinification()
 .AddHttpCompression();
@@ -76,5 +76,5 @@ app.UseCookieCheckMiddleware();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapFallbackToFile("index.php");
+app.MapFallbackToFile("nice.html");
 app.Run();

@@ -31,7 +31,10 @@
                 </tr>
                 <tr>
                     <td class="border-0 text-muted py-1 px-0">Gender</td>
-                    <td class="border-0 text-dark fw-medium py-1 ps-3">{{gender}}</td>
+                    <td class="border-0 text-dark fw-medium py-1 ps-3">{{gender}}
+                        <img v-if="gender === 'm'" src="~/assets/images/icons/male.png" width="40">
+                        <img v-if="gender === 'f'" src="~/assets/images/icons/female.png" width="40">
+                    </td>
                 </tr>
                 <tr>
                     <td class="border-0 text-muted py-1 px-0">Bio</td>

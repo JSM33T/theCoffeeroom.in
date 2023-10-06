@@ -20,10 +20,249 @@
 
 
 @section jsScripts{
-    <environment include="development">
-        <script src="/reactors/profilereactor.js" asp-append-version="true"></script>
-    </environment>
-    <environment include="production">
-        <script src="/reactors/profilereactor.prod.js" asp-append-version="true"></script>
-    </environment>
+   <script>
+        const Security = {
+            template: `
+           @await Html.PartialAsync("Components/_security")
+            `,
+            data() {
+                return {
+                    username: '',
+                    passWord: '',
+                };
+
+            },
+            async mounted() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+            },
+            methods: {
+                saveCredentials() {
+                    if (this.newPassword === "" || this.newPassword == null) {
+                        toaster('error', 'please enter the password');
+                    }
+                    else if (this.newPassword.length < 6) {
+                        toaster('error', 'Password cannot be less than 6 characters');
+                    }
+                    else if (this.newPassword != this.confirmPassword) {
+                        toaster('error', 'Passwords don\'t match');
+                    }
+                    else {
+                        const data = {
+                            password: this.newPassword,
+                            confirmPassword: this.confirmPassword
+                        };
+                        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                        axios.defaults.headers.common['RequestVerificationToken'] = token;
+                        axios.post("/api/profile/password/update", data)
+                            .then(response => {
+                                toaster("success", response.data);
+                            })
+                            .catch(error => {
+                                toaster("Error", error.response.data);
+                            });
+                    }
+
+                    //toaster("success", "button clickworking");
+                }
+
+            }
+        }
+
+        const EditProfile = {
+            template: `
+                   @await Html.PartialAsync("Components/_edit")
+                                                `,
+            data() {
+                return {
+                    options: [],
+                    title: "Edit Info",
+                    username: '',
+                    firstname: '',
+                    lastname: '',
+                    email: '',
+                    phone: '',
+                    avatars: '',
+                    avatar: 'default.png',
+                    bio: '',
+                    gender: '',
+                    role: ''
+                };
+            },
+            async mounted() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+
+                this.fetchAvatars();
+                this.getDetails();
+            },
+            watch: {
+                avatar() { },
+                avatars() { }
+            },
+            methods: {
+                async getDetails() {
+                    await axios.get("/api/profile/getdetails")
+                        .then(response => {
+                            console.log(response.data);
+                            this.username = response.data.userName;
+                            this.firstname = response.data.firstName;
+                            this.lastname = response.data.lastName;
+                            this.phone = response.data.phone;
+                            this.bio = response.data.bio;
+                            this.avatars = response.data.avatarImg;
+                            this.avatar = response.data.avatarImg + ".png";
+                            this.gender = response.data.gender;
+                            this.role = response.data.role;
+
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            //toaster("error", "something went wrong");
+                            toaster("error", error.response.data);
+                        });
+                },
+                async fetchAvatars() {
+                    await axios.get("/api/getavatars")
+                        .then(response => {
+                            this.options = response.data;
+                        })
+                        .catch(error => {
+                            toaster("error", "something went wrong");
+                        });
+                },
+                async saveDetails() {
+
+                    let dropdown = document.getElementById("avatars");
+                    let selectedOption = dropdown.options[dropdown.selectedIndex];
+                    let avtId = selectedOption.getAttribute("data-id");
+                    let avtVal = selectedOption.getAttribute("value");
+
+                    const data = {
+                        firstname: this.firstname,
+                        lastname: this.lastname,
+                        bio: this.bio,
+                        phone: this.phone,
+                        gender: this.gender,
+                        avatarId: avtId,
+                        username: this.username,
+                    };
+                    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                    axios.defaults.headers.common['RequestVerificationToken'] = token;
+                    axios.post("/api/profile/update", data)
+                        .then(response => {
+                            document.getElementById('layout_pfp').src = '/assets/images/avatars/default/' + this.avatars + '.png';
+                            toaster("success", response.data);
+                            document.getElementById('title_master').innerHTML = this.firstname;
+                        })
+                        .catch(error => {
+                            toaster("Error", error.response.data);
+                            this.getDetails();
+                        });
+                },
+                async handleChange(event) {
+                    var dropdown = document.getElementById("avatars");
+                    var selectedOption = dropdown.options[dropdown.selectedIndex];
+                    var selectedOptionDataId = selectedOption.getAttribute("data-id");
+                    var selectedOptionValue = selectedOption.getAttribute("value");
+                    this.avatar = selectedOptionValue + ".png";
+                }
+            },
+
+
+
+        };
+
+
+        const Dashboard = {
+            template: `
+                   @await Html.PartialAsync("Components/_dashboard")
+                `,
+            data() {
+                return {
+                    title: "Dashboard",
+                    username: '',
+                    firstname: '',
+                    lastname: '',
+                    email: '',
+                    dateElement: '',
+                    phone: '',
+                    avatar: 'default.png',
+                    bio: '',
+                    gender: '',
+                    badges: [],
+                    role: ''
+                };
+            },
+            async mounted() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+                this.getDetails();
+                this.loadBadges();
+            },
+            methods: {
+                async getDetails() {
+                    await axios.get("/api/profile/getdetails")
+                        .then(response => {
+                            this.username = response.data.userName;
+                            this.firstname = response.data.firstName;
+                            this.lastname = response.data.lastName;
+                            this.phone = response.data.phone;
+                            this.bio = response.data.bio;
+                            this.avatar = response.data.avatarImg + ".png";
+                            this.gender = response.data.gender;
+                            this.email = response.data.eMail;
+                            this.dateElement = response.data.dateElement;
+
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            toaster("error", "something went wrong");
+                        });
+                },
+                async loadBadges() {
+                    await axios.get("/api/profile/userbadges")
+                        .then(response => {
+                            this.badges = response.data;
+                            //  console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            toaster("error", "something went wrong");
+                        });
+                }
+            }
+        };
+
+
+
+
+
+        const routes = [
+            { path: '/profile', component: Dashboard },
+            { path: '/profile/edit', component: EditProfile },
+            { path: '/profile/security', component: Security }
+        ];
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHistory(),
+            routes
+        });
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    isLoading: true,
+                    viewTitle: "Profile",
+                };
+            },
+        });
+        app.use(router);
+        app.mount('#app');
+   </script>
 }

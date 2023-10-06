@@ -36,9 +36,7 @@
             100% {
                 transform: scale(1);
             }
-
-
-            }
+        }
 
 
 
@@ -77,7 +75,7 @@
     
     <div class="row">
         <div class="col-lg-9 col-xl-8 pe-lg-4 pe-xl-0">
-            <h1 class="pb-2 pb-lg-3">@Model.Title</h1>
+            <h1 class="pb-2 pb-lg-3">{{title}}</h1>
            
             
             <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom mb-4">
@@ -110,7 +108,6 @@
                     </span>
                 </button>
             </div>
-
             <!-- Comment form-->
 
         </div>
@@ -125,14 +122,12 @@
                 string role;
                 try
                 {
-
                     role = Context.Session.GetString("role");
                 }
                 catch
                 {
                     role = "guest";
                 }
-
             }
             @if (role != null)
             {
@@ -600,6 +595,7 @@
         const app = createApp({
             setup() {
                 const likes = ref(0);
+                const title = ref("@Model.Title");
                 const cls = ref("");
                // const modalVisible = ref(true);
 
@@ -717,6 +713,7 @@
                 };
                 return {
                     likes,
+                    title,
                     loadTags,
                     loadAuthors,
                     lazyloadImages,
@@ -730,12 +727,12 @@
                 };
             },
             async mounted() {
-                await this.lazyloadImages();
-                await this.loadTags();
-                await this.loadAuthors();
-                await this.loadCommentsV();
-                await this.loadLikes();
-                await this.isLiked();
+                this.lazyloadImages();
+                this.loadTags();
+                this.loadAuthors();
+                this.loadCommentsV();
+                this.loadLikes();
+                this.isLiked();
             }
         });
 

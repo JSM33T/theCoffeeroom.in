@@ -1,0 +1,29 @@
+﻿<div class="fade-in">
+    <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+        <div class="ms-auto">
+            <router-link class=" btn btn-sm btn-secondary ripple" to="/profile"><i class="ai-user ms-n1 me-2"></i>Dashboard</router-link>
+            <router-link class="btn btn-sm btn-secondary ripple mx-2" to="/profile/edit"><i class="ai-user ms-n1 me-2"></i>Edit Profile</router-link>
+        </div>
+    </div>
+    <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+        <div class="col-md-6">
+            <div class="password-toggle">
+                <input class="form-control form-control-lg ps-5" v-model="newPassword" type="password" @@keyup.enter="saveCredentials" placeholder="Password" autocomplete="off" required="">
+                <label class="password-toggle-btn" aria-label="Show/hide password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="password-toggle">
+                <input class="form-control form-control-lg ps-5" v-model="confirmPassword" @@keyup.enter="saveCredentials" type="password" placeholder="Password" autocomplete="off" required="">
+                <label class="password-toggle-btn" aria-label="Show/hide password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-end pt-3">
+            <button class="btn btn-primary ms-3 ripple" type="button" id="saveprof" @@click="saveCredentials">Save Profile</button>
+        </div>
+    </div>
+</div>
