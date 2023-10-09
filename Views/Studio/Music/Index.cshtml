@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["ActivePage"] = "Studio";
+    ViewData["ActivePage"] = "Music";
 
-    ViewData["Title"] = "The Coffee Room Studio";
+    ViewData["Title"] = "The Coffee Room Music";
     ViewData["Tags"] = "music,studio,futurebass,bollywood remix,bollywood remixes";
     ViewData["Description"] = "A Space for bootlegs,remixes,podcasts and original mixes | The Coffeeroom Studio";
     ViewData["Authors"] = "jsm33t";
@@ -31,7 +31,7 @@
     <div class="row pt-2">
         <!-- Text + CTA button-->
         <div class="col-lg-6 d-flex flex-column mb-4 mb-lg-0 pb-sm-3 pb-lg-0">
-            <h1 class="display-1 text-uppercase fw-bold mt-auto mb-2">the <span class="fw-normal">coffeeroom</span> studio<span class="d-none d-md-inline-block align-middle ms-4" style="width: 120px; height: 2px; background-color: currentColor;"></span></h1>
+            <h1 class="display-1 text-uppercase fw-bold mt-auto mb-2">the <span class="fw-normal">coffeeroom</span> music<span class="d-none d-md-inline-block align-middle ms-4" style="width: 120px; height: 2px; background-color: currentColor;"></span></h1>
             <div class="d-flex align-items-center py-4 py-lg-5">
                 
                 <div class="flex-shrink-sm-0" style="color: currentColor;">
@@ -93,8 +93,6 @@
                     <li class="nav-item mb-0"><a class="nav-link border active" href="#" data-group="all">All</a></li>
                     <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="single">Singles</a></li>
                     <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="album">Albums</a></li>
-                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="podcast">Podcasts</a></li>
-                    <li class="nav-item mb-0"><a class="nav-link border" href="#" data-group="collection">Collection</a></li>
                     
                 </ul>
             </div>
@@ -108,13 +106,11 @@
                         <div class="zoom-effect-img"><img src="/content/studiocontent/albums/tcr-bootleg-compilation-2023/cover_thumb.png" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/tcr-bootleg-compilation-2023">Coffeeroom Bootlegs</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/album/tcr-bootleg-compilation-2023">Coffeeroom Bootlegs</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>various artists</span><span>2023</span></div>
                     </div>
                 </div>
-            </article> 
-
-         
+            </article>
         
             <!-- Item-->
             <article class="masonry-grid-item pb-5 mb-md-2 mb-lg-4 mb-xl-5" data-groups="[&quot;album&quot;]">
@@ -123,7 +119,7 @@
                         <div class="zoom-effect-img"><img src="/content/studiocontent/albums/recuerdos-2/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/recuerdos-2">Recuerdos 2</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/album/recuerdos-2">Recuerdos 2</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>Bootlegs</span><span>2019</span></div>
                     </div>
                 </div>
@@ -134,7 +130,7 @@
                         <div class="zoom-effect-img"><img src="/content/studiocontent/albums/recuerdos-1/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/album/recuerdos-1">Recuerdos 1</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/album/recuerdos-1">Recuerdos 1</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>Botlegs</span><span>2016-17</span></div>
                     </div>
                 </div>
@@ -180,7 +176,7 @@
                         <div class="zoom-effect-img"><img src="/content/studiocontent/singles/melancholy/cover_thumb.jpg" alt="Image"></div>
                     </div>
                     <div class="pt-4 mt-lg-2">
-                        <h2 class="h4 mb-2"><a class="stretched-link" href="/studio/single/melancholy">Melancholy</a></h2>
+                        <h2 class="h4 mb-2"><a class="stretched-link" href="/music/single/melancholy">Melancholy</a></h2>
                         <div class="d-flex justify-content-between fs-lg text-muted"><span>orchestral,original</span><span>2020</span></div>
                     </div>
                 </div>
@@ -203,14 +199,13 @@
 
 @section jsScripts
     {
-    <script>
+    @* <script>
         const { createApp, ref } = Vue;
         const app = createApp({
             setup() {
                 const loadThumbs = async () => {
 
                 };
-
                 return {
                     loadThumbs
                 };
@@ -221,5 +216,5 @@
         });
 
         app.mount('#gallery');
-    </script>
+    </script> *@
 }

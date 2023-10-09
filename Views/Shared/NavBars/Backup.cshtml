@@ -59,56 +59,53 @@
             <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
             <nav class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
-                    
-                   
-                                        
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link " href="/blogs">Blogs</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#"
-                           data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Archive</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown">
-                                <a class="dropdown-item disabled next-link" href="/apps">Applets</a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-item next-link" href="/gallery">Gallery</a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-item disabled next-link" href="/downloads">Downloads</a>
-                            </li>
-                        </ul>
+                        <a class="nav-link dropdown-toggle " href="#" data-bs-toggle="dropdown" aria-expanded="false">Topics</a>
+                        <div class="dropdown-menu overflow-hidden p-0">
+                            <div class="d-lg-flex">
+                                <div class="mega-dropdown-column pt-1 pt-lg-3 pb-lg-4">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Home" ? "active" : "") " href="/">Home</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 rounded-3 rounded-start-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a><span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/music.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "") " href="/blogs">Blogs</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Wall" ? "active" : "") " href="/wall">Wallposts</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
+                                        <li><a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Wall" ? "active" : "") " href="/archives">Downloads</a> <span class="mega-dropdown-column position-absolute top-0 end-0 h-100 bg-size-cover bg-repeat-0 zindex-2 opacity-0" style="background-image: url(/assets/images/megamenu/archive.jpg);"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-dropdown-column position-relative border-start zindex-3"></div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#"
-                           data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Studio</a>
+                           data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown">
-                                <a class="dropdown-item next-link" href="/music">Music</a>
+                                <a class="dropdown-item next-link  @(ViewData["ActivePage"].ToString() == "Studio" ? "active" : "")" href="/studio">Studio</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item disabled next-link" href="/podcasts">Podcasts</a>
+                                <a class="dropdown-item next-link  @(ViewData["ActivePage"].ToString() == "Gallery" ? "active" : "")" href="/gallery">Gallery</a>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-item next-link" href="/gallery">Gallery</a>
+                                <a class="dropdown-item next-link disabled @(ViewData["ActivePage"].ToString() == "Apps" ? "active" : "")" href="/apps">Apps</a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-item next-link @(ViewData["ActivePage"].ToString() == "Blogs" ? "active" : "")" href="/blogs">Blogs</a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-item next-link disabled" href="/archives">Archives</a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-item next-link disabled" href="/shop">Shop</a>
+                            </li>
+                             <li class="dropdown">
+                                <a class="dropdown-item next-link disabled" href="/wall">Community Wall</a>
                             </li>
                         </ul>
                     </li>
 
-                   @*  <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#"
-                           data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Archive</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown">
-                                <a class="dropdown-item disabled next-link" href="/downloads">Tools</a>
-                                <a class="dropdown-item next-link" href="/gallery">Gallery</a>
-                                <a class="dropdown-item next-link" href="/downloads">Lightroom Presets</a>
-                            </li>
-
-                        </ul>
-                    </li> *@
-                    <li class="nav-item"><a class="nav-link disabled" href="/blogs">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="/us">Us</a></li>
 
                     <li class="nav-item dropdown d-sm-none border-top mt-2 pt-2">
                         <a class="nav-link" href="#"

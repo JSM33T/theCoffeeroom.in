@@ -60,16 +60,16 @@
                     }
                 };
                 const loadTopBlogs = async () => {
-                    // try {
-                    //     const response = await axios.get('/api/topblogs/get');
-                    //     const data = response.data;
-                    //     console.log(data);
-                    //     blogs.value = data;
-                    // } catch (error) {
-                    //     console.error('Error fetching data from API:', error);
-                    // } finally {
-                    //     isLoading.value = false;
-                    // }
+                    try {
+                        const response = await axios.get('/api/topblogs/get');
+                        const data = response.data;
+                        console.log(data);
+                        blogs.value = data;
+                    } catch (error) {
+                        console.error('Error fetching data from API:', error);
+                    } finally {
+                        isLoading.value = false;
+                    }
                 };
                 return {
                     emailValue,
@@ -242,6 +242,45 @@
           </div>
         </div>
       </section> *@
+
+
+    <!-- Resources (Carousel on screens < 992px)-->
+    <section class="container py-5 my-md-3 my-lg-2 my-xl-4 my-xxl-5">
+        <div class="d-md-flex align-items-center pb-3 mb-md-3 mb-lg-4 mt-2 mt-sm-3 pt-2 pt-sm-4 pt-lg-5">
+            <h2 class="h1 text-center text-md-start mb-4 mb-md-0 me-md-4">Latest Posts</h2>
+           
+        </div>
+        <!-- Swiper-->
+        <div class="swiper" data-swiper-options="
+      {
+        &quot;spaceBetween&quot;: 24,
+        &quot;pagination&quot;: {
+          &quot;el&quot;: &quot;.swiper-pagination&quot;,
+          &quot;clickable&quot;: true
+        },
+        &quot;breakpoints&quot;: {
+          &quot;576&quot;: { &quot;slidesPerView&quot;: 2 },
+          &quot;992&quot;: { &quot;slidesPerView&quot;: 3 }
+        }
+      }
+    ">
+            <div class="swiper-wrapper">
+                <!-- Item-->
+                <article v-for="blog in blogs" :key="blog.d" class="swiper-slide">
+                    <a href="#"><img class="rounded-5" :src="'content/blogcontent/2023/' + blog.urlHandle + '/cover.jpg'" alt="Image"></a>
+                    <h3 class="h4 pt-4"><a href="#">{{blog.title}}</a></h3>
+                    <p>{{blog.description}}</p>
+                    <div class="d-flex flex-wrap align-items-center pt-1 mt-n2"><a class="nav-link text-muted fs-sm fw-normal p-0 mt-2 me-3" href="#">{{blog.likes}}<i class="ai-heart fs-lg ms-1"></i></a><a class="nav-link text-muted fs-sm fw-normal d-flex align-items-end p-0 mt-2" href="#">{{blog.comments}}<i class="ai-message fs-lg ms-1"></i></a><span class="fs-xs opacity-20 mt-2 mx-3">|</span><span class="fs-sm text-muted mt-2">{{blog.dateFormatted}}</span><span class="fs-xs opacity-20 mt-2 mx-3">|</span><a class="badge bg-faded-primary text-primary fs-xs mt-2" href="#">Analytics</a></div>
+                </article>
+               
+            </div>
+            <!-- Pagination (bullets)-->
+            <div class="swiper-pagination position-relative bottom-0 mt-2 pt-4 d-lg-none"></div>
+        </div>
+        <!-- Read more button-->
+        <div class="text-center pt-4 my-2 mt-lg-0 pt-lg-5 pb-sm-2 pb-md-4"><a class="btn btn-outline-primary rounded-pill" href="/blogs">Read all blogs</a></div>
+    </section>
+
 
     @* =================================================== MAILING LIST ==================================================== *@
     <section class="container dark-mode pt-5 mt-5">

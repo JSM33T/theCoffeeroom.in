@@ -10,16 +10,22 @@ namespace theCoffeeroom.Controllers.Routers
             return View("Views/Studio/Index.cshtml");
         }
 
-        [Route("studio/album/{slug}")]
-        public IActionResult Albums(string Slug)
+        [Route("music")]
+        public IActionResult Music()
         {
-            return View("Views/Studio/Content/Albums/" + Slug +".cshtml");
+            return View("Views/Studio/Music/Index.cshtml");
         }
 
-        [Route("studio/single/{slug}")]
+        [Route("music/album/{slug}")]
+        public IActionResult Albums(string Slug)
+        {
+            return View("Views/Studio/Music/Content/Albums/" + Slug +".cshtml");
+        }
+
+        [Route("music/single/{slug}")]
         public IActionResult Singles(string Slug)
         {
-            return View("Views/Studio/Content/Singles/" + Slug + ".cshtml");
+            return View("Views/Studio/Music/Content/Singles/" + Slug + ".cshtml");
         }
 
 

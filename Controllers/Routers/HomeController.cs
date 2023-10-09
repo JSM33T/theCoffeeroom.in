@@ -48,10 +48,10 @@ namespace theCoffeeroom.Controllers.Routers
             return View("Views/Docs/Attributions.cshtml");
         }
 
-        [Route("/us")]
+        [Route("/about")]
         public IActionResult Us()
         {
-            return View("Views/Home/Us.cshtml");
+            return View("Views/Home/About.cshtml");
         }
 
         [Route("/personalize")]

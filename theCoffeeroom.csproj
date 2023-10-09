@@ -10,28 +10,28 @@
   <ItemGroup>
     <Compile Remove="Controllers\Routers\Apps\**" />
     <Compile Remove="Migrations\**" />
-    <Compile Remove="Views\Archives\Content\**" />
+    <Compile Remove="Views\Archive\Content\**" />
     <Compile Remove="Views\Shop\Content\**" />
     <Compile Remove="wwwroot\content\blogcontent\global\**" />
     <Compile Remove="wwwroot\content\musiccontent\**" />
     <Compile Remove="wwwroot\logs\**" />
     <Content Remove="Controllers\Routers\Apps\**" />
     <Content Remove="Migrations\**" />
-    <Content Remove="Views\Archives\Content\**" />
+    <Content Remove="Views\Archive\Content\**" />
     <Content Remove="Views\Shop\Content\**" />
     <Content Remove="wwwroot\content\blogcontent\global\**" />
     <Content Remove="wwwroot\content\musiccontent\**" />
     <Content Remove="wwwroot\logs\**" />
     <EmbeddedResource Remove="Controllers\Routers\Apps\**" />
     <EmbeddedResource Remove="Migrations\**" />
-    <EmbeddedResource Remove="Views\Archives\Content\**" />
+    <EmbeddedResource Remove="Views\Archive\Content\**" />
     <EmbeddedResource Remove="Views\Shop\Content\**" />
     <EmbeddedResource Remove="wwwroot\content\blogcontent\global\**" />
     <EmbeddedResource Remove="wwwroot\content\musiccontent\**" />
     <EmbeddedResource Remove="wwwroot\logs\**" />
     <None Remove="Controllers\Routers\Apps\**" />
     <None Remove="Migrations\**" />
-    <None Remove="Views\Archives\Content\**" />
+    <None Remove="Views\Archive\Content\**" />
     <None Remove="Views\Shop\Content\**" />
     <None Remove="wwwroot\content\blogcontent\global\**" />
     <None Remove="wwwroot\content\musiccontent\**" />
@@ -65,6 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Serilog" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
@@ -75,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Apps\Index.cshtml">
+    <Content Update="Views\Archive\Apps\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

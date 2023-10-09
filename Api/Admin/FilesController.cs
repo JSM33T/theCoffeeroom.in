@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace theCoffeeroom.Api
+namespace theCoffeeroom.Api.Admin
 {
     public class FilesController : Controller
     {

@@ -41,12 +41,12 @@ builder.Services.AddWebMarkupMin(options =>
 })
 .AddHtmlMinification(options =>
 {
-    options.MinificationSettings.PreserveNewLines = true;
+    options.MinificationSettings.PreserveNewLines = false;
     options.MinificationSettings.MinifyEmbeddedCssCode = true;
     options.MinificationSettings.RemoveHtmlComments = true;
     options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
     options.MinificationSettings.RemoveHtmlCommentsFromScriptsAndStyles = true;
-    options.MinificationSettings.MinifyEmbeddedJsCode = false;
+    options.MinificationSettings.MinifyEmbeddedJsCode = true;
 })
 .AddXmlMinification()
 .AddHttpCompression();

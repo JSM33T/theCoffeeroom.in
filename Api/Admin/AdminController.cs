@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
-namespace theCoffeeroom.Api
+namespace theCoffeeroom.Api.Admin
 {
     public class AdminController : Controller
     {

@@ -5,24 +5,20 @@ namespace theCoffeeroom.Controllers.Routers
 {
     public class GalleryController : Controller
     {
-
-       
-
         [Route("/gallery")]
         public IActionResult Index()
         {
-            return View();
+            return View("Views/Studio/Gallery/Index.cshtml");
         }
 
         [Route("/gallery/{Slug}")]
         public IActionResult Frame(string Slug)
         {
-            var viewModel = new GalleryLoad { Slug = Slug };
-            return View(viewModel);
+            var viewModel = new GalleryLoad
+                                {
+                                    Slug = Slug 
+                                };
+            return View("Views/Studio/Gallery/Frame.cshtml",viewModel);
         }
-
-
-
-
     }
 }
